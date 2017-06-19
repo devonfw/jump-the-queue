@@ -1,0 +1,13 @@
+<td-layout>
+  <md-card layout="column" flex>
+    <img md-card-image src="assets/images/jumpthequeue.png">
+    <md-card-title>Queue code for {{name}} is:</md-card-title>
+
+    <h1 style="font-size: 100px" class="text-center text-xxl push-lg">{{code}}</h1>
+
+    <div class="text-center pad-bottom-lg">
+      <button md-raised-button (click)="navigateQueue()" color="primary" class="text-upper">Watch the queue</button>
+    </div>
+
+  </md-card>
+</td-layout>
