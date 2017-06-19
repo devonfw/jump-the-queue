@@ -3,7 +3,7 @@
     <img md-card-image src="assets/images/jumpthequeue.png">
     <md-card-title>Access</md-card-title>
 
-    <form layout="column" class="pad" (ngSubmit)="submitAccess()" #accessForm="ngForm">
+    <form layout="column" class="pad" (ngSubmit)="submitAccess(accessForm.form)" #accessForm="ngForm">
 
       <md-input-container>
         <input mdInput placeholder="Name" ngModel name="name" required>

@@ -1,3 +1,6 @@
+import { AccessService } from './access/shared/access.service';
+import { AuthService } from './shared/authentication/auth.service';
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {}
+  constructor(private auth: AuthService,
+              private accesService: AccessService) {}
+
+  logoff() {
+    this.accesService.logoff();
+  }
+
 }
