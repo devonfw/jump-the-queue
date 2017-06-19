@@ -19,7 +19,7 @@ export class CodeViewerComponent implements OnInit {
   }
 
   navigateQueue() {
-
+    this.router.navigate(['queue']);
   }
 
 }

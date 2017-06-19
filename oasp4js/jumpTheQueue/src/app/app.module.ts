@@ -1,4 +1,4 @@
-import { CovalentLayoutModule } from '@covalent/core';
+import { CovalentLayoutModule, CovalentDataTableModule } from '@covalent/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,18 +11,21 @@ import { AppComponent } from './app.component';
 import { appRoutes } from 'app/app.routes';
 import { AccessComponent } from './access/access.component';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
+import { QueueViewerComponent } from './queue-viewer/queue-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccessComponent,
-    CodeViewerComponent
+    CodeViewerComponent,
+    QueueViewerComponent
   ],
   imports: [
     BrowserModule,
     appRoutes,
     FormsModule,
     CovalentLayoutModule,
+    CovalentDataTableModule,
     MaterialModule,
     BrowserAnimationsModule,
     HttpModule
