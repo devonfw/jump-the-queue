@@ -13,10 +13,10 @@ export class AccessComponent implements OnInit {
   constructor(private router: Router,
               private accessService: AccessService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  submitAccess(formValue) {
+  submitAccess(formValue): void {
     this.accessService.login(formValue.value.name, formValue.value.email, formValue.value.phone);
     formValue.reset();
   }

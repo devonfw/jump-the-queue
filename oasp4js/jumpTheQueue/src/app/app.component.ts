@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private auth: AuthService,
               private accesService: AccessService) {}
 
-  logoff() {
+  logoff(): void {
     this.accesService.logoff();
   }
 

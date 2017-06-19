@@ -11,7 +11,7 @@ export class AccessService {
               public snackBar: MdSnackBar,
               private router: Router) { }
 
-  login(name, email, phone) {
+  login(name, email, phone): void {
     if (name === 'user' && email === 'asd@asd.com' && phone === 123456789) {
       this.auth.setLogged(true);
       this.auth.setUser(name);
@@ -23,7 +23,7 @@ export class AccessService {
     }
   }
 
-  logoff() {
+  logoff(): void {
       this.auth.setLogged(false);
       this.auth.setUser('');
       this.router.navigate(['access']);

@@ -1,3 +1,5 @@
+import { QueueViewerService } from './shared/queue-viewer.service';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ITdDataTableColumn } from '@covalent/core';
@@ -14,18 +16,18 @@ export class QueueViewerComponent implements OnInit {
     { name: 'hour', label: 'Hour' },
     { name: 'name', label: 'Name'}];
 
-  basicData: any[] = [
-      {code: 'Q04', hour: '14:30', name: 'Elrich'},
-      {code: 'Q05', hour: '14:40', name: 'Richard'},
-      {code: 'Q06', hour: '14:50', name: 'Gabin'},
-    ];
+  queuers: any[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private queueService: QueueViewerService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.queueService.getQueuers().subscribe( (data) => {
+      this.queuers = data;
+    });
   }
 
-  navigateCode() {
+  navigateCode(): void {
     this.router.navigate(['code']);
   }
 
