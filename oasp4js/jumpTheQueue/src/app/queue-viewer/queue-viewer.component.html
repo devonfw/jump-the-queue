@@ -1,0 +1,16 @@
+<td-layout>
+  <md-card>
+    <img md-card-image src="assets/images/jumptheq.png">
+    <md-card-title>Queue view:</md-card-title>
+
+    <td-data-table
+      [data]="queuers"
+      [columns]="columns">
+    </td-data-table>
+
+    <div class="text-center pad-lg">
+      <button md-raised-button (click)="navigateCode()" color="primary" class="text-upper">Go back</button>
+    </div>
+
+  </md-card>
+</td-layout>

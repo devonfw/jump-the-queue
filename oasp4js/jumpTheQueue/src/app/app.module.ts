@@ -1,4 +1,4 @@
-import { CovalentLayoutModule } from '@covalent/core';
+import { CovalentLayoutModule, CovalentDataTableModule } from '@covalent/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,24 +10,38 @@ import 'HammerJS';
 import { AppComponent } from './app.component';
 import { appRoutes } from 'app/app.routes';
 import { AccessComponent } from './access/access.component';
+import { AccessService } from './access/shared/access.service';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
+import { CodeViewerService } from './code-viewer/shared/code-viewer.service';
+import { QueueViewerComponent } from './queue-viewer/queue-viewer.component';
+import { AuthGuard } from './shared/authentication/auth-guard.service';
+import { AuthService } from './shared/authentication/auth.service';
+import { QueueViewerService } from 'app/queue-viewer/shared/queue-viewer.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccessComponent,
-    CodeViewerComponent
+    CodeViewerComponent,
+    QueueViewerComponent
   ],
   imports: [
     BrowserModule,
     appRoutes,
     FormsModule,
     CovalentLayoutModule,
+    CovalentDataTableModule,
     MaterialModule,
     BrowserAnimationsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    CodeViewerService,
+    QueueViewerService,
+    AccessService,
+    AuthGuard,
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

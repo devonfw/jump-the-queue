@@ -1,6 +1,8 @@
 <td-layout-nav>
-  <div td-toolbar-content>
+  <div layout="row" layout-align="center center" td-toolbar-content flex>
     Jump The Queue
+    <span flex></span>
+    <button *ngIf="auth.isLogged()" (click)="logoff()"  md-icon-button mdTooltip="Log out"><md-icon>exit_to_app</md-icon></button>
   </div>
   <router-outlet></router-outlet>
 </td-layout-nav>
