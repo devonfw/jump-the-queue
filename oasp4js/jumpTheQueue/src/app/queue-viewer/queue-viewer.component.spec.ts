@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { QueueViewerComponent } from './queue-viewer.component';
+import { QueueViewerService } from './shared/queue-viewer.service';
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CovalentDataTableModule, CovalentLayoutModule } from '@covalent/core';
 
 describe('QueueViewerComponent', () => {
   let component: QueueViewerComponent;
@@ -8,7 +12,12 @@ describe('QueueViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueueViewerComponent ]
+      declarations: [ QueueViewerComponent ],
+      providers: [ QueueViewerService ],
+      imports: [ MaterialModule,
+                CovalentLayoutModule,
+                CovalentDataTableModule,
+                RouterTestingModule]
     })
     .compileComponents();
   }));

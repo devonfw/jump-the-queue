@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AuthService } from '../shared/authentication/auth.service';
 import { CodeViewerComponent } from './code-viewer.component';
+import { CodeViewerService } from './shared/code-viewer.service';
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CovalentLayoutModule } from '@covalent/core';
 
 describe('CodeViewerComponent', () => {
   let component: CodeViewerComponent;
@@ -8,7 +13,9 @@ describe('CodeViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeViewerComponent ]
+      declarations: [ CodeViewerComponent ],
+      providers: [ CodeViewerService, AuthService ],
+      imports: [ MaterialModule, CovalentLayoutModule, RouterTestingModule ],
     })
     .compileComponents();
   }));

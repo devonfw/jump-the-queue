@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AccessComponent implements OnInit {
 
-  constructor(private router: Router,
-              private accessService: AccessService) { }
+  constructor(private accessService: AccessService) { }
 
   ngOnInit(): void {
   }

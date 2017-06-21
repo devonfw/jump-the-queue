@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AccessComponent } from 'app/access/access.component';
 import { CodeViewerComponent } from 'app/code-viewer/code-viewer.component';
-import { QueueViewerComponent } from "app/queue-viewer/queue-viewer.component";
+import { QueueViewerComponent } from 'app/queue-viewer/queue-viewer.component';
 
 
 const routes: Routes = [
