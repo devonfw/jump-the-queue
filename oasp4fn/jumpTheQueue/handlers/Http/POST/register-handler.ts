@@ -11,9 +11,9 @@ export async function register (event: HttpEvent, context: Context, callback: Fu
         let visitor = <Visitor>event.body;
         let code = Math.random();
         await oasp4fn.insert('Queue', _.assign(visitor, { code: code })).promise();
-        callback(null, { code: code, dateAndTime: new Date() })
+        callback(null, { code: code, dateAndTime: new Date() });
     }
     catch(err){
-        callback({message: 'Cannot register the visitor to the queue'})
+        callback({message: 'Cannot register the visitor to the queue'});
     }
 }
