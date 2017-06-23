@@ -53,13 +53,5 @@
     "removeComments": true,
     "preserveConstEnums": true
     //"sourceMap": true
-  },
-  "files": [
-    "handlers/app.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    ".webpack",
-    "test"
-  ]
+  }
 }
