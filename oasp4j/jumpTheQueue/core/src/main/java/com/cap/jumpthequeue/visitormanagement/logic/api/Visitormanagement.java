@@ -1,6 +1,6 @@
 package com.cap.jumpthequeue.visitormanagement.logic.api;
 
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.visitormanagement.logic.api.to.QueueEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorSearchCriteriaTo;
@@ -42,8 +42,8 @@ public interface Visitormanagement {
    * @param visitor the {@link VisitorEto} to create.
    * @return the new {@link VisitorEto} that has been saved with ID and version.
    */
-  VisitorEto saveVisitor(VisitorEto visitor);
+  VisitorCto saveVisitor(VisitorEto visitor);
 
-  AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor);
+  PaginatedListTo<QueueEto> queuedVisitors();
 
 }

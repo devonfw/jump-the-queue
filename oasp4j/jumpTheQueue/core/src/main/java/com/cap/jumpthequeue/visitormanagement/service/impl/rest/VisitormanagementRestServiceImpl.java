@@ -3,8 +3,8 @@ package com.cap.jumpthequeue.visitormanagement.service.impl.rest;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
+import com.cap.jumpthequeue.visitormanagement.logic.api.to.QueueEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorSearchCriteriaTo;
@@ -28,14 +28,9 @@ public class VisitormanagementRestServiceImpl implements VisitormanagementRestSe
   }
 
   @Override
-  public VisitorEto saveVisitor(VisitorEto visitor) {
+  public VisitorCto saveVisitor(VisitorEto visitor) {
 
     return this.visitormanagement.saveVisitor(visitor);
-  }
-
-  public AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor) {
-
-    return this.visitormanagement.saveVisitorAndGetCode(visitor);
   }
 
   @Override
@@ -48,6 +43,12 @@ public class VisitormanagementRestServiceImpl implements VisitormanagementRestSe
   public PaginatedListTo<VisitorCto> findVisitorsByPost(VisitorSearchCriteriaTo searchCriteriaTo) {
 
     return this.visitormanagement.findVisitorCtos(searchCriteriaTo);
+  }
+
+  @Override
+  public PaginatedListTo<QueueEto> queuedVisitors() {
+
+    return this.visitormanagement.queuedVisitors();
   }
 
 }

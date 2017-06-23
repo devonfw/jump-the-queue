@@ -20,4 +20,8 @@ public interface Visitor extends ApplicationEntity {
 
   public void setCodeId(Long codeId);
 
+  public String getSurname();
+
+  public void setSurname(String surname);
+
 }

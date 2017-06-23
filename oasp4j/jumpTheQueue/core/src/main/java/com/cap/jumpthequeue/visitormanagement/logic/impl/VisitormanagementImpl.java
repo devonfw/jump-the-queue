@@ -1,7 +1,5 @@
 package com.cap.jumpthequeue.visitormanagement.logic.impl;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,17 +11,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
-import com.cap.jumpthequeue.accesscode.logic.api.Accesscode;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.VisitorEntity;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.dao.VisitorDao;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
+import com.cap.jumpthequeue.visitormanagement.logic.api.to.QueueEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorSearchCriteriaTo;
 
+import io.oasp.module.jpa.common.api.to.OrderByTo;
+import io.oasp.module.jpa.common.api.to.OrderDirection;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
@@ -41,7 +43,7 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   private VisitorDao visitorDao;
 
   @Inject
-  private Accesscode accesscode;
+  private Accesscodemanagement accesscode;
 
   /**
    * The constructor.
@@ -82,35 +84,47 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   }
 
   @Override
-  public VisitorEto saveVisitor(VisitorEto visitor) {
+  public VisitorCto saveVisitor(VisitorEto visitor) {
 
     Objects.requireNonNull(visitor, "visitor");
     VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
 
     // initialize, validate visitorEntity here if necessary
-    AccessCodeEntity code = new AccessCodeEntity();
-    code.setCode("A34");
-    code.setDateAndTime(Timestamp.from(Instant.now()));
+    AccessCodeEto codeEto = new AccessCodeEto();
+    codeEto.setVisitorId(visitorEntity.getId());
+    AccessCodeEntity code = getBeanMapper().map(this.accesscode.saveAccessCode(codeEto), AccessCodeEntity.class);
     visitorEntity.setCode(code);
     getVisitorDao().save(visitorEntity);
 
+    VisitorCto visitorCto = new VisitorCto();
+    visitorCto.setCode(getBeanMapper().map(code, AccessCodeEto.class));
+    visitorCto.setVisitor(getBeanMapper().map(visitorEntity, VisitorEto.class));
     LOG.debug("Visitor with id '{}' has been created.", visitorEntity.getId());
 
-    return getBeanMapper().map(visitorEntity, VisitorEto.class);
+    return visitorCto;
   }
 
   @Override
-  public AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor) {
+  public PaginatedListTo<QueueEto> queuedVisitors() {
 
-    Objects.requireNonNull(visitor, "visitor");
-    VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
-    // initialize, validate visitorEntity here if necessary
-    AccessCodeEntity code = new AccessCodeEntity();
-    code.setCode("A34");
-    code.setDateAndTime(Timestamp.from(Instant.now()));
-    visitorEntity.setCode(code);
-    VisitorEntity savedVisitor = getVisitorDao().save(visitorEntity);
-    return this.accesscode.findAccessCode(savedVisitor.getCodeId());
+    AccessCodeSearchCriteriaTo criteria = new AccessCodeSearchCriteriaTo();
+    List<OrderByTo> order = new ArrayList<>();
+    OrderByTo dateOrder = new OrderByTo();
+    dateOrder.setName("dateAndTime");
+    dateOrder.setDirection(OrderDirection.ASC);
+    order.add(dateOrder);
+    criteria.setSort(order);
+    List<QueueEto> queue = new ArrayList<>();
+    PaginatedListTo<AccessCodeEto> accessCodes = this.accesscode.findAccessCodeEtos(criteria);
+    accessCodes.getResult().forEach(code -> {
+      QueueEto queueEntry = new QueueEto();
+      queueEntry.setName(findVisitor(code.getVisitorId()).getName());
+      queueEntry.setSurname(findVisitor(code.getVisitorId()).getSurname());
+      queueEntry.setDateAndTime(code.getDateAndTime());
+      queue.add(queueEntry);
+    });
+
+    return new PaginatedListTo<>(queue, accessCodes.getPagination());
   }
 
   /**
