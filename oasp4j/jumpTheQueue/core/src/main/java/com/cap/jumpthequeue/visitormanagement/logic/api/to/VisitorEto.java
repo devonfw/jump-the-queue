@@ -1,5 +1,9 @@
 package com.cap.jumpthequeue.visitormanagement.logic.api.to;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
 import com.cap.jumpthequeue.visitormanagement.common.api.Visitor;
 
@@ -10,8 +14,13 @@ public class VisitorEto extends AbstractEto implements Visitor {
 
   private static final long serialVersionUID = 1L;
 
+  @NotNull
   private String name;
 
+  @NotNull
+  private String surname;
+
+  @Email
   private String email;
 
   private String phone;
@@ -21,7 +30,7 @@ public class VisitorEto extends AbstractEto implements Visitor {
   @Override
   public String getName() {
 
-    return name;
+    return this.name;
   }
 
   @Override
@@ -33,7 +42,7 @@ public class VisitorEto extends AbstractEto implements Visitor {
   @Override
   public String getEmail() {
 
-    return email;
+    return this.email;
   }
 
   @Override
@@ -45,7 +54,7 @@ public class VisitorEto extends AbstractEto implements Visitor {
   @Override
   public String getPhone() {
 
-    return phone;
+    return this.phone;
   }
 
   @Override
@@ -57,7 +66,7 @@ public class VisitorEto extends AbstractEto implements Visitor {
   @Override
   public Long getCodeId() {
 
-    return codeId;
+    return this.codeId;
   }
 
   @Override
@@ -123,5 +132,17 @@ public class VisitorEto extends AbstractEto implements Visitor {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public String getSurname() {
+
+    return this.surname;
+  }
+
+  @Override
+  public void setSurname(String surname) {
+
+    this.surname = surname;
   }
 }
