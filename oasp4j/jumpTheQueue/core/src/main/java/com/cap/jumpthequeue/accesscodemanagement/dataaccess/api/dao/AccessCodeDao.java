@@ -1,7 +1,7 @@
-package com.cap.jumpthequeue.accesscode.dataaccess.api.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;

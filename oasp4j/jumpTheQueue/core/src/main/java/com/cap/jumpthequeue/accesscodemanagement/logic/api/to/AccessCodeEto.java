@@ -1,8 +1,8 @@
-package com.cap.jumpthequeue.accesscode.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
-import com.cap.jumpthequeue.accesscode.common.api.AccessCode;
+import com.cap.jumpthequeue.accesscodemanagement.common.api.AccessCode;
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
 
 /**
@@ -14,7 +14,7 @@ public class AccessCodeEto extends AbstractEto implements AccessCode {
 
   private String code;
 
-  private Date dateAndTime;
+  private Timestamp dateAndTime;
 
   private Long visitorId;
 
@@ -31,13 +31,13 @@ public class AccessCodeEto extends AbstractEto implements AccessCode {
   }
 
   @Override
-  public Date getDateAndTime() {
+  public Timestamp getDateAndTime() {
 
     return this.dateAndTime;
   }
 
   @Override
-  public void setDateAndTime(Date dateAndTime) {
+  public void setDateAndTime(Timestamp dateAndTime) {
 
     this.dateAndTime = dateAndTime;
   }

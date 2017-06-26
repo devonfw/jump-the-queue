@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,9 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
-import com.cap.jumpthequeue.accesscode.logic.api.Accesscode;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.VisitorEntity;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.dao.VisitorDao;
@@ -41,7 +42,7 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   private VisitorDao visitorDao;
 
   @Inject
-  private Accesscode accesscode;
+  private Accesscodemanagement accesscode;
 
   /**
    * The constructor.
@@ -100,17 +101,37 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   }
 
   @Override
-  public AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor) {
+  public VisitorCto saveVisitorAndGetCode(VisitorEto visitor) {
+
+    // Objects.requireNonNull(visitor, "visitor");
+    // VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
+    // // initialize, validate visitorEntity here if necessary
+    // AccessCodeEto codeEto = new AccessCodeEto();
+    // codeEto.setVisitorId(visitorEntity.getId());
+    // AccessCodeEntity code = getBeanMapper().map(this.accesscode.saveAccessCode(codeEto), AccessCodeEntity.class);
+    // visitorEntity.setCode(code);
+    // getVisitorDao().save(visitorEntity);
+    //
+    // VisitorCto visitorCto = new VisitorCto();
+    // visitorCto.setCode(getBeanMapper().map(code, AccessCodeEto.class));
+    // visitorCto.setVisitor(getBeanMapper().map(visitorEntity, VisitorEto.class));
+    // LOG.debug("Visitor with id '{}' has been created.", visitorEntity.getId());
+    //
+    // return visitorCto;
 
     Objects.requireNonNull(visitor, "visitor");
     VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
     // initialize, validate visitorEntity here if necessary
     AccessCodeEntity code = new AccessCodeEntity();
-    code.setCode("A34");
+    code.setCode(generateCode(new Random(), 3));
     code.setDateAndTime(Timestamp.from(Instant.now()));
     visitorEntity.setCode(code);
     VisitorEntity savedVisitor = getVisitorDao().save(visitorEntity);
-    return this.accesscode.findAccessCode(savedVisitor.getCodeId());
+
+    VisitorCto cto = new VisitorCto();
+    cto.setVisitor(getBeanMapper().map(savedVisitor, VisitorEto.class));
+    cto.setCode(getBeanMapper().map(this.accesscode.findAccessCode(savedVisitor.getCodeId()), AccessCodeEto.class));
+    return cto;
   }
 
   /**
@@ -121,6 +142,16 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   public VisitorDao getVisitorDao() {
 
     return this.visitorDao;
+  }
+
+  private static String generateCode(Random rng, int length) {
+
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    char[] text = new char[length];
+    for (int i = 0; i < length; i++) {
+      text[i] = characters.charAt(rng.nextInt(characters.length()));
+    }
+    return new String(text);
   }
 
 }

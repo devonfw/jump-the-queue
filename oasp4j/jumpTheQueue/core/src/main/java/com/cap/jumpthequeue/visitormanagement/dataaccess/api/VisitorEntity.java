@@ -7,8 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
+import org.hibernate.validator.constraints.Email;
+
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.visitormanagement.common.api.Visitor;
 
@@ -19,8 +22,10 @@ import com.cap.jumpthequeue.visitormanagement.common.api.Visitor;
 @Table(name = "Visitor")
 public class VisitorEntity extends ApplicationPersistenceEntity implements Visitor {
 
+  @NotNull
   private String name;
 
+  @Email
   private String email;
 
   private String phone;
@@ -38,7 +43,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param name new value of {@link #getname}.
+   * @param name new value of {@link #getName}.
    */
   public void setName(String name) {
 
@@ -54,7 +59,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param email new value of {@link #getemail}.
+   * @param email new value of {@link #getEmail}.
    */
   public void setEmail(String email) {
 
@@ -70,7 +75,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param phone new value of {@link #getphone}.
+   * @param phone new value of {@link #getPhone}.
    */
   public void setPhone(String phone) {
 
@@ -88,13 +93,14 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param code new value of {@link #getcode}.
+   * @param code new value of {@link #getCode}.
    */
   public void setCode(AccessCodeEntity code) {
 
     this.code = code;
   }
 
+  @SuppressWarnings("javadoc")
   @Override
   @Transient
   public Long getCodeId() {
@@ -105,6 +111,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
     return this.code.getId();
   }
 
+  @SuppressWarnings("javadoc")
   @Override
   public void setCodeId(Long codeId) {
 

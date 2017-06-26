@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.accesscode.logic.impl;
+package com.cap.jumpthequeue.accesscodemanagement.logic.impl;
 
 import java.util.Objects;
 
@@ -9,11 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
-import com.cap.jumpthequeue.accesscode.dataaccess.api.dao.AccessCodeDao;
-import com.cap.jumpthequeue.accesscode.logic.api.Accesscode;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.AccessCodeDao;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
@@ -23,10 +23,10 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
  */
 @Named
 @Transactional
-public class AccesscodeImpl extends AbstractComponentFacade implements Accesscode {
+public class AccesscodemanagementImpl extends AbstractComponentFacade implements Accesscodemanagement {
 
   /** Logger instance. */
-  private static final Logger LOG = LoggerFactory.getLogger(AccesscodeImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AccesscodemanagementImpl.class);
 
   /** @see #getAccessCodeDao() */
   @Inject
@@ -35,7 +35,7 @@ public class AccesscodeImpl extends AbstractComponentFacade implements Accesscod
   /**
    * The constructor.
    */
-  public AccesscodeImpl() {
+  public AccesscodemanagementImpl() {
     super();
   }
 
@@ -74,6 +74,26 @@ public class AccesscodeImpl extends AbstractComponentFacade implements Accesscod
     LOG.debug("AccessCode with id '{}' has been created.", accessCodeEntity.getId());
 
     return getBeanMapper().map(accessCodeEntity, AccessCodeEto.class);
+
+    // Objects.requireNonNull(accessCode, "accessCode");
+    // AccessCodeEntity accessCodeEntity = getBeanMapper().map(accessCode, AccessCodeEntity.class);
+    //
+    // AccessCodeSearchCriteriaTo criteria = new AccessCodeSearchCriteriaTo();
+    // String code = generateCode(new Random(), 3);
+    // criteria.setCode(code);
+    //
+    // while (!findAccessCodeEtos(criteria).getResult().isEmpty()) {
+    // code = generateCode(new Random(), 3);
+    // criteria.setCode(code);
+    // }
+    // accessCodeEntity.setCode(code);
+    // accessCodeEntity.setDateAndTime(Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS)));
+    //
+    // // initialize, validate accessCodeEntity here if necessary
+    // getAccessCodeDao().save(accessCodeEntity);
+    // LOG.debug("AccessCode with id '{}' has been created.", accessCodeEntity.getId());
+    //
+    // return getBeanMapper().map(accessCodeEntity, AccessCodeEto.class);
   }
 
   /**

@@ -1,14 +1,14 @@
-package com.cap.jumpthequeue.accesscode.logic.api;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api;
 
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
  * Interface for Accesscode component.
  */
-public interface Accesscode {
+public interface Accesscodemanagement {
 
   /**
    * Returns a AccessCode by its id 'id'.
