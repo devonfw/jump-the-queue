@@ -9,7 +9,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
@@ -47,7 +46,7 @@ public interface VisitormanagementRestService {
 
   @POST
   @Path("/register/")
-  public AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor);
+  public VisitorCto registerVisitor(VisitorEto visitor);
 
   /**
    * Delegates to {@link Visitormanagement#deleteVisitor}.

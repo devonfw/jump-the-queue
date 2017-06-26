@@ -3,7 +3,6 @@ package com.cap.jumpthequeue.visitormanagement.service.impl.rest;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
@@ -33,9 +32,9 @@ public class VisitormanagementRestServiceImpl implements VisitormanagementRestSe
     return this.visitormanagement.saveVisitor(visitor);
   }
 
-  public AccessCodeEto saveVisitorAndGetCode(VisitorEto visitor) {
+  public VisitorCto registerVisitor(VisitorEto visitor) {
 
-    return this.visitormanagement.saveVisitorAndGetCode(visitor);
+    return this.visitormanagement.registerVisitor(visitor);
   }
 
   @Override

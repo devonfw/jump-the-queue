@@ -1,12 +1,12 @@
-package com.cap.jumpthequeue.accesscode.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 
 /**
  * This is the {@link SearchCriteriaTo search criteria} {@link net.sf.mmm.util.transferobject.api.TransferObject TO}
- * used to find {@link com.cap.jumpthequeue.accesscode.common.api.AccessCode}s.
+ * used to find {@link com.cap.jumpthequeue.accesscodemanagement.common.api.AccessCode}s.
  *
  */
 public class AccessCodeSearchCriteriaTo extends SearchCriteriaTo {
@@ -15,7 +15,7 @@ public class AccessCodeSearchCriteriaTo extends SearchCriteriaTo {
 
   private String code;
 
-  private Date dateAndTime;
+  private Timestamp dateAndTime;
 
   private Long visitorId;
 
@@ -37,12 +37,12 @@ public class AccessCodeSearchCriteriaTo extends SearchCriteriaTo {
     this.code = code;
   }
 
-  public Date getDateAndTime() {
+  public Timestamp getDateAndTime() {
 
     return this.dateAndTime;
   }
 
-  public void setDateAndTime(Date dateAndTime) {
+  public void setDateAndTime(Timestamp dateAndTime) {
 
     this.dateAndTime = dateAndTime;
   }

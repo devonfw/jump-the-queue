@@ -1,6 +1,6 @@
-package com.cap.jumpthequeue.accesscode.dataaccess.api;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.api;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.cap.jumpthequeue.accesscode.common.api.AccessCode;
+import com.cap.jumpthequeue.accesscodemanagement.common.api.AccessCode;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.VisitorEntity;
 
@@ -24,7 +24,7 @@ public class AccessCodeEntity extends ApplicationPersistenceEntity implements Ac
   private String code;
 
   @Temporal(TemporalType.TIMESTAMP)
-  private Date dateAndTime;
+  private Timestamp dateAndTime;
 
   private VisitorEntity visitor;
 
@@ -67,7 +67,7 @@ public class AccessCodeEntity extends ApplicationPersistenceEntity implements Ac
   /**
    * @return dateAndTime
    */
-  public Date getDateAndTime() {
+  public Timestamp getDateAndTime() {
 
     return this.dateAndTime;
   }
@@ -75,7 +75,7 @@ public class AccessCodeEntity extends ApplicationPersistenceEntity implements Ac
   /**
    * @param dateAndTime new value of {@link #getdateAndTime}.
    */
-  public void setDateAndTime(Date dateAndTime) {
+  public void setDateAndTime(Timestamp dateAndTime) {
 
     this.dateAndTime = dateAndTime;
   }

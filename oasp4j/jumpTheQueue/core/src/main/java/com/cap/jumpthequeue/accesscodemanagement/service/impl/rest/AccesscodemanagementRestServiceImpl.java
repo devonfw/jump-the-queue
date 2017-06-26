@@ -1,23 +1,23 @@
-package com.cap.jumpthequeue.accesscode.service.impl.rest;
+package com.cap.jumpthequeue.accesscodemanagement.service.impl.rest;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.cap.jumpthequeue.accesscode.logic.api.Accesscode;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeEto;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeSearchCriteriaTo;
-import com.cap.jumpthequeue.accesscode.service.api.rest.AccesscodeRestService;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.service.api.rest.AccesscodemanagementRestService;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
- * The service implementation for REST calls in order to execute the logic of component {@link Accesscode}.
+ * The service implementation for REST calls in order to execute the logic of component {@link Accesscodemanagement}.
  */
 @Named("AccesscodeRestService")
-public class AccesscodeRestServiceImpl implements AccesscodeRestService {
+public class AccesscodemanagementRestServiceImpl implements AccesscodemanagementRestService {
 
   @Inject
-  private Accesscode accesscode;
+  private Accesscodemanagement accesscode;
 
   @Override
   public AccessCodeEto getAccessCode(long id) {

@@ -1,12 +1,10 @@
-package com.cap.jumpthequeue.accesscode.dataaccess.impl.dao;
-
-import java.util.Date;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.impl.dao;
 
 import javax.inject.Named;
 
-import com.cap.jumpthequeue.accesscode.dataaccess.api.AccessCodeEntity;
-import com.cap.jumpthequeue.accesscode.dataaccess.api.dao.AccessCodeDao;
-import com.cap.jumpthequeue.accesscode.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.AccessCodeDao;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
@@ -45,10 +43,7 @@ public class AccessCodeDaoImpl extends ApplicationDaoImpl<AccessCodeEntity> impl
     if (code != null) {
       query.where(Alias.$(accesscode.getCode()).eq(code));
     }
-    Date dateAndTime = criteria.getDateAndTime();
-    if (dateAndTime != null) {
-      query.where(Alias.$(accesscode.getDateAndTime()).eq(dateAndTime));
-    }
+
     Long visitor = criteria.getVisitorId();
     if (visitor != null) {
       if (accesscode.getVisitor() != null) {
