@@ -43,6 +43,6 @@ public interface Visitormanagement {
    */
   VisitorEto saveVisitor(VisitorEto visitor);
 
-  VisitorCto saveVisitorAndGetCode(VisitorEto visitor);
+  VisitorCto registerVisitor(VisitorEto visitor);
 
 }

@@ -101,23 +101,7 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   }
 
   @Override
-  public VisitorCto saveVisitorAndGetCode(VisitorEto visitor) {
-
-    // Objects.requireNonNull(visitor, "visitor");
-    // VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
-    // // initialize, validate visitorEntity here if necessary
-    // AccessCodeEto codeEto = new AccessCodeEto();
-    // codeEto.setVisitorId(visitorEntity.getId());
-    // AccessCodeEntity code = getBeanMapper().map(this.accesscode.saveAccessCode(codeEto), AccessCodeEntity.class);
-    // visitorEntity.setCode(code);
-    // getVisitorDao().save(visitorEntity);
-    //
-    // VisitorCto visitorCto = new VisitorCto();
-    // visitorCto.setCode(getBeanMapper().map(code, AccessCodeEto.class));
-    // visitorCto.setVisitor(getBeanMapper().map(visitorEntity, VisitorEto.class));
-    // LOG.debug("Visitor with id '{}' has been created.", visitorEntity.getId());
-    //
-    // return visitorCto;
+  public VisitorCto registerVisitor(VisitorEto visitor) {
 
     Objects.requireNonNull(visitor, "visitor");
     VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);

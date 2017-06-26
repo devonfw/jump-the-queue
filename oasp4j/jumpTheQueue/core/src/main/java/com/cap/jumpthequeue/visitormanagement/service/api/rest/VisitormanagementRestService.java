@@ -46,7 +46,7 @@ public interface VisitormanagementRestService {
 
   @POST
   @Path("/register/")
-  public VisitorCto saveVisitorAndGetCode(VisitorEto visitor);
+  public VisitorCto registerVisitor(VisitorEto visitor);
 
   /**
    * Delegates to {@link Visitormanagement#deleteVisitor}.
