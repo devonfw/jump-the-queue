@@ -2,6 +2,7 @@ package com.cap.jumpthequeue.visitormanagement.logic.impl;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -108,7 +109,7 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
     // initialize, validate visitorEntity here if necessary
     AccessCodeEntity code = new AccessCodeEntity();
     code.setCode(generateCode(new Random(), 3));
-    code.setDateAndTime(Timestamp.from(Instant.now()));
+    code.setDateAndTime(Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS)));
     visitorEntity.setCode(code);
     VisitorEntity savedVisitor = getVisitorDao().save(visitorEntity);
 
