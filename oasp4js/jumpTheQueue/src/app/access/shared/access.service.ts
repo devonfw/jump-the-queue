@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { config } from '../../config';
 
 @Injectable()
 export class AccessService {
@@ -13,13 +14,13 @@ export class AccessService {
               public snackBar: MdSnackBar,
               private router: Router) { }
 
-  login(name, email, phone): void {
-    this.http.post('http://localhost:8081/jumpthequery/services/rest/Queuermanagement/v1/Queuer/', {'name': name, 'email': email, 'phone': phone})
+  register(name, email, phone): void {
+    this.http.post(`${config.basePath}visitormanagement/v1/register`, {name: name, email: email, phone: phone})
              .map(res => res.json())
              .subscribe( (res) => {
                 this.auth.setLogged(true);
                 this.auth.setUser(name);
-                this.auth.setCode(res.code.code)
+                this.auth.setCode(res.code.code);
                 this.router.navigate(['code']);
              }, (err) => {
                 this.snackBar.open(err.json().message, 'OK', {

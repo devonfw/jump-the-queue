@@ -2,7 +2,6 @@ import { AuthService } from '../shared/authentication/auth.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CodeViewerService } from 'app/code-viewer/shared/code-viewer.service';
 
 @Component({
   selector: 'app-code-viewer',
@@ -15,13 +14,10 @@ export class CodeViewerComponent implements OnInit {
   name: string;
 
   constructor(private router: Router,
-              private auth: AuthService,
-              private codeService: CodeViewerService) { }
+              private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.codeService.getCode().subscribe((data: string) => {
-      this.code = data;
-    });
+    this.code = this.auth.getCode();
     this.name = this.auth.getUser();
   }
 
