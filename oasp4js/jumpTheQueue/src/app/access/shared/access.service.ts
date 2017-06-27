@@ -1,31 +1,37 @@
 import { AuthService } from '../../shared/authentication/auth.service';
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Http } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccessService {
 
   constructor(private auth: AuthService,
+              private http: Http,
               public snackBar: MdSnackBar,
               private router: Router) { }
 
   login(name, email, phone): void {
-    if (name === 'user' && email === 'asd@asd.com' && phone === 123456789) {
-      this.auth.setLogged(true);
-      this.auth.setUser(name);
-      this.router.navigate(['code']);
-    } else {
-      this.snackBar.open('access error', 'OK', {
-        duration: 2000,
-      });
-    }
+    this.http.post('http://localhost:8081/jumpthequery/services/rest/Queuermanagement/v1/Queuer/', {'name': name, 'email': email, 'phone': phone})
+             .map(res => res.json())
+             .subscribe( (res) => {
+                this.auth.setLogged(true);
+                this.auth.setUser(name);
+                this.auth.setCode(res.code.code)
+                this.router.navigate(['code']);
+             }, (err) => {
+                this.snackBar.open(err.json().message, 'OK', {
+                  duration: 2000,
+                });
+             });
   }
 
   logoff(): void {
       this.auth.setLogged(false);
       this.auth.setUser('');
+      this.auth.setCode('');
       this.router.navigate(['access']);
   }
 
