@@ -9,9 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Email;
-
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.general.common.api.validation.EmailExtended;
+import com.cap.jumpthequeue.general.common.api.validation.Phone;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.visitormanagement.common.api.Visitor;
 
@@ -25,9 +25,12 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   @NotNull
   private String name;
 
-  @Email
+  @NotNull
+  @EmailExtended
   private String email;
 
+  @NotNull
+  @Phone
   private String phone;
 
   private AccessCodeEntity code;
