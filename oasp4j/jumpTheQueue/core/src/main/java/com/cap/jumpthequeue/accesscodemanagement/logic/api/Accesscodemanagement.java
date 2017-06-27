@@ -44,5 +44,12 @@ public interface Accesscodemanagement {
    */
   AccessCodeEto saveAccessCode(AccessCodeEto accessCode);
 
+  /**
+   * Generates a random access code
+   *
+   * @param rng
+   * @param length
+   * @return the generated code
+   */
   String generateCode(Random rng, int length);
 }
