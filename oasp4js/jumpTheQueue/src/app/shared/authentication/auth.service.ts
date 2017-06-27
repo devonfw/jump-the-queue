@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
     private logged = false;
+    private code = '';
     private user = '';
 
     public isLogged(): boolean {
@@ -19,5 +20,13 @@ export class AuthService {
 
     public setUser(username: string): void {
         this.user = username;
+    }
+
+    public getCode(): string {
+        return this.code;
+    }
+
+    public setCode(code: string): void {
+        this.code = code;
     }
 }

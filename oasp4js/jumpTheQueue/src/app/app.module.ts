@@ -12,7 +12,6 @@ import { appRoutes } from 'app/app.routes';
 import { AccessComponent } from './access/access.component';
 import { AccessService } from './access/shared/access.service';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
-import { CodeViewerService } from './code-viewer/shared/code-viewer.service';
 import { QueueViewerComponent } from './queue-viewer/queue-viewer.component';
 import { AuthGuard } from './shared/authentication/auth-guard.service';
 import { AuthService } from './shared/authentication/auth.service';
@@ -36,7 +35,6 @@ import { QueueViewerService } from 'app/queue-viewer/shared/queue-viewer.service
     HttpModule
   ],
   providers: [
-    CodeViewerService,
     QueueViewerService,
     AccessService,
     AuthGuard,
