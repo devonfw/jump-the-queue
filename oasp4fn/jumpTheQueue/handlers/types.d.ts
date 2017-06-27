@@ -56,5 +56,10 @@ export interface Visitor {
     phone: string;
 } 
 
+export interface Code {
+    code: string;
+    dateAndTime: number;
+} 
+
 
 
