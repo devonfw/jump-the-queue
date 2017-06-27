@@ -108,7 +108,7 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
     VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
     // initialize, validate visitorEntity here if necessary
     AccessCodeEntity code = new AccessCodeEntity();
-    code.setCode(generateCode(new Random(), 3));
+    code.setCode(this.accesscode.generateCode(new Random(), 3));
     code.setDateAndTime(Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS)));
     visitorEntity.setCode(code);
     VisitorEntity savedVisitor = getVisitorDao().save(visitorEntity);
@@ -127,16 +127,6 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
   public VisitorDao getVisitorDao() {
 
     return this.visitorDao;
-  }
-
-  private static String generateCode(Random rng, int length) {
-
-    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    char[] text = new char[length];
-    for (int i = 0; i < length; i++) {
-      text[i] = characters.charAt(rng.nextInt(characters.length()));
-    }
-    return new String(text);
   }
 
 }

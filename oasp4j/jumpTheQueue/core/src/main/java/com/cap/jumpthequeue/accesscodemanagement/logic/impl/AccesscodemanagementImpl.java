@@ -1,6 +1,7 @@
 package com.cap.jumpthequeue.accesscodemanagement.logic.impl;
 
 import java.util.Objects;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -74,26 +75,6 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     LOG.debug("AccessCode with id '{}' has been created.", accessCodeEntity.getId());
 
     return getBeanMapper().map(accessCodeEntity, AccessCodeEto.class);
-
-    // Objects.requireNonNull(accessCode, "accessCode");
-    // AccessCodeEntity accessCodeEntity = getBeanMapper().map(accessCode, AccessCodeEntity.class);
-    //
-    // AccessCodeSearchCriteriaTo criteria = new AccessCodeSearchCriteriaTo();
-    // String code = generateCode(new Random(), 3);
-    // criteria.setCode(code);
-    //
-    // while (!findAccessCodeEtos(criteria).getResult().isEmpty()) {
-    // code = generateCode(new Random(), 3);
-    // criteria.setCode(code);
-    // }
-    // accessCodeEntity.setCode(code);
-    // accessCodeEntity.setDateAndTime(Timestamp.from(Instant.now().plus(1, ChronoUnit.DAYS)));
-    //
-    // // initialize, validate accessCodeEntity here if necessary
-    // getAccessCodeDao().save(accessCodeEntity);
-    // LOG.debug("AccessCode with id '{}' has been created.", accessCodeEntity.getId());
-    //
-    // return getBeanMapper().map(accessCodeEntity, AccessCodeEto.class);
   }
 
   /**
@@ -104,6 +85,17 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
   public AccessCodeDao getAccessCodeDao() {
 
     return this.accessCodeDao;
+  }
+
+  @Override
+  public String generateCode(Random rng, int length) {
+
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    char[] text = new char[length];
+    for (int i = 0; i < length; i++) {
+      text[i] = characters.charAt(rng.nextInt(characters.length()));
+    }
+    return new String(text);
   }
 
 }
