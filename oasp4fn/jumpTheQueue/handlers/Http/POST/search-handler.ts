@@ -14,6 +14,6 @@ export async function search (event: HttpEvent, context: Context, callback: Func
         callback(null, res);
     }
     catch(err){
-        callback({message: 'Cannot get the queue'});
+        callback(new Error('[500] Cannot get the queue'));
     }
 }

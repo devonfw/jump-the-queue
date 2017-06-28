@@ -23,7 +23,7 @@ export let validateVisitor = (visitor: Visitor) => {
     _.some(visitor, (value, key) => {
         switch (key) {
             case 'phone':
-                ok = /(\d+\s)+\d+|\d+/.test(value);
+                ok = /^(\d+\s?)+\d+$/.test(value);
                 break;
             case 'email':
                 ok = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);

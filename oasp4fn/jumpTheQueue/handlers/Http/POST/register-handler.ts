@@ -11,7 +11,7 @@ export async function register (event: HttpEvent, context: Context, callback: Fu
     try {
         let visitor = event.body;
 
-        if(!isVisitor(visitor) && !validateVisitor(visitor))
+        if(!isVisitor(visitor) || !validateVisitor(visitor))
             throw new Error();
 
         let date = new Date();
@@ -30,6 +30,6 @@ export async function register (event: HttpEvent, context: Context, callback: Fu
         callback(null, result);
     }
     catch(err){
-        callback({message: 'Cannot register the visitor to the queue'});
+        callback(new Error('[500] Cannot register the visitor to the queue'));
     }
 } 
