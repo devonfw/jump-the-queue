@@ -1,16 +1,35 @@
 <td-layout>
-  <md-card>
+  <md-card *ngIf="queuers | async as queuersList; else loading">
     <img md-card-image src="assets/images/jumptheq.png">
     <md-card-title>Queue view:</md-card-title>
 
     <td-data-table
-      [data]="queuers"
+      [data]="queuersList.result"
       [columns]="columns">
+      <ng-template tdDataTableTemplate="visitor.name" let-value="value" let-row="row" let-column="column">
+        <div layout="row">
+          <span *ngIf="value === auth.getUser(); else normal" flex><b>{{value}}</b></span>
+          <ng-template #normal>
+            <span flex>{{value}}</span>
+          </ng-template>
+        </div>
+      </ng-template>
     </td-data-table>
+    
+    
 
     <div class="text-center pad-lg">
       <button md-raised-button (click)="navigateCode()" color="primary" class="text-upper">Go back</button>
     </div>
 
   </md-card>
+    
+  <ng-template #loading>
+    <md-progress-bar
+      #loading
+      color="accent"
+      mode="indeterminate">
+    </md-progress-bar>
+  </ng-template>
+
 </td-layout>
