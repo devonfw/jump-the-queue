@@ -1,6 +1,5 @@
 import { AuthService } from '../shared/authentication/auth.service';
 import { CodeViewerComponent } from './code-viewer.component';
-import { CodeViewerService } from './shared/code-viewer.service';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
@@ -14,7 +13,7 @@ describe('CodeViewerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CodeViewerComponent ],
-      providers: [ CodeViewerService, AuthService ],
+      providers: [ AuthService ],
       imports: [ MaterialModule, CovalentLayoutModule, RouterTestingModule ],
     })
     .compileComponents();

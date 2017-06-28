@@ -1,18 +1,19 @@
 import { async, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CovalentLayoutModule } from '@covalent/core';
 
 import { AccessService } from './access/shared/access.service';
-import { AppComponent } from './app.component';
 import { AuthService } from './shared/authentication/auth.service';
-import { MaterialModule } from '@angular/material';
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
       providers: [AccessService, AuthService],
-      imports: [RouterTestingModule, CovalentLayoutModule, MaterialModule ],
+      imports: [RouterTestingModule, HttpModule, CovalentLayoutModule, MaterialModule ],
     }).compileComponents();
   }));
 
