@@ -15,7 +15,7 @@ import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.visitormanagement.dataaccess.api.VisitorEntity;
 
 /**
- * @author pparrado
+ * Access Code Entity
  */
 @Entity
 @Table(name = "ACCESSCODE")

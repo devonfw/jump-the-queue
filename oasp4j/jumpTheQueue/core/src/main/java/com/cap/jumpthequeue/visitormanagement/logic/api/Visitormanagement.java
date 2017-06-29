@@ -24,7 +24,7 @@ public interface Visitormanagement {
    * Returns a paginated list of Visitors matching the search criteria.
    *
    * @param criteria the {@link VisitorSearchCriteriaTo}.
-   * @return the {@link List} of matching {@link VisitorEto}s.
+   * @return the {@link List} of matching {@link VisitorCto}s.
    */
   PaginatedListTo<VisitorCto> findVisitorCtos(VisitorSearchCriteriaTo criteria);
 

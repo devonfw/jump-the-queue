@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
@@ -44,6 +45,12 @@ public interface VisitormanagementRestService {
   @Path("/visitor/")
   public VisitorEto saveVisitor(VisitorEto visitor);
 
+  /**
+   * Delegates to {@link Visitormanagement#registerVisitor}
+   *
+   * @param visitor visitor data
+   * @return the {@link VisitorCto} object with the {@link AccessCodeEto} data
+   */
   @POST
   @Path("/register/")
   public VisitorCto registerVisitor(VisitorEto visitor);
@@ -58,7 +65,7 @@ public interface VisitormanagementRestService {
   public void deleteVisitor(@PathParam("id") long id);
 
   /**
-   * Delegates to {@link Visitormanagement#findVisitorEtos}.
+   * Delegates to {@link Visitormanagement#findVisitorCtos}.
    *
    * @param searchCriteriaTo the pagination and search criteria to be used for finding visitors.
    * @return the {@link PaginatedListTo list} of matching {@link VisitorEto}s.
