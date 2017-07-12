@@ -46,7 +46,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param name new value of {@link #getName}.
+   * @param name new value of {@link #getname}.
    */
   public void setName(String name) {
 
@@ -62,7 +62,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param email new value of {@link #getEmail}.
+   * @param email new value of {@link #getemail}.
    */
   public void setEmail(String email) {
 
@@ -78,7 +78,7 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param phone new value of {@link #getPhone}.
+   * @param phone new value of {@link #getphone}.
    */
   public void setPhone(String phone) {
 
@@ -96,14 +96,13 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
   }
 
   /**
-   * @param code new value of {@link #getCode}.
+   * @param code new value of {@link #getcode}.
    */
   public void setCode(AccessCodeEntity code) {
 
     this.code = code;
   }
 
-  @SuppressWarnings("javadoc")
   @Override
   @Transient
   public Long getCodeId() {
@@ -114,7 +113,6 @@ public class VisitorEntity extends ApplicationPersistenceEntity implements Visit
     return this.code.getId();
   }
 
-  @SuppressWarnings("javadoc")
   @Override
   public void setCodeId(Long codeId) {
 

@@ -90,15 +90,20 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
     VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
 
     // initialize, validate visitorEntity here if necessary
-    AccessCodeEntity code = new AccessCodeEntity();
-    code.setCode("A34");
-    code.setDateAndTime(Timestamp.from(Instant.now()));
-    visitorEntity.setCode(code);
-    getVisitorDao().save(visitorEntity);
+    VisitorEntity resultEntity = getVisitorDao().save(visitorEntity);
+    LOG.debug("Visitor with id '{}' has been created.", resultEntity.getId());
 
-    LOG.debug("Visitor with id '{}' has been created.", visitorEntity.getId());
+    return getBeanMapper().map(resultEntity, VisitorEto.class);
+  }
 
-    return getBeanMapper().map(visitorEntity, VisitorEto.class);
+  /**
+   * Returns the field 'visitorDao'.
+   *
+   * @return the {@link VisitorDao} instance.
+   */
+  public VisitorDao getVisitorDao() {
+
+    return this.visitorDao;
   }
 
   @Override
@@ -117,16 +122,6 @@ public class VisitormanagementImpl extends AbstractComponentFacade implements Vi
     cto.setVisitor(getBeanMapper().map(savedVisitor, VisitorEto.class));
     cto.setCode(getBeanMapper().map(this.accesscode.findAccessCode(savedVisitor.getCodeId()), AccessCodeEto.class));
     return cto;
-  }
-
-  /**
-   * Returns the field 'visitorDao'.
-   *
-   * @return the {@link VisitorDao} instance.
-   */
-  public VisitorDao getVisitorDao() {
-
-    return this.visitorDao;
   }
 
 }

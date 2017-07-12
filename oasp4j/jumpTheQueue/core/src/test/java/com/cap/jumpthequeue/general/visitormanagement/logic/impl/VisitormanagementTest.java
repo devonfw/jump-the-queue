@@ -3,8 +3,7 @@ package com.cap.jumpthequeue.general.visitormanagement.logic.impl;
 import javax.inject.Inject;
 
 import org.junit.Test;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cap.jumpthequeue.SpringBootApp;
 import com.cap.jumpthequeue.visitormanagement.logic.api.Visitormanagement;
@@ -15,8 +14,7 @@ import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorSearchCriteria
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 import io.oasp.module.test.common.base.ComponentTest;
 
-@SpringApplicationConfiguration(classes = SpringBootApp.class)
-@WebAppConfiguration
+@SpringBootTest(classes = SpringBootApp.class)
 public class VisitormanagementTest extends ComponentTest {
 
   @Inject

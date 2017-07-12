@@ -7,15 +7,10 @@
     <artifactId>jumpthequeue</artifactId>
     <version>0.1</version>
   </parent>
-  <groupId>com.cap</groupId>
   <artifactId>jumpthequeue-server</artifactId>
   <packaging>war</packaging>
   <name>${project.artifactId}</name>
   <description>Server for the jumpthequeue application - a simple example using the Open Application Standard Platform for Java (OASP4J).</description>
-
-  <properties>
-      <java.version>1.7</java.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -95,6 +90,14 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <packagingExcludes>WEB-INF/classes/config/application.properties</packagingExcludes>
+              <warName>${project.artifactId}</warName>
+            </configuration>
           </plugin>
         </plugins>
       </build>

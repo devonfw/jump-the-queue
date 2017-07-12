@@ -18,7 +18,7 @@ import com.cap.jumpthequeue.visitormanagement.dataaccess.api.VisitorEntity;
  * Access Code Entity
  */
 @Entity
-@Table(name = "ACCESSCODE")
+@Table(name = "AccessCode")
 public class AccessCodeEntity extends ApplicationPersistenceEntity implements AccessCode {
 
   private String code;
@@ -29,24 +29,6 @@ public class AccessCodeEntity extends ApplicationPersistenceEntity implements Ac
   private VisitorEntity visitor;
 
   private static final long serialVersionUID = 1L;
-
-  /**
-   * @return visitor
-   */
-  @OneToOne
-  @JoinColumn(name = "idVisitor")
-  public VisitorEntity getVisitor() {
-
-    return this.visitor;
-  }
-
-  /**
-   * @param visitor new value of {@link #getvisitor}.
-   */
-  public void setVisitor(VisitorEntity visitor) {
-
-    this.visitor = visitor;
-  }
 
   /**
    * @return code
@@ -78,6 +60,24 @@ public class AccessCodeEntity extends ApplicationPersistenceEntity implements Ac
   public void setDateAndTime(Timestamp dateAndTime) {
 
     this.dateAndTime = dateAndTime;
+  }
+
+  /**
+   * @return visitor
+   */
+  @OneToOne
+  @JoinColumn(name = "idVisitor")
+  public VisitorEntity getVisitor() {
+
+    return this.visitor;
+  }
+
+  /**
+   * @param visitor new value of {@link #getvisitor}.
+   */
+  public void setVisitor(VisitorEntity visitor) {
+
+    this.visitor = visitor;
   }
 
   @Override

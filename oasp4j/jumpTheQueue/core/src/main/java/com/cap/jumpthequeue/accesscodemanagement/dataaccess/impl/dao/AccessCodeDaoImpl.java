@@ -1,5 +1,7 @@
 package com.cap.jumpthequeue.accesscodemanagement.dataaccess.impl.dao;
 
+import java.sql.Timestamp;
+
 import javax.inject.Named;
 
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
@@ -43,7 +45,10 @@ public class AccessCodeDaoImpl extends ApplicationDaoImpl<AccessCodeEntity> impl
     if (code != null) {
       query.where(Alias.$(accesscode.getCode()).eq(code));
     }
-
+    Timestamp dateAndTime = criteria.getDateAndTime();
+    if (dateAndTime != null) {
+      query.where(Alias.$(accesscode.getDateAndTime()).eq(dateAndTime));
+    }
     Long visitor = criteria.getVisitorId();
     if (visitor != null) {
       if (accesscode.getVisitor() != null) {

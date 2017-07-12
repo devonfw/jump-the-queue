@@ -46,16 +46,6 @@ public interface VisitormanagementRestService {
   public VisitorEto saveVisitor(VisitorEto visitor);
 
   /**
-   * Delegates to {@link Visitormanagement#registerVisitor}
-   *
-   * @param visitor visitor data
-   * @return the {@link VisitorCto} object with the {@link AccessCodeEto} data
-   */
-  @POST
-  @Path("/register/")
-  public VisitorCto registerVisitor(VisitorEto visitor);
-
-  /**
    * Delegates to {@link Visitormanagement#deleteVisitor}.
    *
    * @param id ID of the {@link VisitorEto} to be deleted
@@ -68,10 +58,19 @@ public interface VisitormanagementRestService {
    * Delegates to {@link Visitormanagement#findVisitorCtos}.
    *
    * @param searchCriteriaTo the pagination and search criteria to be used for finding visitors.
-   * @return the {@link PaginatedListTo list} of matching {@link VisitorEto}s.
+   * @return the {@link PaginatedListTo list} of matching {@link VisitorCto}s.
    */
   @Path("/visitor/search")
   @POST
   public PaginatedListTo<VisitorCto> findVisitorsByPost(VisitorSearchCriteriaTo searchCriteriaTo);
 
+  /**
+   * Delegates to {@link Visitormanagement#registerVisitor}
+   *
+   * @param visitor visitor data
+   * @return the {@link VisitorCto} object with the {@link AccessCodeEto} data
+   */
+  @POST
+  @Path("/register/")
+  public VisitorCto registerVisitor(VisitorEto visitor);
 }

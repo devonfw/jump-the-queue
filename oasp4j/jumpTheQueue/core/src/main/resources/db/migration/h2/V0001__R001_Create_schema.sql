@@ -6,7 +6,7 @@
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
 
--- *** Visitor ***
+
 CREATE TABLE Visitor(
   id BIGINT NOT NULL AUTO_INCREMENT,
   modificationCounter INTEGER NOT NULL,
@@ -14,12 +14,10 @@ CREATE TABLE Visitor(
   email VARCHAR(255),
   phone VARCHAR(255),
   idCode BIGINT,
-  CONSTRAINT PK_Visitor PRIMARY KEY(id),
-  --CONSTRAINT FK_Visitor_idCode FOREIGN KEY(idCode) REFERENCES AccessCode(id) NOCHECK
+  CONSTRAINT PK_Visitor PRIMARY KEY(id)
 );
 
--- *** AccessCode ***
-CREATE TABLE ACCESSCODE(
+CREATE TABLE AccessCode(
   id BIGINT NOT NULL AUTO_INCREMENT,
   modificationCounter INTEGER NOT NULL,
   code VARCHAR(5),
@@ -28,15 +26,6 @@ CREATE TABLE ACCESSCODE(
   CONSTRAINT PK_AccessCode PRIMARY KEY(id),
   CONSTRAINT FK_AccessCode_idVisitor FOREIGN KEY(idVisitor) REFERENCES Visitor(id)
 );
-
-
-
-
-
-
-
-
-
 
 -- *** BinaryObject (BLOBs) ***
 CREATE TABLE BinaryObject (

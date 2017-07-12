@@ -1,5 +1,7 @@
 package com.cap.jumpthequeue.visitormanagement.logic.api;
 
+import java.util.List;
+
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorCto;
 import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
@@ -52,5 +54,4 @@ public interface Visitormanagement {
    *         {@link AccessCodeEto}
    */
   VisitorCto registerVisitor(VisitorEto visitor);
-
 }

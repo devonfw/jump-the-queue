@@ -3,10 +3,10 @@ package com.cap.jumpthequeue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.EndpointAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-import io.oasp.module.jpa.dataaccess.api.common.AdvancedRevisionEntity;
+import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
@@ -22,6 +22,5 @@ public class SpringBootApp {
   public static void main(String[] args) {
 
     SpringApplication.run(SpringBootApp.class, args);
-
   }
 }

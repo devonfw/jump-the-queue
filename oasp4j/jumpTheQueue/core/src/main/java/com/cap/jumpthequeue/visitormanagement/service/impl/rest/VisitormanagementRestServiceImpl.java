@@ -32,11 +32,6 @@ public class VisitormanagementRestServiceImpl implements VisitormanagementRestSe
     return this.visitormanagement.saveVisitor(visitor);
   }
 
-  public VisitorCto registerVisitor(VisitorEto visitor) {
-
-    return this.visitormanagement.registerVisitor(visitor);
-  }
-
   @Override
   public void deleteVisitor(long id) {
 
@@ -47,6 +42,12 @@ public class VisitormanagementRestServiceImpl implements VisitormanagementRestSe
   public PaginatedListTo<VisitorCto> findVisitorsByPost(VisitorSearchCriteriaTo searchCriteriaTo) {
 
     return this.visitormanagement.findVisitorCtos(searchCriteriaTo);
+  }
+
+  @Override
+  public VisitorCto registerVisitor(VisitorEto visitor) {
+
+    return this.visitormanagement.registerVisitor(visitor);
   }
 
 }

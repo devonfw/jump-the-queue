@@ -13,34 +13,34 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 /**
  * The service implementation for REST calls in order to execute the logic of component {@link Accesscodemanagement}.
  */
-@Named("AccesscodeRestService")
+@Named("AccesscodemanagementRestService")
 public class AccesscodemanagementRestServiceImpl implements AccesscodemanagementRestService {
 
   @Inject
-  private Accesscodemanagement accesscode;
+  private Accesscodemanagement accesscodemanagement;
 
   @Override
   public AccessCodeEto getAccessCode(long id) {
 
-    return this.accesscode.findAccessCode(id);
+    return this.accesscodemanagement.findAccessCode(id);
   }
 
   @Override
   public AccessCodeEto saveAccessCode(AccessCodeEto accesscode) {
 
-    return this.accesscode.saveAccessCode(accesscode);
+    return this.accesscodemanagement.saveAccessCode(accesscode);
   }
 
   @Override
   public void deleteAccessCode(long id) {
 
-    this.accesscode.deleteAccessCode(id);
+    this.accesscodemanagement.deleteAccessCode(id);
   }
 
   @Override
   public PaginatedListTo<AccessCodeEto> findAccessCodesByPost(AccessCodeSearchCriteriaTo searchCriteriaTo) {
 
-    return this.accesscode.findAccessCodeEtos(searchCriteriaTo);
+    return this.accesscodemanagement.findAccessCodeEtos(searchCriteriaTo);
   }
 
 }

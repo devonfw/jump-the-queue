@@ -8,7 +8,7 @@ import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCr
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
- * Interface for Accesscode component.
+ * Interface for Accesscodemanagement component.
  */
 public interface Accesscodemanagement {
 

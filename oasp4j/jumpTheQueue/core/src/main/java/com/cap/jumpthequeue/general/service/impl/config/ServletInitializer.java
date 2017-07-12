@@ -1,11 +1,11 @@
 package com.cap.jumpthequeue.general.service.impl.config;
 
-import com.cap.jumpthequeue.SpringBootApp;
-
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Configuration;
+
+import com.cap.jumpthequeue.SpringBootApp;
 
 /**
  * This auto configuration will be used by spring boot to enable traditional deployment to a servlet container. You may

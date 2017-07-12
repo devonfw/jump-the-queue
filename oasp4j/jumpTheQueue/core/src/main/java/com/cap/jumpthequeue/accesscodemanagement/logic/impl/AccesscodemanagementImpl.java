@@ -20,7 +20,7 @@ import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
- * Implementation of component interface of accesscode
+ * Implementation of component interface of accesscodemanagement
  */
 @Named
 @Transactional
@@ -71,10 +71,10 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     AccessCodeEntity accessCodeEntity = getBeanMapper().map(accessCode, AccessCodeEntity.class);
 
     // initialize, validate accessCodeEntity here if necessary
-    getAccessCodeDao().save(accessCodeEntity);
-    LOG.debug("AccessCode with id '{}' has been created.", accessCodeEntity.getId());
+    AccessCodeEntity resultEntity = getAccessCodeDao().save(accessCodeEntity);
+    LOG.debug("AccessCode with id '{}' has been created.", resultEntity.getId());
 
-    return getBeanMapper().map(accessCodeEntity, AccessCodeEto.class);
+    return getBeanMapper().map(resultEntity, AccessCodeEto.class);
   }
 
   /**

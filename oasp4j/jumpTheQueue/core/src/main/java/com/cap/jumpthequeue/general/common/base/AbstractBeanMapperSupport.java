@@ -1,8 +1,8 @@
 package com.cap.jumpthequeue.general.common.base;
 
-import javax.inject.Inject;
-
 import io.oasp.module.beanmapping.common.api.BeanMapper;
+
+import javax.inject.Inject;
 
 /**
  * This abstract class provides {@link #getBeanMapper() access} to the {@link BeanMapper}.
