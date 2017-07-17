@@ -1,9 +1,12 @@
 # Compiled class file
 *.class
+*.project
+*.classpath
 
 # Log file
 *.log
 
+/.settings/
 server/target/
 server/.settings/
 core/target/
