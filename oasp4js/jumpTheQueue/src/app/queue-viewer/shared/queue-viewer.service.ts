@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { config } from '../../config';
 
 @Injectable()
 export class QueueViewerService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getQueuers(): Observable<any> {
-    return this.http.post(`${config.basePath}visitormanagement/v1/visitor/search`, {})
-          .map(res => res.json());
+    return this.http.post<any>(`${config.basePath}visitormanagement/v1/visitor/search`, {});
   }
 
 }

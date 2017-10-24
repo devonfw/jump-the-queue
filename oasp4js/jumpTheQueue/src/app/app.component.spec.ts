@@ -1,7 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatIconModule, MatSnackBarModule } from '@angular/material';
 import { CovalentLayoutModule } from '@covalent/core';
 
 import { AccessService } from './access/shared/access.service';
@@ -13,7 +13,13 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
       providers: [AccessService, AuthService],
-      imports: [RouterTestingModule, HttpModule, CovalentLayoutModule, MaterialModule ],
+      imports: [
+        MatIconModule,
+        MatSnackBarModule,
+        RouterTestingModule,
+        HttpClientModule,
+        CovalentLayoutModule
+      ],
     }).compileComponents();
   }));
 

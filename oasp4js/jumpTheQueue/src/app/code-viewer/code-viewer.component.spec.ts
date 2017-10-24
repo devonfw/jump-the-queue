@@ -1,10 +1,11 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatCardModule } from '@angular/material';
+import { CovalentLayoutModule } from '@covalent/core';
+
 import { AuthService } from '../shared/authentication/auth.service';
 import { CodeViewerComponent } from './code-viewer.component';
-
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
-import { RouterTestingModule } from '@angular/router/testing';
-import { CovalentLayoutModule } from '@covalent/core';
 
 describe('CodeViewerComponent', () => {
   let component: CodeViewerComponent;
@@ -14,7 +15,12 @@ describe('CodeViewerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CodeViewerComponent ],
       providers: [ AuthService ],
-      imports: [ MaterialModule, CovalentLayoutModule, RouterTestingModule ],
+      imports: [
+        BrowserAnimationsModule,
+        MatCardModule,
+        CovalentLayoutModule,
+        RouterTestingModule,
+      ],
     })
     .compileComponents();
   }));

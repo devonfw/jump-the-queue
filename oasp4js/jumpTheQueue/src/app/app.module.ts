@@ -1,14 +1,27 @@
-import { CovalentLayoutModule, CovalentDataTableModule } from '@covalent/core';
+import {
+  CovalentLayoutModule,
+  CovalentCommonModule,
+  CovalentDataTableModule
+} from '@covalent/core';
+import {
+  MatCardModule,
+  MatInputModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatIconModule,
+  MatSnackBarModule,
+} from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 import 'HammerJS';
 
 import { AppComponent } from './app.component';
-import { appRoutes } from 'app/app.routes';
+import { AppRoutingModule } from './app-routing.module';
 import { AccessComponent } from './access/access.component';
 import { AccessService } from './access/shared/access.service';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
@@ -26,13 +39,20 @@ import { QueueViewerService } from 'app/queue-viewer/shared/queue-viewer.service
   ],
   imports: [
     BrowserModule,
-    appRoutes,
+    AppRoutingModule,
     FormsModule,
-    CovalentLayoutModule,
-    CovalentDataTableModule,
-    MaterialModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpClientModule,
+    CdkTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatSnackBarModule,
+    CovalentLayoutModule,
+    CovalentCommonModule,
+    CovalentDataTableModule,
   ],
   providers: [
     QueueViewerService,
