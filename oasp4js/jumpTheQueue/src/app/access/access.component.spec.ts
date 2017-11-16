@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CovalentLayoutModule } from '@covalent/core';
-import { MatCardModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatSnackBarModule } from '@angular/material';
 
 describe('AccessComponent', () => {
   let component: AccessComponent;
@@ -23,6 +23,7 @@ describe('AccessComponent', () => {
         HttpClientModule,
         FormsModule,
         MatCardModule,
+        MatInputModule,
         MatSnackBarModule,
         CovalentLayoutModule,
         RouterTestingModule,

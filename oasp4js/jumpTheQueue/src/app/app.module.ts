@@ -10,6 +10,7 @@ import {
   MatButtonToggleModule,
   MatIconModule,
   MatSnackBarModule,
+  MatProgressBarModule,
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -49,6 +50,7 @@ import { QueueViewerService } from 'app/queue-viewer/shared/queue-viewer.service
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     CovalentLayoutModule,
     CovalentCommonModule,
