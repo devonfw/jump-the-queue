@@ -1,6 +1,5 @@
 package com.cap.jumpthequeue.general.logic.base;
 
-import com.cap.jumpthequeue.general.common.base.AbstractBeanMapperSupport;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 import java.util.ArrayList;
@@ -13,6 +12,8 @@ import net.sf.mmm.util.entity.api.GenericEntity;
 import net.sf.mmm.util.entity.api.PersistenceEntity;
 import net.sf.mmm.util.transferobject.api.AbstractTransferObject;
 import net.sf.mmm.util.transferobject.api.TransferObject;
+
+import com.cap.jumpthequeue.general.common.base.AbstractBeanMapperSupport;
 
 /**
  * Abstract base class for any <em>use case</em> in this application. Actual implementations need to be annotated with

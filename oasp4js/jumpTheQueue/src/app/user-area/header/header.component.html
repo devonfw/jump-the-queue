@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="app-user-header">
+  <span>
+    <img src="{{queueLogo}}"> 
+  </span>
+  <span class="queue-name">{{queueName}}</span>
+  <span class="fill-remaining-space"></span>
+  <span>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>

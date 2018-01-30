@@ -1,9 +1,9 @@
 package com.cap.jumpthequeue.general.dataaccess.base.dao;
 
+import javax.inject.Named;
+
 import com.cap.jumpthequeue.general.dataaccess.api.BinaryObjectEntity;
 import com.cap.jumpthequeue.general.dataaccess.api.dao.BinaryObjectDao;
-
-import javax.inject.Named;
 
 /**
  * Implementation of {@link BinaryObjectDao}.

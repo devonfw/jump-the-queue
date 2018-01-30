@@ -59,7 +59,27 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
   @Override
   public void configure(HttpSecurity http) throws Exception {
 
+    String[] unsecuredResources =
+        new String[] { "/login", "/security/**", "/services/rest/login", "/services/rest/logout" };
+
     http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
+
+    /*
+     * .userDetailsService(this.userDetailsService) // define all urls that are not to be secured
+     * .authorizeRequests().antMatchers(unsecuredResources).permitAll().anyRequest().authenticated().and()
+     *
+     * // activate crsf check for a selection of urls (but not for login & logout)
+     * .csrf().requireCsrfProtectionMatcher(new CsrfRequestMatcher()).and()
+     *
+     * // configure parameters for simple form login (and logout) .formLogin().successHandler(new
+     * SimpleUrlAuthenticationSuccessHandler()).defaultSuccessUrl("/")
+     * .failureUrl("/login.html?error").loginProcessingUrl("/j_spring_security_login").usernameParameter("username")
+     * .passwordParameter("password").and() // logout via POST is possible
+     * .logout().logoutSuccessUrl("/login.html").and()
+     *
+     * // register login and logout filter that handles rest logins .addFilterAfter(getSimpleRestAuthenticationFilter(),
+     * BasicAuthenticationFilter.class) .addFilterAfter(getSimpleRestLogoutFilter(), LogoutFilter.class);
+     */
 
     if (this.corsEnabled) {
       http.addFilterBefore(getCorsFilter(), CsrfFilter.class);

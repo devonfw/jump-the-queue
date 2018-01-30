@@ -6,16 +6,48 @@ import com.cap.jumpthequeue.general.common.api.ApplicationEntity;
 
 public interface AccessCode extends ApplicationEntity {
 
-  public String getCode();
+  public String getName();
 
-  public void setCode(String code);
+  public void setName(String name);
 
-  public Timestamp getDateAndTime();
+  public String getEmail();
 
-  public void setDateAndTime(Timestamp dateAndTime);
+  public void setEmail(String email);
 
-  public Long getVisitorId();
+  public String getPhone();
 
-  public void setVisitorId(Long visitorId);
+  public void setPhone(String phone);
+
+  public String getIdentificator();
+
+  public void setIdentificator(String identificator);
+
+  public Integer getCode();
+
+  public void setCode(Integer code);
+
+  public Boolean getPriority();
+
+  public void setPriority(Boolean priority);
+
+  public Timestamp getCreationTime();
+
+  public void setCreationTime(Timestamp creationTime);
+
+  public Timestamp getStartTime();
+
+  public void setStartTime(Timestamp startTime);
+
+  public Timestamp getEndTime();
+
+  public void setEndTime(Timestamp endTime);
+
+  public Timestamp getEstimatedTime();
+
+  public void setEstimatedTime(Timestamp estimatedTime);
+
+  public Long getQueueId();
+
+  public void setQueueId(Long queueId);
 
 }

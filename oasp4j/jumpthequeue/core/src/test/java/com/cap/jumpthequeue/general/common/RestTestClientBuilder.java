@@ -6,9 +6,8 @@ import java.util.HashMap;
 import org.apache.cxf.common.util.Base64Utility;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
 import com.cap.jumpthequeue.general.common.api.RestService;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 /**
  * This class contains a method to aid simulating a REST client.

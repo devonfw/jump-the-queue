@@ -1,8 +1,8 @@
 package com.cap.jumpthequeue.general.logic.base;
 
-import com.cap.jumpthequeue.general.logic.api.to.BinaryObjectEto;
-
 import java.sql.Blob;
+
+import com.cap.jumpthequeue.general.logic.api.to.BinaryObjectEto;
 
 /**
  * Use case for managing BinaryObject.

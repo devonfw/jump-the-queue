@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.cap.jumpthequeue.general.common.api.UserProfile;
 import com.cap.jumpthequeue.general.common.api.Usermanagement;
 import com.cap.jumpthequeue.general.common.api.security.UserData;
+
 import io.oasp.module.security.common.api.accesscontrol.AccessControl;
 import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;

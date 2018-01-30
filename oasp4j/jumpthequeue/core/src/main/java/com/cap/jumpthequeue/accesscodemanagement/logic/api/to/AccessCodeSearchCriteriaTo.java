@@ -13,11 +13,27 @@ public class AccessCodeSearchCriteriaTo extends SearchCriteriaTo {
 
   private static final long serialVersionUID = 1L;
 
-  private String code;
+  private String name;
 
-  private Timestamp dateAndTime;
+  private String email;
 
-  private Long visitorId;
+  private String phone;
+
+  private String identificator;
+
+  private Integer code;
+
+  private Boolean priority;
+
+  private Timestamp creationTime;
+
+  private Timestamp startTime;
+
+  private Timestamp endTime;
+
+  private Timestamp estimatedTime;
+
+  private Long queueId;
 
   /**
    * The constructor.
@@ -27,34 +43,114 @@ public class AccessCodeSearchCriteriaTo extends SearchCriteriaTo {
     super();
   }
 
-  public String getCode() {
+  public String getName() {
+
+    return this.name;
+  }
+
+  public void setName(String name) {
+
+    this.name = name;
+  }
+
+  public String getEmail() {
+
+    return this.email;
+  }
+
+  public void setEmail(String email) {
+
+    this.email = email;
+  }
+
+  public String getPhone() {
+
+    return this.phone;
+  }
+
+  public void setPhone(String phone) {
+
+    this.phone = phone;
+  }
+
+  public String getIdentificator() {
+
+    return this.identificator;
+  }
+
+  public void setIdentificator(String identificator) {
+
+    this.identificator = identificator;
+  }
+
+  public Integer getCode() {
 
     return this.code;
   }
 
-  public void setCode(String code) {
+  public void setCode(Integer code) {
 
     this.code = code;
   }
 
-  public Timestamp getDateAndTime() {
+  public Boolean getPriority() {
 
-    return this.dateAndTime;
+    return this.priority;
   }
 
-  public void setDateAndTime(Timestamp dateAndTime) {
+  public void setPriority(Boolean priority) {
 
-    this.dateAndTime = dateAndTime;
+    this.priority = priority;
   }
 
-  public Long getVisitorId() {
+  public Timestamp getCreationTime() {
 
-    return this.visitorId;
+    return this.creationTime;
   }
 
-  public void setVisitorId(Long visitorId) {
+  public void setCreationTime(Timestamp creationTime) {
 
-    this.visitorId = visitorId;
+    this.creationTime = creationTime;
+  }
+
+  public Timestamp getStartTime() {
+
+    return this.startTime;
+  }
+
+  public void setStartTime(Timestamp startTime) {
+
+    this.startTime = startTime;
+  }
+
+  public Timestamp getEndTime() {
+
+    return this.endTime;
+  }
+
+  public void setEndTime(Timestamp endTime) {
+
+    this.endTime = endTime;
+  }
+
+  public Timestamp getEstimatedTime() {
+
+    return this.estimatedTime;
+  }
+
+  public void setEstimatedTime(Timestamp estimatedTime) {
+
+    this.estimatedTime = estimatedTime;
+  }
+
+  public Long getQueueId() {
+
+    return this.queueId;
+  }
+
+  public void setQueueId(Long queueId) {
+
+    this.queueId = queueId;
   }
 
 }

@@ -12,6 +12,10 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 
+/**
+ * @author machamou
+ *
+ */
 @Email
 @Pattern(regexp = ".+@.+\\..+", message = "Email must specify a domain")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE })

@@ -1,14 +1,14 @@
 package com.cap.jumpthequeue.general.logic.impl;
 
+import javax.inject.Named;
+
+import org.springframework.stereotype.Component;
+
 import com.cap.jumpthequeue.general.common.api.UserProfile;
 import com.cap.jumpthequeue.general.common.api.Usermanagement;
 import com.cap.jumpthequeue.general.common.api.datatype.Role;
 import com.cap.jumpthequeue.general.common.api.to.UserDetailsClientTo;
 import com.cap.jumpthequeue.general.common.base.AbstractBeanMapperSupport;
-
-import javax.inject.Named;
-
-import org.springframework.stereotype.Component;
 
 /**
  * Implementation of {@link Usermanagement}.

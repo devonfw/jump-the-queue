@@ -1,8 +1,8 @@
 package com.cap.jumpthequeue.general.common.api;
 
-import com.cap.jumpthequeue.general.common.api.datatype.Role;
-
 import java.security.Principal;
+
+import com.cap.jumpthequeue.general.common.api.datatype.Role;
 
 /**
  * This is the interface for the profile of a user interacting with this application. Currently this can only be a

@@ -27,7 +27,7 @@ public class IllegalEntityStateException extends ApplicationBusinessException {
    * The constructor.
    *
    * @param entity the entity that caused this error.
-   * @param currentState the state of the jumpthequeueEntity entity.
+   * @param currentState the state of the JumpTheQueueEntity entity.
    * @param newState is the new state for the entity that is illegal.
    */
   public IllegalEntityStateException(Object entity, Object currentState, Object newState) {

@@ -1,0 +1,11 @@
+<div layout-fill layout="column" layout-align="center center" class="existcode-title">
+  <span>I've got an validation code</span>
+</div>
+<form layout="row" class="existcode pad" (ngSubmit)="submitAccess(existCodeForm.form)" #existCodeForm="ngForm">
+  <mat-form-field flex="50">
+    <input matInput placeholder="My Validation Code" ngModel name="validationCode" required>
+  </mat-form-field>
+  <button flex="50" mat-raised-button type="submit" color="primary" [disabled]="!existCodeForm.form.valid || (!getEmailFromService() && !getPhoneFromService())" class="text-upper">
+    Get my order
+  </button>
+</form>

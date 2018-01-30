@@ -18,4 +18,36 @@ public interface AccessCodeDao extends ApplicationDao<AccessCodeEntity> {
    * @return the {@link PaginatedListTo} with the matching {@link AccessCodeEntity} objects.
    */
   PaginatedListTo<AccessCodeEntity> findAccessCodes(AccessCodeSearchCriteriaTo criteria);
+
+  /**
+   * @param accescodecriteria
+   * @return
+   */
+  PaginatedListTo<AccessCodeEntity> findAttendingAccessCode(AccessCodeSearchCriteriaTo accescodecriteria);
+
+  /**
+   * @param id
+   * @param b
+   * @return
+   */
+  AccessCodeEntity findNewAttendAccessCode(long id, boolean b);
+
+  /**
+   * @param accessCodeCriteria
+   * @return
+   */
+  PaginatedListTo<AccessCodeEntity> findLastTenAttendedAccessCodesByQueue(
+      AccessCodeSearchCriteriaTo accessCodeCriteria);
+
+  /**
+   * @param accessCodeCriteria
+   * @return
+   */
+  Long getAttendedCodesCount(AccessCodeSearchCriteriaTo accessCodeCriteria);
+
+  /**
+   * @param accessCodeCriteria
+   * @return
+   */
+  Long getNotAttendedCodesCountByTimestamp(AccessCodeSearchCriteriaTo accessCodeCriteria);
 }

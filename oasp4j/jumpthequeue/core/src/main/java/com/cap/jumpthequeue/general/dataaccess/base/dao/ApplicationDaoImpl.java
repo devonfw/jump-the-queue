@@ -1,10 +1,11 @@
 package com.cap.jumpthequeue.general.dataaccess.base.dao;
 
-import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
 import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
 import io.oasp.module.jpa.dataaccess.base.AbstractRevisionedDao;
 
 import org.springframework.stereotype.Repository;
+
+import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
 
 /**
  * This is the abstract base implementation of {@link ApplicationDao}.

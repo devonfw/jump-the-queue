@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.inject.Named;
 
 import com.cap.jumpthequeue.general.common.api.UserProfile;
+
 import io.oasp.module.security.common.api.accesscontrol.PrincipalAccessControlProvider;
 
 /**

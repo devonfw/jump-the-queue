@@ -1,7 +1,7 @@
 package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractCto;
-import com.cap.jumpthequeue.visitormanagement.logic.api.to.VisitorEto;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
 
 /**
  * Composite transport object of AccessCode
@@ -12,7 +12,7 @@ public class AccessCodeCto extends AbstractCto {
 
   private AccessCodeEto accessCode;
 
-  private VisitorEto visitor;
+  private QueueEto queue;
 
   public AccessCodeEto getAccessCode() {
 
@@ -24,14 +24,14 @@ public class AccessCodeCto extends AbstractCto {
     this.accessCode = accessCode;
   }
 
-  public VisitorEto getVisitor() {
+  public QueueEto getQueue() {
 
-    return visitor;
+    return queue;
   }
 
-  public void setVisitor(VisitorEto visitor) {
+  public void setQueue(QueueEto queue) {
 
-    this.visitor = visitor;
+    this.queue = queue;
   }
 
 }

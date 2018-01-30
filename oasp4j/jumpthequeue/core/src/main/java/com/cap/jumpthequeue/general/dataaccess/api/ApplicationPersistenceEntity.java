@@ -8,6 +8,7 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.cap.jumpthequeue.general.common.api.ApplicationEntity;
+
 import io.oasp.module.jpa.dataaccess.api.MutablePersistenceEntity;
 
 /**

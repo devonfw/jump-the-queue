@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.cap.jumpthequeue.general.common.api.security.UserData;
 import com.cap.jumpthequeue.general.dataaccess.base.DatabaseMigrator;
+
 import io.oasp.module.security.common.api.accesscontrol.AccessControlPermission;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
 import io.oasp.module.test.common.base.ComponentTest;

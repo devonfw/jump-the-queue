@@ -1,7 +1,7 @@
 package com.cap.jumpthequeue.general.common.api;
 
 /**
- * This is the interface for a {@link BinaryObject} of the jumpthequeue.
+ * This is the interface for a {@link BinaryObject} of the JumpTheQueue.
  *
  */
 public interface BinaryObject extends ApplicationEntity {

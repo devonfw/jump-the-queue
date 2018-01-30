@@ -1,9 +1,5 @@
 package com.cap.jumpthequeue.general.service.impl.rest;
 
-import com.cap.jumpthequeue.general.common.api.exception.NoActiveUserException;
-import com.cap.jumpthequeue.general.common.api.security.UserData;
-import com.cap.jumpthequeue.general.common.api.to.UserDetailsClientTo;
-
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,6 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
+
+import com.cap.jumpthequeue.general.common.api.exception.NoActiveUserException;
+import com.cap.jumpthequeue.general.common.api.security.UserData;
+import com.cap.jumpthequeue.general.common.api.to.UserDetailsClientTo;
 
 /**
  * The security REST service provides access to the csrf token, the authenticated user's meta-data. Furthermore, it

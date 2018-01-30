@@ -1,6 +1,7 @@
 package com.cap.jumpthequeue.general.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.BinaryObject;
+
 import io.oasp.module.basic.common.api.to.AbstractEto;
 
 /**

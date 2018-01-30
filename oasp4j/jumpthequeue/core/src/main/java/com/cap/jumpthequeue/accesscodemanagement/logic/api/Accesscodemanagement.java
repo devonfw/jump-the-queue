@@ -1,9 +1,9 @@
 package com.cap.jumpthequeue.accesscodemanagement.logic.api;
 
-import java.util.Random;
-
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -18,7 +18,7 @@ public interface Accesscodemanagement {
    * @param id The id 'id' of the AccessCode.
    * @return The {@link AccessCodeEto} with id 'id'
    */
-  AccessCodeEto findAccessCode(Long id);
+  AccessCodeCto findAccessCode(Long id);
 
   /**
    * Returns a paginated list of AccessCodes matching the search criteria.
@@ -45,11 +45,33 @@ public interface Accesscodemanagement {
   AccessCodeEto saveAccessCode(AccessCodeEto accessCode);
 
   /**
-   * Generates a random access code
-   *
-   * @param rng
-   * @param length
-   * @return the generated code
+   * @param token
+   * @return
    */
-  String generateCode(Random rng, int length);
+  AccessCodeCto getVisitorAccessCode(String token);
+
+  /**
+   * @param token
+   * @return
+   */
+  AccessCodeCto getVIPAccessCode(String token);
+
+  /**
+   * @param queue_id
+   * @return
+   */
+  AccessCodeCto getAttendingAccessCode(long queue_id);
+
+  /**
+   * @param searchCriteriaTo
+   * @return
+   */
+  AccessCodeCto findExistingAccessCodesByPost(UserSearchCriteriaTo searchCriteriaTo);
+
+  /**
+   * @param number
+   * @return
+   */
+  AccessCodeEto makeAccessCode(long number);
+
 }

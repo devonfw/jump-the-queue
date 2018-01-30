@@ -1,3 +1,10 @@
-export const config: any = {
-    basePath: 'http://localhost:8081/jumpthequeue/services/rest/',
-};
+export enum BackendType {
+    IN_MEMORY,
+    REST,
+    GRAPHQL,
+}
+
+export class BackendConfig {
+    environmentType: BackendType;
+    restServiceRoot: string;
+}

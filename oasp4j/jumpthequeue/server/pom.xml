@@ -4,18 +4,23 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.cap</groupId>
-    <artifactId>jumpthequeue</artifactId>
-    <version>0.1</version>
+    <artifactId>JumpTheQueue</artifactId>
+    <version>2.0.0</version>
   </parent>
-  <artifactId>jumpthequeue-server</artifactId>
+  <groupId>com.cap</groupId>
+  <artifactId>JumpTheQueue-server</artifactId>
   <packaging>war</packaging>
   <name>${project.artifactId}</name>
-  <description>Server for the jumpthequeue application - a simple example using the Open Application Standard Platform for Java (OASP4J).</description>
+  <description>Server for the JumpTheQueue application - a simple example using the Open Application Standard Platform for Java (OASP4J).</description>
+
+  <properties>
+      <java.version>1.7</java.version>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>jumpthequeue-core</artifactId>
+      <artifactId>JumpTheQueue-core</artifactId>
       <version>${project.version}</version>
     </dependency>
  </dependencies>

@@ -6,25 +6,97 @@
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
 
+-- *** Owner ***
+CREATE TABLE Owner(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255),
+  CONSTRAINT PK_Owner PRIMARY KEY(id)
+ 
+);
+-- *** Queue ***
+CREATE TABLE Queue(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  descriptionText VARCHAR(255),
+  minWait BIGINT,
+  idImage BIGINT,
+  idterms BIGINT,
+  idOwner BIGINT,
+  CONSTRAINT PK_Queue PRIMARY KEY(id),
+  CONSTRAINT FK_Queue_idOwner FOREIGN KEY(idOwner) REFERENCES Owner(id) NOCHECK
+);
 
-CREATE TABLE Visitor(
+-- *** Image ***
+CREATE TABLE Image (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  name VARCHAR(255),
+  content VARCHAR(2147483647),
+  contentType BINARY,
+  mimeType VARCHAR(255),
+  idQueue BIGINT,
+  CONSTRAINT PK_Image PRIMARY KEY(id),
+  CONSTRAINT FK_Image_idQueue FOREIGN KEY(idQueue) REFERENCES Queue(id) NOCHECK
+);
+-- *** Terms ***
+CREATE TABLE Terms(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  description VARCHAR(255),
+  idQueue BIGINT,
+  CONSTRAINT PK_Terms PRIMARY KEY(id),
+  CONSTRAINT FK_Terms_idQueue FOREIGN KEY(idQueue) REFERENCES Queue(id) NOCHECK
+);
+-- *** User ***
+CREATE TABLE User(
   id BIGINT NOT NULL AUTO_INCREMENT,
   modificationCounter INTEGER NOT NULL,
   name VARCHAR(255),
   email VARCHAR(255),
   phone VARCHAR(255),
-  idCode BIGINT,
-  CONSTRAINT PK_Visitor PRIMARY KEY(id)
+  url VARCHAR(255),
+  consent BOOLEAN,
+  token VARCHAR(255),
+  validated BOOLEAN,
+  creationTime TIMESTAMP,
+  identificator VARCHAR(255),
+  idQueue BIGINT,
+  CONSTRAINT PK_User PRIMARY KEY(id),
+  CONSTRAINT FK_User_idQueue FOREIGN KEY(idQueue) REFERENCES Queue(id) NOCHECK
+  --CONSTRAINT email UNIQUE
 );
-
+-- *** AccessCode ***
 CREATE TABLE AccessCode(
   id BIGINT NOT NULL AUTO_INCREMENT,
   modificationCounter INTEGER NOT NULL,
-  code VARCHAR(5),
-  dateAndTime TIMESTAMP,
-  idVisitor BIGINT,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(255),
+  code INTEGER,
+  priority BOOLEAN,
+  identificator VARCHAR(255),
+  creationTime TIMESTAMP,
+  startTime TIMESTAMP,
+  endTime TIMESTAMP,
+  estimatedTime TIMESTAMP,
+  idQueue BIGINT,
   CONSTRAINT PK_AccessCode PRIMARY KEY(id),
-  CONSTRAINT FK_AccessCode_idVisitor FOREIGN KEY(idVisitor) REFERENCES Visitor(id)
+  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES Queue(id) NOCHECK
+);
+
+-- *** RECORD VISTOR INFO CONSENTED ***
+CREATE TABLE VisitorInfo(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  name VARCHAR(255),
+  phone VARCHAR(255),
+  email VARCHAR(255),
+  queue_id BIGINT,
+  CONSTRAINT PK_VisitorInfo PRIMARY KEY(id),
+  CONSTRAINT FK_VisitorInfo_queue_id FOREIGN KEY(queue_id) REFERENCES Queue(id) NOCHECK
 );
 
 -- *** BinaryObject (BLOBs) ***

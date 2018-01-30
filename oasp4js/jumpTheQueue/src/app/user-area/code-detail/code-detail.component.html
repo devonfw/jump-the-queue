@@ -1,0 +1,11 @@
+<div class="code-detail">
+  <div layout-fill layout="column" layout-align="center center" class="access-code">
+    <span>Your Order</span>
+    <hr>
+    <h2>{{ accessCode }}</h2>
+  </div>
+  <div layout-fill layout="column" layout-align="center center" class="time-estimated">
+    <span>Estimated access time:</span>
+    <h2>{{ (estimatedTime + 3600 | amFromUnix) | amFromUtc | amDateFormat:'HH:mm' }} h</h2>
+  </div>
+</div>

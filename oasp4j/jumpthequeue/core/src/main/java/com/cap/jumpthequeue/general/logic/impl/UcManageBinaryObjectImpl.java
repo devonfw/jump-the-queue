@@ -1,15 +1,15 @@
 package com.cap.jumpthequeue.general.logic.impl;
 
+import java.sql.Blob;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.cap.jumpthequeue.general.dataaccess.api.BinaryObjectEntity;
 import com.cap.jumpthequeue.general.dataaccess.api.dao.BinaryObjectDao;
 import com.cap.jumpthequeue.general.logic.api.to.BinaryObjectEto;
 import com.cap.jumpthequeue.general.logic.base.AbstractUc;
 import com.cap.jumpthequeue.general.logic.base.UcManageBinaryObject;
-
-import java.sql.Blob;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * Implementation of the {@link UcManageBinaryObject} intreface.

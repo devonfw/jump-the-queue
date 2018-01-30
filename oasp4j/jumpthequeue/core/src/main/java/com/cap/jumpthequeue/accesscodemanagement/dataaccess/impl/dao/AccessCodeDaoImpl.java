@@ -41,21 +41,138 @@ public class AccessCodeDaoImpl extends ApplicationDaoImpl<AccessCodeEntity> impl
     EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
     JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
 
-    String code = criteria.getCode();
+    String name = criteria.getName();
+    if (name != null) {
+      query.where(Alias.$(accesscode.getName()).eq(name));
+    }
+    String email = criteria.getEmail();
+    if (email != null) {
+      query.where(Alias.$(accesscode.getEmail()).eq(email));
+    }
+    String phone = criteria.getPhone();
+    if (phone != null) {
+      query.where(Alias.$(accesscode.getPhone()).eq(phone));
+    }
+    String identificator = criteria.getIdentificator();
+    if (identificator != null) {
+      query.where(Alias.$(accesscode.getIdentificator()).eq(identificator));
+    }
+    Integer code = criteria.getCode();
     if (code != null) {
       query.where(Alias.$(accesscode.getCode()).eq(code));
     }
-    Timestamp dateAndTime = criteria.getDateAndTime();
-    if (dateAndTime != null) {
-      query.where(Alias.$(accesscode.getDateAndTime()).eq(dateAndTime));
+    Boolean priority = criteria.getPriority();
+    if (priority != null) {
+      query.where(Alias.$(accesscode.getPriority()).eq(priority));
     }
-    Long visitor = criteria.getVisitorId();
-    if (visitor != null) {
-      if (accesscode.getVisitor() != null) {
-        query.where(Alias.$(accesscode.getVisitor().getId()).eq(visitor));
+    Timestamp creationTime = criteria.getCreationTime();
+    if (creationTime != null) {
+      query.where(Alias.$(accesscode.getCreationTime()).eq(creationTime));
+    }
+    Timestamp startTime = criteria.getStartTime();
+    if (startTime != null) {
+      query.where(Alias.$(accesscode.getStartTime()).eq(startTime));
+    }
+    Timestamp endTime = criteria.getEndTime();
+    if (endTime != null) {
+      query.where(Alias.$(accesscode.getEndTime()).eq(endTime));
+    }
+    Timestamp estimatedTime = criteria.getEstimatedTime();
+    if (estimatedTime != null) {
+      query.where(Alias.$(accesscode.getEstimatedTime()).eq(estimatedTime));
+    }
+    Long queue = criteria.getQueueId();
+    if (queue != null) {
+      if (accesscode.getQueue() != null) {
+        query.where(Alias.$(accesscode.getQueue().getId()).eq(queue));
       }
     }
     return findPaginated(criteria, query, alias);
+  }
+
+  @Override
+  public PaginatedListTo<AccessCodeEntity> findAttendingAccessCode(AccessCodeSearchCriteriaTo accescodecriteria) {
+
+    AccessCodeEntity accesscode = Alias.alias(AccessCodeEntity.class);
+    EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
+    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+    long queueId = accescodecriteria.getQueueId();
+    if (queueId != 0 && accesscode.getQueueId() != null) {
+      query.where(Alias.$(accesscode.getQueue().getId()).eq(queueId));
+    }
+    query.where(Alias.$(accesscode.getStartTime()).isNotNull());
+    query.where(Alias.$(accesscode.getEndTime()).isNull());
+
+    return findPaginated(accescodecriteria, query, alias);
+  }
+
+  @Override
+  public AccessCodeEntity findNewAttendAccessCode(long queueId, boolean priority) {
+
+    AccessCodeEntity accesscode = Alias.alias(AccessCodeEntity.class);
+    EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
+    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+
+    if (queueId != 0 && accesscode.getQueueId() != null) {
+      query.where(Alias.$(accesscode.getQueue().getId()).eq(queueId));
+    }
+    query.where(Alias.$(accesscode.getPriority()).eq(priority));
+    query.where(Alias.$(accesscode.getStartTime()).isNull());
+    query.where(Alias.$(accesscode.getEndTime()).isNull());
+
+    return query.singleResult(alias);
+  }
+
+  @Override
+  public PaginatedListTo<AccessCodeEntity> findLastTenAttendedAccessCodesByQueue(
+      AccessCodeSearchCriteriaTo accessCodeCriteria) {
+
+    AccessCodeEntity accesscode = Alias.alias(AccessCodeEntity.class);
+    EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
+    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+
+    Long queue = accessCodeCriteria.getQueueId();
+    if (queue != null) {
+      if (accesscode.getQueue() != null) {
+        query.where(Alias.$(accesscode.getQueue().getId()).eq(queue));
+      }
+    }
+    query.where(Alias.$(accesscode.getEndTime()).isNotNull()).limit(10);
+    return findPaginated(accessCodeCriteria, query, alias);
+  }
+
+  @Override
+  public Long getAttendedCodesCount(AccessCodeSearchCriteriaTo accessCodeCriteria) {
+
+    AccessCodeEntity accesscode = Alias.alias(AccessCodeEntity.class);
+    EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
+    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+    Long queueId = accessCodeCriteria.getQueueId();
+    if (queueId != null) {
+      if (accesscode.getQueueId() != null) {
+        query.where(Alias.$(accesscode.getQueue().getId()).eq(queueId));
+      }
+    }
+    query.where(Alias.$(accesscode.getEndTime()).isNotNull());
+
+    return query.listResults(alias).getTotal();
+  }
+
+  @Override
+  public Long getNotAttendedCodesCountByTimestamp(AccessCodeSearchCriteriaTo accessCodeCriteria) {
+
+    AccessCodeEntity accesscode = Alias.alias(AccessCodeEntity.class);
+    EntityPathBase<AccessCodeEntity> alias = Alias.$(accesscode);
+    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+    Long queue_id = accessCodeCriteria.getQueueId();
+    if (queue_id != null) {
+      if (accesscode.getQueueId() != null) {
+        query.where(Alias.$(accesscode.getQueue().getId()).eq(queue_id));
+      }
+    }
+    query.where(Alias.$(accesscode.getStartTime()).isNull());
+
+    return query.listResults(alias).getTotal();
   }
 
 }

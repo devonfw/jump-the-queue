@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.cap.jumpthequeue.general.service.impl.config.BaseWebSecurityConfig;
+
 import io.oasp.module.basic.common.api.config.SpringProfileConstants;
 
 /**

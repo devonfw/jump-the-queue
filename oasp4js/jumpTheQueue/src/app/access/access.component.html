@@ -1,27 +1,12 @@
-<td-layout>
-  <mat-card>
-    <img mat-card-image src="assets/images/jumptheq.png">
-    <mat-card-title>Access</mat-card-title>
-
-    <form layout="column" class="pad" (ngSubmit)="submitAccess(accessForm.form)" #accessForm="ngForm">
-
-      <mat-form-field>
-        <input matInput placeholder="Name" ngModel name="name" required>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Email" ngModel email name="email" required>
-      </mat-form-field>
-      <span class="text-sm">Filling this, I acccept to receive commercial information.</span>
-
-      <mat-form-field>
-        <input matInput placeholder="Phone" type="number" ngModel name="phone" required>
-      </mat-form-field>
-
-    <mat-card-actions class="text-center">
-      <button mat-raised-button type="submit" color="primary" [disabled]="!accessForm.form.valid" class="text-upper">Request it</button>
-    </mat-card-actions>
-
-    </form>
-  </mat-card>
+<td-layout class="access">
+  <div layout="column" layout-align="center none">
+    <div layout="row" layout-align="center">
+      <mat-card flex-gt-sm="30" flex-gt-xs="50" layout-fill>
+        <img mat-card-image src="assets/images/jumptheq.png">
+        <app-exist-code></app-exist-code>
+        <hr>
+        <app-register></app-register>
+      </mat-card>
+    </div>
+  </div>
 </td-layout>

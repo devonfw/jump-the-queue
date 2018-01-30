@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
- * The MappingFactory class to resolve polymorphic conflicts within the jumpthequeue application.
+ * The MappingFactory class to resolve polymorphic conflicts within the JumpTheQueue application.
  *
  */
 @Named("ApplicationObjectMapperFactory")

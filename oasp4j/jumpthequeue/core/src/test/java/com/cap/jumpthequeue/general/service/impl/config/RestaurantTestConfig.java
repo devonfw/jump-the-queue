@@ -9,6 +9,7 @@ import com.cap.jumpthequeue.general.common.DbTestHelper;
 import com.cap.jumpthequeue.general.common.RestTestClientBuilder;
 import com.cap.jumpthequeue.general.common.SecurityTestHelper;
 import com.cap.jumpthequeue.general.common.base.AbstractRestServiceTest;
+
 import io.oasp.module.basic.common.api.config.SpringProfileConstants;
 
 /**

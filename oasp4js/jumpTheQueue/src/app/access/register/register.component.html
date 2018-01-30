@@ -1,0 +1,34 @@
+<div layout-fill layout="column" layout-align="center center" class="register-title">
+  <span>I want an access code</span>
+</div>
+<form layout="column" class="register pad" (ngSubmit)="submitAccess(accessForm.form)" #accessForm="ngForm">
+
+  <div layout="row">
+    <mat-form-field flex="50">
+      <input matInput placeholder="Name" ngModel name="name" required>
+    </mat-form-field>
+
+    <mat-form-field flex="50" class="left">
+      <input matInput placeholder="Mobile" type="number" ngModel name="phone" (ngModelChange)="onChangePhone($event)" required>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" ngModel email name="email" (ngModelChange)="onChangeEmail($event)" required>
+  </mat-form-field>
+
+  <mat-checkbox matInput ngModel name="terms" required>
+    Accept <a (click)="onClickTerms()" class="terms">Terms and Conditions</a>
+  </mat-checkbox>
+
+  <mat-checkbox class="commercial" matInput ngModel name="commercial">
+     I accept to receive commercial information
+  </mat-checkbox>
+
+  <mat-card-actions class="actions">
+    <button mat-raised-button type="submit" color="primary" [disabled]="!accessForm.form.valid" class="text-upper" style="width: 100%">
+      Register
+    </button>
+  </mat-card-actions>
+
+</form>

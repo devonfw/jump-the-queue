@@ -1,0 +1,17 @@
+<td-layout>
+  <div layout="column" layout-align="center none" layout-fill>
+    <div layout="row" layout-align="center center" layout-fill class="owner-area">
+      <div layout="row" layout-fill>
+        <div layout-fill layout="column" layout-align="center center" class="access-code">
+          <div layout="row">
+            <span class="queue-name" flex>Queue: {{queueName}}</span>
+          </div>
+          <span>Code being attended now:</span>
+          <hr>
+          <h2>{{ attendingAccessCode }}</h2>
+          <button type="button" mat-raised-button color="primary" (click)="next()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</td-layout>

@@ -6,6 +6,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import com.cap.jumpthequeue.general.logic.impl.config.DefaultRolesPrefixPostProcessor;
+
 import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlSchemaProvider;
 import io.oasp.module.security.common.impl.accesscontrol.AccessControlProviderImpl;

@@ -1,0 +1,27 @@
+.code-detail {
+  max-height: 30%;
+  .access-code {
+    margin-top: 20%;
+    span {
+      font-size: 25px;
+    }
+    hr {
+      min-width: 60%;
+    }
+    h2 {
+      font-size: 50px;
+      margin: 10px auto;
+    }
+  }
+  .time-estimated {
+    span {
+      font-size: 12px;
+      letter-spacing: -.3px;
+    }
+    h2 {
+      font-weight: normal;
+      margin-top: 3px;
+      font-size: 20px;
+    }
+  }
+}

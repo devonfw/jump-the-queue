@@ -7,12 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
 import com.cap.jumpthequeue.SpringBootApp;
 import com.cap.jumpthequeue.general.common.DbTestHelper;
 import com.cap.jumpthequeue.general.common.RestTestClientBuilder;
 import com.cap.jumpthequeue.general.common.SecurityTestHelper;
 import com.cap.jumpthequeue.general.service.impl.config.RestaurantTestConfig;
+
 import io.oasp.module.basic.common.api.config.SpringProfileConstants;
 import io.oasp.module.test.common.base.SubsystemTest;
 

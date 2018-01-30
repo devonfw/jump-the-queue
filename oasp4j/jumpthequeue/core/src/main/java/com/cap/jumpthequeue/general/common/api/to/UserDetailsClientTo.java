@@ -2,6 +2,7 @@ package com.cap.jumpthequeue.general.common.api.to;
 
 import com.cap.jumpthequeue.general.common.api.UserProfile;
 import com.cap.jumpthequeue.general.common.api.datatype.Role;
+
 import io.oasp.module.basic.common.api.to.AbstractTo;
 
 /**

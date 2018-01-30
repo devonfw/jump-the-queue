@@ -1,0 +1,13 @@
+.app-user-header {
+  margin-bottom: 30px;
+  .fill-remaining-space {
+    flex: 1 1 auto;
+  }
+  img {
+    max-height: 30px;
+    margin-top: 7px;
+  }
+  .queue-name {
+    margin-left: 10px;
+  }
+}
