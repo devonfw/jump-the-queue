@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.imagemanagement.common.api;
+package com.cap.jumpthequeue.queuemanagement.common.api;
 
 import org.apache.http.entity.ContentType;
 

@@ -1,13 +1,13 @@
-package com.cap.jumpthequeue.imagemanagement.dataaccess.impl.dao;
+package com.cap.jumpthequeue.queuemanagement.dataaccess.impl.dao;
 
 import javax.inject.Named;
 
 import org.apache.http.entity.ContentType;
 
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
-import com.cap.jumpthequeue.imagemanagement.dataaccess.api.ImageEntity;
-import com.cap.jumpthequeue.imagemanagement.dataaccess.api.dao.ImageDao;
-import com.cap.jumpthequeue.imagemanagement.logic.api.to.ImageSearchCriteriaTo;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.ImageEntity;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.ImageDao;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.ImageSearchCriteriaTo;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;

@@ -1,8 +1,8 @@
-package com.cap.jumpthequeue.imagemanagement.dataaccess.api.dao;
+package com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao;
 
 import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
-import com.cap.jumpthequeue.imagemanagement.dataaccess.api.ImageEntity;
-import com.cap.jumpthequeue.imagemanagement.logic.api.to.ImageSearchCriteriaTo;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.ImageEntity;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.ImageSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 

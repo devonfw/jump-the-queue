@@ -9,8 +9,7 @@ import javax.persistence.Transient;
 import org.apache.http.entity.ContentType;
 
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
-import com.cap.jumpthequeue.imagemanagement.common.api.Image;
-import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
+import com.cap.jumpthequeue.queuemanagement.common.api.Image;
 
 /**
  * @author machamou

@@ -1,9 +1,9 @@
-package com.cap.jumpthequeue.imagemanagement.logic.api.to;
+package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
 import org.apache.http.entity.ContentType;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
-import com.cap.jumpthequeue.imagemanagement.common.api.Image;
+import com.cap.jumpthequeue.queuemanagement.common.api.Image;
 
 /**
  * Entity transport object of Image
