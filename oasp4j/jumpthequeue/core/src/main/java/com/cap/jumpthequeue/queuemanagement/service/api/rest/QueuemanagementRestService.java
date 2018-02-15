@@ -1,9 +1,7 @@
 package com.cap.jumpthequeue.queuemanagement.service.api.rest;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,9 +12,7 @@ import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.queuemanagement.logic.api.Queuemanagement;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
-import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueSearchCriteriaTo;
-
-import io.oasp.module.jpa.common.api.to.PaginatedListTo;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.TermsEto;
 
 /**
  * The service interface for REST calls in order to execute the logic of component {@link Queuemanagement}.
@@ -25,16 +21,6 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface QueuemanagementRestService {
-
-  /**
-   * Delegates to {@link Queuemanagement#findQueue}.
-   *
-   * @param id the ID of the {@link QueueEto}
-   * @return the {@link QueueEto}
-   */
-  @GET
-  @Path("/queue/{id}/")
-  public QueueEto getQueue(@PathParam("id") long id);
 
   /**
    * Delegates to {@link Queuemanagement#updateQueue}.
@@ -58,32 +44,23 @@ public interface QueuemanagementRestService {
   public AccessCodeCto attendQueue(@PathParam("id") long id);
 
   /**
-   * Delegates to {@link Queuemanagement#saveQueue}.
+   * Delegates to {@link Queuemanagement#getTermsByQueueId}.
    *
-   * @param queue the {@link QueueEto} to be saved
-   * @return the recently created {@link QueueEto}
+   * @param id the ID of the {@link Queue}
+   * @return the {@link TermsEto}
    */
-  @POST
-  @Path("/queue/")
-  public QueueEto saveQueue(QueueEto queue);
+  @GET
+  @Path("/terms/queue/{queueid}/")
+  public TermsEto getTermsByQueueId(@PathParam("queueid") long queueid);
 
   /**
-   * Delegates to {@link Queuemanagement#deleteQueue}.
+   * Delegates to {@link Queuemanagement#modifTerms}.
    *
-   * @param id ID of the {@link QueueEto} to be deleted
+   * @param id the ID of the {@link Queue}
+   * @return the {@link TermsEto}
    */
-  @DELETE
-  @Path("/queue/{id}/")
-  public void deleteQueue(@PathParam("id") long id);
-
-  /**
-   * Delegates to {@link Queuemanagement#findQueueEtos}.
-   *
-   * @param searchCriteriaTo the pagination and search criteria to be used for finding queues.
-   * @return the {@link PaginatedListTo list} of matching {@link QueueEto}s.
-   */
-  @Path("/queue/search")
-  @POST
-  public PaginatedListTo<QueueEto> findQueuesByPost(QueueSearchCriteriaTo searchCriteriaTo);
+  @PUT
+  @Path("/terms/{queue_id}")
+  public TermsEto modifTerms(@PathParam("queue_id") long queue_id, TermsEto terms);
 
 }

@@ -1,7 +1,7 @@
-package com.cap.jumpthequeue.termsmanagement.logic.api.to;
+package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
-import com.cap.jumpthequeue.termsmanagement.common.api.Terms;
+import com.cap.jumpthequeue.queuemanagement.common.api.Terms;
 
 /**
  * Entity transport object of Terms

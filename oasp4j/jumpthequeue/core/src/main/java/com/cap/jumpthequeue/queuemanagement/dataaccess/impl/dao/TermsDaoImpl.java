@@ -1,11 +1,11 @@
-package com.cap.jumpthequeue.termsmanagement.dataaccess.impl.dao;
+package com.cap.jumpthequeue.queuemanagement.dataaccess.impl.dao;
 
 import javax.inject.Named;
 
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
-import com.cap.jumpthequeue.termsmanagement.dataaccess.api.TermsEntity;
-import com.cap.jumpthequeue.termsmanagement.dataaccess.api.dao.TermsDao;
-import com.cap.jumpthequeue.termsmanagement.logic.api.to.TermsSearchCriteriaTo;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.TermsEntity;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.TermsDao;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.TermsSearchCriteriaTo;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;

@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.termsmanagement.dataaccess.api;
+package com.cap.jumpthequeue.queuemanagement.dataaccess.api;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -7,8 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
-import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
-import com.cap.jumpthequeue.termsmanagement.common.api.Terms;
+import com.cap.jumpthequeue.queuemanagement.common.api.Terms;
 
 /**
  * @author machamou

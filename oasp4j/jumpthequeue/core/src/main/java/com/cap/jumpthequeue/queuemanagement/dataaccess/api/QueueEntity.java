@@ -11,7 +11,6 @@ import javax.persistence.Transient;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.ownermanagement.dataaccess.api.OwnerEntity;
 import com.cap.jumpthequeue.queuemanagement.common.api.Queue;
-import com.cap.jumpthequeue.termsmanagement.dataaccess.api.TermsEntity;
 
 /**
  * @author machamou

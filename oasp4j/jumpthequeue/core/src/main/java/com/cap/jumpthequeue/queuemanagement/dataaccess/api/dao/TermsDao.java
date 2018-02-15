@@ -1,8 +1,8 @@
-package com.cap.jumpthequeue.termsmanagement.dataaccess.api.dao;
+package com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao;
 
 import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
-import com.cap.jumpthequeue.termsmanagement.dataaccess.api.TermsEntity;
-import com.cap.jumpthequeue.termsmanagement.logic.api.to.TermsSearchCriteriaTo;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.TermsEntity;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.TermsSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 

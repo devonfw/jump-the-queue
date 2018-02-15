@@ -1,7 +1,6 @@
-package com.cap.jumpthequeue.termsmanagement.logic.api.to;
+package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractCto;
-import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
 
 /**
  * Composite transport object of Terms
@@ -16,7 +15,7 @@ public class TermsCto extends AbstractCto {
 
   public TermsEto getTerms() {
 
-    return this.terms;
+    return terms;
   }
 
   public void setTerms(TermsEto terms) {
@@ -26,7 +25,7 @@ public class TermsCto extends AbstractCto {
 
   public QueueEto getQueue() {
 
-    return this.queue;
+    return queue;
   }
 
   public void setQueue(QueueEto queue) {

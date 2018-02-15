@@ -2,7 +2,6 @@ package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractCto;
 import com.cap.jumpthequeue.ownermanagement.logic.api.to.OwnerEto;
-import com.cap.jumpthequeue.termsmanagement.logic.api.to.TermsEto;
 
 /**
  * Composite transport object of Queue
@@ -19,7 +18,7 @@ public class QueueCto extends AbstractCto {
 
   public QueueEto getQueue() {
 
-    return queue;
+    return this.queue;
   }
 
   public void setQueue(QueueEto queue) {
@@ -29,7 +28,7 @@ public class QueueCto extends AbstractCto {
 
   public TermsEto getTerms() {
 
-    return terms;
+    return this.terms;
   }
 
   public void setTerms(TermsEto terms) {
@@ -39,7 +38,7 @@ public class QueueCto extends AbstractCto {
 
   public OwnerEto getOwner() {
 
-    return owner;
+    return this.owner;
   }
 
   public void setOwner(OwnerEto owner) {

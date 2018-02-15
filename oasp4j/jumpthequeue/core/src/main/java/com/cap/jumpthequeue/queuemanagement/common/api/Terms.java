@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.termsmanagement.common.api;
+package com.cap.jumpthequeue.queuemanagement.common.api;
 
 import com.cap.jumpthequeue.general.common.api.ApplicationEntity;
 

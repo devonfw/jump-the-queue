@@ -1,10 +1,10 @@
-package com.cap.jumpthequeue.termsmanagement.logic.api.to;
+package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
 import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 
 /**
  * This is the {@link SearchCriteriaTo search criteria} {@link net.sf.mmm.util.transferobject.api.TransferObject TO}
- * used to find {@link com.cap.jumpthequeue.termsmanagement.common.api.Terms}s.
+ * used to find {@link com.cap.jumpthequeue.queuemanagement.common.api.Terms}s.
  *
  */
 public class TermsSearchCriteriaTo extends SearchCriteriaTo {

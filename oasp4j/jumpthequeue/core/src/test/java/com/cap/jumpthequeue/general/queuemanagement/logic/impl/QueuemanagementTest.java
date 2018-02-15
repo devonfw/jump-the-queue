@@ -9,7 +9,6 @@ import com.cap.jumpthequeue.queuemanagement.logic.api.Queuemanagement;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueSearchCriteriaTo;
 
-import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
@@ -32,31 +31,6 @@ public class QueuemanagementTest extends ComponentTest {
     this.queue.setDescriptionText("Test");
     this.queue.setMinWait(10);
 
-  }
-
-  @Test
-  public void saveQueueTest() {
-
-    QueueEto result = this.queuemanagement.saveQueue(this.queue);
-
-    assertThat(result).isNotNull();
-    assertThat(result.getMinWait() == 10);
-
-  }
-
-  @Test
-  public void findQueueEtosTest() {
-
-    PaginatedListTo<QueueEto> result = this.queuemanagement.findQueueEtos(this.criteria);
-    assertThat(result).isNotNull();
-  }
-
-  @Test
-  public void findQueueTest() {
-
-    QueueEto result = this.queuemanagement.findQueue((long) 2);
-    assertThat(result).isNotNull();
-    assertThat(result.getId() == 2);
   }
 
   @Test

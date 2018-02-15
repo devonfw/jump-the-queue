@@ -2,7 +2,6 @@ package com.cap.jumpthequeue.queuemanagement.logic.impl;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,10 +19,12 @@ import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.TermsEntity;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.QueueDao;
+import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.TermsDao;
 import com.cap.jumpthequeue.queuemanagement.logic.api.Queuemanagement;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
-import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueSearchCriteriaTo;
+import com.cap.jumpthequeue.queuemanagement.logic.api.to.TermsEto;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -41,6 +42,10 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
   @Inject
   private QueueDao queueDao;
 
+  /** @see #getQueueDao() */
+  @Inject
+  private TermsDao termsDao;
+
   /** @see #getAccessCodeDao() */
   @Inject
   private AccessCodeDao accessCodeDao;
@@ -52,43 +57,6 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
     super();
   }
 
-  @Override
-  public QueueEto findQueue(Long id) {
-
-    LOG.debug("Get Queue with id {} from database.", id);
-    return getBeanMapper().map(getQueueDao().findOne(id), QueueEto.class);
-  }
-
-  @Override
-  public PaginatedListTo<QueueEto> findQueueEtos(QueueSearchCriteriaTo criteria) {
-
-    criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
-    PaginatedListTo<QueueEntity> queues = getQueueDao().findQueues(criteria);
-    return mapPaginatedEntityList(queues, QueueEto.class);
-  }
-
-  @Override
-  public boolean deleteQueue(Long queueId) {
-
-    QueueEntity queue = getQueueDao().find(queueId);
-    getQueueDao().delete(queue);
-    LOG.debug("The queue with id '{}' has been deleted.", queueId);
-    return true;
-  }
-
-  @Override
-  public QueueEto saveQueue(QueueEto queue) {
-
-    Objects.requireNonNull(queue, "queue");
-    QueueEntity queueEntity = getBeanMapper().map(queue, QueueEntity.class);
-
-    // initialize, validate queueEntity here if necessary
-    QueueEntity resultEntity = getQueueDao().save(queueEntity);
-    LOG.debug("Queue with id '{}' has been created.", resultEntity.getId());
-
-    return getBeanMapper().map(resultEntity, QueueEto.class);
-  }
-
   /**
    * Returns the field 'queueDao'.
    *
@@ -97,6 +65,24 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
   public QueueDao getQueueDao() {
 
     return this.queueDao;
+  }
+
+  /**
+   * Returns the field 'termsDao'.
+   *
+   * @return the {@link TermsDao} instance.
+   */
+  public TermsDao getTermsDao() {
+
+    return this.termsDao;
+  }
+
+  /**
+   * @return
+   */
+  private AccessCodeDao getAccessCodeDao() {
+
+    return this.accessCodeDao;
   }
 
   @Override
@@ -174,12 +160,46 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
     return cto;
   }
 
-  /**
-   * @return
-   */
-  private AccessCodeDao getAccessCodeDao() {
+  @Override
+  public TermsEto modifTerms(long queue_id, TermsEto newterms) {
 
-    return this.accessCodeDao;
+    // Get queue by queue_id
+    QueueEntity queue = getQueueDao().find(queue_id);
+    if (queue.equals(null)) {
+      throw new InternalServerErrorException();
+    }
+    // Get terms by terms_id in this queue
+    TermsEntity term = getTermsDao().find(queue.getTermsId());
+
+    // Change Description text with new value
+    term.setDescription(newterms.getDescription());
+
+    // Save entity
+    getTermsDao().save(term);
+
+    // Log for info
+    LOG.info("Terms for queue {} modified.", queue_id, queue.getDescriptionText());
+
+    // Return modified Terms
+    return getBeanMapper().map(term, TermsEto.class);
+  }
+
+  @Override
+  public TermsEto getTermsByQueueId(long queueid) {
+
+    // Get queue
+    QueueEntity queue = getQueueDao().find(queueid);
+
+    if (queue.equals(null)) {
+      throw new InternalServerErrorException();
+    }
+    // Log terms access
+    LOG.info("Get Terms from {} queue.", queueid, queue.getDescriptionText());
+
+    // Return termsEto
+
+    TermsEntity tvalue = queue.getTerms();
+    return getBeanMapper().map(tvalue, TermsEto.class);
   }
 
 }
