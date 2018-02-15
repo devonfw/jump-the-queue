@@ -18,18 +18,18 @@ public class QueuemanagementRestServiceImpl implements QueuemanagementRestServic
   @Inject
   private Queuemanagement queuemanagement;
 
+  // Update Queue info
   @Override
-  public QueueEto updateQueue(long queueId, QueueEto newqueue) {
+  public QueueEto updateQueue(long queueId, QueueEto newqueueinfo) {
 
-    return this.queuemanagement.updateQueue(queueId, newqueue);
-
+    return this.queuemanagement.updateQueue(queueId, newqueueinfo);
   }
 
+  // Update AccessCodes status for one queue = next turn
   @Override
-  public AccessCodeCto attendQueue(long queueId) {
+  public AccessCodeCto attendQueue(long queueid) {
 
-    return this.queuemanagement.attendQueue(queueId);
-
+    return this.queuemanagement.attendQueue(queueid);
   }
 
   @Override
@@ -40,9 +40,9 @@ public class QueuemanagementRestServiceImpl implements QueuemanagementRestServic
   }
 
   @Override
-  public TermsEto modifTerms(long id, TermsEto newterms) {
+  public TermsEto modifTerms(long queueid, TermsEto newterms) {
 
-    return this.queuemanagement.modifTerms(id, newterms);
+    return this.queuemanagement.modifTerms(queueid, newterms);
 
   }
 }

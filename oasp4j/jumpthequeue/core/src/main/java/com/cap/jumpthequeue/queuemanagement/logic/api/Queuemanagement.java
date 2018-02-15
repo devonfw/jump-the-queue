@@ -10,24 +10,24 @@ import com.cap.jumpthequeue.queuemanagement.logic.api.to.TermsEto;
 public interface Queuemanagement {
 
   /**
-   * @param id
+   * @param queueid
    * @param newqueue
    * @return
    */
-  QueueEto updateQueue(long id, QueueEto newqueue);
+  QueueEto updateQueue(long queueid, QueueEto newqueue);
 
   /**
-   * @param queueId
+   * @param queueid
    * @return
    */
-  AccessCodeCto attendQueue(long queueId);
+  AccessCodeCto attendQueue(long queueid);
 
   /**
-   * @param queue_id
+   * @param queueid
    * @param newterms
    * @return
    */
-  TermsEto modifTerms(long queue_id, TermsEto newterms);
+  TermsEto modifTerms(long queueid, TermsEto newterms);
 
   /**
    * @param queueid

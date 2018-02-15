@@ -30,8 +30,8 @@ public interface QueuemanagementRestService {
    * @return the {@link QueueEto}
    */
   @PUT
-  @Path("/queue/{id}")
-  public QueueEto updateQueue(@PathParam("id") long id, QueueEto newqueue);
+  @Path("/queue/{queueid}")
+  public QueueEto updateQueue(@PathParam("queueid") long queueid, QueueEto newqueue);
 
   /**
    * Delegates to {@link Queuemanagement#attendQueue}.
@@ -40,8 +40,8 @@ public interface QueuemanagementRestService {
    * @return the {@link AccessCodeEto}
    **/
   @PUT
-  @Path("/queue/attend/{id}/")
-  public AccessCodeCto attendQueue(@PathParam("id") long id);
+  @Path("/queue/attend/{queueid}/")
+  public AccessCodeCto attendQueue(@PathParam("queueid") long queueid);
 
   /**
    * Delegates to {@link Queuemanagement#getTermsByQueueId}.
@@ -50,7 +50,7 @@ public interface QueuemanagementRestService {
    * @return the {@link TermsEto}
    */
   @GET
-  @Path("/terms/queue/{queueid}/")
+  @Path("/terms/{queueid}/")
   public TermsEto getTermsByQueueId(@PathParam("queueid") long queueid);
 
   /**
@@ -60,7 +60,7 @@ public interface QueuemanagementRestService {
    * @return the {@link TermsEto}
    */
   @PUT
-  @Path("/terms/{queue_id}")
-  public TermsEto modifTerms(@PathParam("queue_id") long queue_id, TermsEto terms);
+  @Path("/terms/update/{queueid}/")
+  public TermsEto modifTerms(@PathParam("queueid") long queueid, TermsEto terms);
 
 }

@@ -85,27 +85,61 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
     return this.accessCodeDao;
   }
 
+  // Update Queue info
   @Override
-  public QueueEto updateQueue(long id, QueueEto newqueue) {
+  public QueueEto updateQueue(long queueid, QueueEto newqueue) {
 
     // Get queue
-    QueueEntity queue = getQueueDao().find(id);
-    if (queue.equals(null)) {
-      throw new InternalServerErrorException();
+    QueueEntity queue = getQueueByQueueId(queueid);
+    // Make modifications - Logo missing - Only for fields existing in newqueue
+    if (!newqueue.getDescriptionText().isEmpty()) {
+      queue.setDescriptionText(newqueue.getDescriptionText());
     }
-
-    // Make modifications - Logo missing
-
-    // queue.setLogo(newqueue.getLogo()); Logo variable in Queue no implemented yet
-
-    queue.setDescriptionText(newqueue.getDescriptionText());
-
+    if (newqueue.getMinWait() != 0) {
+      queue.setMinWait(newqueue.getMinWait());
+    }
+    if (newqueue.getTermsId() != null) {
+      queue.setTermsId(newqueue.getTermsId());
+    }
+    if (newqueue.getOwnerId() != null) {
+      queue.setOwnerId(newqueue.getOwnerId());
+    }
     // Save modification
     getQueueDao().save(queue);
+    // TODO REMOVE Log for info
     LOG.info("Queue with id {} updated.", queue.getId());
-
-    // return modified Queue
+    // Return modified Queue
     return getBeanMapper().map(queue, QueueEto.class);
+  }
+
+  @Override
+  public TermsEto modifTerms(long queueid, TermsEto newterms) {
+
+    // Get queue by queue_id
+    QueueEntity queue = getQueueByQueueId(queueid);
+    // Get terms by terms_id in this queue
+    TermsEntity term = getTermsDao().find(queue.getTermsId());
+    // Change Description text with new value
+    term.setDescription(newterms.getDescription());
+    // Save entity
+    getTermsDao().save(term);
+    // TODO REMOVE Log for info
+    LOG.info("Terms for queue {} modified.", queueid, queue.getDescriptionText());
+    // Return modified Terms
+    return getBeanMapper().map(term, TermsEto.class);
+  }
+
+  @Override
+  public TermsEto getTermsByQueueId(long queueid) {
+
+    // Get queue queue by queue_id
+    QueueEntity queue = getQueueByQueueId(queueid);
+    // TODO REMOVE Log terms access
+    LOG.info("Get Terms from {} queue.", queueid, queue.getDescriptionText());
+    // Return termsEto
+    TermsEntity tvalue = queue.getTerms();
+    // Return Terms of queue
+    return getBeanMapper().map(tvalue, TermsEto.class);
   }
 
   /**
@@ -149,9 +183,8 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
 
     getAccessCodeDao().save(actCode);
 
-    // Log for info
     String letter = actCode.getPriority() ? "A" : "Q";
-
+    // TODO REMOVE Log for info
     LOG.info("AccessCode with code '{}{} ' has been created.", letter, actCode.getCode());
     AccessCodeCto cto = new AccessCodeCto();
     cto.setAccessCode(getBeanMapper().map(actCode, AccessCodeEto.class));
@@ -160,46 +193,16 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
     return cto;
   }
 
-  @Override
-  public TermsEto modifTerms(long queue_id, TermsEto newterms) {
+  // Private methods
 
-    // Get queue by queue_id
-    QueueEntity queue = getQueueDao().find(queue_id);
-    if (queue.equals(null)) {
-      throw new InternalServerErrorException();
-    }
-    // Get terms by terms_id in this queue
-    TermsEntity term = getTermsDao().find(queue.getTermsId());
+  private QueueEntity getQueueByQueueId(long queueid) {
 
-    // Change Description text with new value
-    term.setDescription(newterms.getDescription());
-
-    // Save entity
-    getTermsDao().save(term);
-
-    // Log for info
-    LOG.info("Terms for queue {} modified.", queue_id, queue.getDescriptionText());
-
-    // Return modified Terms
-    return getBeanMapper().map(term, TermsEto.class);
-  }
-
-  @Override
-  public TermsEto getTermsByQueueId(long queueid) {
-
-    // Get queue
     QueueEntity queue = getQueueDao().find(queueid);
-
+    // TODO Error handle
     if (queue.equals(null)) {
       throw new InternalServerErrorException();
     }
-    // Log terms access
-    LOG.info("Get Terms from {} queue.", queueid, queue.getDescriptionText());
-
-    // Return termsEto
-
-    TermsEntity tvalue = queue.getTerms();
-    return getBeanMapper().map(tvalue, TermsEto.class);
+    return queue;
   }
 
 }
