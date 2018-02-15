@@ -8,8 +8,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.OwnerEntity;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
-import com.cap.jumpthequeue.ownermanagement.dataaccess.api.OwnerEntity;
 import com.cap.jumpthequeue.queuemanagement.common.api.Queue;
 
 /**

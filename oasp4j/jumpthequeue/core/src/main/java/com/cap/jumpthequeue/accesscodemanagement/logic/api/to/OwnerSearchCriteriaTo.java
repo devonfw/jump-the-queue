@@ -1,10 +1,10 @@
-package com.cap.jumpthequeue.ownermanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 
 /**
  * This is the {@link SearchCriteriaTo search criteria} {@link net.sf.mmm.util.transferobject.api.TransferObject TO}
- * used to find {@link com.cap.jumpthequeue.ownermanagement.common.api.Owner}s.
+ * used to find {@link com.cap.jumpthequeue.accesscodemanagement.common.api.Owner}s.
  *
  */
 public class OwnerSearchCriteriaTo extends SearchCriteriaTo {

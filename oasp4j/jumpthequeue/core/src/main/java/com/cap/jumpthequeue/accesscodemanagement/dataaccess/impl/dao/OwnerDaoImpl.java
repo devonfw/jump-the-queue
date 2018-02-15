@@ -1,11 +1,11 @@
-package com.cap.jumpthequeue.ownermanagement.dataaccess.impl.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.impl.dao;
 
 import javax.inject.Named;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.OwnerEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.OwnerDao;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.OwnerSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
-import com.cap.jumpthequeue.ownermanagement.dataaccess.api.OwnerEntity;
-import com.cap.jumpthequeue.ownermanagement.dataaccess.api.dao.OwnerDao;
-import com.cap.jumpthequeue.ownermanagement.logic.api.to.OwnerSearchCriteriaTo;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;

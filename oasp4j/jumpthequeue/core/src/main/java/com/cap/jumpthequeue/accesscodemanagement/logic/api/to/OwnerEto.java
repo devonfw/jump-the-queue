@@ -1,7 +1,7 @@
-package com.cap.jumpthequeue.ownermanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.Owner;
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
-import com.cap.jumpthequeue.ownermanagement.common.api.Owner;
 
 /**
  * Entity transport object of Owner

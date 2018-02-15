@@ -1,8 +1,8 @@
-package com.cap.jumpthequeue.ownermanagement.dataaccess.api.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.OwnerEntity;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.OwnerSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
-import com.cap.jumpthequeue.ownermanagement.dataaccess.api.OwnerEntity;
-import com.cap.jumpthequeue.ownermanagement.logic.api.to.OwnerSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 

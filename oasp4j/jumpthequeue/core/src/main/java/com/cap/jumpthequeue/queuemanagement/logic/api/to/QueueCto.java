@@ -1,7 +1,7 @@
 package com.cap.jumpthequeue.queuemanagement.logic.api.to;
 
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.OwnerEto;
 import com.cap.jumpthequeue.general.common.api.to.AbstractCto;
-import com.cap.jumpthequeue.ownermanagement.logic.api.to.OwnerEto;
 
 /**
  * Composite transport object of Queue

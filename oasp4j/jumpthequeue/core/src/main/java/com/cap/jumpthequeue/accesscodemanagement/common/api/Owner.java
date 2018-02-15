@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.ownermanagement.common.api;
+package com.cap.jumpthequeue.accesscodemanagement.common.api;
 
 import com.cap.jumpthequeue.general.common.api.ApplicationEntity;
 

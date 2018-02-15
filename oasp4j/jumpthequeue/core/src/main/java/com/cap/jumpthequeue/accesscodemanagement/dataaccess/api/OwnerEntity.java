@@ -1,10 +1,10 @@
-package com.cap.jumpthequeue.ownermanagement.dataaccess.api;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.api;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.Owner;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
-import com.cap.jumpthequeue.ownermanagement.common.api.Owner;
 
 /**
  * @author machamou
