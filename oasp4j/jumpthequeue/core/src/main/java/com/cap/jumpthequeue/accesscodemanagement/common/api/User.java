@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.usermanagement.common.api;
+package com.cap.jumpthequeue.accesscodemanagement.common.api;
 
 import java.sql.Timestamp;
 

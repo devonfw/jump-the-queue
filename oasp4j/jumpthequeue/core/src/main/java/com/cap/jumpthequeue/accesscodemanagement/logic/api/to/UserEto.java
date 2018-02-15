@@ -1,9 +1,9 @@
-package com.cap.jumpthequeue.usermanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import java.sql.Timestamp;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.User;
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
-import com.cap.jumpthequeue.usermanagement.common.api.User;
 
 /**
  * Entity transport object of User

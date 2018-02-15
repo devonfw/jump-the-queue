@@ -2,8 +2,9 @@ package com.cap.jumpthequeue.accesscodemanagement.logic.api;
 
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserSearchCriteriaTo;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoEto;
-import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -47,5 +48,11 @@ public interface Accesscodemanagement {
    * @return
    */
   AccessCodeCto findExistingAccessCodesByPost(UserSearchCriteriaTo searchCriteriaTo);
+
+  /**
+   * @param user
+   * @return
+   */
+  UserEto saveNewUser(UserEto user);
 
 }

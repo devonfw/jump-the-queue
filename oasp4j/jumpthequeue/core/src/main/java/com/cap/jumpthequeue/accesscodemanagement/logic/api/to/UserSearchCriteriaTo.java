@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.usermanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import java.sql.Timestamp;
 
@@ -6,7 +6,7 @@ import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 
 /**
  * This is the {@link SearchCriteriaTo search criteria} {@link net.sf.mmm.util.transferobject.api.TransferObject TO}
- * used to find {@link com.cap.jumpthequeue.usermanagement.common.api.User}s.
+ * used to find {@link com.cap.jumpthequeue.accesscodemanagement.common.api.User}s.
  *
  */
 public class UserSearchCriteriaTo extends SearchCriteriaTo {

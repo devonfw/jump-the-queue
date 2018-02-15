@@ -12,12 +12,12 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.User;
 import com.cap.jumpthequeue.general.common.api.validation.EmailExtended;
 import com.cap.jumpthequeue.general.common.api.validation.Phone;
 import com.cap.jumpthequeue.general.common.api.validation.Url;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
-import com.cap.jumpthequeue.usermanagement.common.api.User;
 
 /**
  * @author machamou

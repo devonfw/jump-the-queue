@@ -3,6 +3,7 @@ package com.cap.jumpthequeue.accesscodemanagement.logic.impl;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,28 +11,30 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotFoundException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.UserEntity;
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.VisitorInfoEntity;
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.AccessCodeDao;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.UserDao;
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.VisitorInfoDao;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserSearchCriteriaTo;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.QueueDao;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
-import com.cap.jumpthequeue.usermanagement.dataaccess.api.UserEntity;
-import com.cap.jumpthequeue.usermanagement.dataaccess.api.dao.UserDao;
-import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -67,6 +70,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 
   // Start of refactor Step 1
 
+  // VisitorInfoList
   @Override
   public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(long queueid) {
 
@@ -75,6 +79,54 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
     PaginatedListTo<VisitorInfoEntity> visitorinfos = getVisitorInfoDao().findVisitorInfos(criteria);
     return mapPaginatedEntityList(visitorinfos, VisitorInfoEto.class);
+  }
+
+  // Make a new user
+  @Override
+  public UserEto saveNewUser(UserEto user) {
+
+    Objects.requireNonNull(user, "user");
+    UserEntity userEntity = getBeanMapper().map(user, UserEntity.class);
+
+    // Search for existing email in User and AccessCode Entity
+    UserSearchCriteriaTo usercriteria = new UserSearchCriteriaTo();
+    usercriteria.setEmail(user.getEmail());
+    PaginatedListTo<UserEntity> users = getUserDao().findUsers(usercriteria);
+
+    AccessCodeSearchCriteriaTo accescodecriteria = new AccessCodeSearchCriteriaTo();
+    accescodecriteria.setEmail(user.getEmail());
+    accescodecriteria.setCreationTime(null);
+    PaginatedListTo<AccessCodeEntity> codes = getAccessCodeDao().findAccessCodes(accescodecriteria);
+
+    if (users.getResult().size() != 0 || codes.getResult().size() != 0) {
+      throw new BadRequestException();
+    }
+
+    // Generate UUID TOKEN - random -- Must have add expiration time ?
+    UUID uuid = UUID.randomUUID();
+    String randomUUIDString = uuid.toString();
+    String token = randomUUIDString;
+
+    // Generate identificator
+    // TODO- ExpandFor more User
+    String leters = "ABCDEFGHI";
+    String numbers = "123456789";
+
+    String identificator = RandomStringUtils.random(1, leters) + RandomStringUtils.random(1, numbers)
+        + RandomStringUtils.random(1, leters) + RandomStringUtils.random(1, numbers);
+    // randomAlphanumeric(4). ;
+
+    // Asign token and identificator to current user
+    userEntity.setToken(token);
+    userEntity.setIdentificator(identificator);
+    userEntity.setCreationTime(Timestamp.from(Instant.now()));
+
+    // Save User to UserTable
+    UserEntity resultEntity = getUserDao().save(userEntity);
+    LOG.debug("User with id '{}' has been created.", resultEntity.getId());
+
+    // return user created
+    return getBeanMapper().map(resultEntity, UserEto.class);
   }
 
   /**

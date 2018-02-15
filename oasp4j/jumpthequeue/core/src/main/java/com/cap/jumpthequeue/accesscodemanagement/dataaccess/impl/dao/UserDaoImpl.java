@@ -1,13 +1,13 @@
-package com.cap.jumpthequeue.usermanagement.dataaccess.impl.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.impl.dao;
 
 import java.sql.Timestamp;
 
 import javax.inject.Named;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.UserEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.UserDao;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
-import com.cap.jumpthequeue.usermanagement.dataaccess.api.UserEntity;
-import com.cap.jumpthequeue.usermanagement.dataaccess.api.dao.UserDao;
-import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;
