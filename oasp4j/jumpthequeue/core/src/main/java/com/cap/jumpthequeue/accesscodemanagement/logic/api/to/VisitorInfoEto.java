@@ -1,7 +1,7 @@
-package com.cap.jumpthequeue.visitorinfomanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.VisitorInfo;
 import com.cap.jumpthequeue.general.common.api.to.AbstractEto;
-import com.cap.jumpthequeue.visitorinfomanagement.common.api.VisitorInfo;
 
 /**
  * Entity transport object of VisitorInfo

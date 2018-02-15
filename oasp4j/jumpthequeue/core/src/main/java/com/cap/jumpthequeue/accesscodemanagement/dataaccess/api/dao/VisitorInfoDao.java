@@ -1,8 +1,8 @@
-package com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.VisitorInfoEntity;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.api.dao.ApplicationDao;
-import com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.VisitorInfoEntity;
-import com.cap.jumpthequeue.visitorinfomanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 

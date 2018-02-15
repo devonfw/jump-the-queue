@@ -7,9 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.cap.jumpthequeue.accesscodemanagement.common.api.VisitorInfo;
 import com.cap.jumpthequeue.general.dataaccess.api.ApplicationPersistenceEntity;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
-import com.cap.jumpthequeue.visitorinfomanagement.common.api.VisitorInfo;
 
 /**
  * @author machamou

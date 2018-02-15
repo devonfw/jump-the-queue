@@ -1,10 +1,10 @@
-package com.cap.jumpthequeue.visitorinfomanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import io.oasp.module.jpa.common.api.to.SearchCriteriaTo;
 
 /**
  * This is the {@link SearchCriteriaTo search criteria} {@link net.sf.mmm.util.transferobject.api.TransferObject TO}
- * used to find {@link com.cap.jumpthequeue.visitorinfomanagement.common.api.VisitorInfo}s.
+ * used to find {@link com.cap.jumpthequeue.accesscodemanagement.common.api.VisitorInfo}s.
  *
  */
 public class VisitorInfoSearchCriteriaTo extends SearchCriteriaTo {

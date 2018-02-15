@@ -1,4 +1,4 @@
-package com.cap.jumpthequeue.visitorinfomanagement.logic.api.to;
+package com.cap.jumpthequeue.accesscodemanagement.logic.api.to;
 
 import com.cap.jumpthequeue.general.common.api.to.AbstractCto;
 import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;

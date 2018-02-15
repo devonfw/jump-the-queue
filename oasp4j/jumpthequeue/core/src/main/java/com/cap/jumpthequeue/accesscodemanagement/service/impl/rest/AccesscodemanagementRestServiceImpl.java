@@ -6,9 +6,8 @@ import javax.inject.Named;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
-import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoEto;
 import com.cap.jumpthequeue.accesscodemanagement.service.api.rest.AccesscodemanagementRestService;
-import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -20,30 +19,6 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
 
   @Inject
   private Accesscodemanagement accesscodemanagement;
-
-  @Override
-  public AccessCodeCto getAccessCode(long id) {
-
-    return this.accesscodemanagement.findAccessCode(id);
-  }
-
-  @Override
-  public AccessCodeEto saveAccessCode(AccessCodeEto accesscode) {
-
-    return this.accesscodemanagement.saveAccessCode(accesscode);
-  }
-
-  @Override
-  public void deleteAccessCode(long id) {
-
-    this.accesscodemanagement.deleteAccessCode(id);
-  }
-
-  @Override
-  public PaginatedListTo<AccessCodeEto> findAccessCodesByPost(AccessCodeSearchCriteriaTo searchCriteriaTo) {
-
-    return this.accesscodemanagement.findAccessCodeEtos(searchCriteriaTo);
-  }
 
   @Override
   public AccessCodeCto getVisitorAccessCode(String token) {
@@ -60,21 +35,21 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
   }
 
   @Override
-  public AccessCodeCto getAttendingAccessCode(long queue_id) {
+  public AccessCodeCto getAttendingAccessCode(long queueid) {
 
-    return this.accesscodemanagement.getAttendingAccessCode(queue_id);
-  }
-
-  @Override
-  public AccessCodeCto findExistingAccessCodesByPost(UserSearchCriteriaTo searchCriteriaTo) {
-
-    return this.accesscodemanagement.findExistingAccessCodesByPost(searchCriteriaTo);
+    return this.accesscodemanagement.getAttendingAccessCode(queueid);
   }
 
   @Override
   public AccessCodeEto makeAccessCode(long number) {
 
     return this.accesscodemanagement.makeAccessCode(number);
+  }
+
+  @Override
+  public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(long queueid) {
+
+    return this.accesscodemanagement.findVisitorInfoEtosByQueueId(queueid);
   }
 
 }

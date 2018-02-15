@@ -16,11 +16,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.AccessCodeEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.VisitorInfoEntity;
 import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.AccessCodeDao;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.VisitorInfoDao;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeSearchCriteriaTo;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 import com.cap.jumpthequeue.general.logic.base.AbstractComponentFacade;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.QueueEntity;
 import com.cap.jumpthequeue.queuemanagement.dataaccess.api.dao.QueueDao;
@@ -28,8 +32,6 @@ import com.cap.jumpthequeue.queuemanagement.logic.api.to.QueueEto;
 import com.cap.jumpthequeue.usermanagement.dataaccess.api.UserEntity;
 import com.cap.jumpthequeue.usermanagement.dataaccess.api.dao.UserDao;
 import com.cap.jumpthequeue.usermanagement.logic.api.to.UserSearchCriteriaTo;
-import com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.VisitorInfoEntity;
-import com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.dao.VisitorInfoDao;
 
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
@@ -63,50 +65,16 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     super();
   }
 
-  @Override
-  public AccessCodeCto findAccessCode(Long id) {
-
-    LOG.debug("Get AccessCode with id {} from database.", id);
-    AccessCodeEntity accessCode = getAccessCodeDao().findOne(id);
-
-    accessCode.setEstimatedTime(getEstimatedTimeByQueueId(accessCode.getQueueId()));
-
-    getAccessCodeDao().save(accessCode);
-
-    AccessCodeCto cto = new AccessCodeCto();
-    cto.setAccessCode(getBeanMapper().map(accessCode, AccessCodeEto.class));
-    cto.setQueue(getBeanMapper().map(accessCode.getQueue(), QueueEto.class));
-    return cto;
-  }
+  // Start of refactor Step 1
 
   @Override
-  public PaginatedListTo<AccessCodeEto> findAccessCodeEtos(AccessCodeSearchCriteriaTo criteria) {
+  public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(long queueid) {
 
+    VisitorInfoSearchCriteriaTo criteria = new VisitorInfoSearchCriteriaTo();
+    criteria.setQueueId(queueid);
     criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
-    PaginatedListTo<AccessCodeEntity> accesscodes = getAccessCodeDao().findAccessCodes(criteria);
-    return mapPaginatedEntityList(accesscodes, AccessCodeEto.class);
-  }
-
-  @Override
-  public boolean deleteAccessCode(Long accessCodeId) {
-
-    AccessCodeEntity accessCode = getAccessCodeDao().find(accessCodeId);
-    getAccessCodeDao().delete(accessCode);
-    LOG.debug("The accessCode with id '{}' has been deleted.", accessCodeId);
-    return true;
-  }
-
-  @Override
-  public AccessCodeEto saveAccessCode(AccessCodeEto accessCode) {
-
-    Objects.requireNonNull(accessCode, "accessCode");
-    AccessCodeEntity accessCodeEntity = getBeanMapper().map(accessCode, AccessCodeEntity.class);
-
-    // initialize, validate accessCodeEntity here if necessary
-    AccessCodeEntity resultEntity = getAccessCodeDao().save(accessCodeEntity);
-    LOG.debug("AccessCode with id '{}' has been created.", resultEntity.getId());
-
-    return getBeanMapper().map(resultEntity, AccessCodeEto.class);
+    PaginatedListTo<VisitorInfoEntity> visitorinfos = getVisitorInfoDao().findVisitorInfos(criteria);
+    return mapPaginatedEntityList(visitorinfos, VisitorInfoEto.class);
   }
 
   /**
@@ -118,6 +86,32 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 
     return this.accessCodeDao;
   }
+
+  /**
+   * @return
+   */
+  private UserDao getUserDao() {
+
+    return this.userDao;
+  }
+
+  /**
+   * @return
+   */
+  private VisitorInfoDao getVisitorInfoDao() {
+
+    return this.visitorDao;
+  }
+
+  /**
+   * @return
+   */
+  private QueueDao getQueueDao() {
+
+    return this.queueDao;
+  }
+
+  // Start of refactor Step 1 END
 
   @Override
   public AccessCodeCto getVisitorAccessCode(String token) {
@@ -447,31 +441,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     return code;
   }
 
-  /**
-   * @return
-   */
-  private UserDao getUserDao() {
-
-    return this.userDao;
-  }
-
-  /**
-   * @return
-   */
-  private VisitorInfoDao getVisitorInfoDao() {
-
-    return this.visitorDao;
-  }
-
-  /**
-   * @return
-   */
-  private QueueDao getQueueDao() {
-
-    return this.queueDao;
-  }
-
-  // Generate number's AccesCode's for mock/estimated time calcul
+  // Generate number's AccesCode's for mock/estimated time calculus tests
 
   @Override
   public AccessCodeEto makeAccessCode(long number) {
@@ -479,46 +449,46 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     // Get current time -- Use Date or Calendar instead of Timestamps?
     Timestamp currentTimestamp = Timestamp.from(Instant.now());
 
-    AccessCodeEto eto = new AccessCodeEto();
-    eto.setPriority(true);
-    eto.setQueueId((long) 1233444);
+    AccessCodeEntity accessCodeMade = new AccessCodeEntity();
+    accessCodeMade.setPriority(true);
+    accessCodeMade.setQueueId((long) 1233444);
     for (int i = 1; i < (number / 2); i++) {
-      eto.setName("Peter" + i);
-      eto.setEmail("petermail" + i + "@mail.com");
-      eto.setCode(i);
-      eto.setPhone("600 800 70" + i);
-      eto.setIdentificator("A1B" + i);
-      eto.setCreationTime(currentTimestamp);
+      accessCodeMade.setName("Peter" + i);
+      accessCodeMade.setEmail("petermail" + i + "@mail.com");
+      accessCodeMade.setCode(i);
+      accessCodeMade.setPhone("600 800 70" + i);
+      accessCodeMade.setIdentificator("A1B" + i);
+      accessCodeMade.setCreationTime(currentTimestamp);
       if (i < 2) {
-        eto.setStartTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i)));
-        eto.setEndTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i * 2)));
+        accessCodeMade.setStartTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i)));
+        accessCodeMade.setEndTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i * 2)));
       } else {
-        eto.setStartTime(null);
-        eto.setEndTime(null);
+        accessCodeMade.setStartTime(null);
+        accessCodeMade.setEndTime(null);
       }
-      eto.setEstimatedTime(new Timestamp((currentTimestamp.getTime() + (1000 * 60 * i)) / 1000));
-      saveAccessCode(eto);
+      accessCodeMade.setEstimatedTime(new Timestamp((currentTimestamp.getTime() + (1000 * 60 * i)) / 1000));
+      this.accessCodeDao.save(accessCodeMade);
     }
 
-    eto.setPriority(false);
+    accessCodeMade.setPriority(false);
     for (int i = 0; i < (number / 2); i++) {
-      eto.setName("Marie" + i);
-      eto.setEmail("mariemail" + i + "@mail.com");
-      eto.setCode(i);
-      eto.setPhone("600 900 70" + i);
-      eto.setIdentificator("A2B" + i);
-      eto.setCreationTime(currentTimestamp);
+      accessCodeMade.setName("Marie" + i);
+      accessCodeMade.setEmail("mariemail" + i + "@mail.com");
+      accessCodeMade.setCode(i);
+      accessCodeMade.setPhone("600 900 70" + i);
+      accessCodeMade.setIdentificator("A2B" + i);
+      accessCodeMade.setCreationTime(currentTimestamp);
       if (i % 2 == 0) {
-        eto.setStartTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i)));
-        eto.setEndTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i * 2)));
+        accessCodeMade.setStartTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i)));
+        accessCodeMade.setEndTime(new Timestamp(currentTimestamp.getTime() + (1000 * 60 * i * 2)));
       } else {
-        eto.setStartTime(null);
-        eto.setEndTime(null);
+        accessCodeMade.setStartTime(null);
+        accessCodeMade.setEndTime(null);
       }
-      eto.setEstimatedTime(new Timestamp((currentTimestamp.getTime() + (1000 * 60 * i)) / 1000));
-      saveAccessCode(eto);
+      accessCodeMade.setEstimatedTime(new Timestamp((currentTimestamp.getTime() + (1000 * 60 * i)) / 1000));
+      this.accessCodeDao.save(accessCodeMade);
     }
-    return eto;
+    return getBeanMapper().map(accessCodeMade, AccessCodeEto.class);
   }
 
 }

@@ -1,11 +1,11 @@
-package com.cap.jumpthequeue.visitorinfomanagement.dataaccess.impl.dao;
+package com.cap.jumpthequeue.accesscodemanagement.dataaccess.impl.dao;
 
 import javax.inject.Named;
 
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.VisitorInfoEntity;
+import com.cap.jumpthequeue.accesscodemanagement.dataaccess.api.dao.VisitorInfoDao;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 import com.cap.jumpthequeue.general.dataaccess.base.dao.ApplicationDaoImpl;
-import com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.VisitorInfoEntity;
-import com.cap.jumpthequeue.visitorinfomanagement.dataaccess.api.dao.VisitorInfoDao;
-import com.cap.jumpthequeue.visitorinfomanagement.logic.api.to.VisitorInfoSearchCriteriaTo;
 import com.mysema.query.alias.Alias;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;
