@@ -91,42 +91,35 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
 
     // Get queue
     QueueEntity queue = getQueueByQueueId(queueid);
-    // Make modifications - Logo missing - Only for fields existing in newqueue
-    if (!newqueue.getDescriptionText().isEmpty()) {
-      queue.setDescriptionText(newqueue.getDescriptionText());
-    }
-    if (newqueue.getMinWait() != 0) {
-      queue.setMinWait(newqueue.getMinWait());
-    }
-    if (newqueue.getTermsId() != null) {
-      queue.setTermsId(newqueue.getTermsId());
-    }
-    if (newqueue.getOwnerId() != null) {
-      queue.setOwnerId(newqueue.getOwnerId());
-    }
-    // Save modification
+    // Make modifications - Logo missing - Only for fields existing in NewqueueEto - best way to do?
+    queue.setDescriptionText(
+        (!(newqueue.getDescriptionText() == null)) ? newqueue.getDescriptionText() : queue.getDescriptionText());
+    queue.setMinWait((newqueue.getMinWait() != 0) ? newqueue.getMinWait() : queue.getMinWait());
+    queue.setTermsId((newqueue.getTermsId() != null) ? newqueue.getTermsId() : queue.getTermsId());
+    queue.setOwnerId((newqueue.getOwnerId() != null) ? newqueue.getOwnerId() : queue.getOwnerId());
+    // Save modifications
     getQueueDao().save(queue);
     // TODO REMOVE Log for info
     LOG.info("Queue with id {} updated.", queue.getId());
-    // Return modified Queue
-    return getBeanMapper().map(queue, QueueEto.class);
+    // Return modified QueueEto
+    return getBeanMapper().map(getQueueByQueueId(queueid), QueueEto.class);
   }
 
   @Override
   public TermsEto modifTerms(long queueid, TermsEto newterms) {
 
-    // Get queue by queue_id
+    // Get queue by queueid
     QueueEntity queue = getQueueByQueueId(queueid);
     // Get terms by terms_id in this queue
     TermsEntity term = getTermsDao().find(queue.getTermsId());
     // Change Description text with new value
-    term.setDescription(newterms.getDescription());
+    term.setDescription((newterms.getDescription() != null) ? newterms.getDescription() : term.getDescription());
     // Save entity
     getTermsDao().save(term);
     // TODO REMOVE Log for info
     LOG.info("Terms for queue {} modified.", queueid, queue.getDescriptionText());
-    // Return modified Terms
-    return getBeanMapper().map(term, TermsEto.class);
+    // Return modified Term
+    return getBeanMapper().map(getTermsDao().find(queue.getTermsId()), TermsEto.class);
   }
 
   @Override
@@ -136,14 +129,12 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
     QueueEntity queue = getQueueByQueueId(queueid);
     // TODO REMOVE Log terms access
     LOG.info("Get Terms from {} queue.", queueid, queue.getDescriptionText());
-    // Return termsEto
-    TermsEntity tvalue = queue.getTerms();
     // Return Terms of queue
-    return getBeanMapper().map(tvalue, TermsEto.class);
+    return getBeanMapper().map(queue.getTerms(), TermsEto.class);
   }
 
   /**
-   * Pass next turn -- IN PROCESS
+   * Pass next turn -- IN PROCESS - WIP
    *
    * @return AccessCodeETo
    */

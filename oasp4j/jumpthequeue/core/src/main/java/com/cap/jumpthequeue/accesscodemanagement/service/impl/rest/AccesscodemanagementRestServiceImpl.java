@@ -6,6 +6,7 @@ import javax.inject.Named;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.Accesscodemanagement;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeCto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.AccessCodeEto;
+import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.UserEto;
 import com.cap.jumpthequeue.accesscodemanagement.logic.api.to.VisitorInfoEto;
 import com.cap.jumpthequeue.accesscodemanagement.service.api.rest.AccesscodemanagementRestService;
 
@@ -28,16 +29,9 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
   }
 
   @Override
-  public AccessCodeCto getVIPAccessCode(String token) {
+  public AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode) {
 
-    return this.accesscodemanagement.getVIPAccessCode(token);
-
-  }
-
-  @Override
-  public AccessCodeCto getAttendingAccessCode(long queueid) {
-
-    return this.accesscodemanagement.getAttendingAccessCode(queueid);
+    return this.accesscodemanagement.getAccessCode(queueid, userAskingCode);
   }
 
   @Override

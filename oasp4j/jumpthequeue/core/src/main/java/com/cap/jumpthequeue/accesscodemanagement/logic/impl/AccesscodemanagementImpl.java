@@ -82,8 +82,8 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
   }
 
   // Make a new user
-  @Override
-  public UserEto saveNewUser(UserEto user) {
+
+  private UserEto saveNewUser(UserEto user) {
 
     Objects.requireNonNull(user, "user");
     UserEntity userEntity = getBeanMapper().map(user, UserEntity.class);
@@ -295,88 +295,11 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
   }
 
   @Override
-  public AccessCodeCto getVIPAccessCode(String token) {
-
-    Objects.requireNonNull(token, "token");
-
-    // Get user
-    UserSearchCriteriaTo usercriteria = new UserSearchCriteriaTo();
-    usercriteria.setToken(token);
-    PaginatedListTo<UserEntity> users = this.userDao.findUsers(usercriteria);
-
-    if (users.getResult().size() == 0 || users.getResult().size() > 1) {
-      throw new NotFoundException();
-    }
-
-    UserEntity user = users.getResult().get(0);
-
-    // Validate User
-    user.setValidated(true);
-    getUserDao().save(user);
-
-    // Get queue
-    QueueEntity queue = getQueueDao().find(user.getQueueId());
-
-    if (queue.equals(null)) {
-      throw new InternalServerErrorException();
-    }
-
-    // Find last code for this queue
-    AccessCodeSearchCriteriaTo accesscodecriteria = new AccessCodeSearchCriteriaTo();
-    accesscodecriteria.setQueueId(queue.getId());
-    accesscodecriteria.setPriority(true);
-    PaginatedListTo<AccessCodeEntity> codes = this.accessCodeDao.findAccessCodes(accesscodecriteria);
-
-    if (codes.getResult().size() == 0) {
-      throw new NotFoundException();
-    }
-
-    AccessCodeEntity accesscode = codes.getResult().get(codes.getResult().size() - 1);
-
-    // Create AccessCode
-    AccessCodeEntity code = new AccessCodeEntity();
-    code.setName(user.getName());
-    code.setEmail(user.getEmail());
-    code.setPhone(user.getPhone());
-    code.setCreationTime(user.getCreationTime());
-    code.setIdentificator(user.getIdentificator());
-    code.setQueue(queue);
-    code.setPriority(true);
-    code.setCode(accesscode.getCode() < 999 ? accesscode.getCode() + 1 : 1);
-
-    // Calculate estimated time
-    code.setEstimatedTime(getEstimatedTimeByQueueId(queue.getId()));
-
-    // Save AccessCode
-    getAccessCodeDao().save(code);
-
-    // Generate AccessCode CTO
-    AccessCodeCto cto = new AccessCodeCto();
-    cto.setAccessCode(getBeanMapper().map(code, AccessCodeEto.class));
-    cto.setQueue(getBeanMapper().map(queue, QueueEto.class));
-
-    // Transfert user info to VisitorInfpo Table if consented
-    if (user.getConsent()) {
-      VisitorInfoEntity visitorInfoEntity = new VisitorInfoEntity();
-      // Set info
-      visitorInfoEntity.setName(user.getName());
-      visitorInfoEntity.setPhone(user.getPhone());
-      visitorInfoEntity.setEmail(user.getEmail());
-      visitorInfoEntity.setQueueId(queue.getId());
-      // Save VisitorInfo
-      getVisitorInfoDao().save(visitorInfoEntity);
-    }
-
-    // Return AccessCodeCto
-    return cto;
-  }
-
-  @Override
-  public AccessCodeCto getAttendingAccessCode(long queueId) {
+  public AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode) {
 
     // Find Actual attending AccessCode
     AccessCodeSearchCriteriaTo accescodecriteria = new AccessCodeSearchCriteriaTo();
-    accescodecriteria.setQueueId(queueId);
+    accescodecriteria.setQueueId(queueid);
     PaginatedListTo<AccessCodeEntity> codes = getAccessCodeDao().findAttendingAccessCode(accescodecriteria);
 
     AccessCodeEntity atendingAccesCode = codes.getResult().get(codes.getResult().size() - 1);
@@ -385,7 +308,6 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     AccessCodeCto attendingCodeCto = new AccessCodeCto();
     attendingCodeCto.setAccessCode(getBeanMapper().map(atendingAccesCode, AccessCodeEto.class));
     attendingCodeCto.setQueue(getBeanMapper().map(atendingAccesCode.getQueue(), QueueEto.class));
-
     return attendingCodeCto;
   }
 

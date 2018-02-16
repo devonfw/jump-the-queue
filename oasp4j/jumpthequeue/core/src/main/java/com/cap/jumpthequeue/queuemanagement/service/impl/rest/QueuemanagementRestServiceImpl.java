@@ -32,13 +32,15 @@ public class QueuemanagementRestServiceImpl implements QueuemanagementRestServic
     return this.queuemanagement.attendQueue(queueid);
   }
 
+  // Get terms by queueid
   @Override
-  public TermsEto getTermsByQueueId(long queueid) {
+  public TermsEto getTerms(long queueid) {
 
     return this.queuemanagement.getTermsByQueueId(queueid);
 
   }
 
+  // Update terms by queueid
   @Override
   public TermsEto modifTerms(long queueid, TermsEto newterms) {
 

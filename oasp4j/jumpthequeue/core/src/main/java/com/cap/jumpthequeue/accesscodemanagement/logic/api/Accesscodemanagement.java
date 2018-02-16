@@ -26,16 +26,10 @@ public interface Accesscodemanagement {
   AccessCodeCto getVisitorAccessCode(String token);
 
   /**
-   * @param token
-   * @return
-   */
-  AccessCodeCto getVIPAccessCode(String token);
-
-  /**
    * @param queue_id
    * @return
    */
-  AccessCodeCto getAttendingAccessCode(long queue_id);
+  AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode);
 
   /**
    * @param number
@@ -48,11 +42,5 @@ public interface Accesscodemanagement {
    * @return
    */
   AccessCodeCto findExistingAccessCodesByPost(UserSearchCriteriaTo searchCriteriaTo);
-
-  /**
-   * @param user
-   * @return
-   */
-  UserEto saveNewUser(UserEto user);
 
 }
