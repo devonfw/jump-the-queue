@@ -25,18 +25,24 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 public interface AccesscodemanagementRestService {
 
   /**
-   * Delegates to {@link Accesscodemanagement#findAccessCode}.
+   * Delegates to {@link Accesscodemanagement#findVisitorInfoEtosByQueueId}.
    *
-   * @param id the ID of the {@link AccessCodeEto}
-   * @return the {@link AccessCodeEto}
+   * @param queueid the ID of the {@link Queue}
+   * @return PaginatedListTo<VisitorInfoEto>
    */
-  @GET
-  @Path("/makeaccesscode/{number}/")
-  public AccessCodeEto makeAccessCode(@PathParam("number") long number);
-
   @GET
   @Path("/visitorinfo/{queueid}/")
   public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(@PathParam("queueid") long queueid);
+
+  /**
+   * Delegates to {@link Accescodemanagement#getAccessCode}.
+   *
+   * @param id ID of the queue where consult atendend now code
+   * @return the {@link AccessCodeEto}
+   */
+  @GET
+  @Path("/code/{queueid}/")
+  public PaginatedListTo<AccessCodeEto> getAccessCodeList(@PathParam("queueid") long queueid);
 
   /**
    * Delegates to {@link Accescodemanagement#getVisitorAccessCode}.
@@ -48,13 +54,23 @@ public interface AccesscodemanagementRestService {
   public AccessCodeCto getVisitorAccessCode(@PathParam("token") String token);
 
   /**
-   * Delegates to {@link Accescodemanagement#getAttendingAccessCode}.
+   * Delegates to {@link Accescodemanagement#getAccessCode}.
    *
-   * @param id ID of the queue where consult atendend now code
+   * @param id ID of the queue where consult code
    * @return the {@link AccessCodeEto}
    */
   @POST
   @Path("/code/{queueid}/")
-  public AccessCodeCto getAccessCode(@PathParam("queueid") long queueid, UserEto userAskingCode);
+  public AccessCodeEto getAccessCode(@PathParam("queueid") long queueid, UserEto userAskingCode);
+
+  /**
+   * elegates to {@link Accescodemanagement#makeAccessCode}.
+   *
+   * @param number
+   * @return the {@link AccessCodeEto}
+   */
+  @GET
+  @Path("/makeaccesscode/{number}/")
+  public AccessCodeEto makeAccessCode(@PathParam("number") long number);
 
 }

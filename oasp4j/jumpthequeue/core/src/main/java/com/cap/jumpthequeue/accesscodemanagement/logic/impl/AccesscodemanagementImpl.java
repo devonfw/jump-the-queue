@@ -45,6 +45,11 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 @Transactional
 public class AccesscodemanagementImpl extends AbstractComponentFacade implements Accesscodemanagement {
 
+  // For Identificator generation - Make more values?
+  private static final String leters = "ABCDEFGHIJ";
+
+  private static final String numbers = "0123456789";
+
   /** Logger instance. */
   private static final Logger LOG = LoggerFactory.getLogger(AccesscodemanagementImpl.class);
 
@@ -70,15 +75,65 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 
   // Start of refactor Step 1
 
-  // VisitorInfoList
+  // Get VisitorInfoList
   @Override
   public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(long queueid) {
 
-    VisitorInfoSearchCriteriaTo criteria = new VisitorInfoSearchCriteriaTo();
-    criteria.setQueueId(queueid);
-    criteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
-    PaginatedListTo<VisitorInfoEntity> visitorinfos = getVisitorInfoDao().findVisitorInfos(criteria);
-    return mapPaginatedEntityList(visitorinfos, VisitorInfoEto.class);
+    VisitorInfoSearchCriteriaTo visitorInfoCriteria = new VisitorInfoSearchCriteriaTo();
+    visitorInfoCriteria.setQueueId(queueid);
+    visitorInfoCriteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
+    return mapPaginatedEntityList(getVisitorInfoDao().findVisitorInfos(visitorInfoCriteria), VisitorInfoEto.class);
+  }
+
+  // Get AccessCodeList
+  @Override
+  public PaginatedListTo<AccessCodeEto> findAccessCodeByQueueId(long queueid) {
+
+    AccessCodeSearchCriteriaTo accessCodeCriteria = new AccessCodeSearchCriteriaTo();
+    accessCodeCriteria.setQueueId(queueid);
+    accessCodeCriteria.limitMaximumPageSize(MAXIMUM_HIT_LIMIT);
+    return mapPaginatedEntityList(getAccessCodeDao().findAccessCodes(accessCodeCriteria), AccessCodeEto.class);
+  }
+
+  // Get AccessCode info
+  @Override
+  public AccessCodeEto getAccessCode(long queueid, UserEto userAskingCode) {
+
+    // TODO Refactor this to refactor getNewAccessCode one
+    /*
+     * Order: 1. Check if user exist --> New user if doesn't 2. Check id has accessCode in this queue --> New AccessCode
+     * and send info 3. Send AccessCodeinfo
+     */
+
+    // TODO Use this 2 search in getAccessCode to different behavior
+    // Search for existing email in User and AccessCode Entity
+    UserSearchCriteriaTo usercriteria = new UserSearchCriteriaTo();
+    usercriteria.setEmail(userAskingCode.getEmail());
+    PaginatedListTo<UserEntity> users = getUserDao().findUsers(usercriteria);
+
+    AccessCodeSearchCriteriaTo accescodecriteria = new AccessCodeSearchCriteriaTo();
+    accescodecriteria.setEmail(userAskingCode.getEmail());
+    accescodecriteria.setCreationTime(null);
+    PaginatedListTo<AccessCodeEntity> codes = getAccessCodeDao().findAccessCodes(accescodecriteria);
+
+    // TODO error handle - Check if email exist in one or more table ( if only AccessCode = problem)
+    if (users.getResult().size() != 0 || codes.getResult().size() != 0) {
+      throw new BadRequestException();
+    }
+    AccessCodeEntity resultCode = new AccessCodeEntity();
+    if (users.getResult().size() != 0) {
+      if (codes.getResult().size() != 0) {
+        resultCode = codes.getResult().get(users.getResult().size() - 1);
+      } else {
+        // TODO Check priority
+        resultCode = getnewAccessCode(userAskingCode, queueid);
+      }
+
+    } else {
+      // new user - return userEto/Entity?
+    }
+
+    return getBeanMapper().map(resultCode, AccessCodeEto.class);
   }
 
   // Make a new user
@@ -88,41 +143,23 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     Objects.requireNonNull(user, "user");
     UserEntity userEntity = getBeanMapper().map(user, UserEntity.class);
 
-    // Search for existing email in User and AccessCode Entity
-    UserSearchCriteriaTo usercriteria = new UserSearchCriteriaTo();
-    usercriteria.setEmail(user.getEmail());
-    PaginatedListTo<UserEntity> users = getUserDao().findUsers(usercriteria);
-
-    AccessCodeSearchCriteriaTo accescodecriteria = new AccessCodeSearchCriteriaTo();
-    accescodecriteria.setEmail(user.getEmail());
-    accescodecriteria.setCreationTime(null);
-    PaginatedListTo<AccessCodeEntity> codes = getAccessCodeDao().findAccessCodes(accescodecriteria);
-
-    if (users.getResult().size() != 0 || codes.getResult().size() != 0) {
-      throw new BadRequestException();
-    }
-
-    // Generate UUID TOKEN - random -- Must have add expiration time ?
+    // Generate UUID TOKEN - random -- Must have add expiration time ? Another method?
     UUID uuid = UUID.randomUUID();
     String randomUUIDString = uuid.toString();
     String token = randomUUIDString;
 
     // Generate identificator
-    // TODO- ExpandFor more User
-    String leters = "ABCDEFGHI";
-    String numbers = "123456789";
-
     String identificator = RandomStringUtils.random(1, leters) + RandomStringUtils.random(1, numbers)
         + RandomStringUtils.random(1, leters) + RandomStringUtils.random(1, numbers);
-    // randomAlphanumeric(4). ;
 
-    // Asign token and identificator to current user
+    // Assign token and identificator to current user
     userEntity.setToken(token);
     userEntity.setIdentificator(identificator);
     userEntity.setCreationTime(Timestamp.from(Instant.now()));
 
     // Save User to UserTable
     UserEntity resultEntity = getUserDao().save(userEntity);
+    // TODO REMOVE log for info
     LOG.debug("User with id '{}' has been created.", resultEntity.getId());
 
     // return user created
@@ -294,23 +331,6 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     return new Timestamp(estimatedTime);
   }
 
-  @Override
-  public AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode) {
-
-    // Find Actual attending AccessCode
-    AccessCodeSearchCriteriaTo accescodecriteria = new AccessCodeSearchCriteriaTo();
-    accescodecriteria.setQueueId(queueid);
-    PaginatedListTo<AccessCodeEntity> codes = getAccessCodeDao().findAttendingAccessCode(accescodecriteria);
-
-    AccessCodeEntity atendingAccesCode = codes.getResult().get(codes.getResult().size() - 1);
-
-    // return Cto with result
-    AccessCodeCto attendingCodeCto = new AccessCodeCto();
-    attendingCodeCto.setAccessCode(getBeanMapper().map(atendingAccesCode, AccessCodeEto.class));
-    attendingCodeCto.setQueue(getBeanMapper().map(atendingAccesCode.getQueue(), QueueEto.class));
-    return attendingCodeCto;
-  }
-
   /**
    * Return AccessCode for one User
    *
@@ -355,7 +375,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 
     AccessCodeEntity code;
     if (codes.getResult().size() == 0) {
-      code = getnewAccessCode(foundUser, searchCriteriaTo.getQueueId());
+      code = getnewAccessCode(getBeanMapper().map(foundUser, UserEto.class), searchCriteriaTo.getQueueId());
     } else
       code = codes.getResult().get(codes.getResult().size() - 1);
 
@@ -375,7 +395,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
    * @param queueId
    * @return
    */
-  private AccessCodeEntity getnewAccessCode(UserEntity foundUser, Long queueId) {
+  private AccessCodeEntity getnewAccessCode(UserEto foundUser, Long queueId) {
 
     // Get queue
     QueueEntity queue = getQueueDao().find(queueId);
@@ -389,10 +409,10 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     accesscodecriteria.setQueueId(queue.getId());
     PaginatedListTo<AccessCodeEntity> codes = this.accessCodeDao.findAccessCodes(accesscodecriteria);
 
+    // TODO error handle
     if (codes.getResult().size() == 0) {
       throw new NotFoundException();
     }
-
     AccessCodeEntity accesscode = codes.getResult().get(codes.getResult().size() - 1);
     // Create AccessCode
     AccessCodeEntity code = new AccessCodeEntity();
@@ -402,6 +422,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     code.setCreationTime(Timestamp.from(Instant.now()));
     code.setIdentificator(foundUser.getIdentificator());
     code.setQueue(queue);
+    // TOSDO change when entity changed
     code.setPriority(false);
     code.setCode(accesscode.getCode() < 999 ? accesscode.getCode() + 1 : 1);
 
@@ -415,6 +436,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
     return code;
   }
 
+  // TODO REMOVE this method
   // Generate number's AccesCode's for mock/estimated time calculus tests
 
   @Override

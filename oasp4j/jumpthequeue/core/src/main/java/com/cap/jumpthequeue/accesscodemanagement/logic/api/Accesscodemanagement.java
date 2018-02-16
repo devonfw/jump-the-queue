@@ -29,7 +29,7 @@ public interface Accesscodemanagement {
    * @param queue_id
    * @return
    */
-  AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode);
+  AccessCodeEto getAccessCode(long queueid, UserEto userAskingCode);
 
   /**
    * @param number
@@ -42,5 +42,11 @@ public interface Accesscodemanagement {
    * @return
    */
   AccessCodeCto findExistingAccessCodesByPost(UserSearchCriteriaTo searchCriteriaTo);
+
+  /**
+   * @param queueid
+   * @return
+   */
+  PaginatedListTo<AccessCodeEto> findAccessCodeByQueueId(long queueid);
 
 }

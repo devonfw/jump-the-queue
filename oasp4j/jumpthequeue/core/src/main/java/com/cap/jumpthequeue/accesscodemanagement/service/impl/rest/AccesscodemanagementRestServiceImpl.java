@@ -29,7 +29,7 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
   }
 
   @Override
-  public AccessCodeCto getAccessCode(long queueid, UserEto userAskingCode) {
+  public AccessCodeEto getAccessCode(long queueid, UserEto userAskingCode) {
 
     return this.accesscodemanagement.getAccessCode(queueid, userAskingCode);
   }
@@ -44,6 +44,12 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
   public PaginatedListTo<VisitorInfoEto> findVisitorInfoEtosByQueueId(long queueid) {
 
     return this.accesscodemanagement.findVisitorInfoEtosByQueueId(queueid);
+  }
+
+  @Override
+  public PaginatedListTo<AccessCodeEto> getAccessCodeList(long queueid) {
+
+    return this.accesscodemanagement.findAccessCodeByQueueId(queueid);
   }
 
 }
