@@ -10,7 +10,8 @@
     "build": "tsc && webpack",
     "offline": "sls offline --location .webpack",
     "test": "mocha --opts mocha.opts",
-    "test:auto": "mocha --opts mocha.opts --watch"
+    "test:auto": "mocha --opts mocha.opts --watch",
+    "deploy:local": "SET IS_LOCAL=1 && sls deploy"
   },
   "author": "",
   "license": "ISC",
