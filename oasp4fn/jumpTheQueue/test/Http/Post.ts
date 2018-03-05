@@ -27,9 +27,8 @@ describe('register', function () {
                 expect(res).to.be.an('object').that.contains.all.keys('code', 'dateAndTime');
                 code = res.code;
                 done();
-            }
-            catch(err){
-                done(err);
+            } catch (error) {
+                done(error);
             }
         })
     });
@@ -49,19 +48,14 @@ describe('search', function () {
                     );
                 })
                 done();
-            }
-            catch(err){
-                done(err);
+            } catch (error) {
+                done(error);
             }
         })
     });
 });
 
 after(async () => {
-    try {
-        if(code)
-            await oasp4fn.delete('Queue', code).promise();
-    } catch (error) {
-        return Promise.reject(error);
-    }
+    if(code)
+        await oasp4fn.delete('Queue', code).promise();
 });

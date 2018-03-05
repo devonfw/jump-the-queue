@@ -4,7 +4,7 @@ import { HttpEvent, Context, Visitor } from '../../types';
 import * as _ from 'lodash';
 import { getRandomCode, validateVisitor, isVisitor } from '../../utils';
 
-oasp4fn.setDB(dynamo, {endpoint: 'https://dynamodb.us-west-2.amazonaws.com'});
+oasp4fn.setDB(dynamo);
 
 oasp4fn.config({path: 'register'});
 export async function register (event: HttpEvent, context: Context, callback: Function) {
