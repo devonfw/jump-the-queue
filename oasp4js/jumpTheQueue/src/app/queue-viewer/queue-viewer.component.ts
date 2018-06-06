@@ -4,7 +4,7 @@ import { QueueViewerService } from './shared/queue-viewer.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ITdDataTableColumn } from '@covalent/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
