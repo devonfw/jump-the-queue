@@ -1,0 +1,1 @@
+Jump the queue is an application to facilitate customers join and consult the status of a queue and owners of the queue operate the queue.

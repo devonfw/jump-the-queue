@@ -1,0 +1,40 @@
+<td-layout *ngIf="{
+  accessCodeAttended: accessCodeAttended$ | async,
+  accessCodeVisitor: accessCodeVisitor$  | async,
+  queue: queue$ | async
+} as data;">
+  <div *ngIf="data.queue">
+    <mat-card>
+    <img mat-card-image src="assets/images/jumptheq.png">
+    
+      <div *ngIf="data.accessCodeVisitor">
+        <div class="text-center row">
+          <h1 style="margin-bottom:10px;" class="text-left text-xl push-md">Your Number:</h1> 
+        </div>
+        <div class="text-center row">
+          <h1 style="font-size: 75px; margin:0px;" class="text-center text-xxl push-left-md">{{data.accessCodeVisitor.ticketNumber}}</h1> 
+        </div>
+        <div style="border-bottom: 2px solid black;" class="row">
+          <p class="push-left-md">Currently estimate time: 10:00:00</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-center row">
+          <h1 style="margin-bottom:10px;" class="text-left text-xl push-md">Currently Being Attended:</h1> 
+        </div>
+        <div class="row">
+          <h1 style="font-size: 100px" class="text-center text-xxl push-lg" >{{data.accessCodeAttended?.ticketNumber}}</h1> 
+        </div>
+      </div>
+      <div style="border-top: 2px solid black;" class="pad-bottom-lg pad-top-lg text-center row" *ngIf="data.accessCodeVisitor === null">
+        <button mat-raised-button (click)="onJoinQueue(data.queue.id)" color="primary" class="text-upper">Join the queue</button> 
+      </div>
+    </mat-card>
+    <div *ngIf="data.accessCodeVisitor" style="margin: 8px;" class="row text-right">
+        <button mat-raised-button (click)="onLeaveQueue(data.accessCodeVisitor.id)" color="primary" class="text-upper">Leave the queue</button> 
+    </div>
+  </div>
+  <div *ngIf="data.queue === null || (data.queue !== null && data.queue.active === false)" class="row">
+    <h1 style="font-size: 50px" class="text-center text-xxl push-lg">The queue is not active try again later</h1> 
+  </div>
+</td-layout>
