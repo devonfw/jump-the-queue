@@ -1,0 +1,210 @@
+:toc: macro
+toc::[]
+
+:idprefix:
+:idseparator: -
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Design
+
+image::images/design/scene.png[Scene, 550]
+
+== Introduction
+When visiting public (free) or private (paid) events there are often large queues creating significant waiting times. Ideally the organizer of the event would like to streamline the entry of people into the venue. If people were to arrive right on time they could get into line more efficiently. A website or application could support this process by assigning visitors a queue number. This document describes the design of such a website/application, appropriately named _JumpTheQueue_.
+
+[NOTE]
+====
+This document is intended to reflect a real world use case. The design takes this into account by trying to be complete, the implementation however is simplified in order to be more comprehensible. Where implementation differs from design, the :information_source: symbol is denoted, followed by a comment about the nature of the difference.
+====
+
+== User Stories (by Visitors of an Event)
+----
+As a < type of user >, I want < some goal > so that < some reason >
+----
+
+=== Epic: Register Event
+As a visitor of an event, I want to use a website or an app, which -- after registration -- provides me with a number (and optional date/time), so I can get convenient access to the event.
+
+=== User Story: Register
+As a user of _JumpTheQueue_, I want to register with my name, username, password and phone number, comply with the requirements and obtain my queue number.
+ 
+==== Acceptance Criteria
+A full name (first name / last name) is mandatory. This name as well as the username, password and telephone number must be valid.
+
+=== User Story: Terms and Conditions
+As a user of _JumpTheQueue_, I accept that the organizer of the event can store my personal data and send me commercial notices (aka “spam”).
+
+==== Acceptance Criteria
+The terms and conditions must be accepted by ticking the corresponding checkboxes.
+
+=== User Story: Join a Queue
+As a user of _JumpTheQueue_, I want to join the queue at the event.
+
+=== User Story: List Queued Visitors
+As a user of _JumpTheQueue_, I want to see which queue number is currently being processed and what my own queue number is. Optionally, I want to know the estimated remaining time until it's my turn.
+
+[NOTE]
+====
+The "remaining time" feature is not further developed/implemented.
+====
+ 
+=== User Story: Leave the Queue
+As a user of _JumpTheQueue_, I want to be able to leave a queue I previously joined.
+
+=== Etcetera
+As a user of _JumpTheQueue_, I have to confirm either my E-Mail address or my phone number by entering a code which was sent to me, so my contact-data can be verified.
+
+[NOTE]
+====
+This feature is not further developed/implemented.
+====
+
+== User Interface
+
+=== Flow
+.The basic flow of the application.
+image::images/design/flow.png[Flow, 450]
+
+* for new users: fill in a form with your private data (first name, last name, phone number), choose a username and password, tick the box(es) to accept the terms and conditions and finally press a button to “register”
+* for returning users: enter username and password and press a button to "login"
+* in case of validation errors, a suitable error message will be shown
+* if there are no errors an access code will be generated, which will be shown on the following page (this code can optionally be appended with the access date/time)
+* this page could also show a visualization of the queue, listing all currently queued visitors
+
+=== Mock-Ups
+.The pages/views of the application.
+image::images/design/mockups.png[Mockup, 650]
+
+== Model
+.The logical components of the application and their interactions.
+image::images/design/model.png[Model, 650]
+
+{sp} +
+
+.Each event has multiple queues, each queue holds multiple visitors with access codes.
+image::images/design/event.png[Events, 650]
+
+{sp} +
+
+[NOTE]
+====
+The "Event" item is not further developed/implemented.
+====
+
+== Predicates
+====
+_Definition_::
+----
+< function name > = < parameters > => < *pure* function >
+----
+
+_or_::
+----
+< function name > = trivial : < trivial description >
+----
+====
+
+====
+[subs=+macros]
+----
+isnull = (v) => v === null
+notnull = (v) => !isnull(v)
+ 
+isempty = (s: string) => s.length === 0
+notempty = (s: string) => !notempty(s)
+ 
+isEmailAddress = trivial: notnull + notempty + pass:quotes[_consists of_] <name>@<domain.toplevel>
+ 
+isTelephoneNumber = trivial: notnull + notempty + pass:quotes[_consists of sequence of numbers or spaces (i.e. “4 84 28 81”)_]
+----
+====
+
+== Types
+====
+_Definition_:: 
+[subs=+macros]
+----
+type < alias > :: < type defs > with predicated: < list of predicates >
+----
+
+_or_::
+----
+type < alias > :: trivial: < trivial description >
+----
+====
+
+====
+[subs=+macros]
+----
+type ID :: trivial: Unique Atomic Identifier
+ 
+type NamedItem :: string 
+with predicates: notnull, notempty
+ 
+type EmailAddress :: string
+with predicates: isEmailAddress 
+ 
+type TelephoneNumber :: string 
+with predicates: isTelephoneNumber 
+ 
+type Option<T> :: None | T
+ 
+type Result<T> :: Error | T
+ 
+type Error :: trivial: Error information with code & error description
+----
+====
+
+== Entities & Value Objects
+[cols="2", options="header"]
+|===========================
+2+|Visitor (Entity)
+s|Field           s|Type
+|Id                |ID
+|Username          |NamedItem 
+|Name              |NamedItem
+|Password          |NamedItem
+|PhoneNumber       |Option<TelephoneNumber>
+|AcceptedComercial |boolean
+|AcceptedTerms     |boolean
+|UserType          |boolean
+|===========================
+
+[cols="2", options="header"]
+|===========================
+2+|AccessCode (Entity)
+s|Field      s|Type
+|Id           |ID
+|Ticketnumber |NamedItem 
+|StartTime    |Option<DateTime>
+|EndTime      |Option<DateTime>
+|StartTime    |Option<DateTime>
+|Visitor      |NamedItem
+|Queue        |NamedItem
+|===========================
+
+[cols="2", options="header"]
+|===========================
+2+|DailyQueue (Entity)
+s|Field            s|Type
+|Id                 |ID
+|Name               |NamedItem 
+|Logo               |NamedItem
+|AttentionTime      |Option<DateTime>
+|MinAttentionTime   |Option<DateTime>
+|Active             |boolean
+|Customers          |NamedItem
+|===========================
+ 
+There must be a 1 - 1 relationship between a Visitor and an VisitorTicker.
+
+'''
+
+*Next Step*: link:setup.asciidoc[Setting up the Project]

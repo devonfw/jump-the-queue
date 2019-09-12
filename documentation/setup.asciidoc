@@ -1,0 +1,170 @@
+:toc: macro
+toc::[]
+
+:idprefix:
+:idseparator: -
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Project Setup
+In this step we are going to create our work environment and establish the first part of our backend. Like most *devonfw* projects, our backend will be build in Java and thus utilize the tools, liraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
+
+== Setting up a devonfw Work Environment
+Follow the setup instructions listed https://github.com/devonfw/devon-ide/blob/master/documentation/setup.asciidoc[here]. +
+After you have done so, your working directroy should look like this:
+
+image::images/setup/after_setup.png[After Setup, 250]
+
+Press "Shift + Right Click" and select "Open Devon CMD shell here". +
+Your shell should now show the message:
+
+____
+devon-ide environment variables have been set for C:\\... in workspace main
+____
+
+Navigate into workspace "main" by entering:
+
+----
+C:\...> cd workspaces\main
+----
+
+== Creating the Project
+Now we are going to create the folder structure for our backend by running the following commands:
+
+----
+C:\...\workspaces\main>                 mkdir jumpthequeue
+C:\...\workspaces\main>                 cd jumpthequeue
+C:\...\workspaces\main\jumpthequeue>    mkdir java
+C:\...\workspaces\main\jumpthequeue>    cd java
+C:\...\workspaces\main\jumpthequeue\java>
+----
+
+Here we are going to generate our devon4j application template as a starting point for our backend:
+
+----
+C:\...\workspaces\main\jumpthequeue\java>
+    devon java create com.devonfw.application.jtqj com.devonfw.java.jtqj -Dversion=0.0.1
+----
+
+[NOTE]
+====
+We are using the `java` https://github.com/devonfw/devon-ide/blob/master/documentation/java.asciidoc[commandlet] of the devon-ide. After the command `create` we are passing the arguments `package`, `groupId` and `version` in this case.
+====
+
+image::images/setup/build_successful.png[Build Success, 800]
+
+Once you see the `BUILD SUCCESS` message, the new app template has been created and can now be expanded.
+
+== Importing the Application in Eclipse
+First we have to launch our project-specific Eclipse instance by executing the `eclipse-main.bat` script in the root folder. Now we can import our application into Eclipse:
+
+image::images/setup/eclipse_import_1.png[Eclipse Maven Import 1, 350]
+
+Select `Import projects...` from the Package Explorer (or optionally `Import...` via the `File` menu).
+
+image::images/setup/eclipse_import_2.png[Eclipse Maven Import 2, 450]
+
+Select `Existing Maven Projects` and click `Next >`. +
+Now click `Browse` and select the `java` folder inside our `jumpthequeue` project.
+
+image:images/setup/eclipse_import_3.png[Eclipse Maven Import 3, 550]
+image:images/setup/eclipse_import_4.png[Eclipse Maven Import 4, 550]
+
+Eclipse will detect the pre-generated Maven project structure inside our project by looking for `pom.xml` files. +
+In our case it should find the `api`, `core` and `server` packages. +
+Finally click `Finish` and wait for the import to complete.
+
+== Preparing the Backend for an Initial Launch
+Before test-launching our backend we have to change the the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
+
+----
+/jtqj-core/src/main/resources/config/
+----
+
+Now open `application.properties` and update the following line of code:
+
+----
+server.servlet.context-path=/jumpthequeue
+----
+
+[TIP]
+====
+For a more manageable view of the package structure inside the Eclipse Package Explorer select `Package Presentation > Hierarchical` from the small image:images/setup/small_dropdown.png[Dropdown Icon, 20] dropdown-menu.
+
+image::images/setup/hierarchical_view.png[Hierarchical View, 550]
+====
+
+== Launching the Backend
+Finally, using _Spring Boot_ (which provides us with an embedded _Tomcat_ server), we can run the backend of our app in one easy step. Navigate to:
+
+----
+/jtqj-core/src/main/java/com.devonfw.application.jtqj/
+----
+
+Now right click `SpringBootApp.java` select `Run As > Java Application`.
+
+image::images/setup/run_java_app.png[Run as Java Application, 650]
+
+If you did everything right up until now the console should show a message like this:
+
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (vX.X.X.RELEASE)
+
+.
+.
+.
+... c.d.application.jtqj.SpringBootApp       : Starting SpringBootApp on XXXXXXX with PID XXXX 
+... o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/jumpthequeue'
+... c.d.application.jtqj.SpringBootApp       : Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)
+----
+
+The backend is now accessible via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. +
+You can view the exposed services by logging in with these credentials:
+
+----
+Username:   waiter
+Password:   waiter
+----
+
+image::images/setup/rest_services.png[RESTful Services, 550]
+
+[NOTE]
+====
+You are redirected to a login screen because -- by default -- a new _devon4j_ applications provides a basic security setup.
+====
+
+== Structure of the App Template
+When creating _devon4j_ based apps this way, we get the following features _out-of-the-box_:
+
+* _Maven_ project with _api_ project, _core_ project and _server_ project:
+** _api_ project for the common API
+** _core_ project for the app implementation
+** _server_ project ready to package the app for deployment
+
+* Data base ready environment with an _h2_ instance, including:
+** Data model schema
+** Mock data schema
+
+* Database version control with _Flyway_
+
+* _Bean Mapper_ ready
+
+* Basic security enabled (based on _Spring Security_)
+
+* Unit test support and model
+
+'''
+
+*Next Step*: link:components.asciidoc[Components]

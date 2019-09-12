@@ -1,0 +1,860 @@
+:toc: macro
+toc::[]
+
+:idprefix:
+:idseparator: -
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Components
+image::images/components/architecture.png[Architecture, 700]
+
+When working with _devon4j_ the recommended approach for designing an applications is _Component Oriented Design_. Each component will represent a significant part (or feature) of our application related to _CRUD_ operations. Internally, the components will be divided into three layers (_service_, _logic_, and _dataaccess_) and will communicate in two directions: service with database or -- in the _logic_ layer -- a component with another component.
+
+== Principles
+The benefits of dividing our application into components are:
+
+- https://en.wikipedia.org/wiki/Separation_of_concerns[separation of concerns]
+
+- https://en.wikipedia.org/wiki/Reusability[reusability]
+
+- to avoid https://en.wikipedia.org/wiki/Redundant_code[redundant code]
+
+- https://en.wikipedia.org/wiki/Information_hiding[information hiding]
+
+- self contained, descriptive and stable component https://en.wikipedia.org/wiki/Application_programming_interface[APIs]
+
+- https://en.wikipedia.org/wiki/Data_consistency[data consistency] (a component is responsible for its data and changes to this data shall only happen via the component)
+
+=== Component Structure
+A component consists of three packages, which correspond to the three layers defined by the _devon4j_ architecture: _service_, _logic_ and _dataaccess_.
+
+image::images/components/layers.png[Component Layers, 300]
+
+* _Service_ layer: exposes the REST API to exchange information with client applications
+
+* _Logic_ layer: in charge of hosting the business logic of the application
+
+* _Data Access_ layer: communicates with the database
+
+Apart from that, most components will have a fourth package -- _common_ -- to store shared elements, which will be used by all layers of the component. It will contain common _interfaces_, _constants_, _exceptions_ or _enumerations_.
+
+=== Component Core
+As we mentioned earlier, each component will be related to a functionality. This functionality will be represented in code by an _Entity_ that defines all the properties needed to wrap the logic of that feature.
+
+This _Entity_ represents the "core" of the component and will be located in the `dataaccess.api` package.
+
+The naming convention for these entities in _devon4j_ is:
+----
+[Target]Entity
+----
+
+"Target" should match the name of the related table in the database -- although this is not mandatory.
+
+Basically, each _Entity_ is a https://en.wikipedia.org/wiki/Plain_old_Java_object[POJO] (plain old Java object) that will be mapped to a table in the database and represent each column via a suitable property.
+
+.An entity and its corresponding table in the DB (taken from another application).
+[caption="Example: "]
+image::images\components\example_entity.png[Example Entity, 800]
+
+== Create your Components
+We are now going to create our first app components. Our example application needs to provide two basic functionalities:
+
+* register a user (returning an access code)
+* show registered queue members
+
+To accomplish this we are going to work with three entities; _Visitor_, _Queue_ and _AccessCode_:
+
+image::images\components\jtq_entities.png[JumpTheQueue Entities, 750]
+
+The components will be defined as follows:
+
+[caption=""]
+|===
+|Visitor | Access Code | Daily Queue
+
+|username
+|ticketNumber
+|name
+
+|name
+|creationTime
+|logo
+
+|password
+|startTime
+|password
+
+|phoneNumber
+|endTime
+|currentNumber
+
+|acceptedCommercial
+|--
+|attentionTime
+
+|acceptedTerms
+|--
+|minAttentionTime
+
+|userType
+|--
+|active
+
+|--
+|--
+|customers
+|===
+
+In addition, we will have to represent two relationships:
+
+  1. The https://en.wikipedia.org/wiki/One-to-one_(data_model)[one to one] relation between _Visitor_ and _Access Code_.
+
+  2. The https://en.wikipedia.org/wiki/One-to-many_(data_model)[one to many] relation between _Daily Queue_ and _Access Code_.
+
+Now is the moment to decide about the components of our app. The low complexity of the functionality would allow us to create only one component for managing all entities. In order to clarify the example we are going to create three managing components however; one for _Visitor_, one for _Access Code_ and one for _Daily Queue_.
+
+[NOTE]
+====
+If you feel more comfortable managing all the entities in a single component, you could also do it this way. The result will be the same, the only difference will be the structure of some elements and the distribution of code inside the packages.
+====
+
+=== The Database
+Projects created with the _devon4j_ archetype already contain a pre-defined database schema, which we can use as a basis to create our own. We are going to utilize the http://www.h2database.com/html/main.html[H2 Database Engine], because our generated _devon4j_ application uses it by default.
+
+There are four pre-defined database schemas:
+----
+jtqj-core/src/main/resources/db/type/h2/V0001__Create_Sequence.sql
+jtqj-core/src/main/resources/db/type/h2/V0002__Create_RevInfo.sql
+jtqj-core/src/main/resources/db/type/h2/V0003__Create_BinaryObject.sql
+jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
+----
+
+==== _Visitor_ Table
+We are going to create our own table for _Visitor(s)_ by right clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
+----
+V0005__Create_Visitor.sql
+----
+
+A visitor will provide: _username_, _name_, _password_, _phoneNumber_, _acceptedCommercial_ and _acceptedTerms_ in order to obtain an _Access Code_. We need to represent this data in our table:
+[source, sql]
+----
+create table Visitor(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  username VARCHAR(255),
+  name VARCHAR(255),
+  password VARCHAR(255),
+  phoneNumber VARCHAR(255),
+  acceptedCommercial BOOL DEFAULT '0',
+  acceptedTerms BOOL NOT NULL DEFAULT '0',
+  userType BOOL DEFAULT '0',
+  CONSTRAINT PK_Visitor PRIMARY KEY(id),
+);
+----
+
+* _id_: The ID of each visitor.
+* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* _username_: The visitors email adress.
+* _name_: The visitors name.
+* _password_: The visitors password.
+* _phoneNumber_: The visitors phone number.
+* _accepterCommercial_: A boolean to denote if the visitor has the accepted commercial agreements.
+* _accepterTerms_: A boolean to denote if the visitor has accepted the terms & conditions.
+* _userType_: Denotes the type of user.
+
+==== _Daily Queue_ Table
+In a second table we will represent the _Daily Queue_, which will contain _name_, _logo_, _currentNumber_, _attentionTime_, _minAttentionTime_, _active_ and _customers_. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
+----
+V0006__Create_Queue.sql
+----
+
+It will contain the following declarations:
+[source, sql]
+----
+create table DailyQueue(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  name VARCHAR(255),
+  logo VARCHAR(255),
+  currentNumber VARCHAR(255),
+  attentionTime TIMESTAMP,
+  minAttentionTime TIMESTAMP NOT NULL DEFAULT '60000',
+  active BOOL NOT NULL DEFAULT '1',
+  customers INTEGER NOT NULL DEFAULT '0',
+  CONSTRAINT PK_DailyQueue PRIMARY KEY(id),
+);
+----
+
+* _id_: The ID of each queue.
+* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* _name_: The queues name.
+* _logo_: The queues logo.
+* _currentNumber_: the queue's number being attended.
+* _attentionTime_: Average time required to attend a visitor.
+* _minAttentionTime_: Minimum time required to attend a visitor, set by default.
+* _active_: A boolean to denote if the queue is active.
+* _customer_: The queues total number of customers.
+
+==== _Access Code_ Table
+The third table will represent the _Access Code_ and contain the _ticketNumber_, _creationTime_, _startTime_ and _endTime_. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
+----
+V0007__Create_Access_Code.sql
+----
+
+It will contain the following declarations:
+[source, sql]
+----
+CREATE TABLE AccessCode(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  modificationCounter INTEGER NOT NULL,
+  ticketNumber VARCHAR(5),
+  creationTime TIMESTAMP,
+  startTime TIMESTAMP,
+  endTime TIMESTAMP,
+  idVisitor BIGINT NOT NULL,
+  idQueue BIGINT NOT NULL,
+  CONSTRAINT PK_AccessCode PRIMARY KEY(id),
+  CONSTRAINT FK_AccessCode_idVisitor FOREIGN KEY(idVisitor) REFERENCES Visitor(id),
+  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES DailyQueue(id),
+);
+----
+
+* _id_: The ID of each code.
+* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* _ticketNumber_: The number of the ticket for a queue.
+* _creationTime_: The date and time of creation.
+* _startTime_: The date and time, from which the code is valid.
+* _endTime_: The date and time, when the code expires.
+* _idVisitor_: The relation with the _Visitor_ table.
+* _idQueue_: The relation with the _DailyQueue_ table.
+
+==== Mock Data
+Finally we are going to provide a certain amount of mock data, which will be available right from the start in our application. Create a new SQL script in `/jtqj-core/src/main/resources/db/migration/1.0/`, called:
+----
+V0008__Master_data.sql
+----
+
+Copy and paste the following data into it:
+[source,sql]
+----
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (0, 1, 'mike@mail.com', 'test', '1', '123456789', '0', '1', '1');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (1, 1, 'peter@mail.com', 'test', '1', '123456789', '1', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (2, 1, 'pablo@mail.com', 'test', '1', '123456789', '0', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (3, 1, 'test1@mail.com', 'test', '1', '123456789', '0', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (4, 1, 'test2@mail.com', 'test', '1', '123456789', '1', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (5, 1, 'test3@mail.com', 'test', '1', '123456789', '0', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (6, 1, 'test4@mail.com', 'test', '1', '123456789', '0', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (7, 1, 'test5@mail.com', 'test', '1', '123456789', '1', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (8, 1, 'test6@mail.com', 'test', '1', '123456789', '0', '1', '0');
+INSERT INTO Visitor (id, modificationCounter, username, name, password, phoneNumber, acceptedCommercial, acceptedTerms, userType) VALUES (9, 1, 'test7@mail.com', 'test', '1', '123456789', '0', '1', '0');
+
+INSERT INTO DailyQueue (id, modificationCounter, name, logo, currentNumber, attentionTime, minAttentionTime, active, customers) VALUES (1, 1, 'Day2', 'C:/logos/Day1Logo.png', 'Q001', NULL, '1970-01-01 00:01:00', TRUE, 9);
+
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (1, 1, 'Q001', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, 1, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (2, 1, 'Q002', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 2, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (3, 1, 'Q003', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 3, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (4, 1, 'Q004', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 4, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (5, 1, 'Q005', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 5, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (6, 1, 'Q006', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 6, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (7, 1, 'Q007', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 7, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (8, 1, 'Q008', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 8, 1);
+INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (9, 1, 'Q009', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 9, 1);
+----
+
+=== The Core of the Components
+Now that we have defined the database for our entities, we should start creating the code of the related components.
+
+We are going to use _CobiGen_ to generate the component structure. That means that -- as already commented -- we can generate all the structure and layers starting from a _core_ element: a simple _Plain Old Java Object_ that represents our _Entity_. So, in order to use _CobiGen_, we have to create our entities in the expected locations (as you will see in the following section): `<entitymanagement>.dataaccess.api`.
+
+==== _Visitor_ Component
+To implement the component we will need to define a _VisitorEntity_ to connect and manage the data of the _Visitor_ table in the database. The name of this component will be `visitormanagement`, the entity will be called `VisitorEntity`.
+
+Right-click on the root folder of the project `/jtqj-core/src/main/java`, select `New > Package` and create the following package:
+----
+com.devonfw.application.jtqj.visitormanagement.dataaccess.api
+----
+
+image::images/components/new_package_1.png[New Package Creation Step 1, 500]
+image::images/components/new_package_2.png[New Package Creation Step 2, 500]
+
+Now create a new Java class in this package and call it `VisitorEntity`:
+
+image::images/components/new_class.png[New Class Creation, 500]
+
+We are going to need fields, which represent the data model, so our entity should contain the following code:
+[source,java]
+----
+	private String username;
+
+	private String name;
+
+	private String phoneNumber;
+
+	private String password;
+
+	private Boolean acceptedCommercial;
+
+	private Boolean acceptedTerms;
+
+	private Boolean userType;
+----
+
+[NOTE]
+====
+We are not adding _id_ or _modificationCounter_, because _CobiGen_ will generate these fields for us.
+====
+
+Now we need to declare our entity as a JPA entity with the `@Entity` annotation (_javax.persistence.Entity_) at class level. To map the entity to the database table, we will use the `@Table` annotation (_javax.persistence.Table_) defining the `name` of our already created _Visitor_ table (also at class level):
+[source, java]
+----
+[...]
+
+@Entity
+@Table(name = "Visitor")
+public class VisitorEntity ...
+----
+ 
+Now we have to declare the _getter_ and _setter_ methods for the fields of our entity. We can do this manually or automatially generate them using Eclipse:
+
+image::images/components/getter_setter.png[Generating Getter and Setter Methods with Eclipse, 950]
+
+The resulting implementation of our _VisitorEntity_ class should now look like this:
+
+[source,java]
+----
+package com.devonfw.application.jtqj.visitormanagement.dataaccess.api;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Visitor")
+public class VisitorEntity {
+
+	private String username;
+
+	private String name;
+
+	private String phoneNumber;
+
+	private String password;
+
+	private Boolean acceptedCommercial;
+
+	private Boolean acceptedTerms;
+
+	private Boolean userType;
+
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the acceptedCommercial
+	 */
+	public Boolean getAcceptedCommercial() {
+		return acceptedCommercial;
+	}
+
+	/**
+	 * @param acceptedCommercial the acceptedCommercial to set
+	 */
+	public void setAcceptedCommercial(Boolean acceptedCommercial) {
+		this.acceptedCommercial = acceptedCommercial;
+	}
+
+	/**
+	 * @return the acceptedTerms
+	 */
+	public Boolean getAcceptedTerms() {
+		return acceptedTerms;
+	}
+
+	/**
+	 * @param acceptedTerms the acceptedTerms to set
+	 */
+	public void setAcceptedTerms(Boolean acceptedTerms) {
+		this.acceptedTerms = acceptedTerms;
+	}
+
+	/**
+	 * @return the userType
+	 */
+	public Boolean getUserType() {
+		return userType;
+	}
+
+	/**
+	 * @param userType the userType to set
+	 */
+	public void setUserType(Boolean userType) {
+		this.userType = userType;
+	}
+}
+----
+
+==== _AccessCode_ component
+We are going to repeat the same process for the _AccessCode_ component. Create these packages in `/jtqj-core/src/main/java`:
+----
+com.devonfw.application.jtqj.accesscodemanagement.dataaccess.api
+----
+
+\... and create a class called `AccessCodeEntity` inside of them. +
+We will end up with the following structure:
+
+image::images/components/accesscode_entity.png[AccessCode Entity, 250]
+
+The contents of _AccessCodeEntity_ before using _CobiGen_ will be:
+
+[source,java]
+----
+package com.devonfw.application.jtqj.accesscodemanagement.dataaccess.api;
+
+import java.sql.Timestamp;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+
+import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.VisitorEntity;
+
+@Entity
+@Table(name = "AccessCode")
+public class AccessCodeEntity {
+
+	@Size(min = 2, max = 5)
+	private String ticketNumber;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp creationTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp startTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp endTime;
+
+	private VisitorEntity visitor;
+
+	private QueueEntity queue;
+
+	/**
+	 * @return the ticketNumber
+	 */
+	public String getTicketNumber() {
+		return ticketNumber;
+	}
+
+	/**
+	 * @param ticketNumber the ticketNumber to set
+	 */
+	public void setTicketNumber(String ticketNumber) {
+		this.ticketNumber = ticketNumber;
+	}
+
+	/**
+	 * @return the creationTime
+	 */
+	public Timestamp getCreationTime() {
+		return creationTime;
+	}
+
+	/**
+	 * @param creationTime the creationTime to set
+	 */
+	public void setCreationTime(Timestamp creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	/**
+	 * @return the startTime
+	 */
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
+	/**
+	 * @param startTime the startTime to set
+	 */
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	/**
+	 * @return the endTime
+	 */
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	/**
+	 * @param endTime the endTime to set
+	 */
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
+
+	/**
+	 * @return the visitor
+	 */
+	@OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idVisitor")
+	public VisitorEntity getVisitor() {
+		return visitor;
+	}
+
+	/**
+	 * @param visitor the visitor to set
+	 */
+	public void setVisitor(VisitorEntity visitor) {
+		this.visitor = visitor;
+	}
+
+	/**
+	 * @return the queue
+	 */
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idQueue")
+	public QueueEntity getQueue() {
+		return queue;
+	}
+
+	/**
+	 * @param queue the queue to set
+	 */
+	public void setQueue(QueueEntity queue) {
+		this.queue = queue;
+	}
+}
+----
+
+[WARNING]
+====
+Eclipse will report some errors related to `QueueEntity`. +
+These will be resolved, when we create the corresponding class in the next step.
+====
+
+==== _Queue_ Component
+Finally, we are going to repeat the same process for our last entity _QueueEntity_ component. Create these packages in `/jtqj-core/src/main/java`:
+----
+com.devonfw.application.jtqj.queuemanagement.dataaccess.api
+----
+
+\... and create a class called `QueueEntity` inside of them. +
+We will end up with the following structure:
+
+image::images/components/queue_entity.png[Queue Entity, 250]
+
+The contents of _QueueEntity_ before using _CobiGen_ will be:
+
+[source,java]
+----
+package com.devonfw.application.jtqj.queuemanagement.dataaccess.api;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "DailyQueue")
+public class QueueEntity {
+
+	private String name;
+
+	private String logo;
+
+	private String currentNumber;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp attentionTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp minAttentionTime;
+
+	private Boolean active;
+
+	private int customers;
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the logo
+	 */
+	public String getLogo() {
+		return logo;
+	}
+
+	/**
+	 * @param logo the logo to set
+	 */
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	/**
+	 * @return the currentNumber
+	 */
+	public String getCurrentNumber() {
+		return currentNumber;
+	}
+
+	/**
+	 * @param currentNumber the currentNumber to set
+	 */
+	public void setCurrentNumber(String currentNumber) {
+		this.currentNumber = currentNumber;
+	}
+
+	/**
+	 * @return the attentionTime
+	 */
+	public Timestamp getAttentionTime() {
+		return attentionTime;
+	}
+
+	/**
+	 * @param attentionTime the attentionTime to set
+	 */
+	public void setAttentionTime(Timestamp attentionTime) {
+		this.attentionTime = attentionTime;
+	}
+
+	/**
+	 * @return the minAttentionTime
+	 */
+	public Timestamp getMinAttentionTime() {
+		return minAttentionTime;
+	}
+
+	/**
+	 * @param minAttentionTime the minAttentionTime to set
+	 */
+	public void setMinAttentionTime(Timestamp minAttentionTime) {
+		this.minAttentionTime = minAttentionTime;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @return the customers
+	 */
+	public int getCustomers() {
+		return customers;
+	}
+
+	/**
+	 * @param customers the customers to set
+	 */
+	public void setCustomers(int customers) {
+		this.customers = customers;
+	}
+}
+----
+
+Now we have finished preparing the _core_ of our components and can start using _CobiGen_ to generate the remaining structure (services, layers, DAOs, ...).
+
+[WARNING]
+====
+Now we can resolve the compilation errors related to `QueueEntity` in the `AccessCodeEntity.java` by applying the suggestions of the IDE. To do this, open the offending file, click the first red light bulb on the left border of the editor and select `Import 'QueueEntity' (com.devonfw. ...)`.
+
+Or just manually add this line to your import statements:
+----
+import com.devonfw.application.jtqj.queuemanagement.dataaccess.api.QueueEntity;
+----
+====
+
+=== The Component Structure (using _CobiGen_)
+Once we are finished creating the _core_ of our components we could continue to create the structure and all elements manually, but we are going to use _CobiGen_ for these tasks, since we can save a significant amount of time and effort this way.
+
+First however, we need to add the _CobiGen_ plugin to our Eclipse instance. For this purpose, close Eclipse (remember to save all your progress) and in the `jump-the-queue` folder right-click to `Open a Devon CMD shell here`.
+
+Now enter and execute:
+----
+devon eclipse add-plugin cobigen
+----
+
+\... and re-open Eclipse via the `eclipse-main.bat` script. 
+
+==== CobiGen Health Check
+When using CobiGen for the first time it's recommended to check the health of the tool. +
+To do so, right-click one of our entities and select `CobiGen > Health Check...`.
+
+image::images/components/cobigen_health_1.png[CobiGen Health Check 1, 550]
+
+The next dialogs will show us if there are outdated templates. In that case just click the "Update" button.
+
+image::images/components/cobigen_health_2.png[CobiGen Health Check 2, 550]
+
+[CAUTION]
+====
+CobiGen is not yet compatible with Java 11: +
+https://github.com/devonfw/tools-cobigen/issues/970[]
+
+To be continued ...
+====
+
+==== _Queue_ Component Structure (Entity without Relations)
+In order to create the whole structure of a component with _CobiGen_ we only need to right-clicking over our component core entity and select `CobiGen > Generate...`.
+
+image::images/devon4j/4.Components/cobigen1.png[cobigen1.png]
+
+Now we have to choose which packages we want to generate with the tool.
+
+[NOTE]
+====
+Here's a short explanation for some of these options:
+
+* _CRUD REST Services_: Generates a complete service layer with CRUD operations for our entity exposed as a REST service.
+
+* _CRUD SpringData Repository_: Generates the entity repository (that contains the CRUD operations) in the data access layer.
+
+* _CRUD UC Logic_: Generates the logic layer dividing the implementation into different use cases.
+
+* _Entity Infrastructure_: Creates the entity main interface and edits (via a merge) the current entity to extend devon classes.
+
+* _TO's_: Generates the related _Transfer Objects_ (these will be explained in later chapters of this tutorial).
+====
+
+To generate all the needed functionalities of our component, we are going to select the following packages to be generated *at the same time*:
+
+image::images/devon4j/4.Components/cobigen3_allpackages.png[cobigen3_allpackages.png]
+
+Now we can select the fields to be involved (all by default) or directly create all the packages clicking the _Finish_ button.
+
+During the process _CobiGen_ will show a message asking us to review some ambiguous references. Click _Continue_
+
+image::images/devon4j/4.Components/cobigen4_review_imports.png[cobigen4_review_imports.png]
+
+Once _CobiGen_ has finished we will check if we need to introduce manual adjustments.
+
+First, we need to adjust manually some imports related to _Timestamp_ in:
+
+_API_:
+
+* `queuemanagement.common.api.Queue`
+* `queuemanagement.logic.api.to.QueueEto`
+* `queuemanagement.logic.api.to.QueueSearchCriteriaTo`
+
+_CORE_:
+
+* `queuemanagement.dataaccess.api.repo.QueueRepository`
+* `queuemanagement.dataaccess.api.QueueEntity`
+
+We can fix the remaining errors manually via: `import java.sql.TimeStamp`.
+
+image::images/devon4j/4.Components/cobigen5_manual_import.png[cobigen5_manual_import.png]
+
+==== _AccessCode_ Component Structure (Entity with Relations)
+We repeat the process with _AccessCode_ but in this case, since its an entity with relations, we are going to have to select different CobiGen options:
+
+image::images/devon4j/4.Components/cobigen-accesscode-new.png[cobigen-accesscode-new.png]
+
+After letting CobiGen finish generating and fixing the imports like in the last step there will be some errors left, this is because we have a relation (dependency) with some of the _Queue_ and _Visitor_ component elements, that are still not created. We will solve this compilation errors in next steps.
+
+image::images/devon4j/4.Components/cobigen6_expected_errors.png[cobigen6_expected_errors.png]
+
+==== _Visitor_ Component Structure (Entity without Relations)
+Finally we are going to repeat the same process that was used for the _Queue_ component but this time, using _CobiGen_ on our other _Visitor_ component. Once CobiGen has finished we can fix one of the compilation error in `AccessCodeCto` and `UcFindAccessCodeImpl` related to `VisitorEto` by manual importing like we learned in the last step.
+
+==== Run the Application
+If all compilation errors are resolved, run the app (`SpringBootApp.java > Run As > Java Application`). The app should launch without errors.
+
+Congratulations you have created your first _devon4j_ components! You should be able to access the login screen via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. You can login using the credentials `waiter` again. In the next chapter we will show and explain each of the created elements in detail.
+
+'''
+
+*Next Step*: link:layers.asciidoc[Layers]

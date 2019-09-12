@@ -1,0 +1,23 @@
+:toc: macro
+toc::[]
+
+:idprefix:
+:idseparator: -
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Home
+
+_JumpTheQueue_ is a small application which you will create yourself during the course of this guide. It will help you better understand the back- and frontend technologies used as part of link:https://devonfw.com/[devonfw]. At the bottom of each page you will find a link leading to the next step in the guide. Happy coding!
+
+NOTE: An new version of this app is available at https://github.com/devonfw-forge/jump-the-queue-v2[jump-the-queue-v2]. It was redesigned from the ground up and uses a slightly different technology stack. However, no guide is available for this updated version just yet.
+
+'''
+
+*Next Step:* link:design.asciidoc[Design of the Application]
