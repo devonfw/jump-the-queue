@@ -13,7 +13,6 @@ ifdef::env-github[]
 endif::[]
 
 = Design
-
 image::images/design/scene.png[Scene, 550]
 
 == Introduction
