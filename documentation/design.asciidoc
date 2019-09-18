@@ -206,4 +206,4 @@ There must be a 1 - 1 relationship between a Visitor and an VisitorTicker.
 
 '''
 
-*Next Step*: link:setup.asciidoc[Setting up the Project]
+*Next Step:* link:setup.asciidoc[Setting up the Project]

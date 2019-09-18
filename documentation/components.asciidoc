@@ -857,4 +857,4 @@ Congratulations you have created your first _devon4j_ components! You should be 
 
 '''
 
-*Next Step*: link:layers.asciidoc[Layers]
+*Next Step:* link:layers.asciidoc[Layers]

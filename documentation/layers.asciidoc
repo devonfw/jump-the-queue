@@ -16,4 +16,4 @@ endif::[]
 
 '''
 
-*Next Step*: link:custom-functionality.asciidoc[Custom Functionality]
+*Next Step:* link:custom-functionality.asciidoc[Custom Functionality]

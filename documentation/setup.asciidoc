@@ -167,4 +167,4 @@ When creating _devon4j_ based apps this way, we get the following features _out-
 
 '''
 
-*Next Step*: link:components.asciidoc[Components]
+*Next Step:* link:components.asciidoc[Components]
