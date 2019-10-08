@@ -1,0 +1,213 @@
+:toc: macro
+toc::[]
+
+= Testing of OASP4Fn applications
+In this chapter we are going to learn how to tests applications in OASP4Fn using the http://mochajs.org/[mocha] framework and the http://chaijs.com/[chai] assertion library.
+
+== Install global dependencies
+As the title says in this section we're going to specify the global dependencies that we need to run our tests, that only are the test framework and the typescript interpreter:
+
+```
+yarn global add mocha
+yarn global add ts-node
+```
+
+No more dependencies are needed, because we start our project with the oasp4fn application template and the local part of the test dependencies are specified as dev-dependencies at the _package.json_.
+
+== Writing the tests
+Once we have all the dependencies installed, it's time to put hands on the tests.
+
+=== Setting up file
+First of all we are going to import all the handlers we are going to test in our file/s (in our case only in test/Http/Post.ts), our typings and the every time useful _lodash_ package, so the head of our test file will look like this:
+
+[source, typescript]
+----
+import { HttpEvent, Context, Code } from '../../handlers/types';
+import { register } from '../../handlers/Http/POST/register-handler';
+import { search } from '../../handlers/Http/POST/search-handler';
+import { expect } from 'chai';
+import * as _ from 'lodash';
+----
+
+Next we are going to define our tests to the _register_ handler, that specify the behavior of our handler, like isn't really complex, we are going to specify that should return an object with, and we will have something like this:
+
+[source, typescript]
+----
+import { HttpEvent, Context, Code } from '../../handlers/types';
+import { register } from '../../handlers/Http/POST/register-handler';
+import { search } from '../../handlers/Http/POST/search-handler';
+import { expect } from 'chai'; 
+import * as _ from 'lodash';
+
+describe('register', function () {
+    it('The register should return an object, with the code and dateAndTime properties');
+});
+----
+
+If we execute this test with `yarn test` we should see that we only have one test and is in a pending state:
+
+image::images/oasp4fn/3.BuildYourOwn/yarn_test1.PNG[, link="images/oasp4fn/3.BuildYourOwn/yarn_test1.PNG"]
+
+=== Add tests of the handlers
+Now is time to call the function and check his behavior, first of all execute `yarn test:auto` to watch for changes and execute the tests automatically, next write your test:
+
+[IMPORTANT]
+====
+Keep in mind that if you don't have the instace of the database running, as is specified in link:BuildOASP4FnApplication#local-database-set-up[this section], the tests won't pass.
+====
+
+[source, typescript]
+----
+import { HttpEvent, Context, Code } from '../../handlers/types';
+import { register } from '../../handlers/Http/POST/register-handler';
+import { search } from '../../handlers/Http/POST/search-handler';
+import { expect } from 'chai';
+import * as _ from 'lodash';
+
+const EVENT = {
+    method: 'POST',
+    path: {},
+    body: {},
+    query: {},
+    headers: {}
+}
+
+let context: Context;
+
+describe('register', function () {
+    this.timeout(6000);
+    it('The register should return an object, with the code and dateAndTime properties', (done: Function) => {
+        let event =  <HttpEvent>_.assign({ body: { "name": "David", "email": "somenthing@something.com", "phone": "658974145"}}, EVENT);
+        register(event, context, (err: Error, res: Code) => {
+            try {
+                expect(err).to.be.null;
+                expect(res).to.be.an('object').that.contains.all.keys('code', 'dateAndTime');
+                done();
+            }
+            catch(error){
+                done(error);
+            }
+        })
+    });
+});
+----
+
+Note that we declare and instantiate a HttpEvent and only declare the Context, that's why we don't use the context variable inside our handlers but our event variable yes.
+
+Also, realise that we have modified the mocha default timeout (that is 2000ms) to 6000ms, and we change it to match the default AWS lambda timeout. Be careful here, and look that the function passed to the _describe_ is not an arrow function, that's because the scope of an arrow function is bounded when it's created not when it's called, so if that function would been an arrow function we couldn't have acces to the mocha methods and properties.
+
+Once we have tested the _register_ handler, we have to add tests for the _search_ handler, so you have to repeat the last process until you have something like this:
+
+[source, typescript]
+----
+describe('search', function () {
+    this.timeout(6000);
+    it('The search should return an array with the items of the table Queue', (done: Function) => {
+        search(EVENT, context, (err: Error, res: object[]) => {
+            try {
+                expect(err).to.be.null;
+                expect(res).to.be.an('Array');
+                res.forEach(obj => {
+                    expect(obj).to.be.an('object');
+                    expect(obj).to.contain.all.keys(
+                        ['name', 'email', 'phone', 'code', 'dateAndTime']
+                    );
+                })
+                done();
+            }
+            catch(error){
+                done(error);
+            }
+        })
+    });
+});
+----
+
+=== Add an after hook
+Finally, it's worth to point that we are inserting test data into our database, so we should erase them if it's necessary after executing the test, for do this, we are going to add a hook that will execute at the end of our tests, and will erase a visitor if we had inserted any, using OASP4Fn, so for that we are going to import OASP4Fn in our file, store the code of the inserted visitor and delete it if it had been inserted successfully, so our hook will look like this:
+
+[source, typescript]
+----
+after(async () => {
+    if(code)
+        await oasp4fn.delete('Queue', code).promise();
+});
+----
+
+Keep in mind that the variable _code_ is the property code located in the returned object of the handler _register_ that you should store, when his callback return it. 
+
+=== Final result
+So, at the end of the road we have this test file:
+
+[source, typescript]
+----
+import { HttpEvent, Context, Code } from '../../handlers/types';
+import { register } from '../../handlers/Http/POST/register-handler';
+import { search } from '../../handlers/Http/POST/search-handler';
+import { expect } from 'chai';
+import * as _ from 'lodash';
+import oasp4fn from '@oasp/oasp4fn';
+
+const EVENT = {
+    method: 'POST',
+    path: {},
+    body: {},
+    query: {},
+    headers: {}
+}
+
+let context: Context;
+
+let code: string;
+
+describe('register', () => {
+    it('The register should return an object, with the code and dateAndTime properties', (done: Function) => {
+        let event =  <HttpEvent>_.assign({}, EVENT, { body: { "name": "David", "email": "somenthing@something.com", "phone": "658974145"}});
+        register(event, context, (err: Error, res: Code) => {
+            try {
+                expect(err).to.be.null;
+                expect(res).to.be.an('object').that.contains.all.keys('code', 'dateAndTime');
+                code = res.code;
+                done();
+            }
+            catch(error){
+                done(error);
+            }
+        })
+    });
+});
+
+describe('search', () => {
+    it('The search should return an array with the items of the table Queue', (done: Function) => {
+        search(EVENT, context, (err: Error, res: object[]) => {
+            try {
+                expect(err).to.be.null;
+                expect(res).to.be.an('Array');
+                res.forEach(obj => {
+                    expect(obj).to.be.an('object');
+                    expect(obj).to.contain.all.keys(
+                        ['name', 'email', 'phone', 'code', 'dateAndTime']
+                    );
+                })
+                done();
+            }
+            catch(error){
+                done(error);
+            }
+        })
+    });
+});
+
+after(async () => {
+    if(code)
+        await oasp4fn.delete('Queue', code).promise();
+});
+----
+
+And the output console look like this:
+
+image::images/oasp4fn/3.BuildYourOwn/yarn_test2.PNG[, link="images/oasp4fn/3.BuildYourOwn/yarn_test2.PNG"]
+
+'''
+
+*Next chapter*: link:OASP4FnDeployment[Deploy your OASP4Fn app]

@@ -1,0 +1,93 @@
+:toc: macro
+toc::[]
+
+= Angular Components
+In this chapter we are going to see how components work and how we can work with them.
+
+== What are Angular Components
+From link:https://angular.io/[Angular's main page]:
+
+_"A component controls a patch of screen called a view."_
+
+_"You define a component's application logic—what it does to support the view—inside a class. The class interacts with the view through an API of properties and methods._
+
+_Components are the most basic building block of an UI in an Angular application. An Angular application is a tree of Angular components. They are internally composed by an HTML template and a class with all the methods needed to handle that template._
+
+HTML is the language of the Angular template. Almost all HTML syntax is valid template syntax. The <script> element is a notable exception; it is forbidden, eliminating the risk of script injection attacks. In practice, <script> is ignored and a warning appears in the browser console. See the Security page for details.
+
+Some legal HTML doesn't make much sense in a template. The <html>, <body>, and <base> elements have no useful role. Pretty much everything else is fair game. Moreover, Angular has some extended HTML functionalities, involving data binding, structural directives like loops or if's and property bindings.
+
+_A component must belong to a NgModule in order for it to be usable by another component or application. To specify that a component is a member of a NgModule, you should list it in the declarations field of that NgModule."_
+
+Every Angular application is composed by components pending on the root component: _app.component.ts_. You can route from one component to another, use their selector to instantiate a component inside of another component's template, input data in a child component in order to use it inside the child component or take event outputs to the Father component in order to do actions when this event is triggered.
+
+Basically, *without components, there is no Angular application.*
+
+== Create a new component
+
+Create a component could be as simple as create a file name like this: _<name of the component>.component.ts_ but a component should come with more files to complete all the environment needed for a component: local style file to apply to the component template, the template in an html file separated from the component and, at least, one spec file to test the component.
+
+All of this files could be easily generated along with the component itself if we use `ng generate`. Angular/cli have this functionality to create a component, generate the other files and add this new component to the _app.module.ts_ automatically, the structure of the command is:
+
+`ng generate component <component-name>`
+
+== Toolbars
+
+link:https://material.angular.io/components/toolbar/overview[Angular Material] provide with components that are specially created to use with a layout to the page, this is the case of toolbars.
+
+Designed to be used as header of pages, sidenavs or components, toolbars are headers that apply the theme color and some standard styles to use, and extender with extra functionalities like multiple rows and acceptance of icon buttons.
+
+As they make easier the development of the layouts of pages, they are widely used in component libraries as Covalent Teradata, which are integrated in their link:https://teradata.github.io/covalent/#/layouts[Layout Options]
+
+== Root Component
+
+_app.component.ts_ as it is usually named when a project is created through angular/cli is what is called the root component, that is because, as we seen in the explanation of what is a component, Angular apps are a tree where components are pending one from another.
+
+This root component should contain what is common in the whole application: general layout of the app, headers, footers, sidenavs... Because even if we use a Router to navigate between components, this elements will remain still.
+
+Using the root component to preserve some elements is useful because we do not have to repeat the same html code on view component in every component and give us the opportunity to keep data from one view to another. As an example, this is used in MyThaiStar to have always available the orders data in the sidenav, no matter where are you navigating.
+
+== Routing
+
+Angular has the functionality to navigate from components in order to keep the architecture of the application easy to maintain and use for the user, this is provided by the link:https://angular.io/guide/router[Router], when you can find all the information.
+
+Routing works establishing routes to components in a special file, this special file exports the RouterModule that has to be imported into the _app.module.ts_. With the route information, the Router component know that when the URL of the app ends with one of the given routes, the <router-outlet> tag will show the component for that route.
+
+You can also configure the routes to redirect to a certain component when URL introduced is unknown and a default page when the app starts.
+
+There are some cases when a component also has it own navigation inside of it, to make sub-navigation Router are prepared to use children-routes, this is a special property of a route, when you declare some routes inside of a children array, with this children array correctly set up, you can navigate to a component, and it sub-navigate some other components inside of it.
+
+One last remark, this routes can be secured using a special service called Guards, that forbid or permit the navigation depending on the implementation of a boolean method. This will be shown in its section in link:AngularServices[Angular Services].
+
+== Forms
+
+Angular provides a large amount of functionalities regarding this topic. All the info can be found in link:https://angular.io/guide/user-input[Angular Form docs].
+
+Basically forms can be built as always, using the <form> tag and adding some inputs and selectors to it, but in this case, the forms have been extended to provide utility coverage when working with them:
+
+* Declaring the ngForm this way: #formName="ngForm" as a property of the form tag give us access to this form functionalities.
+* Adding a ngModel you can use Angular's data binding to fulfill the user inputs into your code directly from the form.
+* Adding a name property you can pass the form in the submit and make use of all the functionalities the Angular form provides. Like access to the form values by its name, reset the form...
+* Knowing if there has been an error filling the fields of the form, this is widely used to disable submit button if the form is not valid.
+
+Angular Forms have a lot more of functionalities to use them, so, once again, it is recommended to visit the link:https://angular.io/guide/user-input[Angular Form docs].
+
+= Teradata Covalent components
+
+Along with styles utilities, link:https://teradata.github.io/covalent/[Teradata Covalent] comes with a library of components built using Google material that extends the basic usage of Angular Material components to be used in more complex situations, this is the case of data tables, layouts, steppers etc You can find them all link:https://teradata.github.io/covalent/#/components[Here]
+
+== Teradata Covalent Layouts
+
+Material apps tend to have a similar structure, once there, is up to you make your custom app and distinguish from the others, to make this structure built easier, Teradata Covalent has made link:https://teradata.github.io/covalent/#/layouts[Some layouts] to help us to find what fits better with the structure of our component view.
+
+If you are going to use a layout in one page, is recommended to use a layout on every page, otherwise, you may encounter problems with the size of the page or with blank spaces. To avoid this, if you used a layout on your root component, add at least a <td-layout> tag to your component in order to have size coherence. This does not mean you can add other layouts, this only affects if you do not put any layout at all.
+
+== Teradata Covalent Data Table
+
+Nowadays almost every application has data to show to the user, so is not strange to have an implementation of a table, you can make use of the html table tag, but this means you will have to implement all the interactions by hand. Covalent Teradata created their own link:https://teradata.github.io/covalent/#/components/data-table[Data Table] and offered as a component, so you can use it and all its functionalities in order to avoid the implementation of a working data table from scratch.
+
+The data table from Covalent works with inputs and output events, it needs, at least, the data to be shown and an array of columns, which has to be composed by a name that corresponds to the object in data and a label to show in the component. From this moment you have a function data table, now you can add events like sorting, paging, searching and so on, all the docs are link:https://teradata.github.io/covalent/#/components/data-table[Here]
+
+'''
+
+*Next chapter*: link:angular-services[Angular Services]

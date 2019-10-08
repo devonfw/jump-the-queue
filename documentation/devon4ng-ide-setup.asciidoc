@@ -1,0 +1,54 @@
+:toc: macro
+toc::[]
+
+= IDE Setup
+
+This Tutorial explains how to setup Visual Studio Code to work on and contribute to devon4ng projects with your Windows computer.
+
+To get started follow these steps:
+
+. Download and install link:https://gitforwindows.org/[Git for Windows]:
++
+IMPORTANT: Install with the option `Use Git from the Windows Command Prompt` but *without* Windows Explorer integration!
++
+image::images/devon4ng/7.IdeSetup/gitforwindows-install.jpg[width="813", high="390", align="center"]
++
+* For Windows Explorer integration install link:https://tortoisegit.org/[Tortoise Git] (optional)
+
+. Download and install the _recommended_ link:https://dotnet.microsoft.com/download/dotnet-framework[.NET Framework] Runtime & Developer Pack
+
+. Download and install the _latest_ link:https://adoptopenjdk.net/[AdoptOpen JDK] (with the HotSpot JVM):
++
+* During installation activate the option for `Set JAVA_HOME variable`
++
+image::images/devon4ng/7.IdeSetup/adoptopenjdk-install.jpg[width="813", high="390", align="center"]
++
+IMPORTANT: *Reboot* your PC to put the newly set JAVA_HOME variable into effect!
+
+. Get *Visual Studio Code*:
++
+* If you are *NOT* a member of Capgemini, download link:https://code.visualstudio.com/[VS Code], install and run it.
++
+* If you *ARE* a member of Capgemini, download the _current_ link:http://de-mucevolve02/files/devonfw/current/[devonfw distribution] and unzip it to a directory of your choice. Navigate to `~\software\vscode` and run `Code.exe`.
+
+. Install the *devonfw Platform Extension Pack* for VS Code:
+* In VS Code, select the 'Extensions' icon in the Activity Bar to the left, then search and install the `devonfw Platform Extension Pack` ...
+* or follow link:https://marketplace.visualstudio.com/items?itemName=devonfw.devonfw-extension-pack[this link], click 'Install', confirm the dialogue and open the URL with VS Code.
+
+. Download and install the _current_ version of link:https://nodejs.org/[Node.js]
+
+. Install *TypeScript* support and the *Angular CLI*:
+* In VS Code, open a command prompt via `Terminal > New Terminal`
+* now run the command `npm install –g typescript`
+* also run the command `npm install –g @angular/cli`
++
+TIP: You can check, what modules you have installed by running `npm list -g`. You can also check, what version of the Angular CLI you are using by running `ng version`.
+
+. (OPTIONAL) Configure Yarn to be your package manager:
+
+* Download and install the _stable_ version of link:https://yarnpkg.com/en/docs/install#windows-stable[Yarn]
+* Now run the command `ng config -g cli.packageManager yarn`
++
+NOTE: We feel like Yarn is quite a bit faster and generally more usable than npm. However, if you are already familiar with npm, you can contiue using it.
+
+Finally, if you are using the *devonfw distribution*, we recommend storing all your devon4ng projects in the folder `workspaces_vs`. This allows you to execute the script `update-all-workspaces.bat`, in order to generate a launch script for each individual project called `vscode-<YourProjectName>.bat`.
