@@ -8,10 +8,6 @@ env:
     - GH_REPO_SOURCE="github.com/${ORG}/${REPO_SOURCE}.git"
     - GH_REPO_DEST="github.com/${ORG}/${REPO_DEST}.git"
     - secure: qw5fXAE/9J2aTmmRsEDTPd6VRmk174aRKzRB9UOnBOUvT4fx8IYC248KoR/vnLcK0/Vygpb/xJN9wPcVpTfO8w7L55GF/Ppy9MyC15aShEVu+TlVWZL4Fto4MZBEuQsx/hMRCOVKszDzjBY902uto+beUKabE3v50u/AIALDhUohhbcX4XBsZ9LltA4GoaXdZ2gMAFO02h3ZZ0FASK2zsTfVaqf5nbjDbrxiu6LwoCXMg9PbIrp4CHoH957MnTzjwOA+t7PhgEYZf+nY1hOTlrLRvzpYAr9JzMYnHXEkzh1+qK7DtYCnmO8NDCOEZHA/pWAXNn07ZpzhWHPXD2JDzpryw26uIyWPP7EUPXsTmVyWe4JM4domg0ZVFQKhR1k9GphifOqX7hIsjaf8JsTG279xXuXd7fvByasMC8+Vsp7kyrv+Pte35dOCmDxJNT+6h9RCNki7pD3mmdXG76SV7NVFgU9ilmR7/zWmbFNoaD2xpjoA5kjJLbDyi5punOW5/ig+gSKpfr61xDDR7OoNgucFN7b39l1g2DSj4tMb2OoB3uRRW04aDTymOcit4g4iEw3W/akK4pm4fkNOQ0S8C1gF3QPPR98NlwbD8ovgsj1kJCgf39o1m/1nInZJt5AwJeR8Kl5sRdWadL1RlH8QLHd85zBPNxA4bW7gQog2TvM=
-install: true
-before_install:
-  - cd ..
-  - sudo apt-get update # update without upgrade?
 stages:
   - name: Documentation
     if: (branch = master) AND (type = push)
