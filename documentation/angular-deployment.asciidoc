@@ -1,0 +1,14 @@
+:toc: macro
+toc::[]
+
+= Deploy an devon4ng application
+
+When you have a finished version of your application and you want to deploy it somewhere you just make sure you have all your test running correctly and your app compiles. Then, run this Angular/cli command in your project root folder:
+
+`ng build`
+
+This process will compile the project and generate a folder called *dist*:
+
+image::images/devon4ng/6.Deployment/dist_folder.JPG[,width="250", link="images/devon4ang/6.Deployment/dist_folder.JPG"]
+
+Dist folder contains all your *typescript code transpiled to javascript*, that is all, now you have all you need in that folder to deploy your project wherever you want.

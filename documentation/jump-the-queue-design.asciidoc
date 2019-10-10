@@ -1,0 +1,190 @@
+:toc: macro
+toc::[]
+
+image::images/jumpthequeue/scene.png[, link="images/jumpthequeue/scene.png"]
+
+= Introduction
+When visiting public (free) or private (paid) events there are often large queues creating significant waiting times. Ideally the organizer of the event would like to streamline the entry of people. That would be possible by allowing people privileged access or, alternatively, offer an incentive for people to arrive in time or to get into line more efficiently. A way of doing this would be to have a website or application which would allow visitors to "Jump the Queue". This document describes the design for such an application: _“JumpTheQueue”_. 
+
+[NOTE]
+==== 
+Note that the document is intended to reflect a hypothetical but real use case. The design reflects this by trying to be complete. But the implementation is simplified in order to serve as an example. Where implementation differs from design, this is noted with an icon or symbol like : =>  and a comment about the nature of the difference. 
+====
+
+= Visitor Stories
+----
+As a < type of user >, I want < some goal > so that < some reason >
+----
+
+== Epic: Register Event
+As a visitor to an event I want to be able to visit a website or use an app - called _JumpTheQueue_, which provides me with a code (and optional date/time) after registration so that I can get a privileged access to the event
+
+=== User Story: register
+As a user of _JumpTheQueue_, I want to register with my name, password, username, Phone number so that I comply with the requirements to obtain the access code
+ 
+==== Acceptance Criteria
+A full name is mandatory. username, name, password and telephoneNumber must be valid. Validation is a separate, asynchronous process. 
+
+=== US: terms and conditions
+As a user of _JumpTheQueue_, I accept that the organiser of the event can store my personal data so they can send me commercial notices (“spam”)
+
+==== Acceptance Criteria
+As a user of _JumpTheQueue_, I want to accept the terms and conditions by using the corresponding checkboxes.
+
+=== US: Join a queue
+As a visitor of _JumpTheQueue_ i want to be able to see the ticket number that is currently being attended and be able to join the queue.
+ 
+=== US: List queued visitors
+As a visitor of _JumpTheQueue_ with a ticket, i want to see which ticket number is being attended and my ticket number. Optionally, I want to know the estimate time that remains in order to get attended.
+ 
+=== US: Leave the queue
+As a visitor of _JumpTheQueue_ i want to be able to leave the queue.
+
+=== Etcetera
+As a user of _JumpTheQueue_, I have to confirm either Email or Phone number by replying to a message send to the account if entered so the data can be verified.
+
+====
+=> this is not further developed nor implemented 
+====
+
+As a visitor , I want to go the the privileged access queue with my valid (i.e. validated) access code so I can get direct access.
+====
+=> this is not further developed nor implemented 
+====
+
+= UI
+
+== Flow
+The basic flow of the application can be:
+
+image::images/jumpthequeue/flow.png[, link="images/jumpthequeue/flow.png"]
+
+
+* Fill in a form to give your name and private data and then press a button with “Register”
+* In case of validation errors, an error message will be shown
+* If there are no errors then an Access Code will be generated which will be shown on a next page. The access code can optionally be provided with proposed access time.
+* From this page you can show a view of the current Queue, with the list of people queued
+
+== Mock-ups
+
+image::images/jumpthequeue/mockups.png[, link="images/jumpthequeue/mockups.png"]
+
+= Model 
+
+image::images/jumpthequeue/model.png[, link="images/jumpthequeue/model.png"]
+
+image::images/jumpthequeue/event.png[, link="images/jumpthequeue/event.png"]
+ 
+====
+=> the Event item is not further developed nor implemented 
+====
+
+== Predicates
+
+====
+_Definition_::
+----
+< function name > = < parameters > => < *pure* function >
+----
+
+_or_::
+----
+< function name > = trivial : < trivial description >
+----
+====
+
+[subs=+macros]
+----
+isnull = (v) => v === null
+notnull = (v) => !isnull(v)
+ 
+isempty = (s: string) => s.length === 0
+notempty = (s: string) => !notempty(s)
+ 
+isEmailAddress = trivial: notnull + notempty + pass:quotes[_consists of_] <name>@<domain.toplevel>
+ 
+isTelephoneNumber = trivial: notnull + notempty + pass:quotes[_consists of sequence of numbers or spaces (i.e. “4 84 28 81”)_]
+----
+
+== Types
+
+====
+_Definition_:: 
+[subs=+macros]
+----
+type < alias > :: < type defs > with predicated: < list of predicates >
+----
+
+_or_::
+----
+type < alias > :: trivial: < trivial description >
+----
+====
+
+[subs=+macros]
+----
+type ID :: trivial: Unique Atomic Identifier
+ 
+type NamedItem :: string 
+with predicates: notnull, notempty
+ 
+type EmailAddress :: string
+with predicates: isEmailAddress 
+ 
+type TelephoneNumber :: string 
+with predicates: isTelephoneNumber 
+ 
+type Option<T> :: None | T
+ 
+type Result<T> :: Error | T
+ 
+type Error :: trivial: Error information with code & error description
+----
+
+== Entities & Value Objects
+
+[cols="2", options="header"]
+|===========================
+2+|Visitor (Entity)
+s|Field           s|Type
+|Id                |ID
+|Username          |NamedItem 
+|Name              |NamedItem
+|Password          |NamedItem
+|PhoneNumber       |Option<TelephoneNumber>
+|AcceptedComercial |boolean
+|AcceptedTerms     |boolean
+|UserType          |boolean
+|===========================
+
+[cols="2", options="header"]
+|===========================
+2+|AccessCode (Entity)
+s|Field      s|Type
+|Id           |ID
+|Ticketnumber |NamedItem 
+|StartTime    |Option<DateTime>
+|EndTime      |Option<DateTime>
+|StartTime    |Option<DateTime>
+|Visitor      |NamedItem
+|Queue        |NamedItem
+|===========================
+
+[cols="2", options="header"]
+|===========================
+2+|DailyQueue (Entity)
+s|Field            s|Type
+|Id                 |ID
+|Name               |NamedItem 
+|Logo               |NamedItem
+|AttentionTime      |Option<DateTime>
+|MinAttentionTime   |Option<DateTime>
+|Active             |boolean
+|Customers          |NamedItem
+|===========================
+ 
+There must be a 1 - 1 relationship between a Visitor and an VisitorTicker. 
+
+'''
+
+*Next chapter*: link:devon4j-getting-started-home[devon4j Getting Started]

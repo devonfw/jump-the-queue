@@ -1,0 +1,77 @@
+[preface]
+== Document Description
+This document contains high-level documentation of the components of devonfw to develop a client-server system based on Java and AngularJS. It is intended for individual training as well as for organized training sessions.
+
+:leveloffset: 0
+:toc:
+
+= Jump The Queue
+== Guide to the Reader
+
+While the document a comprehensive overview, the following links should provide you a step by step navigation to follow the tutorial. The document is structured in an alternating fashion documenting general explanation of the different components followed by the guide of developing the *Jump The Queue* application. The links provided in the following will just point at the beginning of the guide of each section as a shortcut. If you are unsure about anything, please scroll some pages back to find further explanation on the architecture and contents or don't hesitate to ask your trainer if you are currently in a training.
+
+link:jump-the-queue-design#introduction[Jump the Queue introduction and requirements description]
+
+*Building the server*
+
+. link:build-devon4j-application#build-your-own-devon4j-application[Create your own devon4j application]
+. link:devon4j-components#create-your-components[Create your components]
+. link:devon4j-layers#layers-of-the-jump-the-queue-application[Layers of the application]
+. link:devon4j-layers#jump-the-queue-running[Run the application]
+. link:devon4j-adding-custom-functionality#return-the-access-code[Customize the application]
+. link:devon4j-validations#add-your-validations[Add validation]
+. link:devon4j-testing#testing-our-application[Testing the application]
+
+*Building the client*
+
+. link:build-devon4ng-application#goal-of-jump-the-queue[Create your own devon4ng application]
+. link:build-devon4ng-application#creating-components[Create your components]
+. link:build-devon4ng-application#creating-services[Create services]
+. link:build-devon4ng-application#making-calls-to-server[Make calls to the server]
+
+:leveloffset: 1
+include::jump-the-queue-design[]
+
+:leveloffset: 0
+= devon4j Getting Started
+
+:leveloffset: 1
+include::devonfw-intro[]
+
+include::devon4j-overview[]
+
+include::an-devon4j-application[]
+
+include::build-devon4j-application[]
+
+include::devon4j-components[]
+
+include::devon4j-layers[]
+
+include::devon4j-adding-custom-functionality[]
+
+include::devon4j-validations[]
+
+include::devon4j-testing[]
+
+include::devon4j-deployment[]
+
+:leveloffset: 0
+= devon4ng Getting Started
+
+:leveloffset: 1
+
+include::devonfw-intro[]
+
+include::devon4ng-introduction[]
+
+include::an-devon4ng-application[]
+
+include::build-devon4ng-application[]
+
+include::angular-components[]
+
+include::angular-services[]
+
+include::angular-deployment[]
+

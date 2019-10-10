@@ -1,0 +1,94 @@
+:toc: macro
+toc::[]
+
+= An devon4j Application
+
+== My Thai Star basics
+As an example of how an devon4j application is built we are going to show the _My Thai Star_ application backend project, that can be found https://github.com/devonfw/my-thai-star[in github].
+
+The _My Thai Star_ application is a solution for managing the online booking and orders of a restaurant, it is addressed as a showcase app but designed with real requirements although trying to serve as example of common use cases in web apps (master-detail model, login, authorization based on roles, pagination, search with filters, etc.).
+
+image::images/devon4j/2.Example_app/mts.png[,width="450", link="images/devon4j/2.Example_app/mts.png"]
+
+The main features of the app are:
+
+- anonymous users can book a table.
+
+- anonymous users can create an event and invite some friends to the restaurant.
+
+- users can visit the meal catalog and see information about the available dishes (name, ingredients, picture, price). 
+
+- both, the host and the guests, can order food for the event based on the food catalog and can select dishes with extra ingredients.
+
+- all the booking and order creation / cancellation operations are related to mail notifications sent by the application to warn the involved users about the changes.
+
+- only users with role _waiter_ are able to access to a restricted area of the application to have access to a list with all of the bookings and orders and can access to the details of each one.
+
+- the waiters can filter the bookings/orders results to manage the list.
+
+== My Thai Star devon4j Backend overview
+
+What we have shown in the previous section is the aspect of a My Thai Star client app that consumes the services created with the _devon4j_ server solution.
+
+From now on we are going to focus on the implementation of that server project to show how is it formed and how you can create your own _devon4j_ server project with the devonfw framework.
+
+My Thai Star project is hosted https://github.com/devonfw/my-thai-star[on github] and includes different technologies such as _Java_, _.Net_ and _Node_ for backend solutions and _Angular_ and _Xamarin_ as default clients.
+
+[NOTE]
+====
+The _My Thai Star_ project is also included in the devonfw distribution, in _workspaces/examples_ folder. Just execute _eclipse-examples.bat_ . Import the existing Maven project. In the folder examples you will find the folder My-Thai-Star. Import it.
+====
+
+=== The devon4j project
+
+Using the _devon4j_ approach for the Java backend project we will have a structure of a main _Maven_ project formed by two sub-projects:
+
+image::images/devon4j/2.Example_app/project_modules.png[,width="250", link="images/devon4j/2.Example_app/project_modules.png"]
+
+In the _core_ project we will store all the logic and functionality of the application.
+
+The _server_ project configures the packaging of the application.
+
+=== The components
+
+In early chapters we have mentioned that the devon4j applications should be divided in different components that will provide the functionality for the different features of the application. Following the naming convention `[Target]management` being the _Target_ the main _entity_ that we want to manage.
+
+The components, as part of the logic of the app, are located in the _core_ project of the app. In the case of _My Thai Star_ we need to show the different available *dishes*, we need to manage the *booking* and the *orders* and we need to create new *users*. So the application will be divided in the following components:
+
+image::images/devon4j/2.Example_app/project_components.png[,width="250", link="images/devon4j/2.Example_app/project_components.png"]
+
+=== The component structure (layers)
+
+Each component of the app is internally divided following the three-layer architecture (_service_, _logic_ and _dataaccess_) that Devon4j proposes. So we will have three different packages to order our component's elements:
+
+image::images/devon4j/2.Example_app/component_layers.png[,width="250", link="images/devon4j/2.Example_app/component_layers.png"]
+
+
+== Running MyThaiStar backend
+
+Using _Spring Boot_ features, we can easily run our _Java_ backend applications using the _Run as > Java application_ over the _SpringBootApp.java_ main class 
+
+image::images/devon4j/2.Example_app/run.png[,width="450", link="images/devon4j/2.Example_app/run.png"]
+
+Once we see console messages like
+
+----
+Tomcat started on port(s): 8081 (http)
+Started SpringBootApp in 15.985 seconds (JVM running for 16.833)
+----
+
+we can start consuming our _Java_ backend.
+
+To show the backend services results we are going to use https://www.getpostman.com/[**Postman**] app for desktop, although you can use any other similar application.
+
+Now, with _Postman_, we can do a simple _GET_ request to obtain the info of a _dish_ with _id=1_ (`http://localhost:8081/mythaistar/services/rest/dishmanagement/v1/dish/1`). And we obtain a result like this
+
+image::images/devon4j/2.Example_app/get_request.png[, link="images/devon4j/2.Example_app/get_request.png"]
+
+== Creating your own devon4j backend app
+
+Once we have seen what we can achieve using _devon4j_ as our backend solution, in next sections we are going to see how to create our own _devon4j_ project step by step, starting from how to create a new _devon4j_ project and explaining how to generate each element of the application.
+
+'''
+
+*Next chapter*: link:build-devon4j-application[Create your own devon4j app]
