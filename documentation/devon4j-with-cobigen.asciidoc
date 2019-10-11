@@ -1,1 +1,0 @@
-= Generating devon4j applications with Cobigen
