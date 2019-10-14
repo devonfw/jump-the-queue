@@ -1,59 +1,70 @@
 :toc: macro
 toc::[]
+:idprefix:
+:idseparator: -
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
-= devonfw Tutorial sources
+= Home
 
-== General concept
+== General Concept
+This documentation serves as an introductory course to application development under devonfw. It is structured in an alternating fashion: First a general explanation of different components and features is provided -- using the complex _MyThaiStar_ application as an example, then the actual implementation of these aspects is demonstrated via code-examples -- which are part of the smaller _JumpTheQueue_ application.
 
-The idea of the Getting Started Guides is to function as an introduction & tutorial. 
+Here's some general advice up front: 
 
-The idea is to show how a real application, _My Thai Star_, is built up. From general overview & architecture to detailing individual layers, _My Thai Star_ is shown to hightlight how to create a devonfw app. For each part a practical part is included. This is based on a(n extremely) minimal application, _Jump The Queue_.
+* _Carefully_ read each chapter and use the provided instructions in combination with the screenshots to complete your application code.
 
-Some general hints up front: 
+* Work through the chapters in their _correct order_ by following the "*Next chapter:*" link at the bottom of each page.
 
-- Don't get lost in all the links. The links you should click are **bold**.
-- You can switch the eclipse view bei pressing ctrl+F10 and choosing "Package presentation". 
-- work constantly through every chapter of this guide.
+* Don't get lost in all the _optional links_ provided within the text. They exist for the sake of completeness and you don't have to follow them unless explicitly stated.
 
+* In Eclipse select the "Package Explorer" tab, press *Ctrl+F10* and under "Package Presentation" enable the option "Hierarchical" to gain a better overview over the project.
 
-== devonfw-intro
+* If Eclipse shows any _warnings_, ignore them for the time being.
 
-A short introduction to the devonfw distribution.
+* If Eclipse detects _errors_ as a result of its static code analysis, read the displayed tooltips and consider applying the suggested solutions. If this doesn't resolve the issue or if you encounter runtime errors, do the following:
 
-- link:devonfw-intro[**devonfw intro**]
+** _Backtrack_ your steps and make sure you haven't made any mistaktes previously. Be especially careful when using _CobigGen_, since generating wrong/unnecessary classes will most likely break the application.
 
-== Setting up the IDE
+** _Compare_ your own code with the finished application code in this repository to rule out any other potential mistakes. As a last resort you might copy/paste the provided files into your own project.
 
-A quick guide to set the IDE up and run your first App.
+** If all of the above fails, ask your supervisor for help and provide them with a link to the respective section in this guide. This way we can correct possible errors and improve this introductory course for future trainees.
 
-- link:devon4j-ide-setup[**devon4j-ide-setup**]
+IMPORTANT: If you haven't already, please read the devonfw https://github.com/devonfw/getting-started/[getting started guide] for a basic overview over the framework, its components, the available resources and other related topics.
 
-- link:devon4ng-ide-setup[**devon4ng-ide-setup**]
+== Document Overview
 
-- link:devon4j-creating-a-project[**creating a devon4j project**]
+=== devon4j
+. link:devon4j-overview[]
+. link:an-devon4j-application[]
+. link:build-devon4j-application[]
+. link:devon4j-components[]
+. link:devon4j-layers[]
+. link:devon4j-adding-custom-functionality[]
+. link:devon4j-validations[]
+. link:devon4j-testing[]
+. link:devon4j-deployment[]
 
+=== devon4ng
+. link:devon4ng-introduction[]
+. link:an-devon4ng-application[]
+. link:angular-components[]
+. link:angular-services[]
+. link:build-devon4ng-application[]
+. link:angular-deployment[]
 
+////
+=== OASP4Fn
+. link:OASP4FnIntroduction[]
+. link:BuildOASP4FnApplication[]
+. link:OASP4FnTesting[]
+. link:OASP4FnDeployment[]
+////
 
-== Jump The Queue 
-
-**Jump The Queue** is the application that will be used as tutorial for the following Backend and Frontend technologies. Here you can read a bit about what it is.
-
-- link:jump-the-queue-design[**Jump The Queue Design**] 
-
-
-== Backend Technologies
-
-You will install **Jump The Queue** and do some work with it like expanding it with a new component, using CobiGen, using Postman and a lot of other stuff.
-
-- link:devon4j-getting-started-home[**devon4j Getting Started**]
-
-Here you can find information about OASP4Fn. Remember that OASP4FN is deprecated:
-
-- link:OASP4FnGettingStartedHome[**OASP4Fn Getting Started**] **DEPRECATED**
-
-
-== Frontend Technologies
-
-- link:devon4ng-getting-started-home[**devon4ng Getting Started**]
-
- 
+'''
+*First chapter:* link:jump-the-queue-design[]
