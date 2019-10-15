@@ -19,7 +19,7 @@ jobs:
         - cd ..
         - git clone https://${GH_REPO_DEST}
         # Clean up wiki repository, copy documentation there
-        #- cd ${REPO_DEST} && rm -rf * && cd ..
+        - cd ${REPO_DEST} && rm -rf * && cd ..
         - yes | cp -rf ${REPO_SOURCE}/documentation/* ${REPO_DEST}/
         - cd ${REPO_DEST}
         # Remove .asciidoc file extension from relative links
