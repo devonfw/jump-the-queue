@@ -16,6 +16,7 @@ jobs:
     - stage: Documentation
       script:
         # Clone necessary repositories
+        - cd ..
         - git clone https://${GH_REPO_DEST}
         # Clean up wiki repository, copy documentation there
         #- cd ${REPO_DEST} && rm -rf * && cd ..
