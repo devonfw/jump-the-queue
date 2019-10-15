@@ -1,40 +1,30 @@
-* link:home[Home]
+=== link:home[Home]
 
-* **General concept**
+==== link:jump-the-queue-design.asciidoc[JumpTheQueue Design]
 
-* **devonfw intro**
-** link:devonfw-intro[devonfw intro]
+==== devon4j (Backend)
+. link:devon4j-overview.asciidoc[devon4j Overview]
+. link:an-devon4j-application.asciidoc[devon4j Application]
+. link:build-devon4j-application.asciidoc[Build a devon4j Application]
+. link:devon4j-components.asciidoc[devon4j Components]
+. link:devon4j-layers.asciidoc[devon4j Structure]
+. link:devon4j-adding-custom-functionality.asciidoc[devon4j Custom Functionality]
+. link:devon4j-validations.asciidoc[devon4j Validations]
+. link:devon4j-testing.asciidoc[devon4j Testing]
+. link:devon4j-deployment.asciidoc[devon4j Deployment]
 
-* **Setting up the IDE**
-** link:devon4j-ide-setup[devon4j-ide-setup]
-** link:devon4ng-ide-setup[devon4ng-ide-setup]
-** link:devon4j-creating-a-project[creating a devon4j project]
+==== devon4ng (Frontend)
+. link:devon4ng-introduction.asciidoc.asciidoc[devon4ng Introduction]
+. link:an-devon4ng-application.asciidoc[devon4ng Application]
+. link:angular-components.asciidoc[Angular Components]
+. link:angular-services.asciidoc[Angular Services]
+. link:build-devon4ng-application.asciidoc[Build a devon4ng Application]
+. link:angular-deployment.asciidoc[Angular Deployment]
 
-* **Jump The Queue**
-** link:jump-the-queue-design[Jump The Queue Design]
-
-* **devonfw Backend Technologies**
-
-** link:devon4j-getting-started-home[devon4j Getting Started]
-*** link:devon4j-overview[devon4j overview]
-*** link:an-devon4j-application[an devon4j application]
-*** link:build-devon4j-application[build your own devon4j application]
-*** link:devon4j-components[devon4j application components]
-*** link:devon4j-layers[devon4j structure]
-*** link:devon4j-adding-custom-functionality[devon4j adding custom functionality]
-*** link:devon4j-validations[devon4j data validations]
-*** link:devon4j-testing[devon4j testing]
-*** link:devon4j-deployment[deployment]
-
-** link:OASP4FnGettingStartedHome[OASP4Fn Getting Started **(DEPRECATED)**]
-
-* **devonfw Frontend Technologies**
-** link:devon4ng-getting-started-home[devon4ng Getting Started]
-*** link:devon4ng-introduction[devon4ng intro]
-*** link:an-devon4ng-application[An devon4ng application]
-*** link:angular-components[The Angular Components]
-*** link:angular-services[The Angular Services]
-*** link:build-devon4ng-application[Build your own devon4ng application]
-*** link:angular-deployment[Deployment]
-
-
+////
+==== OASP4Fn (Serverless)
+. link:OASP4FnIntroduction[OASP4Fn Introduction]
+. link:BuildOASP4FnApplication[Build a OASP4Fn Application]
+. link:OASP4FnTesting[OASP4Fn Testing]
+. link:OASP4FnDeployment[OASP4Fn Deployment]
+////
