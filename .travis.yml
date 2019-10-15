@@ -17,11 +17,12 @@ jobs:
       script:
         # Clone necessary repositories
         - git clone https://${GH_REPO_DEST}
-        # Clean up wiki repository, copy documentation there and adjust files for GitHub wiki
-        - cd ${REPO_DEST} && rm * && rm -r images && cd ..
+        # Clean up wiki repository, copy documentation there
+        - cd ${REPO_DEST} && rm -rf * && cd ..
         - yes | cp -rf ${REPO_SOURCE}/documentation/* ${REPO_DEST}/
         - cd ${REPO_DEST}
-        - grep -lr "link:[a-zA-Z0-9_.-]*\.asciidoc\[" . | xargs -r sed -i "s/.asciidoc//g"
+        # Remove .asciidoc file extension from relative links
+        - grep -lr "link:[a-zA-Z0-9_.-]*\.asciidoc\[" . | xargs -r sed -i "s/\(link:[a-zA-Z0-9_.-]*\)\.asciidoc\(\[\)/\1\2/g"
         # Terminate Travis CI build when no changes detected
         - |
           if git diff-index --quiet HEAD && [ ! -n "$(git status -s)" ]; then 
