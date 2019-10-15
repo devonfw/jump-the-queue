@@ -14,7 +14,7 @@
 . link:devon4j-deployment.asciidoc[devon4j Deployment]
 
 ==== devon4ng (Frontend)
-. link:devon4ng-introduction.asciidoc.asciidoc[devon4ng Introduction]
+. link:devon4ng-introduction.asciidoc[devon4ng Introduction]
 . link:an-devon4ng-application.asciidoc[devon4ng Application]
 . link:angular-components.asciidoc[Angular Components]
 . link:angular-services.asciidoc[Angular Services]
