@@ -10,18 +10,16 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Deployment of devon4j applications
+= Deployment of devon4j Applications
+As we already mentioned when introducing the xref:an-devon4j-application#the-devon4j-project[devon4j projects], the apps created with the _devon4j_ archetype are going to provide, apart from the _core_ project and _api_ project, a _server_ project that will configure the packaging of the app. 
 
-As we already mentioned when link:an-devon4j-application#the-devon4j-project[introducing the devon4j projects], the apps created with the _devon4j_ archetype are going to provide, apart from the _core_ project and _api_ project, a _server_ project that will configure the packaging of the app. 
+In our _JumpTheQueue_ app we can verify that we have this _server_ project available
 
-In our _Jump the Queue_ app we can verify that we have this _server_ project available
-
-image::images/devon4j/9.Deployment/jumpthequeue_server_structure.png[width="250", link="images/devon4j/9.Deployment/jumpthequeue_server_structure.png"]
+image::images/devon4j/9.Deployment/jumpthequeue_server_structure.png[JumpTheQueue Server Structure, 350]
 
 So, using _Maven_, we are going to be able to easily package our app in a _.war_ file to be deployed in an application server like _Tomcat_ (the default server provided in devonfw).
 
-== The _server_ project
-
+== The _server_ Project
 The _server_ project provided in _devon4j_ applications is an almost empty _Maven_ project. It only has a _pom.xml_ file that is used to configure the packaging of the _core_ project. Taking a closer look to this _pom.xml_ file we can realize that it only presents a single dependency to the core project. 
 
 [source,xml]
@@ -53,8 +51,7 @@ And then it includes the https://docs.spring.io/spring-boot/docs/current/referen
 
 ----
 
-== Disabling security tests
-
+== Disabling Security Tests
 First, since this is a basic tutorial and there is no security/permissions,the files `SecurityRestServiceImplTest` and the `PermissionCheckTest` need to be modified leaving one test of each that will return true and the rest in a commentary. First, in the core `jtqj-core` inside `src/test/java/.../general/common/service/impl/rest/SecurityRestServiceImplTest`:
 
 [source, java]
@@ -170,8 +167,7 @@ public class PermissionCheckTest extends ModuleTest {
 
 This is going to allow our application to pass the tests and be able to build.
 
-== Running the app with Maven
-
+== Running the App with Maven
 Thanks to _Spring Boot_ and the `spring-boot-maven-plugin` we can run our app using Maven. To do so just open a command line with access to _Maven_ (in Devonfw we can do it using the _console.bat_). And:
 
 1.- As is explained in https://github.com/devonfw/devon/wiki/getting-started-understanding-devon4j-spring-boot-config#step-2-including-properties[devonfw documentation] the `application.properties` used for packaging is `/src/main/resources/application.properties`. So we need to edit the app properties to access to the app. In `/jtqj-core/src/main/resources/application.properties` configure the properties:
@@ -201,10 +197,9 @@ The app should be launched in the _Spring Boot_ embedded Tomcat server. Wait a f
 
 Now we can try to access to the app resource (GET)`http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1` we can verify that the app is running fine
 
-image::images/devon4j/9.Deployment/jumpthequeue_simpleget1.png[, link="images/devon4j/9.Deployment/jumpthequeue_simpleget1.png"]
+image::images/devon4j/9.Deployment/jumpthequeue_simpleget1.png[JumpTheQueue Simple GET Request]
 
-== Packaging the app with Maven
-
+== Packaging the App with Maven
 In the same way, using _Maven_ we can package our project in a _.war_ file. As in the previous section, open a command line with access to _Maven_ (in devonfw _console.bat_ script) and execute the command `mvn clean package` in the project root directory
 
 ----

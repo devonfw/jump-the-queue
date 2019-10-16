@@ -11,7 +11,6 @@ ifdef::env-github[]
 endif::[]
 
 = IDE Setup
-
 This Tutorial explains how to setup the development environment to work on and contribute to devonfw4j with your Windows computer.
 
 We are using a pre-configured https://github.com/devonfw/devon-ide[devon-ide] for development. To get started follow these steps:
@@ -22,14 +21,14 @@ We are using a pre-configured https://github.com/devonfw/devon-ide[devon-ide] fo
 Important: install with option +Use Git from the Windows Command Prompts+ but without Windows Explorer integration.
 +
 
-image::images/tutorialsources/devonfw-ide-setup-step01.png[width="813", high="390", align="center"]
+image::images/tutorialsources/devonfw-ide-setup-step01.png[Git for Windows Setup, 450]
 * Download TortoiseGit from ** https://tortoisegit.org/ **
 +
 . Download the distribution
-* If you are a member of Capgemini: download http://de-mucevolve02/files/devonfw/current/Devon-dist-current.zip[**devonfw current distribution**] (for devonfw please find the setup guide within the devon-dist).
+* If you are a member of Capgemini: download the current http://de-mucevolve02/files/devonfw/current/Devon-dist-current.zip[devonfw distribution] (for devonfw please find the setup guide within the devon-dist).
 +
-image::images/tutorialsources/devonfw-ide-setup-step02.png[width="813", high="390", align="center"]
-. Choose a project location for your project (e.g. `C:\projects\devonfw`, referred to with `$projectLoc` in this setup guides following steps). Avoid long paths and white spaces to prevent trouble. Extract the downloaded ZIP files via `Extract Here` (e.g. using http://www.7-zip.org/[**7-Zip**]). Do not use the Windows native ZIP tool to extract as this is not working properly on long paths and filenames.
+image::images/tutorialsources/devonfw-ide-setup-step02.png[devonfw Distribution Download, 450]
+. Choose a project location for your project (e.g. `C:\projects\devonfw`, referred to with `$projectLoc` in this setup guides following steps). Avoid long paths and white spaces to prevent trouble. Extract the downloaded ZIP files via `Extract Here` (e.g. using http://www.7-zip.org/[7-Zip]). Do not use the Windows native ZIP tool to extract as this is not working properly on long paths and filenames.
 . Run the script `update-all-workspaces.bat` in `$projectLoc`.
 +
 Hint: You can use update-all-workspaces.bat whenever you created a new folder in `workspaces` to separate different workspaces. This update will create new Eclipse start batches allowing to run a number of Eclipse instances using different workspaces in parallel.  
@@ -47,7 +46,7 @@ Do another check whether there are files in folder `workspaces\main\my-thai-star
 . *In Eclipse* select `File > Import > Maven > Existing Maven Projects` and then choose the cloned projects from your workspace by clicking the `Browse` button and select the folder structure (`workspaces\main\my-thai-star\java\MTSJ`).
 . *Execute* the application by starting the ´SpringBootApp´. Select the class and click the right mouse button. In the context menu select the entry `Run as => Java Application` (or `Debug as ...`). The application starts up and creates log entries in the Eclipse Console Tab.
 +
-image::images/tutorialsources/devonfw-ide-setup-run.png[width="813", high="390", align="center"]
+image::images/tutorialsources/devonfw-ide-setup-run.png[Running an Application]
 +
 . Open `console.bat`.
 +
@@ -60,5 +59,4 @@ image::images/tutorialsources/devonfw-ide-setup-run.png[width="813", high="390",
 . Once started, the sample application runs on http://localhost:4200/restaurant[], login with waiter/waiter and have a look at the services list provided.
 
 '''
-
-*Next chapter*: link:devon4j-creating-a-project[creating a devon4j project]
+*Next Chapter*: link:devon4j-creating-a-project.asciidoc[Creating a devon4j Project]

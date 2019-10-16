@@ -10,22 +10,21 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-== Build your own devon4ng application
+== Build your own devon4ng Application
 In this chapter we are going to see how to build a new devon4ng from scratch. The proposal of this tutorial is to end having enough knowledge of Angular and the rest of technologies regarding devon4ng to know how to start developing on it and if you want more advanced and specific functionalities see them on the cookbook.
 
-== Goal of Jump The Queue
+== Goal of JumpTheQueue
 This mock-up images shows what you are going to have as a result when the tutorial is finished. An app to manage codes assigned to queuers in order to easy the management of the queue, with a code, you can jump positions in queue and know everywhere which is your position.
 
-image::images/devon4ng/3.BuildYourOwn/mockups.png[,width="500", link="images/devon4ng/3.BuildYourOwn/mockups.png"]
+image::images/devon4ng/3.BuildYourOwn/mockups.png[JumpTheQueue Mock-Ups, 500]
 
 So, hands on it, let's configure the environment and build this app!
 
-== Installing global tools
-
+== Installing Global Tools
 WARNING: If you got the devonfw distribution, the only thing you need to do in this step is intall the `devonfw Platform Extension Pack` in visual studio. After that, you can skip the rest and continue from link:#2-creating-basic-new-project-with-devcon[Here] 
 
-=== Visual Code: 
-To install the editor download the installer from https://code.visualstudio.com/Download[the official page] and install it.
+=== Visual Studio Code: 
+To install the editor download the installer from the https://code.visualstudio.com/Download[official page] and install it.
 
 Once installed, the first thing you should do is install the extensions that will help you during the development, to do that follow this steps:
 
@@ -34,22 +33,19 @@ Once installed, the first thing you should do is install the extensions that wil
 2. Install the `devonfw Platform Extension Pack`
 
 === Node.js
-
-Go to the https://nodejs.org/en/[node.js official page] and download the version you like the most, the LTS or the Current, as you wish.
+Go to https://nodejs.org/en/[nodejs.org] and download the version you like the most, the LTS or the Current, as you wish.
 
 The recommendation is to install the latest version of your election, but keep in mind that to use Angular CLI your version must be at least 8.x and npm 5.x, so if you have a node.js already installed in your computer this is a good moment to check your version and upgrade it if it's necessary.
 
 === TypeScript
-
 Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create javascript modules in Node.js, that is installed along with Node, so for install typescript you don’t have to install npm explicitly, only run this command:
 
 `npm install –g typescript`
 
 === Yarn
-
 As npm, https://yarnpkg.com/en/[Yarn] is a package manager, the differences are that Yarn is quite more faster and usable, so we decided to use it to manage the dependencies of devon4ng projects.
 
-To install it you only have to go to https://yarnpkg.com/en/docs/install[the official installation page] and follow the instructions.
+To install it you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
 
 Even though, if you feel more comfortable with npm, you can remain using npm, there is no problem regarding this point.
 
@@ -60,7 +56,7 @@ To install it you have to run this command in your console prompt: `npm install 
 
 Then, you should be able to run `ng version` and this will appear in the console:
 
-image::images/devon4ng/3.BuildYourOwn/angularcli.png[, link="images/devon4ng/3.BuildYourOwn/angularcli.png"]
+image::images/devon4ng/3.BuildYourOwn/angularcli.png[Angular CLI Version]
 
 In addition, you can set Yarn as the default package manager to use with Angular/CLI running this command: 
 
@@ -68,34 +64,30 @@ In addition, you can set Yarn as the default package manager to use with Angular
 
 Finally, once all these tools have been installed successfully, you are ready to create a new project. Theres two ways of creating a project:
 
-
-
 == 1.- Creating basic new project with the Angular/CLI
-
 One of the best reasons to install Angular/CLI is because it has a feature that creates a whole new basic project where you want just running:
 
 `ng new <project name>`
 
 Where <project name> is the name of the project you want to create. In this case, we are going to call it `angular` since we got the project distributed with the folders of the different systems. After executing the command, it will ask two things:
 
-image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[, link="images/devon4ng/3.BuildYourOwn/ngnewoptions.png"]
+image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 
 This command will create the basic files and install the dependencies stored in `package.json`
 
-image::images/devon4ng/3.BuildYourOwn/ngnew.JPG[, link="images/devon4ng/3.BuildYourOwn/ngnew.JPG"]
+image::images/devon4ng/3.BuildYourOwn/ngnew.jpg[Angular Project Creation]
 
 Then, if we move to the folder of the project we have just created and open visual code we will have something like this:
 
-image::images/devon4ng/3.BuildYourOwn/filesnew.png[, link="images/devon4ng/3.BuildYourOwn/filesnew.png"]
+image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
 Finally, it is time to check if the created project works properly. To do this, move to the projects root folder and run: `ng serve -o`
 
-And... it worked:
+And ... it worked:
 
-image::images/devon4ng/3.BuildYourOwn/appnew.png[, link="images/devon4ng/3.BuildYourOwn/appnew.png"]
+image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
 
 == 2.- Creating basic new project with Devcon
-
 Once the devcon has loaded, we go to devon4ng->create. Then we fill the clientname with the name of your project and then browse the folder where we want to create the project in. Once that is done, you can push the create button.
 
 Once devcon has finished you should see something like this:
@@ -105,12 +97,11 @@ Once devcon has finished you should see something like this:
 The result on this screenshot can differ from the result.
 ====
 
-image::images/devon4ng/3.BuildYourOwn/devcon4ng.png[, link="images/devon4ng/3.BuildYourOwn/devcon4ng.png"]
+image::images/devon4ng/3.BuildYourOwn/devcon4ng.png[Devcon devon4ng Create]
 
 Even though this tutorial is going to start with the second option. At this point, you should be ready to start the development with either.
 
 === Adding Google Material and Covalent Teradata
-
 [NOTE]
 ====
 If you dont have the latest angular version install the corresponding version of the dependencies to your angular version. To do so, add @`version` behind. Example: npm install @angular/material@7.1.2 or yarn add @angular/material@7.1.2
@@ -212,8 +203,7 @@ $background: map-get($theme, background);
 ....
 ----
 
-== Start the development
-
+== Start the Development
 Now we have a fully functional blank project, all we have to do now is just create the components and services which will compose the application.
 
 First, we are going to develop the views of the app, through its components, and then we will create the services with the logic, security and back-end connection.
@@ -223,11 +213,10 @@ First, we are going to develop the views of the app, through its components, and
 This tutorial is only going to develop a mobile view. The app is not going to be responsive. This might be added to the tutorial in a future.
 ====
 
-=== Creating components
-
+=== Creating Components
 [NOTE]
 ====
-Learn more about creating new components in devon4ng link:angular-components#create-a-new-component[HERE]
+Learn more about creating new components in devon4ng xref:angular-components#Create-a-new-Component[here].
 ====
 
 The app consists of 3 main views:
@@ -240,12 +229,12 @@ To navigate between them we are going to implement routes to the components in o
 
 To see our progress, move to the root folder of the project and run `ng serve` this will serve our client app in _localhost:4200_ and keeps watching for changing, so whenever we modify the code, the app will automatically reload.
 
-==== Root component
+==== Root Component
 _app.component_ will be our Root component, so we do not have to create any component yet, we are going to use it to add to the app the elements that will be common no matter in what view we are.
 
 [NOTE]
 ====
-Learn more about the root component in devon4ng link:angular-components#root-component[HERE]
+Learn more about the root component in devon4ng xref:angular-components#Root-Component[here].
 ====
 
 This is the case of a header element, which will be on top of the window and on top of all the components, let's build it:
@@ -254,7 +243,7 @@ The first thing to know is about https://teradata.github.io/covalent/#/layouts[C
 
 [NOTE]
 ====
-Learn more about layouts in devon4ng link:angular-components#teradata-covalent-layouts[HERE]
+Learn more about layouts in devon4ng link:angular-components#Teradata-Covalent-Layouts[here].
 ====
 
 As we do not really need nothing more than a header we are going to use the simplest layout: *nav view*
@@ -431,12 +420,12 @@ Now we can use layouts, so lets use it on _app.component.html_ to make it look l
 
 [NOTE]
 ====
-Learn more about toolbars in devon4ng link:angular-components#toolbars[HERE]
+Learn more about toolbars in devon4ng link:angular-components#Toolbars[here].
 ====
 
 Once this done, our app should have a header and the "app works!" should remain in the body of the page:
 
-image::images/devon4ng/3.BuildYourOwn/root_header.JPG[,width="250", link="images/devon4ng/3.BuildYourOwn/root_header.JPG"]
+image::images/devon4ng/3.BuildYourOwn/root_header.jpg[Root Header, 250]
 
 To make a step further, we have to modify the body of the Root component because it should be the *output of the router*, so now it is time to prepare the routing system.
 
@@ -500,19 +489,18 @@ import { CoreModule } from './shared/core.module';
 
 [NOTE]
 ====
-Learn more about routing in devon4ng link:angular-components#routing[HERE]
+Learn more about routing in devon4ng xref:angular-components#Routing[here].
 ====
 
 Finally, we remove the `<h1>app works!</h1>` from _app.component.html_ and in its place we put a `<router-outlet></router-outlet>` tag. So the final result of our Root component will look like this:
 
-image::images/devon4ng/3.BuildYourOwn/root_router.JPG[,width="250", link="images/devon4ng/3.BuildYourOwn/root_router.JPG"]
+image::images/devon4ng/3.BuildYourOwn/root_router.jpg[Root Router, 250]
 
 As you can see, now the body content is the html of *FormLoginComponent*, this is because we told the Router to redirect to formlogin when the path is /FormLogin, but also, redirect to it as default if any of the other routes match with the path introduced.
 
 For now, we are going to leave the header this way, but in a future, we will separate it into another component inside a layout folder.
 
 ==== LoginFormComponent
-
 As we have already created this component from the section before, let's move on to building the template of the login view.
 
 First, we need to add the Covalent Layout and the card to the file _form-login.component.html_ :
@@ -530,7 +518,7 @@ This will add a grey background to the view and a card on top of it with the tit
 
 Now, we are going to add this image:
 
-image::images/devon4ng/3.BuildYourOwn/jumptheq.png[,width="250", link="images/devon4ng/3.BuildYourOwn/jumptheq.png"]
+image::images/devon4ng/3.BuildYourOwn/jumptheq.png[JumpTheQueue Logo Image, 250]
 
 In order to have it available in the project to show, save it in the following path of the project: _/src/assets/images/_ and it has been named: _jumptheq.png_
 
@@ -547,14 +535,13 @@ So the final code with the form added will look like this:
 
 This code will give us as a result something similar to this:
 
-image::images/devon4ng/3.BuildYourOwn/formlogin.png[,width="250", link="images/devon4ng/3.BuildYourOwn/formlogin.png"]
+image::images/devon4ng/3.BuildYourOwn/formlogin.png[Form Login, 250]
 
 This is going to be the container for the login.
 
 Now lets continue with the second component: login.
 
-==== Login component
-
+==== Login Component
 Our first step will be to create the component in the exact same way we did with the `FormLogin` component, but this time we are going to generate it in a new folder called components inside formlogin. Putting every child component on that folder will allow us to keep a good and clear structure. In order to do this, we use the command: `ng generate component form-login/components/login`. After `angularCli` has finished generating the component, we gotta create two modules, one for the form-login and one for the login:
 
   1. We create a new file called `login-module.ts` in the login root:
@@ -651,7 +638,7 @@ After that we modify the `login.component.html` and add the form:
 
 [NOTE]
 ====
-Learn more about forms in devon4ng link:angular-components#forms[HERE]
+Learn more about forms in devon4ng link:angular-components#Forms[here].
 ====
 
 This form contains two input container from Material and inside of them, the input with the properties listed above and making all required.
@@ -672,12 +659,11 @@ As a last step, we will add this component to the `form-login-component.html`:
 
 Now you should see something like this:
 
-image::images/devon4ng/3.BuildYourOwn/login.png[,width="250", link="images/devon4ng/3.BuildYourOwn/login.png"]
+image::images/devon4ng/3.BuildYourOwn/login.png[JumpTheQueue Login Screen, 250]
 
 With two components already created we need to use the router to navigate between them. Following the application flow of events, we are going to add a navigate function to the  register button, so when we press it, we will be redirected to our future register component.
 
-==== Register component
-
+==== Register Component
 First we are going to generate the register component `ng generate component register` will create our component so we can start working on it.
 
 Turning back to _login.component.html_ we have to modify these lines of code:
@@ -712,7 +698,7 @@ We need to inject an instance of Router object and declare it into the name _rou
 
 [NOTE]
 ====
-Learn more about Dependency Injection in devon4ng link:angular-services#dependency-injection[HERE]
+Learn more about Dependency Injection in devon4ng xref:angular-services#Dependency-Injection[here].
 ====
 
 [source, typescript]
@@ -780,14 +766,14 @@ Now, we are going to imitate the `login` to make our `register.component.html`:
 
 [NOTE]
 ====
-Learn more about services in devon4ng link:angular-services[HERE]
+Learn more about services in devon4ng link:angular-services.asciidoc[here].
 ====
 
 Now we have a minimum of navigation flow into our application, we are going to generate out first service using the command `ng generate service register/services/register`. This will create a folder services inside register and create the service. Services are where we keep the logic that connects to our db and are going to be used by our `component.ts`. In order to use the service we are going to create some interface models, lets create a folder called `backendModels` inside shared and inside a file called `interfaces.ts`, in here we are going to add the model interfaces that will match our backend:
 
 [NOTE]
 ====
-Learn more about creating services in devon4ng link:angular-services#create-a-new-service[HERE]
+Learn more about creating services in devon4ng xref:angular-services#Create-a-new-Service[here].
 ====
 
 [source, typescript]
@@ -853,7 +839,7 @@ This method will send our model to the backend and return an Observable that we 
 
 [NOTE]
 ====
-Learn more about Observables and RxJs in devon4ng link:angular-services#server-communication[HERE]
+Learn more about Observables and RxJs in devon4ng xref:angular-services#Server-Communication[here].
 ====
 
 Now we are going to modify `register.component.ts` to call this service:
@@ -916,12 +902,11 @@ Finally, we modify the `register.component.html` to send the form values to the 
 ....
 ----
 
-image::images/devon4ng/3.BuildYourOwn/register.png[,width="250", link="images/devon4ng/3.BuildYourOwn/register.png"]
+image::images/devon4ng/3.BuildYourOwn/register.png[Register Page, 250]
 
 Now if we try the method and take a look at the browser console we should see the visitor model.
 
 ==== Login, Auth and AuthGuard
-
 Now that we registered a `Visitor`, its time to create the `AuthService`, `AuthGuardService` and `LoginService`. The `AuthService` will be the one that contains the login info, the `AuthGuardService` will check if a user can use or not a component with the canActivate method and finally the `LoginService` will be used to fill the `AuthService`.
 
 [NOTE]
@@ -1053,7 +1038,7 @@ We will use this service to fill it with information from the logged in user whe
 
 [NOTE]
 ====
-Learn more about authentication in devon4ng link:angular-services#authentication[HERE]
+Learn more about authentication in devon4ng xref:angular-services#Authentication[here].
 ====
 
 Now we are going to use this class to make the `auth-guard.service.ts`:
@@ -1103,7 +1088,7 @@ This service will be a bit different, because we have to implement an interface 
 
 [NOTE]
 ====
-Learn more about guards in devon4ng link:angular-services#guards[HERE]
+Learn more about guards in devon4ng xref:angular-services#Guards[here].
 ====
 
 Once this is done, the last step is filling the `login.service.ts`, in this case theres going to be three methods:
@@ -1278,8 +1263,7 @@ constructor(private registerService: RegisterService, private router: Router, pu
 ...
 ----
 
-==== Separating the header to the layout
-
+==== Separating the Header from the Layout
 In order to do this, we are going to generate a new component inside `app/layout/header` with `ng generate component layout/header` 
 
 Now we are going to add it to out main view `app.component.html`:
@@ -1320,7 +1304,6 @@ In the header logic (`header.component.ts`) we are simply going to inject the `A
 Separating components will allow us to keep the code clean and easy to work with.
 
 ==== Generating ViewQueue
-
 As the last view, we are going to learn how to use our observables on the html template directly without having to `subscribe()` to them.
 
 First, we are going to generate the component: `ng generate component view-queue`. After that, we are going to include the component in the `app-routing.module.ts` adding also the guard, only allowing users that are `VISITOR` to see the component. It is important to insert the following code before the ` { path: '**', redirectTo: '/FormLogin', pathMatch: 'full' },  // Redirect if url path do not match with any other route.`.
@@ -1614,12 +1597,11 @@ export class ViewQueueComponent implements OnInit {
 
 In this last component, we assign the `Observables` when the component is initiated. After that, when clicking the join queue button we assign a new `Observable` `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue we delete the AccessCode we set the `accessCodeVisitor` to null. Since we are using an async pipe, everytime we modify the status of the `Observables` they are going to update the template.
 
-image::images/devon4ng/3.BuildYourOwn/withCodeAccess.png[,width="250", link="images/devon4ng/3.BuildYourOwn/withCodeAccess.png"]
+image::images/devon4ng/3.BuildYourOwn/withCodeAccess.png[Queue Page with Access Code, 250]
 
-image::images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png[,width="250", link="images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png"]
+image::images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png[Queue Page without Access Code, 250]
 
 That is all regarding how to build your own devon4ng application example, now is up to you add features, change styles and do everything you could imagine. Just one final step to complete the tutorial, run the tutorial outside your local machine: Deployment.
 
 '''
-
-*Next chapter*: link:angular-deployment[ Deploy your devon4ng app]
+*Next Chapter*: link:angular-deployment.asciidoc[Deploy your devon4ng App]

@@ -13,32 +13,29 @@ endif::[]
 = Components
 
 == devon4j Components
-
-image::images/devon4j/4.Components/devon4j_architecture.png[width="450", link="images/devon4j/4.Components/devon4j_architecture.png"]
+image::images/devon4j/4.Components/devon4j_architecture.png[devon4j Architecture, 450]
 
 When working with _devon4j_ the recommended approach for the design of the applications is the _Component Oriented Design_. Each component will represent a significant part (or feature) of our application related to _CRUD_ operations. Internally, the components will be divided in three layers (_service_, _logic_, and _dataaccess_) and will communicate in two directions: service with database or, in the _logic_ layer, a component with other component.
 
 === Principles
-
 The benefits of dividing our application in components are:
 
-- https://en.wikipedia.org/wiki/Separation_of_concerns[Separation of concerns].
+- https://en.wikipedia.org/wiki/Separation_of_concerns[separation of concerns].
 
-- https://en.wikipedia.org/wiki/Reusability[Reusability].
+- https://en.wikipedia.org/wiki/Reusability[reusability].
 
 - Avoid https://en.wikipedia.org/wiki/Redundant_code[redundant code].
 
-- https://en.wikipedia.org/wiki/Information_hiding[Information hiding].
+- https://en.wikipedia.org/wiki/Information_hiding[information hiding].
 
 - Self contained, descriptive and stable component APIs.
 
 - Data consistency, a component is responsible for its data and changes to this data shall only happen via the component.
 
-== devon4j component example
+== devon4j Component Example
+_MyThaiStar_ is an application of a restaurant that allows *booking* tables, and *order* different *dishes* so the main _devon4j_ components are:
 
-_My Thai Star_ is an application of a restaurant that allows *booking* tables, and *order* different *dishes* so the main _devon4j_ components are:
-
-image::images/devon4j/4.Components/mythaistar_components.png[width="250", link="images/devon4j/4.Components/mythaistar_components.png"]
+image::images/devon4j/4.Components/mythaistar_components.png[MyThaiStar Components, 250]
 
 - dishmanagement: This component will manage the dishes information retrieving it from the db and serving it to the client. It also could be used to create new menus.
 
@@ -56,11 +53,10 @@ Apart from that components we will have other _packages_ for the cross-cutting c
 
 - mailservice: with this service we will provide the functionality for sending email notifications. This is a shared service between different app components such as _bookingmanagement_ or _ordercomponent_.
 
-=== devon4j component structure
-
+=== devon4j Component Structure
 The component will be formed by one package for each one of the three layers that are defined by the _devon4j_ architecture: _service_, _logic_ and _dataaccess_.
 
-image::images/devon4j/4.Components/mythaistar_component_structure.png[width="250", link="images/devon4j/4.Components/mythaistar_component_structure.png"]
+image::images/devon4j/4.Components/mythaistar_component_structure.png[MyThaiStar Component Structure, 250]
 
 - _Service_ Layer: will expose the REST api to exchange information with client applications.
 
@@ -70,8 +66,7 @@ image::images/devon4j/4.Components/mythaistar_component_structure.png[width="250
 
 Apart from that the components will have a fourth package _common.api_ to store the common elements that will be used by the different layers of the component. This is the place will contain common _interfaces_, constants, exceptions or _enums_.
 
-=== devon4j component core
-
+=== devon4j Component Core
 As we mentioned earlier, each component will be related to a functionality and this functionality will be represented in code by an _Entity_ that will define all the properties needed to wrap the logic of that feature.
 
 This _Entity_, that represents the _core_ of the component, will be located in the `dataaccess.api` package.
@@ -84,17 +79,17 @@ The naming convention in _devon4j_ for these entities is
 
 The 'Target' should match the name of the related table in the data base, although this is not mandatory.
 
-image::images/devon4j/4.Components/mythaistar_component_core1.png[width="250", link="images/devon4j/4.Components/mythaistar_component_core1.png"]
+image::images/devon4j/4.Components/mythaistar_component_core1.png[MyThaiStar Component Core 1, 250]
 
 Basically an _Entity_ is simply a https://en.wikipedia.org/wiki/Plain_old_Java_object[POJO] that will be mapped to a table in the data base, and that reflects each table column with a suitable property.
 
-image::images/devon4j/4.Components/mythaistar_component_core2.png[, link="images/devon4j/4.Components/mythaistar_component_core2.png"]
+image::images/devon4j/4.Components/mythaistar_component_core2.png[MyThaiStar Component Core 2]
 
 == Create your components
 
-After you have completed link:build-devon4j-application[your own devon4j app] creation, we are going to create our first app component.
+After you have completed link:build-devon4j-application.asciidoc[your own devon4j app] creation, we are going to create our first app component.
 
-Going back to our example application, link:jump-the-queue-design[Jump the Queue], we need to provide two basic functionalities:
+Going back to our example application, link:jump-the-queue-design.asciidoc[JumpTheQueue], we need to provide two basic functionalities:
 
 - register a user (returning an access code).
 
@@ -102,7 +97,7 @@ Going back to our example application, link:jump-the-queue-design[Jump the Queue
 
 To accomplish that we are going to work over three entities: _Visitor_, _Queue_ and _AccessCode_.
 
-image::images/devon4j/4.Components/visitor-accesscode.png[width="400", link="images/devon4j/4.Components/visitor-accesscode.png"]
+image::images/devon4j/4.Components/visitor-accesscode.png[Visitor AccessCode, 400]
 
 The _Visitor_ will be defined with: _username_, _name_, _password_, _phoneNumber_, _acceptedCommercial_ , _acceptedTerms_ and _userType_.
 
@@ -123,8 +118,7 @@ Now is the moment to decide the components of our app. The complexity of the fun
 However if you feel more comfortable managing the entities in a single component you can also do it in that way. The results will be the same and the only difference will be related with the structure of the elements and the distribution of the code.
 ====
 
-=== The database
-
+=== The Database
 In the projects created with the _devon4j_ archetype, we already have a complete data base schema that we can use as a model to create our own. By default we are going to work over the http://www.h2database.com/html/main.html[H2] database engine provided in the _devon4j_ applications, although you can use other database alternatives for this exercise. 
 
 We have the `/jtqj-core/src/main/resources/db/type/h2/V0001__Create_Sequence.sql, V0002__Create_RevInfo.sql` and `V0003__Create_BinaryObject.sql`
@@ -132,8 +126,7 @@ these tables are already used by default so don't delete them. We therefore also
 You can create your own schema table that your required. For e.g. `db/type/h2/V0005__Create_Visitor.sql`.
 
 
-==== _Visitor_ table
-
+==== _Visitor_ Table
 Now we can add our first table _Visitor_ in `db/type/h2/V0005__Create_Visitor.sql`. In the case of _Jump the Queue_, the visitors will provide: _username_, _name_, _password_, _phoneNumber_, _acceptedCommercial_ and _acceptedTerms_ to obtain an _access code_. So we need to represent that data in our table:
 
 [source, sql]
@@ -171,8 +164,7 @@ create table Visitor(
 - _userType_: the type of user.
 
 
-==== _Daily Queue_ table
-
+==== _Daily Queue_ Table
 As second table we will represent the _Daily Queue_ that will be formed by _name_, _logo_, _currentNumber_, _attentionTime_, _minAttentionTime_, _active_ and the _customers_. This table will be created at `db/type/h2/V0006__Create_Queue.sql`:
 
 [source, sql]
@@ -209,8 +201,7 @@ create table DailyQueue(
 
 - _customer_: the queue's total number of customers.
 
-==== _Access Code_ table
-
+==== _Access Code_ Table
 As third table we will represent the _Access Code_ that will be formed by the _ticketNumber_, _creationTime_, _startTime_ and the _endTime_. This table will be created at `db/type/h2/V0007__Create_Access_Code.sql`
 
 [source, sql]
@@ -246,8 +237,7 @@ CREATE TABLE AccessCode(
 
 - _idQueue_: the relation with the _DailyQueue_ entity.
 
-==== Mock data
-
+==== Mock Data
 Finally we can provide a certain amount of mock data to start our app. Add a new sql script `/jtqj-core/src/main/resources/db/migration/1.0/V0008__Master_data.sql` adding sample data:
 
 [source,sql]
@@ -276,14 +266,12 @@ INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, sta
 INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, startTime, endTime, idVisitor, idQueue) VALUES (9, 1, 'Q009', CURRENT_TIMESTAMP, '2008-01-01 00:00:01', NULL, 9, 1);
 ----
 
-=== The _core_ of the components
-
+=== The _core_ of the Components
 Now that we have defined the data base for our entities is the moment to start creating the code of the related components.
 
 We are going to use _Cobigen_ to generate the component structure. That means that, as we already commented, we can generate all the structure and layers starting from a _core_ element: a simple _Plain Old Java Object_ that represents our _Entity_. So, in order to use _Cobigen_, we must create our entities in the expected location: `MyEntitymanagement.dataaccess.api`.
 
-==== _Visitor_ component
-
+==== _Visitor_ Component
 To implement the component we will need to define a _VisitorEntity_ to connect and manage the data of the _Visitor_ table in the data base.
 
 The name for this component will be `visitormanagement` and for the entity `VisitorEntity`.
@@ -294,17 +282,17 @@ From the root package of the project create the following packages:
 com.devonfw.application.jtqj.visitormanagement.dataaccess.api
 ----
 
-image::images/devon4j/4.Components/visitor_component_packages1.png[ link="images/devon4j/4.Components/visitor_component_packages1.png"]
+image::images/devon4j/4.Components/visitor_component_packages1.png[Visitor Component Packages 1]
 
-image::images/devon4j/4.Components/visitor_component_packages2.png[width="450", link="images/devon4j/4.Components/visitor_component_packages2.png"]
+image::images/devon4j/4.Components/visitor_component_packages2.png[Visitor Component Packages 2, 450]
 
 Now create a new java class in the just created `visitormanagement.dataaccess.api` package
 
-image::images/devon4j/4.Components/visitor_component_entity1.png[ link="images/devon4j/4.Components/visitor_component_entity1.png"]
+image::images/devon4j/4.Components/visitor_component_entity1.png[Visitor Component Entity 1]
 
 and call it _VisitorEntity_
 
-image::images/devon4j/4.Components/visitor_component_entity2.png[width="450", link="images/devon4j/4.Components/visitor_component_entity2.png"]
+image::images/devon4j/4.Components/visitor_component_entity2.png[Visitor Component Entity 2, 450]
 
 In the entity, we are going to add the fields to represent the data model, so our entity should contain:
 
@@ -342,7 +330,7 @@ public class VisitorEntity
  
 Now we have to declare the _getters_ and _setters_ of the fields of our entity. We can do it manually or using Eclipse with the option  
 
-image::images/devon4j/4.Components/visitor_component_gettersandsetters.png[ link="images/devon4j/4.Components/visitor_component_gettersandsetters.png"]
+image::images/devon4j/4.Components/visitor_component_gettersandsetters.png[Visitor Component Getters and Setters]
 
 The result of current implementation for _VisitorEntity_ class is
 
@@ -474,17 +462,14 @@ public class VisitorEntity{
 
 ----
 
-==== _AccessCode_ component
-
+==== _AccessCode_ Component
 We are going to repeat the same process for the _AccessCode_ component. We create packages from the jtqj-core:
-
 
 `com.devonfw.application.jtqj.accesscodemanagement.dataaccess.api`
 
-
 And create a class called _AccessCodeEntity_. So we will end up with the following structure:
 
-image::images/devon4j/4.Components/jumpthequeue_emptycomponents.png[ link="images/devon4j/4.Components/jumpthequeue_emptycomponents.png"]
+image::images/devon4j/4.Components/jumpthequeue_emptycomponents.png[JumpTheQueue empty Components 1]
 
 And the content of the _AccessCodeEntity_ before start using _Cobigen_ will be
 
@@ -625,15 +610,14 @@ public class AccessCodeEntity {
 The compilation errors related to _QueueEntity_ will be solved when we create the related entity in next step.
 ====
 
-==== _Queue_ component
-
+==== _Queue_ Component
 Finally, we are going to repeat the same process for our last entity _QueueEntity_ component. Create  packages:
 
 `com.devonfw.application.jtqj.queuemanagement.dataaccess.api` 
 
 And create the class _QueueEntity_. So we will end up with the following structure:
 
-image::images/devon4j/4.Components/jumpthequeue_emptycomponents2.png[ link="images/devon4j/4.Components/jumpthequeue_emptycomponents2.png"]
+image::images/devon4j/4.Components/jumpthequeue_emptycomponents2.png[JumpTheQueue empty Components 2]
 
 And the content of the _QueueEntity_ before start using _Cobigen_ will be
 
@@ -775,27 +759,24 @@ With this we have finished preparing the core of our components. Now we can star
 Now we can solve the compilation errors related to `QueueEntity` in the `AccessCodeEntity.java` class by using the suggestion of IDE. To get the suggestion just open the class `AccessCodeEntity.java` and leftclick on the little bulb on the left side. 
 ====
 
-=== The component's structure with _Cobigen_
-
+=== The Component's Structure with _Cobigen_
 Once we have finished creating the _core_ of our components we could continue creating all the structure and elements manually, but we are going to show how using _Cobigen_ for those tasks we can save a significant amount of time and effort.
 
 ==== Cobigen Health Check
-
 The first time we use Cobigen is recommended to check the health of the tool. To do so, right-click over an entity and select _Health Check_
 
-image::images/devon4j/4.Components/cobigen0.png[link="images/devon4j/4.Components/cobigen0.png"]
+image::images/devon4j/4.Components/cobigen0.png[CobiGen Health Check 1]
 
 The next dialogs will show us if there are outdated templates. In that case we can solve it clicking the _Update_ button.
 
-image::images/devon4j/4.Components/cobigen_health1.png[width="350",link="images/devon4j/4.Components/cobigen_health1.png"]
+image::images/devon4j/4.Components/cobigen_health1.png[CobiGen Health Check 2, 350]
 
-image::images/devon4j/4.Components/cobigen_health2.png[width="350",link="images/devon4j/4.Components/cobigen_health2.png"]
+image::images/devon4j/4.Components/cobigen_health2.png[CobiGen Health Check 3, 350]
 
-==== _Queue_ component structure (Entity without relations)
-
+==== _Queue_ Component Structure (Entity without Relations)
 In order to create the whole structure of a component with _Cobigen_ we only need to right-clicking over our component core entity, select _Cobigen > Generate_
 
-image::images/devon4j/4.Components/cobigen1.png[link="images/devon4j/4.Components/cobigen1.png"]
+image::images/devon4j/4.Components/cobigen1.png[Cobigen Generate]
 
 Now we have to choose which packages we want to generate with the tool.
 
@@ -803,33 +784,33 @@ The options are:
 
 * _CRUD SpringData Repository_: generates the entity repository(that contains the CRUD operations) in the data access layer.
 
-image::images/devon4j/4.Components/cobigen2_crud_springdata_repository.png[link="images/devon4j/4.Components/cobigen2_crud_springdata_repository.png"]
+image::images/devon4j/4.Components/cobigen2_crud_springdata_repository.png[CobiGen CRUD Spring Data Repository]
 
 * _CRUD REST services_: generates a complete service layer with CRUD operations for our entity exposed as a REST service.
 
-image::images/devon4j/4.Components/cobigen2_crud_rest_services.png[link="images/devon4j/4.Components/cobigen2_crud_rest_services.png"]
+image::images/devon4j/4.Components/cobigen2_crud_rest_services.png[CobiGen CRUD REST Services]
 
 * _CRUD UC logic_: generates the logic layer dividing the implementation in different use cases.
 
-image::images/devon4j/4.Components/cobigen2_crud_uc_logic.png[link="images/devon4j/4.Components/cobigen2_crud_uc_logic.png"]
+image::images/devon4j/4.Components/cobigen2_crud_uc_logic.png[CobiGen CRUD UC Logic]
 
 * _Entity infrastructure_: creates the entity main interface and edits (by a merge) the current entity to extend the devon classes
 
-image::images/devon4j/4.Components/cobigen2_entity_infrastructure.png[link="images/devon4j/4.Components/cobigen2_entity_infrastructure.png"]
+image::images/devon4j/4.Components/cobigen2_entity_infrastructure.png[CobiGen Entity Infrastructure]
 
 * _TO's_: generates the related _Transfer Objects_, that we will explain in next chapters of this tutorial
 
-image::images/devon4j/4.Components/cobigen2_to.png[link="images/devon4j/4.Components/cobigen2_to.png"]
+image::images/devon4j/4.Components/cobigen2_to.png[CobiGen Transfer Objects]
 
 To generate all the needed functionalities of our component we are going to select the following packages to be generated *at the same time*
 
-image::images/devon4j/4.Components/cobigen3_allpackages.png[link="images/devon4j/4.Components/cobigen3_allpackages.png"]
+image::images/devon4j/4.Components/cobigen3_allpackages.png[CobiGen Package Selection]
 
 Now we can select the fields to be involved (all by default) or directly create all the packages clicking the _Finish_ button.
 
 During the process _Cobigen_ will show a message asking us to review some ambiguous references. Click _Continue_
 
-image::images/devon4j/4.Components/cobigen4_review_imports.png[link="images/devon4j/4.Components/cobigen4_review_imports.png"]
+image::images/devon4j/4.Components/cobigen4_review_imports.png[CobiGen Import Review]
 
 Once _Cobigen_ has finished we will check if we need to introduce manual adjustments.
 
@@ -851,28 +832,24 @@ _CORE_
 
 We can fix the errors manual with: `**import** java.sql.TimeStamp`.
 
-image::images/devon4j/4.Components/cobigen5_manual_import.png[link="images/devon4j/4.Components/cobigen5_manual_imports.png"]
+image::images/devon4j/4.Components/cobigen5_manual_import.png[CobiGen Manual Import]
 
-==== _AccessCode_ component structure (Entity with relations)
-
+==== _AccessCode_ Component Structure (Entity with Relations)
 We repeat the process with _AccessCode_ but in this case, since its an entity with relations, we are going to have to select different cobigen options:
 
-image::images/devon4j/4.Components/cobigen-accesscode-new.png[link="images/devon4j/4.Components/cobigen3_allpackages_cto.png"]
+image::images/devon4j/4.Components/cobigen-accesscode-new.png[CobiGen New AccessCode]
 
 After letting cobigen finish generating and fixing the imports like in the last step there will be some errors left, this is because we have a relation (dependency) with some of the _Queue_ and _Visitor_ component elements, that are still not created. We will solve this compilation errors in next steps.
 
-image::images/devon4j/4.Components/cobigen6_expected_errors.png[link="images/devon4j/4.Components/cobigen6_expected_errors.png"]
+image::images/devon4j/4.Components/cobigen6_expected_errors.png[CobiGen Expeted Errors]
 
-==== _Visitor_ component structure (Entity without relations)
-
+==== _Visitor_ Component Structure (Entity without Relations)
 Finally we are going to repeat the same process that was used with the _Queue_ component but this time, using _Cobigen_ with our other _Visitor_ component. Once cobigen has finished we can fix one of the compilation error in `AccessCodeCto` and `UcFindAccessCodeImpl` related to `VisitorEto` by manual importing like we learned in the last step.
 
-==== Run the app
-
+==== Run the App
 If all compilation errors are solved run the app ( _SpringBootApp.java right click > Run as > Java application_ ). The app should be launched without errors.
 
 Congratulations you have created your first _devon4j_ components. You should be able to access the login screen with link:http://localhost:8081/jumpthequeue[]. You can login with waiter/waiter. In the next chapter we will explain and show in detail each of the created elements
 
 '''
-
-*Next chapter*: link:devon4j-layers[devon4j structure]
+*Next Chapter*: link:devon4j-layers.asciidoc[devon4j Structure]

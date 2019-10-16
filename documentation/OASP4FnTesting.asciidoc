@@ -10,10 +10,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Testing of OASP4Fn applications
+= Testing of OASP4Fn Applications
 In this chapter we are going to learn how to tests applications in OASP4Fn using the http://mochajs.org/[mocha] framework and the http://chaijs.com/[chai] assertion library.
 
-== Install global dependencies
+== Install Global Dependencies
 As the title says in this section we're going to specify the global dependencies that we need to run our tests, that only are the test framework and the typescript interpreter:
 
 ```
@@ -23,10 +23,10 @@ yarn global add ts-node
 
 No more dependencies are needed, because we start our project with the oasp4fn application template and the local part of the test dependencies are specified as dev-dependencies at the _package.json_.
 
-== Writing the tests
+== Writing the Tests
 Once we have all the dependencies installed, it's time to put hands on the tests.
 
-=== Setting up file
+=== Setting up File
 First of all we are going to import all the handlers we are going to test in our file/s (in our case only in test/Http/Post.ts), our typings and the every time useful _lodash_ package, so the head of our test file will look like this:
 
 [source, typescript]
@@ -55,9 +55,9 @@ describe('register', function () {
 
 If we execute this test with `yarn test` we should see that we only have one test and is in a pending state:
 
-image::images/oasp4fn/3.BuildYourOwn/yarn_test1.PNG[, link="images/oasp4fn/3.BuildYourOwn/yarn_test1.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/yarn_test1.PNG[Yarn Test]
 
-=== Add tests of the handlers
+=== Add Tests of the Handlers
 Now is time to call the function and check his behavior, first of all execute `yarn test:auto` to watch for changes and execute the tests automatically, next write your test:
 
 [IMPORTANT]
@@ -132,7 +132,7 @@ describe('search', function () {
 });
 ----
 
-=== Add an after hook
+=== Add an after Hook
 Finally, it's worth to point that we are inserting test data into our database, so we should erase them if it's necessary after executing the test, for do this, we are going to add a hook that will execute at the end of our tests, and will erase a visitor if we had inserted any, using OASP4Fn, so for that we are going to import OASP4Fn in our file, store the code of the inserted visitor and delete it if it had been inserted successfully, so our hook will look like this:
 
 [source, typescript]
@@ -145,7 +145,7 @@ after(async () => {
 
 Keep in mind that the variable _code_ is the property code located in the returned object of the handler _register_ that you should store, when his callback return it. 
 
-=== Final result
+=== Final Result
 So, at the end of the road we have this test file:
 
 [source, typescript]
@@ -215,8 +215,7 @@ after(async () => {
 
 And the output console look like this:
 
-image::images/oasp4fn/3.BuildYourOwn/yarn_test2.PNG[, link="images/oasp4fn/3.BuildYourOwn/yarn_test2.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/yarn_test2.png[Yarn Test]
 
 '''
-
-*Next chapter*: link:OASP4FnDeployment[Deploy your OASP4Fn app]
+*Next Chapter*: link:OASP4FnDeployment.asciidoc[Deploy your OASP4Fn App]

@@ -10,21 +10,18 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= devon4j adding custom functionality
-
-In the link:devon4j-layers[previous chapter] we have seen that using _Cobigen_ we can generate in a few _clicks_ all the structure and functionality of an _devon4j_ component.
+= devon4j adding Custom Functionality
+In the link:devon4j-layers.asciidoc[previous chapter] we have seen that using _Cobigen_ we can generate in a few _clicks_ all the structure and functionality of an _devon4j_ component.
 
 In this chapter we are going to show how to add custom functionalities in our projects that are out of the scope of the code that _Cobigen_ is able to cover.
 
 == Return the Access Code
-
-The _Jump the Queue_ design defines a link:jump-the-queue-design#user-story-register[User Story] in which a visitor can register into an event and obtain an access code to avoid a queue.
+The _Jump the Queue_ design defines a xref:jump-the-queue-design#user-story-register[User Story] in which a visitor can register into an event and obtain an access code to avoid a queue.
 
 In our _standard_ implementation of the _Jump the queue_ app we have used _Cobigen_ to generate the components, so we have a default implementation of the services. Since _AccessCode_ component is more complex and needs the use of _CTOs_ we need to create our own _usecasemanage_ and the methods save and delete.
 It is also needed to add some methods to the _Queue_ component since when saving/deleting an `AccessCode` the `Queue` customers needs to increase/decrease.
 
-=== Adding methods to the _Queue_ component
-
+=== Adding Methods to the _Queue_ Component
 In our case, two new methods are going to be needed, `decreaseQueueCustomer` and `increaseQueueCustomer`. In order to add those methods to the queuemanagement we need to do three steps:
 
 	1. Modify the corresponding `usecase` interface adding the methods.
@@ -34,8 +31,7 @@ In our case, two new methods are going to be needed, `decreaseQueueCustomer` and
 	3. Modify the management implementation `managementimpl`.
 
 
-==== 1 Modifying `UcManageQueue`
-
+==== 1 Modifying _UcManageQueue_
 Inside `jtqj-api/queuemanagement/log/api/usecase/UcManageQueue` the declaration of the two methods are going to be added:
 
 [source, java]
@@ -62,8 +58,7 @@ public interface UcManageQueue {
 }
 ----
 
-==== 2 Implementing the methods in  `UcManageQueueImpl`
-
+==== 2 Implementing the Methods in _UcManageQueueImpl_
 In the `jtqj-core/src/main/java/queuemanagement/logic/impl/usecase/UcManageQueueImpl` the implementation of the methods that were just added in the interface are going to be added.
 
 [source, java]
@@ -97,8 +92,7 @@ public class UcManageQueueImpl extends AbstractQueueUc implements UcManageQueue 
 }
 ----
 
-==== 3 Modify the management implementation `QueuemanagementImpl`.
-
+==== 3 Modify the Management Implementation _QueuemanagementImpl_
 Since the `Queuemanagement` extends the usecase `UcManageQueue` the methods from the previous step need to be added in the `QueuemanagementImpl`. 
 
 [source,java]
@@ -124,7 +118,6 @@ These methods are simply going to call the `ucManageQueue` methods that were jus
 === Creating the usecasemanage for the AccessCode
 
 ==== Adding method to the AccessCode usecasefind
-
 Before creating the usecasemanage a method needs to be added to the usecasefind that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/` the file `UcFindAccessCode` is going to be modified adding the new method to the interface:
 
 [source,java]
@@ -167,7 +160,6 @@ public class UcFindAccessCodeImpl extends AbstractAccessCodeUc implements UcFind
 This method uses a `AcessCodeSearchCriteriaTo` to find a page of entities `AccessCodeEntity` with the repository. After that, it maps the list changing from `AccessCodeEntity` to `AccessCodeEto`. 
 
 ==== Creating the usecasemanage
-
 In the api(`jtqj-api`) inside the package `accesscodemanagement/logic/api/usecase/` we are going to create a new interface called `UcManageAccessCode`, where we will define the save and delete methods.
 
 [source,java]
@@ -354,7 +346,7 @@ public class UcManageAccessCodeImpl extends AbstractAccessCodeUc implements UcMa
 
 Taking a closer look into the code, we can see that in order to use the methods from the `UcFindAccessCodeImpl` we need to use the parent(`Accesscodemanagement`) instead of the class directly. Also, following the `devon4j` structure each component needs to take care of its own. In this case, by using the method `getQueuemanagement()` we get access to the `Queuemanagement` injection that will allow the use of the methods we created earlier in the use cases in the queue component.
 
-=== Adding to the logic
+=== Adding to the Logic
 Inside `jtqj-api` and in the class `accesscodemanagement/logic/api/AccessCodemanagement` we are going to extend the `UcManageAccessCode` that we just defined
 
 [source,java]
@@ -428,8 +420,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 }
 ----
 
-=== Adding to the service
-
+=== Adding to the Service
 To add the new service we need to add the definition to the `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/acessCode` _REST_ resource bound three methods, one called _saveAccessCode_, another one called _findAccessCodeEtos_ and the other one called _deleteAccessCode_.
 
 [source,java]
@@ -512,11 +503,11 @@ Now run again the app with Eclipse and with postman call our new save service (P
 
 The result should be something similar to this:
 
-image::images/devon4j/6.Customizations/jumpthequeue_accesscode.png[, link="images/devon4j/6.Customizations/jumpthequeue_accesscode.png"]
+image::images/devon4j/6.Customizations/jumpthequeue_accesscode.png[JumpTheQueue AccessCode]
 
 In order to know if the new codeaccess has been succesfully created we can search all the ctos like we did in anterior steps, the new accesscode should be on the bottom:
 
-image::images/devon4j/6.Customizations/jumpthequeue_listwithcode.png[, link="images/devon4j/6.Customizations/jumpthequeue_listwithcode.png"]
+image::images/devon4j/6.Customizations/jumpthequeue_listwithcode.png[JumpTheQueue List with Code]
 
 To test the delete, you can send a delete to this url http://localhost:8081/jumpthequeue/services/rest/accesscodemanagement/v1/accesscode/{id} using the id found either on the save or on the search.
 
@@ -525,5 +516,4 @@ In this chapter we have seen how easy is extend a _devon4j_ application, with fe
 In the next chapter we will show how easy is to add validations for the data that we receive from the client.
 
 '''
-
-*Next chapter*: link:devon4j-validations[Validations in devon4j]
+*Next Chapter*: link:devon4j-validations.asciidoc[Validations in devon4j]

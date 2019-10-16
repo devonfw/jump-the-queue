@@ -11,13 +11,11 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j
+For _Java_ based backend solutions, _devonfw_ includes https://github.com/devonfw/devon4j/wiki/architecture[devon4j] that provides a standardized architecture blueprint, an open best-of-breed technology stack as well as industry proven best practices and code conventions for a cloud ready _Spring_ based server.
 
-For _Java_ based backend solutions, _devonfw_ includes https://github.com/devonfw/devon4j/wiki/architecture[_devon4j_] that provides a standardized architecture blueprint, an open best-of-breed technology stack as well as industry proven best practices and code conventions for a cloud ready _Spring_ based server.
+Included in _devonfw_ framework as default server solution, https://github.com/devonfw/devon4j[devon4j] is the result of applying devonfw principles in a Java based technology stack. With _devon4j_ developers are able to create web application backends in a fast and reliable way, generating web services (REST, SOAP) that web clients can consume.
 
-Included in _devonfw_ framework as default server solution, https://github.com/devonfw/devon4j[_devon4j_] is the result of applying devonfw principles in a Java based technology stack. With _devon4j_ developers are able to create web application backends in a fast and reliable way, generating web services (REST, SOAP) that web clients can consume.
-
-== devon4j Technology stack
-
+== devon4j Technology Stack
 As mentioned before, devon4j is not only a framework but a set of tools and conventions. devon4j provides a Java backend solution based on the following technologies:
 
 * https://spring.io/[Spring framework] as the main development framework
@@ -56,27 +54,25 @@ As service framework
 * http://cxf.apache.org/[Apache CXF] that provides support for:
 
 ** REST services through https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services[JAX-RS]
+
 ** SOAP services through https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS]
 
-== devon4j tools
+== devon4j Tools
 
 === IDE
-
 As part of the _devonfw_ framework devon4j projects are integrated in a customized Eclipse instance that provides pre-configurations and pre-installed plugins focusing on code quality and productivity boosting.
 
 === devonfw Tools
-
 Apart from all the methodologies regarding the mentioned frameworks, inside the devonfw ecosystem there are another tools that are crucial for boosting the productivity and enhance the managing of the Java projects.
 
 * Cobigen: a generic incremental generator for end to end code generation that will allow us to automate the generation of the main parts of the components of our apps. Starting from an Entity, Cobigen can generate all its CRUD functionality for us, starting from the service and ending up in the persistance data layer.
 
 * Devcon: a devonfw internal tool to manage devonfw based projects. Among many other tasks, it can create, run or deploy devon4j applications avoiding users to do it manually.
 
-== devon4j architecture overview
-
+== devon4j Architecture Overview
 devon4j provides a solution for industrialized web apps based on _components_ and a three-layers architecture.
 
-image::images/devon4j/1.Overview/devon4j_architecture.png[,width="450", link="images/devon4j/1.Overview/devon4j_architecture.png"]
+image::images/devon4j/1.Overview/devon4j_architecture.png[devon4j Architecture, 600]
 
 A _component_ is a package that contains the services and logic related to one feature of the app.
 
@@ -93,5 +89,4 @@ Finally the _devon4j_ applications provide a _general_ package to locate the cro
 In the next chapters you can find all the details about the implementation of each layer and how to develop all the relevant parts of a web app based on _devonfw_ framework and _devon4j_.
 
 '''
-
-*Next chapter*: link:an-devon4j-application[an devon4j application]
+*Next Chapter*: link:an-devon4j-application.asciidoc[A devon4j Application]

@@ -10,7 +10,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-image::images/jumpthequeue/scene.png[, link="images/jumpthequeue/scene.png"]
+image::images/jumpthequeue/scene.png[JumpTheQueue Scene]
 
 = Introduction
 When visiting public (free) or private (paid) events there are often large queues creating significant waiting times. Ideally the organizer of the event would like to streamline the entry of people. That would be possible by allowing people privileged access or, alternatively, offer an incentive for people to arrive in time or to get into line more efficiently. A way of doing this would be to have a website or application which would allow visitors to "Jump the Queue". This document describes the design for such an application: _“JumpTheQueue”_. 
@@ -66,8 +66,7 @@ As a visitor , I want to go the the privileged access queue with my valid (i.e. 
 == Flow
 The basic flow of the application can be:
 
-image::images/jumpthequeue/flow.png[, link="images/jumpthequeue/flow.png"]
-
+image::images/jumpthequeue/flow.png[JumpTheQueue App Flow]
 
 * Fill in a form to give your name and private data and then press a button with “Register”
 * In case of validation errors, an error message will be shown
@@ -75,21 +74,18 @@ image::images/jumpthequeue/flow.png[, link="images/jumpthequeue/flow.png"]
 * From this page you can show a view of the current Queue, with the list of people queued
 
 == Mock-ups
-
-image::images/jumpthequeue/mockups.png[, link="images/jumpthequeue/mockups.png"]
+image::images/jumpthequeue/mockups.png[JumpTheQueue Mock-Ups]
 
 = Model 
+image::images/jumpthequeue/model.png[JumpTheQueue Model]
 
-image::images/jumpthequeue/model.png[, link="images/jumpthequeue/model.png"]
-
-image::images/jumpthequeue/event.png[, link="images/jumpthequeue/event.png"]
+image::images/jumpthequeue/event.png[JumpTheQueue Event]
  
 ====
 => the Event item is not further developed nor implemented 
 ====
 
 == Predicates
-
 ====
 _Definition_::
 ----
@@ -116,7 +112,6 @@ isTelephoneNumber = trivial: notnull + notempty + pass:quotes[_consists of seque
 ----
 
 == Types
-
 ====
 _Definition_:: 
 [subs=+macros]
@@ -151,7 +146,6 @@ type Error :: trivial: Error information with code & error description
 ----
 
 == Entities & Value Objects
-
 [cols="2", options="header"]
 |===========================
 2+|Visitor (Entity)
@@ -195,5 +189,4 @@ s|Field            s|Type
 There must be a 1 - 1 relationship between a Visitor and an VisitorTicker. 
 
 '''
-
-*Next chapter*: link:devon4j-getting-started-home[devon4j Getting Started]
+*Next Chapter*: link:devon4j-overview.asciidoc[devon4j Overview]

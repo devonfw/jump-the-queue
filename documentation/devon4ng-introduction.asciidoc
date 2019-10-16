@@ -11,11 +11,9 @@ ifdef::env-github[]
 endif::[]
 
 == devon4ng
+Created to support the development of Angular applications, https://github.com/devonfw/devon4ng[devon4ng] includes Google Material Design as main visual language to take at maximum the advantage of Angular possibilities and Material components, making possible the building of modular, well-designed, responsive front-end applications.
 
-Created to support the development of Angular applications, https://github.com/devonfw/devon4ng[_devon4ng_] includes Google Material Design as main visual language to take at maximum the advantage of Angular possibilities and Material components, making possible the building of modular, well-designed, responsive front-end applications.
-
-=== devon4ng Technology stack
-
+=== devon4ng Technology Stack
 devon4ng works on top of Angular but also, it provides several tools, libraries and code conventions to make your Angular apps easier to develop based on the following technologies:
 
 - http://angular.io/[Angular Framework] as the main development framework
@@ -38,7 +36,7 @@ The main advantages of this technologies are:
 === devon4ng tools
 
 ==== IDE
-There is no integrated IDE with the framework, that means you are free to work with whatever IDE fits better with you. Event though, we fully recommend the use of https://code.visualstudio.com/[Visual Studio Code], along with a https://github.com/devonfw/devonfw-extension-pack-vscode[Guide of the most interesting plugins] to make even easier your development with Typescript and Angular.
+There is no integrated IDE with the framework, that means you are free to work with whatever IDE fits better with you. Event though, we fully recommend the use of https://code.visualstudio.com/[Visual Studio Code], along with a https://github.com/devonfw/devonfw-extension-pack-vscode[guide] of the most interesting plugins to make even easier your development with Typescript and Angular.
 
 ==== Angular/Cli
 This https://github.com/angular/angular-cli[CLI] helps the developer to automatize some common processes. It comes with https://github.com/webpack/webpack[Webpack] as main bundler. It is widely used in the Angular community thanks to the boost of productivity it provides at the time of creating new projects from scratch, serving and testing the project, creating new components, services, directives...
@@ -46,23 +44,22 @@ This https://github.com/angular/angular-cli[CLI] helps the developer to automati
 ==== Testing
 Testing helps the developers to be sure that all the typescript in services and components works properly, but also, it can test HTML tags and properties. There are many options to test an Angular app, the default option is https://github.com/karma-runner/karma[Karma] and https://github.com/jasmine/jasmine[Jasmine].
 
-=== devon4ng architecture overview
+=== devon4ng Architecture Overview
 As Angular is the main framework for devon4ng, the architecture of the applications that is going to be used is the same as https://angular.io/docs/ts/latest/guide/architecture.html[Angular]:
 
-image::images/devon4ng/1.Intro/architecture_overview.png[, link="images/devon4ng/1.Intro/architecture_overview.png"]
+image::images/devon4ng/1.Intro/architecture_overview.png[Angular Architecture Overview]
 
 This architecture will be enhanced with some functionalities from Covalent Teradata and Angular Material:
 
 - Theming: functionality that Angular Material includes in its library and Covalent Teradata extends, it declares one primary color, one secondary color and one color for warning and alerts to be used in all the application. Also Covalent Teradata expects a color for the background and another for the foreground. This colors will be stored in one theme, where you can store as much as you want and be changed at the run-time by the user.
 
-image::images/devon4ng/1.Intro/theming.png[, link="images/devon4ng/1.Intro/theming.png"]
+image::images/devon4ng/1.Intro/theming.png[Angular Theming]
 
 - Flex-box: Along with other https://teradata.github.io/covalent/#/style-guide/utility-styles[CSS Utility Styles & Classes], Covalent Teradata comes with flex-box, useful for styling and organizing components inside of a view, which also has been extended by Covalent Teradata to achieve responsiveness. You can declare styles that change, hide or transform the component depending on the screen resolution of the device.
 
-image::images/devon4ng/1.Intro/flex_box.jpeg[, link="images/devon4ng/1.Intro/flex_box.jpeg"]
+image::images/devon4ng/1.Intro/flex_box.jpeg[Flex Box]
 
 In the following chapters we are going to see an example of a finished devon4ng application, how to build your own devon4ng app from the scratch and all you need to know about each part of the architecture in order to start building your own applications.
 
 '''
-
-*Next chapter*: link:an-devon4ng-application[An devon4ng application]
+*Next Chapter*: link:an-devon4ng-application.asciidoc[A devon4ng Application]

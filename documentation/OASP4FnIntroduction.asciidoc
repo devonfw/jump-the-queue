@@ -11,13 +11,11 @@ ifdef::env-github[]
 endif::[]
 
 = OASP4Fn Introduction
-
 **Serverless** is a framework that allows developers to build auto-scalable applications, pay-per-execution, event-driven apps on AWS Lambda, Microsoft Azure, IBM OpenWhisk and Google Cloud Platform.
  
 **OASP4Fn** is a npm package full of functionality independent of the goal of the developments made over this framework. It provides many different features following this approach in order to allow the developers use the ones that fit in their needs to build, test and deploy applications in an easy, fast and clean way using the Serverless framework.
 
-== Serverless computing
-
+== Serverless Computing
 Serverless computing consists in the following concepts and benefits:
 
 * **Functions as a Service** (FaaS).
@@ -34,13 +32,12 @@ Besides the automatic horizontal scaling, the biggest benefit is that **you only
 
 It solves common and inefficient situations like **occasional requests**, where an application with a few small requests per minute makes the CPU idle most of time, or like **inconsistent traffic** where the traffic profile of an application is very _speaky_. For example:
 
-image::images/oasp4fn/1.Introduction/inconsistent-traffic-pattern.png[, link="images/oasp4fn/1.Introduction/inconsistent-traffic-pattern.png"]
+image::images/oasp4fn/1.Introduction/inconsistent-traffic-pattern.png[Inconsistent Traffic Pattern]
 
 
 In a traditional environment you may need to increase your total hardware capability by a factor of 10 to handle the spikes, even though they only account for less than 4% of total machine uptime.
 
 == Installation
-
 OASP4Fn is distributed as a **npm package** that you can install in your node.js application running in a terminal the following command:
 
 [source, bash]
@@ -51,21 +48,18 @@ $ yarn add @oasp/oasp4fn
 ----
 
 == What does OASP4Fn provide on Serverless?
-
 The following picture shows what OASP4Fn offers in order to facilitate Serverless development.
 
-image::images/oasp4fn/1.Introduction/oasp4fn_adds.PNG[, link="images/oasp4fn/1.Introduction/oasp4fn_adds.PNG"]
+image::images/oasp4fn/1.Introduction/oasp4fn_adds.png[OASP4Fn Adds]
 
 Currently, the **OASP4Fn architecture** defines a series of adapters to help developers to build applications and make use of different cloud providers. 
 
-image::images/oasp4fn/1.Introduction/oasp4fn_available.PNG[, link="images/oasp4fn/1.Introduction/oasp4fn_available.PNG"]
+image::images/oasp4fn/1.Introduction/oasp4fn_available.png[OASP4Fn Available]
 
 === TypeScript
-
 The Serverless framework is not prepared by default to use TypeScript. OASP4Fn allows the developer to use **TypeScript** as the programming language in any development, as it provides the **types definitions** and a **preconfigured webpack building system** that automates the transpilation of the different handlers. 
 
 === Infraestructure as Code 
-
 The service made with OASP4Fn must follow a **specified structure**, that along with a configuration file will allow the user to avoid having to configure his service manually. 
 
 ----
@@ -93,7 +87,6 @@ The logic of our application must be stored in a folder, called **handlers**, in
 Furthermore of the specified before, in the file **oasp4fn.config.js**, it is specified the configuration of the events, deployment information and the runtime environment in which the handlers will run.
 
 === Annotations
-
 In addition to the configuration file, we can specify to each handler a **concrete configuration**, related to the event that triggers the handler, using a **dummy function** that adds or modifies the configuration specified in OASP4Fn configuration file.
 
 [source,typescript]
@@ -107,8 +100,7 @@ export async function getAttachment (event: HttpEvent, context: Context, callbac
 
 These annotations will be only interpreted by the framework, so they do not inject or add any kind of functionality to the actual handler.
 
-== Cloud adapters
-
+== Cloud Adapters
 OASP4Fn also comes with a simple interface that allows the user to have access to different services of cloud providers using adapters.
 
 That interface makes use of this adapters to retrieve data to the user through **Promises**, and let the user query that retrieved data.
@@ -121,7 +113,6 @@ Currently available adapters:
 ** AWS Cognito
 
 == Command Line Interface 
-
 OASP4Fn provides a simple command line interface, that using the resources and the information provided by Infrastructure as Code, will help the user generate the proper files to build, deploy and test our application.
 
 [source,bash]
@@ -139,6 +130,4 @@ Options:
 ----
 
 '''
-
-*Next chapter*: link:BuildOASP4FnApplication[Build your OASP4Fn app]
- 
+*Next Chapter*: link:BuildOASP4FnApplication.asciidoc[Build your OASP4Fn App]

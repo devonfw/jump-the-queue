@@ -14,7 +14,7 @@ endif::[]
 In this chapter, we are going to see how services work and how we can work with them.
 
 == What are Angular Services
-From link:https://angular.io/[Angular's main page]:
+From https://angular.io/[Angular's] main page:
 
 _"Service is a broad category encompassing any value, function, or feature that your application needs._
 
@@ -29,42 +29,37 @@ Services are often created in a shared folder, with the purpose of containing al
 Like components, services have to be declared in a NgModule too, in this case, in the _providers_ array.
 
 == Dependency Injection
-
-From link:https://angular.io/guide/architecture#dependency-injection[Angular architecture docs]:
+From https://angular.io/guide/architecture#dependency-injection[Angular architecture docs]:
 
 _"Dependency injection is a way to supply a new instance of a class with the fully-formed dependencies it requires. Most dependencies are services. Angular uses dependency injection to provide new components with the services they need._
 
 _When Angular creates a component, it first asks an injector for the services that the component requires._
 
-image::images/devon4ng/5.Angular_Services/injector.png[, link="images/devon4ng/5.Angular_Services/injector.png"]
+image::images/devon4ng/5.Angular_Services/injector.png[Angular Injector]
 
 _An injector maintains a container of service instances that it has previously created. If a requested service instance is not in the container, the injector makes one and adds it to the container before returning the service to Angular. When all requested services have been resolved and returned, Angular can call the component's constructor with those services as arguments. This is dependency injection."_
 
-For more information: link:https://angular.io/guide/dependency-injection[Angular DI]
+For more information visit the https://angular.io/guide/dependency-injection[Angular dependency injection] page.
 
-== Create a new service
-
+== Create a new Service
 Security or other global services will be stored in a shared folder at the same level of the rest of the components, but the services that are specific to a certain component will be in a shared folder too, but inside of that certain component. We can indicate the path to create our services when creating them using angular/cli
 
 `ng generate service <path>/<service-name>`
 
 == Authentication
-
 Authentication is a special service created to maintain user session in the application, in the tutorial case is serves just as an indicator of the logged state and the name of the user, but it can be extended to store tokens, validate permission of roles and so on.
 
 Basically is a service created with the objective of manage what the user can or can not see depending on their actions in the application.
 
 == Guards
-
-link:https://angular.io/guide/router#milestone-5-route-guards[Guards] are services that implement an interface called *CanActivate*, this interface forces to implement a canActivate method which returns a boolean. Is up to you decide what conditions are you going to implement to forbid the navigation to a certain component, but the fact is you can implement it there and then return if the navigation can be done returning true or can not be done returning false.
+https://angular.io/guide/router#milestone-5-route-guards[Guards] are services that implement an interface called *CanActivate*, this interface forces to implement a canActivate method which returns a boolean. Is up to you decide what conditions are you going to implement to forbid the navigation to a certain component, but the fact is you can implement it there and then return if the navigation can be done returning true or can not be done returning false.
 
 Guards are strongly related to Router, because are the routes who will consume them adding the property `canActivate:[GuardServiceName]` to each route to be protected, you can create as many guards as you want to secure every single component as desired.
 
 If your application will have a login process, or special areas not accessible to everyone. We encourage to use Guards, because even if you hide the button to navigate, the user can modify the URL in the browser and have access to the component, with guards implemented, this navigation will be forbidden and you app not compromised.
 
-== Server communication
-
-Angular uses link:https://angular.io/guide/http#http[HTTP] to communicate with the server, but what the call return is an object from the library link:http://reactivex.io/rxjs/[RxJS], which is a third party library endorsed by Angular to manage asynchronous calls based on the Observable pattern.
+== Server Communication
+Angular uses https://angular.io/guide/http#http[HTTP] to communicate with the server, but what the call return is an object from the library http://reactivex.io/rxjs/[RxJS], which is a third party library endorsed by Angular to manage asynchronous calls based on the Observable pattern.
 
 You do not have to install the package because it comes with the creation of the project with the angular/cli, you just have to import the correct operators and modules to use it correctly.
 
@@ -78,8 +73,7 @@ Observables work as follows:
 
 This is the most common workflow with Observables. Take into account that if you put some code after the Subscribe, it will be probably executed before the subscribe ends, if you need something to be executed after the subscribe function, you should put it inside of the subscription.
 
-link:https://angular.io/guide/http#rxjs-library[Here] you can find more information about RxJs and Observables coming from the main page of Angular.
+https://angular.io/guide/http#rxjs-library[Here] you can find more information about RxJs and Observables coming from the main page of Angular.
 
 '''
-
-*Next chapter*: link:build-devon4ng-application[ Build your own devon4ng application]
+*Next cChapter*: link:build-devon4ng-application.asciidoc[Build your own devon4ng Application]

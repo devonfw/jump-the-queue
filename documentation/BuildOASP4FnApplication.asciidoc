@@ -10,10 +10,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-== Build your OASP4Fn application 
+== Build your OASP4Fn Application 
 In this chapter we are going to build a serverless backend with OASP4Fn. The main objective of this tutorial is to take an initial contact with OASP4Fn and the necessary tools we are going to use in the development, so at the end of it, the user will be enough confident to start developing a new project with OASP4Fn without problems.
 
-== Install tools
+== Install Tools
 In this section we’re going to introduce all the necessary tools we’re going to need to start programming and a initial configuration if necessary.
 
 === Visual Studio Code
@@ -37,7 +37,7 @@ Let’s install what is going to be the main language during development: TypeSc
 === Yarn
 As npm, https://yarnpkg.com/en/[Yarn] is a package manager, the differences are that Yarn is quite more faster and usable, so we decided to use it to manage the dependencies of OASP4Fn projects.
 
-To install it you only have to go to https://yarnpkg.com/en/docs/install[the official installation page] and follow the instructions.
+To install it you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
 
 Even though, if you feel more confortable with npm, you can remain using npm, there is no problem regarding this point.
 
@@ -49,7 +49,7 @@ Lastly, we are going to install the serverless framework, that are going to help
 == Postman 
 https://www.getpostman.com/[Postman] is an app that helps you build HTTP requests and send them to a server through any of the HTTP methods. This tool will be useful at the end of the tutorial when we are going to run our handlers locally and send POST http requests to them.
 
-== Starting our project through a template
+== Starting our Project through a Template
 To start with the tutorial we are going to use the https://github.com/oasp/oasp4fn-application-template[oasp4fn application template], so use the following command to clone it in your local machine:
 
 `git clone https://github.com/oasp/oasp4fn-application-template.git jumpTheQueue`
@@ -73,7 +73,7 @@ Only remains to install the base dependencies of our code using yarn, so we only
 
 `yarn`
 
-== Local database set up 
+== Local Database Setup 
 The database we are going to use during this tutorial is https://aws.amazon.com/dynamodb/[dynamodb], the noSQL database provided by AWS, which is supported by OASP4Fn.
 First you have to download and start it following http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning[Amazon Official Documentation], once you have downloaded DynamoDB on your computer, open the corresponding shell using the local endpoint:
 
@@ -81,7 +81,7 @@ http://localhost:8000/shell/
 
 And an interactive shell will be opened in your default browser like this:
 
-image::images/oasp4fn/3.BuildYourOwn/dynamo_db_shell.PNG[, link="images/oasp4fn/3.BuildYourOwn/dynamo_db_shell.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/dynamo_db_shell.png[Dynamo DB Shell]
 
 Now we are going to create a table called Queue with the opened shell, to do that write "createTable" in the text pane sited at the left side of the screen and press Ctrl + Space, this will generate a template object specifying the properties that has to be passed to the create function, so we have to modify that object, having at the end something like this:
 
@@ -116,9 +116,9 @@ dynamodb.createTable(params, function(err, data) {
 
 Finally press Ctrl + Enter, and if we have specified the properties properly an output with table description will be displayed at the left side console:
 
-image::images/oasp4fn/3.BuildYourOwn/table_description.PNG[, link="images/oasp4fn/3.BuildYourOwn/table_description.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/table_description.png[Table Description]
 
-== AWS credentials
+== AWS Credentials
 Although we are going to use a local instance, aws-sdk is going to look for credentials required for the configuration and an error will raise if the credentials are missing, so for that reason we are going to add a credentials file in an _.aws_ folder in our home directory. Said that, first of all create the folder with the following commands:
 
 ```
@@ -156,7 +156,7 @@ export interface Code {
 } 
 ----
 
-== Start the development
+== Start the Development
 Now that we already have finish the set up of our project, we are going to add our handlers based on our design: 
 
 * One that will add the visitor to the queue
@@ -285,7 +285,7 @@ export async function search (event: HttpEvent, context: Context, callback: Func
 }
 ----
 
-== Generating the configuration files
+== Generating the Configuration Files
 In this part we are going to learn how to generate the configuration files that we are going to use to build and deploy our handlers. The first step, is to add the configuration in the _oasp4fn.config.js_ file, but how isn't necessary more configuration than the default one in this tutorial, we are going to remove that file:
 
 `rm oasp4fn.config.js`
@@ -296,9 +296,9 @@ Finally we can execute the command:
 
 And is all goes well, two files, _serverless.yml_ and webpack.config.json will be generated and we will see this command line output:
 
-image::images/oasp4fn/3.BuildYourOwn/fun_output.PNG[, link="images/oasp4fn/3.BuildYourOwn/fun_output.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/fun_output.png[FUN Output]
 
-== Build and run your handlers locally
+== Build and Run your Handlers Locally
 To execute our handlers locally we will make use of the https://github.com/dherault/serverless-offline[serverless-offline] plugin, that emulates a local API-gateway that let you build your handlers through webpack and send http requests to them, so run:
 
 `yarn offline`
@@ -310,17 +310,16 @@ To run this command you must have the _serverless.yml_ file generated, and the s
 
 and you will see the following output:
 
-image::images/oasp4fn/3.BuildYourOwn/offline.PNG[, link="images/oasp4fn/3.BuildYourOwn/offline.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/offline.png[Offline]
 
 And when the webpack rebuild line appears you can start to send requests to the specified endpoints, so open the postman and create a visitor sending a POST request to the register endpoint:
 
-image::images/oasp4fn/3.BuildYourOwn/postman_register.PNG[, link="images/oasp4fn/3.BuildYourOwn/postman_register.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/postman_register.png[Postman Register]
 
 After this, test your other handler, sending a void object with the POST http request, and see how our handler return the visitor inserted:
 
-image::images/oasp4fn/3.BuildYourOwn/postman_search.PNG[, link="images/oasp4fn/3.BuildYourOwn/postman_search.PNG"]
+image::images/oasp4fn/3.BuildYourOwn/postman_search.png[Postman Search]
 
 '''
-
-*Next chapter*: link:OASP4FnTesting[Test your OASP4Fn app]
+*Next Chapter*: link:OASP4FnTesting.asciidoc[Test your OASP4Fn App]
 
