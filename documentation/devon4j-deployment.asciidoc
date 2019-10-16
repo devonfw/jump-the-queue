@@ -226,3 +226,6 @@ The packaging process (compilation, tests and _.war_ file generation) should be 
 ----
 
 The packaging process has created a _.war_ file that has been stored in the `\java\jtqj\server\target` directory.
+
+'''
+*Next Chapter*: link:devon4ng-introduction.asciidoc[devon4ng Introduction]
