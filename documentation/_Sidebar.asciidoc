@@ -23,8 +23,8 @@
 
 ////
 ==== OASP4Fn (Serverless)
-. link:OASP4FnIntroduction[OASP4Fn Introduction]
-. link:BuildOASP4FnApplication[Build a OASP4Fn Application]
-. link:OASP4FnTesting[OASP4Fn Testing]
-. link:OASP4FnDeployment[OASP4Fn Deployment]
+. link:OASP4FnIntroduction.asciidoc[OASP4Fn Introduction]
+. link:BuildOASP4FnApplication.asciidoc[Build a OASP4Fn Application]
+. link:OASP4FnTesting.asciidoc[OASP4Fn Testing]
+. link:OASP4FnDeployment.asciidoc[OASP4Fn Deployment]
 ////

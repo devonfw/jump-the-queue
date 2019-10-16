@@ -1,4 +1,0 @@
-:toc: macro
-toc::[]
-
-= An OASP4Fn application

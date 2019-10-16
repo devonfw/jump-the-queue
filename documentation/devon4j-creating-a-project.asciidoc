@@ -1,5 +1,14 @@
 :toc: macro
 toc::[]
+:idprefix:
+:idseparator: -
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
 = Introduction
 In this chapter you will learn to create a workspace and create a projekt using the CLI or the GUI. When using devon, each project has its own workspace and can be edited by different instances of the IDE, e.g. eclipse.

@@ -1,5 +1,14 @@
 :toc: macro
 toc::[]
+:idprefix:
+:idseparator: -
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
 = Deployment of OASP4Fn applications
 The deployment is performed by the serverless framework and it's quite simple, you only have to run the following command to deploy the full service:

@@ -35,36 +35,36 @@ Here's some general advice up front:
 
 ** If all of the above fails, ask your supervisor for help and provide them with a link to the respective section in this guide. This way we can correct possible errors and improve this introductory course for future trainees.
 
-IMPORTANT: If you haven't already, please read the devonfw https://github.com/devonfw/getting-started/[getting started guide] for a basic overview over the framework, its components, the available resources and other related topics.
+IMPORTANT: If you haven't already, please read the devonfw https://github.com/devonfw/getting-started/[getting started guide] for a basic overview over the framework and the available resources.
 
 == Document Overview
 
-=== devon4j
-. link:devon4j-overview[]
-. link:an-devon4j-application[]
-. link:build-devon4j-application[]
-. link:devon4j-components[]
-. link:devon4j-layers[]
-. link:devon4j-adding-custom-functionality[]
-. link:devon4j-validations[]
-. link:devon4j-testing[]
-. link:devon4j-deployment[]
+=== devon4j (Backend)
+. link:devon4j-overview.asciidoc[devon4j Overview]
+. link:an-devon4j-application.asciidoc[devon4j Application]
+. link:build-devon4j-application.asciidoc[Build a devon4j Application]
+. link:devon4j-components.asciidoc[devon4j Components]
+. link:devon4j-layers.asciidoc[devon4j Structure]
+. link:devon4j-adding-custom-functionality.asciidoc[devon4j Custom Functionality]
+. link:devon4j-validations.asciidoc[devon4j Validations]
+. link:devon4j-testing.asciidoc[devon4j Testing]
+. link:devon4j-deployment.asciidoc[devon4j Deployment]
 
-=== devon4ng
-. link:devon4ng-introduction[]
-. link:an-devon4ng-application[]
-. link:angular-components[]
-. link:angular-services[]
-. link:build-devon4ng-application[]
-. link:angular-deployment[]
+=== devon4ng (Frontend)
+. link:devon4ng-introduction.asciidoc[devon4ng Introduction]
+. link:an-devon4ng-application.asciidoc[devon4ng Application]
+. link:angular-components.asciidoc[Angular Components]
+. link:angular-services.asciidoc[Angular Services]
+. link:build-devon4ng-application.asciidoc[Build a devon4ng Application]
+. link:angular-deployment.asciidoc[Angular Deployment]
 
 ////
-=== OASP4Fn
-. link:OASP4FnIntroduction[]
-. link:BuildOASP4FnApplication[]
-. link:OASP4FnTesting[]
-. link:OASP4FnDeployment[]
+=== OASP4Fn (Serverless)
+. link:OASP4FnIntroduction.asciidoc[OASP4Fn Introduction]
+. link:BuildOASP4FnApplication.asciidoc[Build a OASP4Fn Application]
+. link:OASP4FnTesting.asciidoc[OASP4Fn Testing]
+. link:OASP4FnDeployment.asciidoc[OASP4Fn Deployment]
 ////
 
 '''
-*First chapter:* link:jump-the-queue-design[]
+*First Chapter:* link:jump-the-queue-design.asciidoc[JumpTheQueue Design]
