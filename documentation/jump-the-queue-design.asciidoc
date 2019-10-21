@@ -77,7 +77,7 @@ image::images/jumpthequeue/flow.png[JumpTheQueue App Flow, 450]
 
 === Mock-Ups
 .The pages/views of the application.
-image::images/jumpthequeue/mockups.png[JumpTheQueue Mock-Up]
+image::images/jumpthequeue/mockups.png[JumpTheQueue Mock-Up, 800]
 
 == Model
 .The logical components of the application and their interactions.
@@ -201,7 +201,7 @@ s|Field            s|Type
 |Customers          |NamedItem
 |===========================
  
-There must be a 1 - 1 relationship between a Visitor and an VisitorTicker.
+There must be a 1 - 1 relationship between a Visitor and a VisitorTicker.
 
 '''
 *Next Chapter*: link:devon4j-overview.asciidoc[devon4j Overview]
