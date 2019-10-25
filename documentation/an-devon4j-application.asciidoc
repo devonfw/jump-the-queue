@@ -48,11 +48,15 @@ The _My Thai Star_ project is also included in the devonfw distribution, in _wor
 ====
 
 === The devon4j Project
-Using the _devon4j_ approach for the Java backend project we will have a structure of a main _Maven_ project formed by two sub-projects:
+Using the _devon4j_ approach for the Java backend project we will have a structure of a main _Maven_ project formed by four sub-projects:
 
 image::images/devon4j/2.Example_app/project_modules.png[Maven Project Structure]
 
 In the _core_ project we will store all the logic and functionality of the application.
+
+In the _api_ project contains the definitions of all interfaces in the application.
+
+The _batch_ project contains components related to the https://spring.io/projects/spring-batch[Spring Batch] framework which handles batch processing.
 
 The _server_ project configures the packaging of the application.
 
@@ -74,14 +78,14 @@ Using _Spring Boot_ features, we can easily run our _Java_ backend applications 
 
 image::images/devon4j/2.Example_app/run.png[MyThaiStar Backend Launch]
 
-Once we see console messages like:
+Once we see a console messages like
 
 ----
 Tomcat started on port(s): 8081 (http)
-Started SpringBootApp in 15.985 seconds (JVM running for 16.833)
+Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)
 ----
 
-we can start consuming our _Java_ backend.
+we can start accessing our _Java_ backend.
 
 To show the backend services results we are going to use https://www.getpostman.com/[Postman] app for desktop, although you can use any other similar application.
 
