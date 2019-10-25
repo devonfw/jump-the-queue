@@ -72,7 +72,7 @@ public class DishmanagementTest extends ComponentTest {
 
 
 == Testing our Application
-Now that we have briefly overview we are going to add some tests to our _Jump the Queue_ application.
+Now that we have briefly overview we are going to add some tests to our _JumpTheQueue_ application.
 
 We have a main component for managing _visitors_, so we are going to create a dedicated package for the component within the `com.devonfw.application.jtqj` package. And inside this new package we are going to add a new test class named `VisitormanagementTest.java`
 
@@ -205,7 +205,7 @@ The _devon4j_ test module provide us with some extra functionalities that we can
 
 Extending _ComponentTest_ class we also have available the _doSetUp()_ and _doTearDown()_ methods, that we can use to initialize and release resources in our test classes.
 
-In our _Jump the Queue_ test class we could declare the _visitor_ object in the _doSetUp_ method, so we can use this resource in several test methods instead of declaring it again and again.
+In our _JumpTheQueue_ test class we could declare the _visitor_ object in the _doSetUp_ method, so we can use this resource in several test methods instead of declaring it again and again.
 
 Doing this our test class would be as follows
 
@@ -261,7 +261,7 @@ public class VisitormanagementTest extends ComponentTest{
 == Running the Tests with Maven
 We can use _Maven_ to automate the testing of our project. To do it we simply need to open the _devonfw_ console (_console.bat_ script) or a command line with access to _Maven_ and, in the project, execute the command `mvn clean test`. With this command _Maven_ will scan for classes named with the _Test_ word and will execute all the tests included in these classes.
 
-If we do it with _Jump the Queue_ project
+If we do it with _JumpTheQueue_ project
 ----
 \Devon-dist\....\jump-the-queue\java\jtqj>mvn clean test
 ----

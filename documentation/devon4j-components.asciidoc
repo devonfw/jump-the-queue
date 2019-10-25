@@ -269,7 +269,7 @@ INSERT INTO AccessCode (id, modificationCounter, ticketNumber, creationTime, sta
 === The Core of the Components
 Now that we have defined the database for our entities, we should start creating the code of the related components.
 
-We are going to use _CobiGen_ to generate the component structure. That means that -- as already commented -- we can generate all the structure and layers starting from a _core_ element: a simple _Plain Old Java Object_ that represents our _Entity_. So, in order to use _CobiGen_, we have to create our entities in the expected locations (as you will see in the following section): `<entitymanagement>.dataaccess.api`.
+We are going to use CobiGen to generate the component structure. That means that -- as already commented -- we can generate all the structure and layers starting from a _core_ element: a simple _Plain Old Java Object_ that represents our _Entity_. So, in order to use CobiGen, we have to create our entities in the expected locations (as you will see in the following section): `<entitymanagement>.dataaccess.api`.
 
 ==== _Visitor_ Component
 To implement the component we will need to define a _VisitorEntity_ to connect and manage the data of the _Visitor_ table in the database. The name of this component will be `visitormanagement`, the entity will be called `VisitorEntity`.
@@ -306,7 +306,7 @@ We are going to need fields, which represent the data model, so our entity shoul
 
 [NOTE]
 ====
-We are not adding _id_ or _modificationCounter_, because _CobiGen_ will generate these fields for us.
+We are not adding _id_ or _modificationCounter_, because CobiGen will generate these fields for us.
 ====
 
 Now we need to declare our entity as a JPA entity with the `@Entity` annotation (_javax.persistence.Entity_) at class level. To map the entity to the database table, we will use the `@Table` annotation (_javax.persistence.Table_) defining the `name` of our already created _Visitor_ table (also at class level):
@@ -321,7 +321,7 @@ public class VisitorEntity ...
  
 Now we have to declare the _getter_ and _setter_ methods for the fields of our entity. We can do this manually or automatially generate them using Eclipse:
 
-image::images/devon4j/4.Components/getter_setter.png[Generating Getter and Setter Methods with Eclipse, 950]
+image::images/devon4j/4.Components/getter_setter.png[Generating Getter and Setter Methods with Eclipse]
 
 The resulting implementation of our _VisitorEntity_ class should now look like this:
 
@@ -462,7 +462,7 @@ We will end up with the following structure:
 
 image::images/devon4j/4.Components/accesscode_entity.png[AccessCode Entity, 250]
 
-The contents of _AccessCodeEntity_ before using _CobiGen_ will be:
+The contents of _AccessCodeEntity_ before using CobiGen will be:
 
 [source,java]
 ----
@@ -610,7 +610,7 @@ We will end up with the following structure:
 
 image::images/devon4j/4.Components/queue_entity.png[Queue Entity, 250]
 
-The contents of _QueueEntity_ before using _CobiGen_ will be:
+The contents of _QueueEntity_ before using CobiGen will be:
 
 [source,java]
 ----
@@ -743,9 +743,9 @@ public class QueueEntity {
 }
 ----
 
-Now we have finished preparing the _core_ of our components and can start using _CobiGen_ to generate the remaining structure (services, layers, DAOs, ...).
+Now we have finished preparing the _core_ of our components and can start using CobiGen to generate the remaining structure (services, layers, DAOs, ...).
 
-[WARNING]
+[IMPORTANT]
 ====
 Now we can resolve the compilation errors related to `QueueEntity` in the `AccessCodeEntity.java` by applying the suggestions of the IDE. To do this, open the offending file, click the first red light bulb on the left border of the editor and select `Import 'QueueEntity' (com.devonfw. ...)`.
 
@@ -755,10 +755,14 @@ import com.devonfw.application.jtqj.queuemanagement.dataaccess.api.QueueEntity;
 ----
 ====
 
-=== The Component Structure (using _CobiGen_)
-Once we are finished creating the _core_ of our components we could continue to create the structure and all elements manually, but we are going to use _CobiGen_ for these tasks, since we can save a significant amount of time and effort this way.
+=== The Component Structure (using CobiGen)
+Once we are finished creating the _core_ of our components we could continue to create the structure and all elements manually, but we are going to use CobiGen for these tasks, since we can save a significant amount of time and effort this way.
 
-First however, we need to add the _CobiGen_ plugin to our Eclipse instance. For this purpose, close Eclipse (remember to save all your progress) and in the `jump-the-queue` folder right-click to `Open a Devon CMD shell here`.
+First however, we need to make sure that the CobiGen plugin is installed in our Eclipse instance:
+
+image::images/devon4j/4.Components/cobigen_plugin_check.png[CobiGen Plugin Check, 550]
+
+If you don't see this option in the dropdown menu, close Eclipse (remember to save all your progress) and in the `jump-the-queue` folder right-click to `Open a Devon CMD shell here`.
 
 Now enter and execute:
 ----
@@ -773,89 +777,91 @@ To do so, right-click one of our entities and select `CobiGen > Health Check...`
 
 image::images/devon4j/4.Components/cobigen_health_1.png[CobiGen Health Check 1, 550]
 
-The next dialogs will show us if there are outdated templates. In that case just click the "Update" button.
+The next dialogs will show us if there are outdated templates. In that case just click the "Update" button. You can also run an _Advanced Health Check_ to see exactly which CobiGen templates are available for this project.
 
 image::images/devon4j/4.Components/cobigen_health_2.png[CobiGen Health Check 2, 550]
 
-//TODO: Continue here!
+image::images/devon4j/4.Components/cobigen_health_3.png[CobiGen Health Check 3, 400]
 
 ==== _Queue_ Component Structure (Entity without Relations)
-In order to create the whole structure of a component with _Cobigen_ we only need to right-clicking over our component core entity, select _Cobigen > Generate_
+In order to create the whole structure of a component with CobiGen we only need to right-click our component core entity and select `CobiGen > Generate`.
 
-image::images/devon4j/4.Components/cobigen1.png[Cobigen Generate]
+image::images/devon4j/4.Components/cobigen1.png[CobiGen Generate, 550]
 
 Now we have to choose which packages we want to generate with the tool.
 
+[NOTE]
+====
 The options are:
 
-* _CRUD SpringData Repository_: generates the entity repository(that contains the CRUD operations) in the data access layer.
+* _CRUD SpringData Repository_: Generates the entity repository (that contains the CRUD operations) in the data access layer.
 
-image::images/devon4j/4.Components/cobigen2_crud_springdata_repository.png[CobiGen CRUD Spring Data Repository]
+image::images/devon4j/4.Components/cobigen2_crud_springdata_repository.png[CobiGen CRUD Spring Data Repository, 650]
 
-* _CRUD REST services_: generates a complete service layer with CRUD operations for our entity exposed as a REST service.
+* _CRUD REST Services_: Generates a complete service layer with CRUD operations for our entity exposed as a REST service.
 
-image::images/devon4j/4.Components/cobigen2_crud_rest_services.png[CobiGen CRUD REST Services]
+image::images/devon4j/4.Components/cobigen2_crud_rest_services.png[CobiGen CRUD REST Services, 650]
 
-* _CRUD UC logic_: generates the logic layer dividing the implementation in different use cases.
+* _CRUD UC Logic_: Generates the logic layer dividing the implementation in different use cases.
 
-image::images/devon4j/4.Components/cobigen2_crud_uc_logic.png[CobiGen CRUD UC Logic]
+image::images/devon4j/4.Components/cobigen2_crud_uc_logic.png[CobiGen CRUD UC Logic, 650]
 
-* _Entity infrastructure_: creates the entity main interface and edits (by a merge) the current entity to extend the devon classes
+* _Entity Infrastructure_: Creates the entity main interface and edits (by a merge) the current entity to extend the devon classes.
 
-image::images/devon4j/4.Components/cobigen2_entity_infrastructure.png[CobiGen Entity Infrastructure]
+image::images/devon4j/4.Components/cobigen2_entity_infrastructure.png[CobiGen Entity Infrastructure, 650]
 
-* _TO's_: generates the related _Transfer Objects_, that we will explain in next chapters of this tutorial
+* _TO's_: Generates the related _Transfer Objects_, that we will explain in next chapters of this tutorial.
 
-image::images/devon4j/4.Components/cobigen2_to.png[CobiGen Transfer Objects]
+image::images/devon4j/4.Components/cobigen2_to.png[CobiGen Transfer Objects, 650]
+====
 
-To generate all the needed functionalities of our component we are going to select the following packages to be generated *at the same time*
+To generate all the needed functionalities of our component we are going to select the following packages to be generated *at the same time*:
+
+//TODO: Blocked by CobiGen issue with Ljava.sql.Timestamp dependency.
 
 image::images/devon4j/4.Components/cobigen3_allpackages.png[CobiGen Package Selection]
 
-Now we can select the fields to be involved (all by default) or directly create all the packages clicking the _Finish_ button.
+Now we can select the fields to be involved ('All' by default) or directly create all the packages by clicking `Finish`.
 
-During the process _Cobigen_ will show a message asking us to review some ambiguous references. Click _Continue_
+During the process CobiGen will show a message asking us to review some ambiguous references; click `Continue`.
 
-image::images/devon4j/4.Components/cobigen4_review_imports.png[CobiGen Import Review]
+image::images/devon4j/4.Components/cobigen4_review_imports.png[CobiGen Import Review, 500]
 
-Once _Cobigen_ has finished we will check if we need to introduce manual adjustments.
+Once CobiGen has finished we will check if we need to introduce manual adjustments.
 
 First, we need to adjust manually some imports related to _Timestamp_ in:
 
 _API_
 
 - `queuemanagement.common.api.Queue`
-
 - `queuemanagement.logic.api.to.QueueEto`
-
 - `queuemanagement.logic.api.to.QueueSearchCriteriaTo`
 
 _CORE_
 
 - `queuemanagement.dataaccess.api.repo.QueueRepository`
-
 - `queuemanagement.dataaccess.api.QueueEntity`
 
-We can fix the errors manual with: `**import** java.sql.TimeStamp`.
+We can fix the errors manually via: `**import** java.sql.Timestamp`.
 
 image::images/devon4j/4.Components/cobigen5_manual_import.png[CobiGen Manual Import]
 
 ==== _AccessCode_ Component Structure (Entity with Relations)
-We repeat the process with _AccessCode_ but in this case, since its an entity with relations, we are going to have to select different cobigen options:
+We repeat the process with _AccessCode_ but in this case, since its an entity with relations, we are going to have to select different CobiGen options:
 
 image::images/devon4j/4.Components/cobigen-accesscode-new.png[CobiGen New AccessCode]
 
-After letting cobigen finish generating and fixing the imports like in the last step there will be some errors left, this is because we have a relation (dependency) with some of the _Queue_ and _Visitor_ component elements, that are still not created. We will solve this compilation errors in next steps.
+After letting CobiGen finish generating and fixing the imports like in the last step there will be some errors left, this is because we have a relation (dependency) with some of the _Queue_ and _Visitor_ component elements, that are still not created. We will solve this compilation errors in next steps.
 
 image::images/devon4j/4.Components/cobigen6_expected_errors.png[CobiGen Expeted Errors]
 
 ==== _Visitor_ Component Structure (Entity without Relations)
-Finally we are going to repeat the same process that was used with the _Queue_ component but this time, using _Cobigen_ with our other _Visitor_ component. Once cobigen has finished we can fix one of the compilation error in `AccessCodeCto` and `UcFindAccessCodeImpl` related to `VisitorEto` by manual importing like we learned in the last step.
+Finally we are going to repeat the same process that was used with the _Queue_ component but this time, using CobiGen with our other _Visitor_ component. Once CobiGen has finished we can fix one of the compilation error in `AccessCodeCto` and `UcFindAccessCodeImpl` related to `VisitorEto` by manual importing like we learned in the last step.
 
 ==== Run the App
-If all compilation errors are solved run the app ( _SpringBootApp.java right click > Run as > Java application_ ). The app should be launched without errors.
+If all compilation errors are solved run the app (right click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
 
-Congratulations you have created your first _devon4j_ components. You should be able to access the login screen with link:http://localhost:8081/jumpthequeue[]. You can login with waiter/waiter. In the next chapter we will explain and show in detail each of the created elements
+Congratulations you have created your first devon4j components. You should be able to access the login screen via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. You can login with the username and password "*waiter*". In the next chapter we will explain and show in detail each of the created elements.
 
 '''
 *Next Chapter*: link:devon4j-layers.asciidoc[devon4j Structure]

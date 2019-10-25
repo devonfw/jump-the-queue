@@ -24,7 +24,7 @@ For validations _devon4j_ includes the http://hibernate.org/validator/[Hibernate
 Hibernate Validator allow us to check the values by adding annotations in our _Java_ classes.
 
 == MyThaiStar Validations
-In _My Thai Star_ app we can find validations for some fields that we receive from the client.
+In _MyThaiStar_ app we can find validations for some fields that we receive from the client.
 
 The main part of the inputs from the client is related to the _booking_ process. The client needs to provide: `name`, `comment`, `bookingDate`, `email` and `assistants`. 
 
@@ -62,10 +62,10 @@ private Integer assistants;
 
 - `@Digits` checks the format of an integer.
 
-- `@Email` is the standard validator for email accounts. In this case the standard validator is not checking the domain of the email, so for _My Thai Star_ we added a custom validator called '@EmailExtended' that is defined in a new 'general/common/api/validation/EmailExtended.java` class. In the next section we will see it in more detail.
+- `@Email` is the standard validator for email accounts. In this case the standard validator is not checking the domain of the email, so for _MyThaiStar_ we added a custom validator called '@EmailExtended' that is defined in a new 'general/common/api/validation/EmailExtended.java` class. In the next section we will see it in more detail.
 
 == Add your own Validations
-In _Jump the Queue_ app we have some inputs from the client so let's add some validations for that data to avoid errors and ensure the consistency of the information before trying to save to data base.
+In _JumpTheQueue_ app we have some inputs from the client so let's add some validations for that data to avoid errors and ensure the consistency of the information before trying to save to data base.
 
 When registering a visitor the client provides:
 
@@ -115,7 +115,7 @@ image::images/devon4j/7.Validations/jumpthequeue_validation_name.png[JumpTheQueu
 
 
 === Email Validation
-In the case of the email, as we have already commented for _My Thai Star_, using the `@Email` annotation for validations will allow to enter emails like `something@something`. This does not fit the app requirements, so we need to add a custom email validator.
+In the case of the email, as we have already commented for _MyThaiStar_, using the `@Email` annotation for validations will allow to enter emails like `something@something`. This does not fit the app requirements, so we need to add a custom email validator.
 
 Add an annotation `EmailExtended.java` in a new `general.common.api.validation` package.
 
