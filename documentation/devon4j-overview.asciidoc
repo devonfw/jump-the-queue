@@ -18,14 +18,14 @@ Included in _devonfw_ framework as default server solution, https://github.com/d
 == devon4j Technology Stack
 As mentioned before, devon4j is not only a framework but a set of tools and conventions. devon4j provides a Java backend solution based on the following technologies:
 
-* https://spring.io/[Spring framework] as the main development framework
+* https://spring.io/[Spring framework] as the main development framework.
 
 * https://projects.spring.io/spring-boot/[Spring Boot] as project accelerator.
 
 * https://maven.apache.org/[Maven] as project and dependencies management tool. The _Maven_ projects use the _POM_ file to store all the necessary information for building the project (project configuration, dependencies, plugins, etc.). You can get more details about _POM_ files https://maven.apache.org/pom.html#What_is_the_POM[here].
 
 
-Some of the main features of _Spring Boot_ are
+Some of the main features of _Spring Boot_ are:
 
 * Creation of stand-alone Spring applications in an easy way.
 
@@ -37,7 +37,7 @@ Some of the main features of _Spring Boot_ are
 
 * Provide production-ready features such as metrics, health checks and externalized configuration.
 
-* No requirement for XML configuration
+* No requirement for XML configuration.
 
 For _persistence_ and _data access_ devon4j implements:
 
@@ -49,25 +49,22 @@ For _persistence_ and _data access_ devon4j implements:
 
 * https://flywaydb.org/[Flyway] as a tool for version control of the database.
 
-As service framework
+As service framework:
 
 * http://cxf.apache.org/[Apache CXF] that provides support for:
 
-** REST services through https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services[JAX-RS]
+** https://en.wikipedia.org/wiki/Representational_state_transfer[REST] services through https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services[JAX-RS]
 
-** SOAP services through https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS]
+** https://en.wikipedia.org/wiki/SOAP[SOAP] services through https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS]
 
 == devon4j Tools
+The following tools are included in the https://github.com/devonfw/ide[devon IDE], which -- mong many other tasks -- can create, run or deploy devon4j applications, avoiding lots of manual work.
 
-=== IDE
-As part of the _devonfw_ framework devon4j projects are integrated in a customized Eclipse instance that provides pre-configurations and pre-installed plugins focusing on code quality and productivity boosting.
+=== Custom Eclipse Instance
+As part of the _devonfw_ framework, devon4j projects are integrated into a customized Eclipse instance, which provides pre-configurations and pre-installed plugins, focusing on code quality and productivity boosting. 
 
-=== devonfw Tools
-Apart from all the methodologies regarding the mentioned frameworks, inside the devonfw ecosystem there are another tools that are crucial for boosting the productivity and enhance the managing of the Java projects.
-
-* Cobigen: a generic incremental generator for end to end code generation that will allow us to automate the generation of the main parts of the components of our apps. Starting from an Entity, Cobigen can generate all its CRUD functionality for us, starting from the service and ending up in the persistance data layer.
-
-* Devcon: a devonfw internal tool to manage devonfw based projects. Among many other tasks, it can create, run or deploy devon4j applications avoiding users to do it manually.
+=== CobiGen
+A generic incremental generator for end to end code generation that allows us to automate the generation of major components of our apps. Based on entities, CobiGen can generate all CRUD functionality for us, starting with services and ending with the persistance data layer.
 
 == devon4j Architecture Overview
 devon4j provides a solution for industrialized web apps based on _components_ and a three-layers architecture.
@@ -78,11 +75,11 @@ A _component_ is a package that contains the services and logic related to one f
 
 Each component will be divided in three layers: _service_, _logic_ and _dataacess_.
 
-* Service Layer: will expose the REST api to exchange information with the client applications.
+* *Service* Layer: will expose the REST api to exchange information with the client applications.
 
-* Logic Layer: the layer in charge of hosting the business logic of the application.
+* *Logic* Layer: the layer in charge of hosting the business logic of the application.
 
-* Data Access Layer: the layer to communicate with the data base.
+* *Data Access* Layer: the layer to communicate with the data base.
 
 Finally the _devon4j_ applications provide a _general_ package to locate the cross-cutting functionalities such as _security_, _logging_ or _exception handling_.
 

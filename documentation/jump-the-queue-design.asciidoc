@@ -18,7 +18,7 @@ When visiting public (free) or private (paid) events there are often large queue
 
 [NOTE]
 ====
-This document is intended to reflect a real world use case. The design takes this into account by trying to be complete, the implementation however is simplified in order to be more comprehensible. Where implementation differs from design, the :information_source: symbol is denoted, followed by a comment about the nature of the difference.
+This document is intended to reflect a real world use case. The design takes this into account by trying to be complete. The implementation however is simplified in order to be more comprehensible. The :information_source: symbol is denoted on this page, where implementation diverges from design, followed by a short comment about the nature of the difference.
 ====
 
 == User Stories (by Visitors of an Event)
