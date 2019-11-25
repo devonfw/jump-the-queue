@@ -11,13 +11,13 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j Component Layers
-As we already mentioned in the xref:devon4j-overview#devon4j-architecture-overview[introduction to devon4j] the components of our _Java_ backend apps will be divided in three layers: _service_, _logic_ and _dataaccess_.
+As we already mentioned in the xref:devon4j-overview#devon4j-architecture-overview[introduction to devon4j] the components of our _Java_ backend apps will be divided into three layers: _service_, _logic_ and _dataaccess_.
 
-* *Service* Layer: will contain the REST services to exchange information with the client applications.
+* *service*: The layer that contains the REST services to exchange information with the client applications.
 
-* *Logic* Layer: the layer in charge of hosting the logic of the application (validations, authorization control, business logic, etc.).
+* *logic*: The layer hosting the logic of the application (validations, authorization control, business logic, etc.).
 
-* *Data Access* Layer: the layer to communicate with the database.
+* *dataaccess*: The layer that communicates with the database.
 
 == Layers Implementation
 image::images/devon4j/5.Layers/dependency_injection.png[Dependency Injection, 250]
