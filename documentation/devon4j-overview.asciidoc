@@ -58,7 +58,7 @@ As service framework:
 ** https://en.wikipedia.org/wiki/SOAP[SOAP] services through https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS]
 
 == devon4j Tools
-The following tools are included in the https://github.com/devonfw/ide[devon IDE], which -- mong many other tasks -- can create, run or deploy devon4j applications, avoiding lots of manual work.
+The following tools are included in the https://github.com/devonfw/ide[devonfw IDE], which -- among many other things -- can create, run and deploy devon4j applications, avoiding lots of manual work.
 
 === Custom Eclipse Instance
 As part of the _devonfw_ framework, devon4j projects are integrated into a customized Eclipse instance, which provides pre-configurations and pre-installed plugins, focusing on code quality and productivity boosting. 

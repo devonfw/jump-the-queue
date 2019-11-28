@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = Build your own devon4j Application
-In this step we are going to create our work environment and establish the first part of our backend. Like most *devonfw* projects, our backend will be build in Java and thus utilize the tools, liraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
+In this step we are going to create our work environment and establish the first part of our backend. Like most *devonfw* projects, our backend will be build in Java and thus utilize the tools, libraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
 
 == Setting up a devonfw Work Environment
 Follow the setup instructions listed https://github.com/devonfw/devon-ide/blob/master/documentation/setup.asciidoc[here]. +
@@ -79,7 +79,7 @@ In our case it should find the `api`, `core` and `server` packages. +
 Finally click `Finish` and wait for the import to complete.
 
 == Preparing the Backend for an Initial Launch
-Before test-launching our backend we have to change the the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
+Before test-launching our backend we have to change the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
 
 ----
 /jtqj-core/src/main/resources/config/

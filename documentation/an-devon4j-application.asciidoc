@@ -78,7 +78,7 @@ Using _Spring Boot_ features, we can easily run our _Java_ backend applications 
 
 image::images/devon4j/2.Example_app/run.png[MyThaiStar Backend Launch]
 
-Once we see a console messages like
+Once we see a console messages like:
 
 ----
 Tomcat started on port(s): 8081 (http)
