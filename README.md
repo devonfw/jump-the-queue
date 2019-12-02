@@ -1,5 +1,8 @@
 # devonfw-tutorial-sources
 
-This repository contains the source code of the _JumpTheQueue_ application and an extensive documentation, which describes its creation in the form of a tutorial.
+(soon to be `jump-the-queue`)
+
+Source code and documentation for the _JumpTheQueue_ tutorial application.  
+Documentation is provided in the form of a step-by-step guide suited for new devonfw users.
 
 Please visit the [wiki](https://github.com/devonfw/devonfw-tutorial-sources/wiki) tab to begin the walkthrough.

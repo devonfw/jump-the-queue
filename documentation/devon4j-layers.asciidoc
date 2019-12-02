@@ -11,14 +11,13 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j Component Layers
-As we already mentioned in the xref:devon4j-overview#devon4j-architecture-overview[introduction to devon4j] the components of our _Java_ backend apps will be divided in three layers: _service_, _logic_ and _dataaccess_.
+As we already mentioned in the xref:devon4j-overview#devon4j-architecture-overview[introduction to devon4j] the components of our _Java_ backend apps will be divided into three layers: _service_, _logic_ and _dataaccess_.
 
-* _Service_ Layer: will contain the REST services to exchange information with the client applications.
+* *service*: The layer that contains the REST services to exchange information with the client applications.
 
-* _Logic_ Layer: the layer in charge of hosting the logic of the application (validations, authorization control, business logic, etc.).
+* *logic*: The layer hosting the logic of the application (validations, authorization control, business logic, etc.).
 
-* _Data Access_ Layer: the layer to communicate with the data base.
-
+* *dataaccess*: The layer that communicates with the database.
 
 == Layers Implementation
 image::images/devon4j/5.Layers/dependency_injection.png[Dependency Injection, 250]
@@ -29,7 +28,7 @@ Following the https://github.com/devonfw/devon4j/wiki/guide-dependency-injection
 
 image::images/devon4j/5.Layers/layer_api_impl.png[Layer API Implementation]
 
-- Usage of JSR330: The Java standard set of annotations for _dependency injection_ (`@Named`, `@Inject`, `@PostConstruct`, `@PreDestroy`, etc.) provides us with all the needed annotations to define our beans and inject them.
+- Usage of https://jcp.org/en/jsr/detail?id=330[JSR330]: The Java standard set of annotations for _dependency injection_ (`@Named`, `@Inject`, `@PostConstruct`, `@PreDestroy`, etc.) provides us with all the needed annotations to define our beans and inject them.
 
 [source, java]
 ----
@@ -51,7 +50,7 @@ public class MyBeanImpl implements MyBean {
 ----
 
 === Communication between Layers
-The communication between layers is solved using the described _Dependency Injection_ pattern, based on _Spring_ and the _Java_ standards: _java.inject_ (JSR330) combined with JSR250.
+The communication between layers is solved using the described _Dependency Injection_ pattern, based on _Spring_ and the _Java_ standards: _java.inject_ (https://jcp.org/en/jsr/detail?id=330[JSR330]) combined with https://jcp.org/en/jsr/detail?id=250[JSR250].
 
 image::images/devon4j/5.Layers/layers_impl.png[Layer Implementation]
 
@@ -106,16 +105,15 @@ public class BookingmanagementImpl extends AbstractComponentFacade implements Bo
 }
 ----
 
-
 === Service Layer
-As we mentioned at the beginning, the _Service_ layer is where the services of our application (REST or SOAP) will be located.
+As we mentioned at the beginning, the _Service_ layer is where the services of our application (_REST_ or _SOAP_) will be located.
 
 In _devon4j_ applications the default implementation for web services is based on http://cxf.apache.org/[Apache CXF], a services framework for Java apps that supports web service standards like _SOAP_ (implementing https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS]) and _REST_ services (https://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services[JAX-RS]).
 
 In this tutorial we are going to focus only in the _REST_ implementation of the services.
 
 ==== Service Definition
-The services definition is done by the service _interface_ located in the `service.api.rest` package. In the _boooking_ component of _My Thai Star_ application we can see a service definition statement like the following
+The services definition is done by the service _interface_ located in the `service.api.rest` package. In the _boooking_ component of MyThaiStar application we can see a service definition statement like the following
 
 
 [source,java]
@@ -134,20 +132,17 @@ public interface BookingmanagementRestService {
 }
 ----
 
-*JAX-RS annotations*:
+*JAX-RS annotations:*
 
-- _@Path_: defines the common path for all the resources of the service.
+- *_@Path_*: defines the common path for all the resources of the service.
 
-- _@Consumes_ and _@Produces_: declares the type of data that the service expects to receive from the client and the type of data that will return to the client as response.
+- *_@Consumes_* and *_@Produces_*: declares the type of data that the service expects to receive from the client and the type of data that will return to the client as response.
 
-- _@GET_: annotation for _HTTP_ _get_ method.
+- *_@GET_*: annotation for _HTTP GET_ method.
 
-- _@Path_: the path definition for the _getBooking_ resource.
+- *_@Path_*: the path definition for the _getBooking_ resource.
 
-- _@PathParam_: annotation to configure the _id_ received in the _url_ as a parameter.
-
-
-
+- *_@PathParam_*: annotation to configure the _id_ received in the _url_ as a parameter.
 
 ==== Service Implementation
 The service implementation is a class located in the `service.impl.rest` package that implements the previous defined interface.
@@ -175,18 +170,17 @@ As you can see this layer simply delegates in the _logic_ layer to resolve the a
 === Logic Layer
 In this layer we will store all the custom implementations to resolve the requirements of our applications. Including:
 
-- business logic.
+- business logic
 
-- Delegation of the https://en.wikipedia.org/wiki/Business_transaction_management[transaction management] to Spring framework.
+- delegation of the https://en.wikipedia.org/wiki/Business_transaction_management[transaction management] to Spring framework
 
-- object mappings.
+- object mappings
 
-- validations.
+- validations
 
-- authorizations.
+- authorizations
 
 Within the _logic_ layer we must avoid including code related to services or data access, we must delegate those tasks in the suitable layer.
-
 
 ==== Logic Layer Definition
 As in the _service_ layer, the logic implementation will be defined by an interface located in a `logic.api` package.
@@ -250,16 +244,16 @@ public class BookingmanagementImpl extends AbstractComponentFacade implements Bo
 }
 ----
 
-In the above _My Thai Star_ logic layer example we can see:
+In the above _MyThaiStar_ logic layer example we can see:
 
-- business logic and/or https://github.com/devonfw/devon4j/wiki/guide-beanmapping[object mappings].
+- Business logic and/or https://github.com/devonfw/devon4j/wiki/guide-beanmapping[object mappings].
 
 - Delegation of the transaction management through the Spring's `@Transactional` annotation.
 
 === Transfer Objects
 In the code examples of the _logic_ layer section you may have seen a _BookingCto_ object. This is one of the https://github.com/devonfw/devon4j/wiki/guide-transferobject[transfer objects] defined in _devon4j_ to be used as transfer data element between layers.
 
-Main benefits of using _TO's_:
+Main benefits of using _Transfer Objects_:
 
 - Avoid inconsistent data (when entities are sent across the app changes tend to take place in multiple places).
 
@@ -267,35 +261,31 @@ Main benefits of using _TO's_:
 
 - Hide internal details.
 
-In _devon4j_ we can find two different _Transfer Objects:
+In _devon4j_ we can find two different _Transfer Objects_:
 
 ==== Entity Transfer Object (ETO)
 - Same data-properties as entity.
-
 - No relations to other entities.
-
 - Simple and solid mapping.
 
 ==== Composite Transfer Object (CTO)
 - No data-properties at all.
-
 - Only relations to other TOs.
-
 - 1:1 as reference, else Collection(List) of TOs.
-
 - Easy to manually map reusing ETO's and CTO's.
 
-
 === Data Access Layer
-The third, and last, layer of the _devon4j_ architecture is the one responsible for store all the code related to connection and access to data base.
+The third, and last, layer of the _devon4j_ architecture is the one responsible for store all the code related to connection and access to database.
 
-For mapping java objects to the data base _devon4j_ use the http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html[Java Persistence API] (JPA). And as _JPA_ implementation _devon4j_ use http://hibernate.org/orm/[Hibernate].
+For mapping java objects to the database _devon4j_ use the _Java Persistence API_ (https://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html[JPA]). The JPA implementation _devon4j_ uses is http://hibernate.org/orm/[Hibernate].
 
 Apart from the _Entities_ of the component, in the _dataaccess_ layer we are going to find the same elements that we saw in the other layers: definition (an _interface_) and implementation (a class that implements that interface).
 
 However, in this layer the implementation is slightly different, the `[Target]DaoImpl` extends `general.dataaccess.base.dao.ApplicationDaoImpl` that provides us (through `io.oasp.module.jpa`) with the basic implementation _dataaccess_ methods: `save(Entity)`, `findOne(id)`, `findAll(ids)`, `delete(id)`, etc.
 
-Because of that, in the `[Target]DaoImpl` implementation of the layer we only need to add the _custom_ methods that are not implemented yet. Following the _My Thai Star_ component example (_bookingmanagement_) we will find only the paginated _findBookings_ implementation.
+//TODO: Replace `io.oasp.module.jpa` with current counterpart!
+
+Because of that, in the `[Target]DaoImpl` implementation of the layer we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_) we will find only the paginated _findBookings_ implementation.
 
 ==== Data Access Layer Definition
 [source,java]
@@ -326,19 +316,18 @@ public class BookingDaoImpl extends ApplicationDaoImpl<BookingEntity> implements
 
 The implementation of the _findBookings_ uses http://www.querydsl.com/[queryDSL] to manage the dynamic queries.
 
-
 === Layers of the JumpTheQueue Application
-All the above sections describe the main elements of the layers of the _devon4j_ components. If you have completed the exercise of the link:devon4j-components.asciidoc[previous chapter] you may have noticed that all those components are already created for us by _Cobigen_.
+All the above sections describe the main elements of the layers of the _devon4j_ components. If you have completed the exercise of the link:devon4j-components.asciidoc[previous chapter] you may have noticed that all those components are already created for us by _CobiGen_.
 
-Take a look to our application structure
+Take a look to our application structure:
 
-*visitor component core (without relations)*
+*Visitor Component Core (without Relations)*
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_core.png[JumpTheQueue Core Structure, 350]
 
 - 1. Definition for _dataaccess_ layer repository.
 
-- 2. The entity that we created to be used by _Cobigen_ to generate the component structure.
+- 2. The entity that we created to be used by _CobiGen_ to generate the component structure.
 
 - 3. Definition of _abstract usecase_ in the _logic_ layer.
 
@@ -350,7 +339,7 @@ image::images/devon4j/5.Layers/jumpthequeue_structure_core.png[JumpTheQueue Core
 
 - 7. Implementation of the _rest service_.
 
-*visitor component api (without relations)*
+*Visitor Component API (without Relations)*
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_api.png[JumpTheQueue API Structure, 350]
 
@@ -372,38 +361,38 @@ For the _queue_ component you will find a similar structure.
 
 The component _access code_ will have a similar structure adding some differences since it has some relations with visitor and queue.
 
-*access code component core (with relations)*
+*Access Code Component Core (with Relations)*
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_core_cto.png[JumpTheQueue Core Structure CTO, 350]
 
-Theres only a single difference in the core, if you look closely, cobigen didnt generate the _usecasemanage_ implementation. This is due to complexity of the entities with relations.
-In this case cobigen will leave us to create the save and delete methods so we can properly adress them.
+Theres only a single difference in the core, if you look closely, CobiGen didnt generate the _usecasemanage_ implementation. This is due to complexity of the entities with relations.
+In this case CobiGen will leave us to create the save and delete methods so we can properly adress them.
 
-*access code component api (with relations)*
+*Access Code Component API (with Relations)*
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_api_cto.png[JumpTheQueue API Structure CTO, 350]
 
 Theres two differences here:
   
-  1. As you can see cobigen generated a cto for our entity with relations
+  1. As you can see CobiGen generated a cto for our entity with relations
 
   2. Like we explained in the core, the _usecasemanage_ definition is missing.
 
 So, as you can see, our components have all the layers defined and implemented following the _devon4j_ principles.
 
-Using _Cobigen_ we have created a complete and functional _devon4j_ application without the necessity of any manual implementation except for more complex entities which will be explained to the next chapter.
+Using _CobiGen_ we have created a complete and functional _devon4j_ application without the necessity of any manual implementation except for more complex entities which will be explained to the next chapter.
 
 Let's see the application running and let's try to use the REST service to save a new visitor.
 
 === JumpTheQueue Running
 As we already mentioned, for this tutorial we are using https://www.getpostman.com/[Postman] app for desktop, but you can use any other similar tool to test your API.
 
-First, open your _Jump the Queue_ project in Eclipse and run the app (right click over the _SpringBootApp.java class > Run as > Java application)
+First, open your _JumpTheQueue_ project in Eclipse and run the app (right click over the _SpringBootApp.java class > Run as > Java application)
 
 ==== Simple Call
 If you remember we added some xref:devon4j-components#mock-data[mock data] to have some visitors info available, let's try to retrieve a visitor's information using our _visitormanagement service_.
 
-Call the service (GET) `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1/` to obtain the data of the visitor with _id_ 1.
+Call the service *GET*: `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1/` to obtain the data of the visitor with _id_ 1.
 
 image::images/devon4j/5.Layers/jumpthequeue_simpeGet1.png[JumpTheQueue Simple GET Request 1]
 
@@ -428,7 +417,7 @@ public void configure(HttpSecurity http) throws Exception {
 }
 ----
 
-Finally in the file `/jtqj-core/src/main/resources/application.properties` set `security.cors.enabled` to true
+Finally in the file `/jtqj-core/src/main/resources/application.properties` set `security.cors.enabled` to true:
 
 ----
 security.cors.enabled=true
@@ -438,11 +427,11 @@ Now run again the app and try again the same call. We should obtain the data of 
 
 image::images/devon4j/5.Layers/jumpthequeue_simpeGet2.png[JumpTheQueue Simple GET Request 2]
 
-
 ==== Paginated Response
-_Cobigen_ has created for us a complete services related to our entities so we can access to a paginated list of the visitors without any extra implementation.
+_CobiGen_ has created for us a complete services related to our entities so we can access to a paginated list of the visitors without any extra implementation.
 
 We are going to use the following service defined in `visitormanagement/service/api/rest/VisitormanagementRestService.java`
+
 [source,java]
 ----
 	@Path("/visitor/search")
@@ -492,7 +481,7 @@ If we want to filter the results we can define a _criteria_ object in the body. 
 }
 ----
 
-we will filter the results to find only visitors with username _test1@mail.com_. If now we repeat the request the result will be
+We will filter the results to find only visitors with username _test1@mail.com_. If now we repeat the request the result will be:
 
 image::images/devon4j/5.Layers/jumpthequeue_paginated2.png[JumpTheQueue Paginated Response 2]
 
@@ -501,9 +490,9 @@ We could customize the filter editing the `visitormanagement/logic/impl/usecase/
 ==== Saving a Visitor
 To fit the requirements of the related xref:jump-the-queue-design#user-story-register[user story] we need to register a _visitor_ and return an _access code_.
 
-By default _Cobigen_ has generated for us the _Read_ operation in the _UcFindEntityImpl_ and rest of the _CRUD_ in _UcManageEntityImpl_. So we already are able to read, update, delete and create a visitor in our database without extra implementation.
+By default _CobiGen_ has generated for us the _Read_ operation in the _UcFindEntityImpl_ and rest of the _CRUD_ in _UcManageEntityImpl_. So we already are able to read, update, delete and create a visitor in our database without extra implementation.
 
-To delegate in _Spring_ to manage the _transactions_ we only need to add the `@Transactional` annotation to our _usecase_  implementations. Since _devonfw 2.2.0_ _Cobigen_ adds this annotation automatically, so we don't need to do it manually. Check your logic implementation classes and add the annotation in case it is not present.
+To delegate in _Spring_ to manage the _transactions_ we only need to add the `@Transactional` annotation to our _usecase_  implementations. Since _devonfw 2.2.0_ _CobiGen_ adds this annotation automatically, so we don't need to do it manually. Check your logic implementation classes and add the annotation in case it is not present.
 
 [source,java]
 ----
@@ -524,7 +513,7 @@ To save a visitor we only need to use the _REST_ resource `/services/rest/visito
 You can see the definition for _VisitorEto_ in `visitormanagement/logic/api/to/VisitorEto.java`
 ====
 
-So, call (POST) `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor` providing in the body a _Visitor_ object like
+So, call *POST*: `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor` providing in the body a _Visitor_ object like
 
 [source,json]
 ----
@@ -539,14 +528,13 @@ So, call (POST) `http://localhost:8081/jumpthequeue/services/rest/visitormanagem
 }
 ----
 
-
-We will get a result like the following
+We will get a result like the following:
 
 image::images/devon4j/5.Layers/jumpthequeue_saveVisitor.png[JumpTheQueue Save Visitor]
 
-In the body of the response we can see the default content for a successful service response: the data of the new visitor. This is the default implementation when saving a new _entity_ with _devon4j_ applications. However, the _Jump the Queue_ design defines that the response must provide the _access code_ created for the user, so we will need to change the logic of our application to fit this requirement.
+In the body of the response we can see the default content for a successful service response: the data of the new visitor. This is the default implementation when saving a new _entity_ with _devon4j_ applications. However, the _JumpTheQueue_ design defines that the response must provide the _access code_ created for the user, so we will need to change the logic of our application to fit this requirement.
 
-In the next chapter we will see how we can customize the code generated by _Cobigen_ to adapt it to our necessities.
+In the next chapter we will see how we can customize the code generated by _CobiGen_ to adapt it to our necessities.
 
 '''
-*Next Chapter*: link:devon4j-adding-custom-functionality.asciidoc[ Customizing a devon4j Project]
+*Next Chapter*: link:devon4j-adding-custom-functionality.asciidoc[Customizing a devon4j Project]

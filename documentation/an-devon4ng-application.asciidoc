@@ -12,10 +12,10 @@ endif::[]
 
 = devon4ng Application
 
-== My Thai Star Basics
-As an example of how an devon4ng application is built we are going to show the _My Thai Star_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
+== MyThaiStar Basics
+As an example of how an devon4ng application is built we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
 
-_My Thai Star_ application is a solution for managing the online booking and orders of a restaurant, it is addressed as a showcase app but designed with real requirements and, moreover, trying to serve as an example of common use cases in web apps (Routing with and without guards, use of flex-box, theming, re-usable components, mock back end...).
+_MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant, it is addressed as a showcase app but designed with real requirements and, moreover, trying to serve as an example of common use cases in web apps (Routing with and without guards, use of flex-box, theming, re-usable components, mock back end...).
 
 image::images/devon4j/2.Example_app/mts.png[MyThaiStar Home Page]
 
@@ -29,12 +29,12 @@ The main features of the app are:
 - Logged users also can:
 * If the user has the role _waiter_, he will be able to access to a restricted area to see and filter the list and details of all the reservations and orders made by the users.
 
-== My Thai Star devon4ng Frontend Overview
-What we have shown in the previous section is the aspect of a My Thai Star client app that consumes the services created with the _devon4ng_ server solution.
+== MyThaiStar devon4ng Frontend Overview
+What we have shown in the previous section is the aspect of a MyThaiStar client app that consumes the services created with the _devon4ng_ server solution.
 
 From now on we are going to focus on the implementation of the components, services and directives to show how is it formed and how you can create your own _devon4ng_ client project with devonfw framework.
 
-My Thai Star project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.Net_ and _Node_ for backend solutions and _Angular_ and _Xamarin_ as default clients.
+MyThaiStar project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.Net_ and _Node_ for backend solutions and _Angular_ and _Xamarin_ as default clients.
 
 === The devon4ng Project
 Using the _devon4ng_ approach for the client project we will have a structure of a main _Angular_ project formed as follows:

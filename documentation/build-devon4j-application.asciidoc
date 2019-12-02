@@ -11,161 +11,157 @@ ifdef::env-github[]
 endif::[]
 
 = Build your own devon4j Application
-In this chapter we are going to show how to create a new _devon4j_ application from scratch. The app that we are going to create is _Jump the Queue_, a simple app to avoid the queue in an event registering a visitor and obtaining an _access code_. You can read all the details of the app in the link:jump-the-queue-design.asciidoc[JumpTheQueue design] page.
+In this step we are going to create our work environment and establish the first part of our backend. Like most *devonfw* projects, our backend will be build in Java and thus utilize the tools, libraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
 
-== Getting the devonfw Distribution
-The recommended way to start developing _devon4j_ applications is to get the last _devonfw_ distribution to have a _ready-to-start_ development environment.
+== Setting up a devonfw Work Environment
+Follow the setup instructions listed https://github.com/devonfw/devon-ide/blob/master/documentation/setup.asciidoc[here]. +
+After you have done so, your working directroy should look like this:
 
-You can download _devonfw_ distributions from http://de-mucevolve02/files/devonfw/[here].
+image::images/devon4j/3.BuildYourOwn/after_setup.png[After Setup, 250]
 
-Once the download is done extract the _zip_ file and you will get the distribution's content.
+Press "Shift + Right Click" and select "Open Devon CMD shell here". +
+Your shell should now show the message:
 
-image::images/devon/devon_dist.png[devonfw Distributon Contents, 450]
+____
+devon-ide environment variables have been set for C:\\... in workspace main
+____
 
-== Initialize the Distribution
-Before creating our first project you must initialize the distribution. To do so execute the script
+Navigate into workspace "main" by entering:
+
 ----
-update-all-workspaces.bat
+C:\...> cd workspaces\main
 ----
 
-Now you should see the _conf_ directory and the Eclipse launchers.
+== Creating the Project
+Now we are going to create the folder structure for our backend by running the following commands:
+
+----
+C:\...\workspaces\main>                 mkdir jumpthequeue
+C:\...\workspaces\main>                 cd jumpthequeue
+C:\...\workspaces\main\jumpthequeue>    mkdir java
+C:\...\workspaces\main\jumpthequeue>    cd java
+C:\...\workspaces\main\jumpthequeue\java>
+----
+
+Here we are going to generate our devon4j application template as a starting point for our backend:
+
+----
+C:\...\workspaces\main\jumpthequeue\java>
+    devon java create com.devonfw.application.jtqj com.devonfw.java.jtqj -Dversion=0.0.1
+----
 
 [NOTE]
 ====
-Learn more about _devonfw_ initialization https://github.com/devonfw/devon/wiki/getting-started-download-and-setup#setup-the-workspace[here].
+We are using the `java` https://github.com/devonfw/devon-ide/blob/master/documentation/java.asciidoc[commandlet] of the devon-ide. After the command `create` we are passing the arguments `package`, `groupId` and `version` in this case.
 ====
 
-== Create the Server Project
-First, in the _workspaces_ directory of the distribution create a new folder _jumpthequeue_ and go into it.
-Execute console.bat to get a console initialized with the provided software served in the `software` folder.
+image::images/devon4j/3.BuildYourOwn/build_successful.png[Build Success, 800]
 
-[NOTE]
-====
-Even though this tutorial is following an structure similar to https://github.com/devonfw/my-thai-star[MyThaiStar]. If you are using the devonfw distribution, we recommend the use of the workspaces as a folder to create the project. We recomend to adapt the parameters appropriately. Once you finished generating the project, execute the script `update-all-workspaces.bat` and it will include a script in the root of the devonfw dist with your new workspace for eclipse.
-====
+Once you see the `BUILD SUCCESS` message, the new app template has been created and can now be expanded.
 
-[source]
-----
-D:\Devon\workspaces>mkdir jumpthequeue
-D:\Devon\workspaces>cd jumpthequeue
-D:\Devon\workspaces>mkdir java
-D:\Devon\workspaces>cd java
-----
+== Importing the Application in Eclipse
+First we have to launch our project-specific Eclipse instance by executing the `eclipse-main.bat` script in the root folder. Now we can import our application into Eclipse:
 
-We are going to generate the new _devon4j_ project using _Devcon_. To launch the tool run the 'console.bat' script, in the new opened command line window execute the command
+image::images/devon4j/3.BuildYourOwn/eclipse_import_1.png[Eclipse Maven Import 1, 350]
 
-----
-devcon -g
-----
+Select `Import projects...` from the Package Explorer (or optionally `Import...` via the `File` menu).
 
-You should see the _Devcon_'s graphic interface. Select `devon4j` and `create`
+image::images/devon4j/3.BuildYourOwn/eclipse_import_2.png[Eclipse Maven Import 2, 450]
 
-image::images/devon4j/3.BuildYourOwn/newapp1.png[Devcon devon4j Dropdown Menu, 450]
+Select `Existing Maven Projects` and click `Next >`. +
+Now click `Browse` and select the `java` folder inside our `jumpthequeue` project.
 
-Then we only need to define our server app _serverpath_ (for the location of the app select our just created _jumpthequeue_/java directory), _servername_, _packagename_, _groupid_, _version_ and _dbtype_. Finally click on _Start_ button.
+image:images/devon4j/3.BuildYourOwn/eclipse_import_3.png[Eclipse Maven Import 3, 550]
+image:images/devon4j/3.BuildYourOwn/eclipse_import_4.png[Eclipse Maven Import 4, 550]
 
-image::images/devon4j/3.BuildYourOwn/devcon_devon4j_create.png[Devcon devon4j Create Page, 450]
+Eclipse will detect the pre-generated Maven project structure inside our project by looking for `pom.xml` files. +
+In our case it should find the `api`, `core` and `server` packages. +
+Finally click `Finish` and wait for the import to complete.
 
-Once you see the `BUILD SUCCESS` info message your new app is ready.
-
-[NOTE]
-====
-You can also create new projects:
-
-- manually from command line https://github.com/devonfw/devon4j/wiki/tutorial-newapp#from-command-line[see how]
-
-- from Eclipse https://github.com/devonfw/devon4j/wiki/tutorial-newapp#from-eclipse[see how]
-
-====
-
-
-== Import and run the App
-As last step we can import the project we just created into the Eclipse IDE provided with _devonfw_. Although our new _devon4j_ based app is still empty we are going to show how to run it with _Spring Boot_ simply to check that everything is ok.
-
-We could use the _eclipse-main.bat_ or the _eclipse-examples.bat_ launchers (that you should see on your distribution's root directory) but we are going to create a new _Eclipse_ launcher related to our new project.
-
-To do it launch again the script
+== Preparing the Backend for an Initial Launch
+Before test-launching our backend we have to change the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
 
 ----
-update-all-workspaces.bat
+/jtqj-core/src/main/resources/config/
 ----
 
-After the process is done you should see a new _eclipse-jumpthequeue.bat_ launcher. Execute it and a new _Eclipse_ instance should be opened.
-
-Now import our new project with `File > Import`.
-
-Select _Maven/Existing Maven Projects_ 
-
-image::images/devon4j/3.BuildYourOwn/newapp2.png[Maven Project Import Screen]
-
-Browse for the _jumpthequeue_ project
-
-image::images/devon4j/3.BuildYourOwn/newapp3.png[Maven Project Import Selection]
-
-Click `Finish` and wait while the dependencies of the project are resolved to complete the import process.
-
-Now let's change the _server context path_ of our application. Open `/jtqj-core/src/main/resources/config/application.properties` and set the `server.context-path` property to _/jumpthequeue_
+Now open `application.properties` and update the following line of code:
 
 ----
 server.servlet.context-path=/jumpthequeue
 ----
 
-[NOTE]
+[TIP]
 ====
-You can also change the port where the application will be available with the property `server.port`
+For a more manageable view of the package structure inside the Eclipse Package Explorer select `Package Presentation > Hierarchical` from the small image:images/devon4j/3.BuildYourOwn/small_dropdown.png[Dropdown Icon, 20] dropdown-menu.
+
+image::images/devon4j/3.BuildYourOwn/hierarchical_view.png[Hierarchical View, 550]
 ====
 
-Finally, using _Spring Boot_ features (that provides us with an embedded Tomcat), we can run the app in an easy way. Look for the `SpringBootApp.java` class and click right button and select `Run As > Java Application`.
-
-image::images/devon4j/3.BuildYourOwn/run.png[Spring Boot Run Java Application]
-
-If everything is ok you will see a messages in the _Console_ window like
+== Launching the Backend
+Finally, using _Spring Boot_ (which provides us with an embedded _Tomcat_ server), we can run the backend of our app in one easy step. Navigate to:
 
 ----
-INFO [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8081 (http)
-INFO [main] com.cap.jumpthequeue.SpringBootApp       : Started SpringBootApp in 16.978 seconds (JVM running for 17.895)
+/jtqj-core/src/main/java/com.devonfw.application.jtqj/
 ----
 
-The app will be available at 'http://localhost:8081/jumpthequeue'
+Now right click `SpringBootApp.java` select `Run As > Java Application`.
 
-image::images/devon4j/3.BuildYourOwn/login.png[Backend Login Page]
+image::images/devon4j/3.BuildYourOwn/run_java_app.png[Run as Java Application, 650]
+
+If you did everything right up until now the console should show a message like this:
+
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (vX.X.X.RELEASE)
+
+.
+.
+.
+... c.d.application.jtqj.SpringBootApp       : Starting SpringBootApp on XXXXXXX with PID XXXX 
+... o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path '/jumpthequeue'
+... c.d.application.jtqj.SpringBootApp       : Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)
+----
+
+The backend is now accessible via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. +
+You can view the exposed services by logging in with these credentials:
+
+----
+Username:   waiter
+Password:   waiter
+----
+
+image::images/devon4j/3.BuildYourOwn/rest_services.png[RESTful Services, 550]
 
 [NOTE]
 ====
-You are redirected to the login screen because, by default, the new _devon4j_ applications provide a basic security set up.
+You are redirected to a login screen because -- by default -- a new _devon4j_ applications provides a basic security setup.
 ====
 
-== Empty App Structure
-Creating _devon4j_ based apps we get the following main features _out-of-the-box_:
+== Structure of the App Template
+When creating _devon4j_ based apps this way, we get the following features _out-of-the-box_:
 
 * _Maven_ project with _api_ project, _core_ project and _server_ project:
-
 ** _api_ project for the common API
-
 ** _core_ project for the app implementation
+** _server_ project ready to package the app for deployment
 
-** _server_ project ready to package the app for the deployment
+* Data base ready environment with an _h2_ instance, including:
+** Data model schema
+** Mock data schema
 
-image::images/devon4j/3.BuildYourOwn/devcon_devon4j_project_exp.PNG[API Core Server Packages, 500]
+* Database version control with _Flyway_
 
-* Data base ready environment with an _h2_ instance
-* Data model schema
-* Mock data schema
-* Database version control with Flyway
-
-image::images/devon4j/3.BuildYourOwn/devcon_devon4j_flyway.PNG[Database Files, 250]
-
-* Bean mapper ready
-
-image::images/devon4j/3.BuildYourOwn/emptyapp_beanmapper.png[Bean Mapper, 650]
+* _Bean Mapper_ ready
 
 * Basic security enabled (based on _Spring Security_)
 
-image::images/devon4j/3.BuildYourOwn/emptyapp_security.png[Spring Security, 650]
-
 * Unit test support and model
-
-image::images/devon4j/3.BuildYourOwn/emptyapp_test.png[Unit Test Model, 650]
 
 '''
 *Next Chapter*: link:devon4j-components.asciidoc[Add a Component to your App]
