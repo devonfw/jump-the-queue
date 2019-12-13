@@ -135,7 +135,7 @@ jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
 ----
 
 ==== _Visitor_ Table
-We are going to create our own table for _Visitor(s)_ by right clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
+We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
 ----
 V0005__Create_Visitor.sql
 ----
@@ -882,7 +882,7 @@ Once CobiGen has finished we can fix the rest of the compilation errors related 
 * `accesscodemanagement.logic.api.to.AccessCodeCto`
 
 ==== Run the App
-If all compilation errors are solved run the app (right click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
+If all compilation errors are solved run the app (right-click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
 
 *Congratulations!* +
 You have created your first devon4j components. You should be able to access the login screen via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. You can login with the username and password "*waiter*". In the next chapter we will show and explain each of the created elements in detail.
