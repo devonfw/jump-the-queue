@@ -266,7 +266,7 @@ Apart from the _Entities_ of components, we are going to find the same elements,
 
 //TODO: Ask for assistance regarding the update of this section:
 
-WARNING: The rest of this section contains outdated information. The MyThaiStar application has been updated since this tutorial was written. Please continue reading at xref:Layers of the JumpTheQueue Application[].
+WARNING: The rest of this section contains outdated information. The MyThaiStar application has been updated since this tutorial was written. Please continue reading at xref:layers-of-the-jumpthequeue-application[].
 
 However, in this layer the implementation is slightly different: The `[Target]DaoImpl` extends `general.dataaccess.base.dao.ApplicationDaoImpl`, which provides us (through `io.oasp.module.jpa`) with the basic implementation _dataaccess_ methods: `save(Entity)`, `findOne(id)`, `findAll(ids)`, `delete(id)`, etc.
 
@@ -374,9 +374,7 @@ Instead we get a response containing the login form. This is because _devon4j_ a
 
 To make testing easier, we are going to "open" the application, to avoid the security filter, and we are going to enable the https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[CORS] filter to allow requests from (Angular-) clients.
 
-In the file `general/service/impl/config/BaseWebSecurityConfig.java`:
-
-* Edit the `configure(HttpSecurity http)` method: Remove the HTTP request filter and authorize every request, to allow access to the app:
+In the file `general/service/impl/config/BaseWebSecurityConfig.java` edit the `configure()` method and remove the HTTP request filter. This will authorize every request and allow us access to the app:
 
 [source,java]
 ----
@@ -398,7 +396,7 @@ Finally in the file `/jtqj-core/src/main/resources/application.properties` set `
 security.cors.enabled=true
 ----
 
-Now we run the app again and send the same GET request. Now we should be able to obtain the data of our visitor:
+Now we run the app again and send the same GET request. We should now be able to obtain the data of our visitor:
 
 image::images/devon4j/5.Layers/jumpthequeue_simpeGet2.png[JumpTheQueue Simple GET Request 2]
 
@@ -438,7 +436,8 @@ In the 'Headers' tab we'll have to ensure that `Content-Type` `application/json`
 
 [NOTE]
 ====
-You can see the definition of the _SearchCriteriaTo_ in `visitormanagement/logic/api/to/VisitorSearchCriteriaTo.java`
+You can see the definition of the _VisitorSearchCriteriaTo_ in:
+`visitormanagement/logic/api/to/VisitorSearchCriteriaTo.java`
 ====
 
 The result will appear in the 'Headers' tab and look something like this:
@@ -466,7 +465,7 @@ image::images/devon4j/5.Layers/jumpthequeue_paginated2.png[JumpTheQueue Paginate
 We could customize this filter by editing the `visitormanagement/logic/impl/usecase/UcFindVisitorImpl.java` class.
 
 ==== Saving a Visitor
-To meet the requirements of the xref:jump-the-queue-design#user-story-register[user story: register], we need to register a _visitor_ and return an _access code_.
+To meet the requirements of the xref:jump-the-queue-design#user-story-register[User Story: Register], we need to register a _visitor_ and return an _access code_.
 
 By default _CobiGen_ has generated the _Read_ operation in the _UcFindEntityImpl_ for us, as well as the rest of the _CRUD_ operations in _UcManageEntityImpl_. So we are already able to _create_, _read_, _update_ and _delete_ visitors in our database, without any extra implementation required.
 
@@ -484,13 +483,13 @@ public class UcManageVisitorImpl extends AbstractVisitorUc implements UcManageVi
 
 To save a visitor we only need to use the _REST_ resource `/services/rest/visitormanagement/v1/visitor` and provide the visitor definition for _VisitorEto_ in the body.
 
-
 [NOTE]
 ====
-You can see the definition for _VisitorEto_ in `visitormanagement/logic/api/to/VisitorEto.java`
+You can see the definition for _VisitorEto_ in:
+`visitormanagement/logic/api/to/VisitorEto.java`
 ====
 
-So, select the service *POST* and enter: +
+Select the service *POST* and enter: +
 `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor`
 
 Provide a _Visitor_ object in the body, such as this:
