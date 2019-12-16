@@ -1,6 +1,4 @@
-# devonfw-tutorial-sources
-
-(soon to be `jump-the-queue`)
+# jump-the-queue
 
 Source code and documentation for the _JumpTheQueue_ tutorial application.  
 Documentation is provided in the form of a step-by-step guide suited for new devonfw users.
