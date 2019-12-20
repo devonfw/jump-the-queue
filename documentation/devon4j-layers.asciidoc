@@ -25,9 +25,10 @@ image::images/devon4j/5.Layers/dependency_injection.png[Dependency Injection, 25
 Following the https://github.com/devonfw/devon4j/wiki/guide-dependency-injection[devon4j recommendations] for _Dependency Injection_ in MyThaiStar's layers we will find:
 
 * Separation of API and implementation: Inside each layer we will separate the elements in different packages: _api_ and _impl_. The _api_ will store the _interface_ with the methods definition and inside the _impl_ we will store the class that implements the _interface_:
-image:images/devon4j/5.Layers/layer_api_impl.png[Layer API Implementation]
 
-* Usage of https://jcp.org/en/jsr/detail?id=330[JSR330]: The Java standard set of annotations for _Dependency Injection_ (`@Named`, `@Inject`, `@PostConstruct`, `@PreDestroy`, etc.) provides us with all the needed annotations to define our beans and inject them.
+image::images/devon4j/5.Layers/layer_api_impl.png[Layer API Implementation]
+
+* Usage of https://jcp.org/en/jsr/detail?id=330[JSR330]: The Java standard set of annotations for _Dependency Injection_ (`@Named`, `@Inject`, `@PostConstruct`, `@PreDestroy`, etc.) provides us with all the needed annotations to define our beans and inject them:
 
 [source, java]
 ----
@@ -129,7 +130,6 @@ public interface BookingmanagementRestService {
   public BookingCto getBooking(@PathParam("id") long id);
 
   ...
-
 }
 ----
 
@@ -264,42 +264,33 @@ For mapping Java objects to the database, _devon4j_ use the _Java Persistence AP
 
 Apart from the _Entities_ of components, we are going to find the same elements, that we saw in other layers, in the _dataaccess_ layer: a definition (i.e. an _interface_) and an implementation (a class that implements that interface).
 
-//TODO: Ask for assistance regarding the update of this section:
+However, in this layer the implementation is slightly different: The `[Target]Repository` extends `com.devonfw.module.jpa.dataaccess.api.data.DefaultRepository`, which provides us with the basic _dataaccess_ methods: `save(Entity)`, `findOne(id)`, `findAll(ids)`, `delete(id)`, etc.
 
-WARNING: The rest of this section contains outdated information. The MyThaiStar application has been updated since this tutorial was written. Please continue reading at xref:layers-of-the-jumpthequeue-application[].
+Because of that, in the `[Target]Repository` implementation of the layer, we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_), we will only find the paginated _findBookings_ implementation here:
 
-However, in this layer the implementation is slightly different: The `[Target]DaoImpl` extends `general.dataaccess.base.dao.ApplicationDaoImpl`, which provides us (through `io.oasp.module.jpa`) with the basic implementation _dataaccess_ methods: `save(Entity)`, `findOne(id)`, `findAll(ids)`, `delete(id)`, etc.
-
-Because of that, in the `[Target]DaoImpl` implementation of the layer we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_) we will find only the paginated _findBookings_ implementation.
-
-==== Data Access Layer Definition
 [source,java]
 ----
-public interface BookingDao extends ApplicationDao<BookingEntity> {
-  PaginatedListTo<BookingEntity> findBookings(BookingSearchCriteriaTo criteria);
-}
-----
+import org.springframework.data.jpa.repository.Query;
+import com.querydsl.jpa.impl.JPAQuery;
 
-==== Data Access Layer Implementation
-[source,java]
-----
-@Named
-public class BookingDaoImpl extends ApplicationDaoImpl<BookingEntity> implements BookingDao {
+...
 
-  @Override
-  public PaginatedListTo<BookingEntity> findBookings(BookingSearchCriteriaTo criteria) {
-    
-    BookingEntity booking = Alias.alias(BookingEntity.class);
-    EntityPathBase<BookingEntity> alias = Alias.$(booking);
-    JPAQuery query = new JPAQuery(getEntityManager()).from(alias);
+public interface BookingRepository extends DefaultRepository<BookingEntity> {
 
+  @Query("SELECT booking FROM BookingEntity booking WHERE booking.bookingToken = :token")
+  BookingEntity findBookingByToken(@Param("token") String token);
+
+  default Page<BookingEntity> findBookings(BookingSearchCriteriaTo criteria) {
+
+    BookingEntity alias = newDslAlias();
+    JPAQuery<BookingEntity> query = newDslQuery(alias);
+  
     ...
-
   }
 }
 ----
 
-The implementation of the _findBookings_ uses http://www.querydsl.com/[queryDSL] to manage the dynamic queries.
+The implementation of _findBookings_ uses https://github.com/devonfw/devon4j/blob/develop/documentation/guide-repository.asciidoc[Spring Data] and http://www.querydsl.com/[QueryDSL] to manage dynamic queries.
 
 === Layers of the JumpTheQueue Application
 The sections above describe the main elements of layers of the _devon4j_ components. If you have completed the exercise in the link:devon4j-components.asciidoc[previous chapter], you may have noticed that all those components are already created for us by _CobiGen_.
