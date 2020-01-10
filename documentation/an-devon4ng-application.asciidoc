@@ -13,31 +13,31 @@ endif::[]
 = devon4ng Application
 
 == MyThaiStar Basics
-As an example of how an devon4ng application is built we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
+As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
 
-_MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant, it is addressed as a showcase app but designed with real requirements and, moreover, trying to serve as an example of common use cases in web apps (Routing with and without guards, use of flex-box, theming, re-usable components, mock back end...).
+The _MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant. It is presented as a showcase app but designed with real requirements in mind. Moreover, it attempts to demonstrate common features provided by many modern web apps (routing with and without guards, use of flex-box, theming, re-usable components, mock back end, ...).
 
 image::images/devon4j/2.Example_app/mts.png[MyThaiStar Home Page]
 
 The main features of the app are:
 
-- Anonymous users can:
-* Book a table.
-* Create an event and invite some friends to it via email.
-* See the menu of dishes and with the reservationId make their own orders.
+* Anonymous users can:
+** Book a table.
+** Create an event and invite some friends via email.
+** See the menu of dishes and make their own orders.
 
-- Logged users also can:
-* If the user has the role _waiter_, he will be able to access to a restricted area to see and filter the list and details of all the reservations and orders made by the users.
+* Logged-in users in the role _Waiter_ can also:
+** Access a restricted area to see and filter the list and details of all reservations and orders made by users.
 
 == MyThaiStar devon4ng Frontend Overview
-What we have shown in the previous section is the aspect of a MyThaiStar client app that consumes the services created with the _devon4ng_ server solution.
+In the previous section we have shown the aspect of the _MyThaiStar_ server project and the services it provides.
 
-From now on we are going to focus on the implementation of the components, services and directives to show how is it formed and how you can create your own _devon4ng_ client project with devonfw framework.
+In this section we are going to focus on the implementation of the frontend components, services and directives. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4ng_ client project with the devonfw framework.
 
-MyThaiStar project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.Net_ and _Node_ for backend solutions and _Angular_ and _Xamarin_ as default clients.
+The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for backend solutions _Angular_ and _Xamarin_ as default clients.
 
 === The devon4ng Project
-Using the _devon4ng_ approach for the client project we will have a structure of a main _Angular_ project formed as follows:
+Using the _devon4ng_ approach for the client project we will have the structure of a main _Angular_ project as follows:
 
 image::images/devon4ng/2.Example_app/project_main_files.jpg[Angular Project Structure]
 
@@ -47,10 +47,10 @@ In the _node modules_ folder, all installed dependencies will be stored.
 
 The _src_ folder contains all the application code.
 
-Finally, the rest of the files are config files for the different technologies involved in the project.
+Finally, the rest of the files are configuration files for different technologies involved in the project.
 
 === Angular Folder Structure
-Following https://angular.io/docs/ts/latest/guide/style-guide.html[Angular style guide] rules, the structure of the application has been built this way:
+Following the https://angular.io/docs/ts/latest/guide/style-guide.html[Angular style guide] rules, the application has been structured this way:
 
 * app
 ** components
@@ -68,11 +68,20 @@ As can be seen in this image:
 image::images/devon4ng/2.Example_app/app_structure.jpg[Angular Folder Structure]
 
 === Components
-As we already saw in the previous chapter, Angular architecture is based on four types of elements: Components, Services, Modules and Directives.
+As we already saw in the previous chapter, the Angular architecture is based on four types of elements: _components_, _services_, _modules_ and _directives_.
 
-In this section we are going to focus on the _components_. We can distinguish them because they all are named with the extension *.component.ts*.
+In this section we are going to focus on the _components_. We can distinguish them, because they all are named with the extension `.component.ts`.
 
-Components are a single element of the application, but it can have, at the same time, more components in them, this is the case for the components that are _main views_: *app*(main component of the app), *home*, *menu*, *book-table*, *cockpit-area* or the components for the dialogs. These views have their own layout from Covalent Teradata to organize its contents as well as other components or tags to be displayed.
+Components represent a single element of the application, but can -- at the same time -- contain multiple components themselves. This is the case for components that are *main views*:
+
+* *app* (the main component)
+* *home*
+* *menu*
+* *book-table*
+* *cockpit-area*
+* some components for dialogs
+
+These views have their own Teradata Covalent layouts to manage their contents, other components or tags that are displayed.
 
 [source, typescript]
 ----
@@ -88,7 +97,13 @@ export class MenuComponent implements OnInit {
 }
 ----
 
-Even though, there are also components that are an element of a template that has a complete meaning by themselves and can be reused multiple times and/or in multiple places, this is the case of components like, *sidenav*, *header* or *menu-card*, which is an element that accepts an input data with the menu information and displays it as a card, this component will be repeated for every single dish on the menu, so the better way to handle this is to isolate its logic and template in a component so the menu view just have to know about the existence of the component and the data it needs to work.
+There are also components, which are part of a template and can be reused multiple times and/or in multiple places. This is the case for components like:
+
+* *sidenav* 
+* *header*
+* *menu-card*
+
+*menu-card* is an element, that accepts menu information as input data displays this information as a card. This component will be reused for every single dish on the menu, so the best way to handle it, is to isolate its logic and template in a component, so the menu view just has to know about the existence of the component and the data it needs to work.
 
 [source, typescript]
 ----
@@ -97,50 +112,54 @@ Even though, there are also components that are an element of a template that ha
 
 image::images/devon4ng/2.Example_app/menu_cards.jpg[MyThaiStar Menu Cards View]
 
-To interact and navigate between the main views, Angular provides a *Router* that provides with functionalities to move between URL's in the same app, in addition, it provides an HTML tag `<router-outlet></router-outlet>` that will show the component that has been navigated to. This router tag is placed in the main app component, at the same level as the sidenav and the header, this means that these two components are on top of whatever the router shows, that is why we can always see the header no matter what component we are displaying through the router.
+To interact and navigate between the main views, Angular provides a *Router* that provides the functionality to move between URLs in the same app. Additionally it provides an HTML tag `<router-outlet></router-outlet>` that shows, which component has been navigated to. This router tag is placed in the main _app_ component, at the same level as the _sidenav_ and the _header_. This means, that these two components are on top of whatever the router shows. That is why we can always see the header, no matter what component we are displaying via the router.
 
-Also, Angular Material provides a _tab_ component, which can show content depending on which tab you clicked, but they are in the same component, an example of usage of this kind of components can be seen in the book-table view:
+Angular Material also provides a *Tab* component, which changes its content depending on which tab has been clicked on. An example for the usage of this component can be seen in the _book-table_ view:
 
 image::images/devon4ng/2.Example_app/book_table.jpg[MyThaiStar Book Table View]
 
-This component view shows a card that can show an instant reservation or the creation of an event.
+This component view shows a card, that contains a form for reservation or the creation of an event.
 
 === Services
-Ideally, all the logic should be taken out of the component, and let there only the calls to the services and minimal script interaction. Services is where all the logic should be, including calling the server.
+Ideally, all logic should be taken out of a component. Only calls to services and minimal script interactions should be contained in a component. The services should then contain all the logic, for example, code that calls the server and so on.
 
-MyThaiStar components consume this services, as could be the price-calculator when a costumer makes an order:
+MyThaiStar components consume those services, for example a price-calculator service, which is called when a costumer makes an order:
 
 image::images/devon4ng/2.Example_app/price_calculator.jpg[MyThaiStar Price Calculator]
 
-There are two exceptional cases in MyThaiStar of services that serve with a different proposal than serve to a specific component: *Authentication and AuthGuard* and *HttpClient*.
+There are two special services in MyThaiStar, which serve a different purpose, than just being consumed by a component. They are:
 
-To secure the access to waiter cockpit, which is a forbidden area to anyone who is not a waiter, MyThaiStar counts with a service of authentication and a Router Guard.
+* *Authentication*
+* *AuthGuard*
+* *HttpClient*
+
+To secure the access to the waiter cockpit -- which is a forbidden area for anyone who is not a waiter -- MyThaiStar employs a service of authentication as well as a *Router Guard*.
 
 image::images/devon4ng/2.Example_app/authentication.jpg[MyThaiStar Authentication & Router Guard Service]
 
-Guards are services that implements _CanActivate_ function which returns a Boolean indicating if the navigation is valid or forbidden. If is forbidden, the router stands still where it is, and if it is valid, it navigates correctly. The authentication service serves as a storage and a validator of certain data regarding username, role, permissions and JWT token.
+*Guards* are services, that implement the _CanActivate_ function, which returns a Boolean, indicating if a navigation attempt is valid or forbidden. If it is forbidden, the router stops navigation -- if it is valid, the router navigates to the desired location. The _authentication service_ serves as storage and validator for certain kinds of data, including usernames, roles, permissions and https://jwt.io/[JWT] tokens.
 
-HttpClient is an envelope of Http that implement the management of headers. The workflow is exact the same as the standard Http but as the project needed to incorporate a token to every call to a specific secured services, then, this token needed to be added and removed depending on call to the server, also, it has been extended to handle the error in case the token has expired or corrupted.
+*HttpClient* -- among other things -- implements the management of HTTP headers. The workflow is exactly the same as with standard HTTP requests/responses, but here a token is added to a header, when specific, secured services are called. HttpClient has also been extended to handle errors, in case a token has expired or is corrupted.
 
 image::images/devon4ng/2.Example_app/authorization_header.jpg[MyThaiStar Security Token]
 
-When all of this correctly setup, we can do a log-in to the waiter cockpit, and if entered the correct credentials, the logged state will set to true, the login to the server will be correct returning the token and the header with this token will be setted giving as a result the correct navigation to the waiter cockpit:
+With all of this correctly setup, we can log into to the waiter cockpit by entering the correct credentials. This way the logged-in state is set to true. The server will return a header with the correct token. As a result, the application will navigate to the waiter cockpit correctly.
 
 image::images/devon4ng/2.Example_app/waiter_cockpit.jpg[MyThaiStar Waiter Cockpit View]
 
 === Modules
-Through modules you can encapsulate whole functionalities or part of the application. All Angular apps have, at least, one module: _app.module_. But Angular encourages the use of more modules to organize all the components and services. In MyThaiStar every component and service is inside a module, making the _app.module_ composed only by other smaller modules.
+Through modules, you can encapsulate whole functionalities or parts of the application. All Angular apps have at least one module: _app.module_. Angular encourages the use of more modules to organize all components and services. In MyThaiStar, every component and service is inside a module, so the _app.module_ is only composed of other, smaller modules.
 
 == Running MyThaiStar Client
-To run MyThaiStar you will have to have installed globally https://nodejs.org/en/[Node] and https://github.com/angular/angular-cli[Angular CLI]. Once you have installed these dependencies, you can go to project folder and run `yarn install`, when finished, you are ready to run the client with: `ng serve`.
+To run MyThaiStar, you have to have https://nodejs.org/en/[Node] installed globally and https://github.com/angular/angular-cli[Angular CLI]. Once you have installed these dependencies, you can go to the project folder and run: `yarn install`. Once finished, you are ready to run the client via: `ng serve`.
 
-If everything goes well, the console output will be something like this:
+If everything goes well, the console will output something like this:
 
-image::images/devon4ng/2.Example_app/webpack.jpg[Webpack Console Output]
+image::images/devon4ng/2.Example_app/ng_compiled.png[Angular CLI Output]
 
-Now yo can go to your browser to: `localhost:4200` and there will be MyThaiStar client running.
+Navigate to http://localhost:4200 to see the MyThaiStar app client running.
 
-Now we know what can be done with devon4ng, we are going to see step by step how to make from scratch your own app, explaining every process to create components, services, routing and each element of the application.
+Now that we know, what can be done with _devon4ng_, we are going to show you step-by-step how you can make your own app from scratch. We will explain how to create components and services, how to set up routing and how each other element of the application works.
 
 '''
 *Next Chapter*: link:angular-components.asciidoc[Angular Components]
