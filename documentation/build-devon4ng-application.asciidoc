@@ -698,7 +698,7 @@ We need to inject an instance of Router object and declare it into the name _rou
 
 [NOTE]
 ====
-Learn more about Dependency Injection in devon4ng xref:angular-services#Dependency-Injection[here].
+Learn more about Dependency Injection in devon4ng xref:devon4ng-services#Dependency-Injection[here].
 ====
 
 [source, typescript]
@@ -766,14 +766,14 @@ Now, we are going to imitate the `login` to make our `register.component.html`:
 
 [NOTE]
 ====
-Learn more about services in devon4ng link:angular-services.asciidoc[here].
+Learn more about services in devon4ng link:devon4ng-services.asciidoc[here].
 ====
 
 Now we have a minimum of navigation flow into our application, we are going to generate out first service using the command `ng generate service register/services/register`. This will create a folder services inside register and create the service. Services are where we keep the logic that connects to our db and are going to be used by our `component.ts`. In order to use the service we are going to create some interface models, lets create a folder called `backendModels` inside shared and inside a file called `interfaces.ts`, in here we are going to add the model interfaces that will match our backend:
 
 [NOTE]
 ====
-Learn more about creating services in devon4ng xref:angular-services#Create-a-new-Service[here].
+Learn more about creating services in devon4ng xref:devon4ng-services#Create-a-new-Service[here].
 ====
 
 [source, typescript]
@@ -839,7 +839,7 @@ This method will send our model to the backend and return an Observable that we 
 
 [NOTE]
 ====
-Learn more about Observables and RxJs in devon4ng xref:angular-services#Server-Communication[here].
+Learn more about Observables and RxJs in devon4ng xref:devon4ng-services#Server-Communication[here].
 ====
 
 Now we are going to modify `register.component.ts` to call this service:
@@ -1038,7 +1038,7 @@ We will use this service to fill it with information from the logged in user whe
 
 [NOTE]
 ====
-Learn more about authentication in devon4ng xref:angular-services#Authentication[here].
+Learn more about authentication in devon4ng xref:devon4ng-services#Authentication[here].
 ====
 
 Now we are going to use this class to make the `auth-guard.service.ts`:
@@ -1088,7 +1088,7 @@ This service will be a bit different, because we have to implement an interface 
 
 [NOTE]
 ====
-Learn more about guards in devon4ng xref:angular-services#Guards[here].
+Learn more about guards in devon4ng xref:devon4ng-services#Guards[here].
 ====
 
 Once this is done, the last step is filling the `login.service.ts`, in this case theres going to be three methods:

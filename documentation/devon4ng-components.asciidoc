@@ -62,7 +62,7 @@ You can also configure the routes to redirect to a certain component when URL in
 
 There are some cases when a component also has it own navigation inside of it, to make sub-navigation Router are prepared to use children-routes, this is a special property of a route, when you declare some routes inside of a children array, with this children array correctly set up, you can navigate to a component, and it sub-navigate some other components inside of it.
 
-One last remark, this routes can be secured using a special service called Guards, that forbid or permit the navigation depending on the implementation of a boolean method. This will be shown in its section in link:angular-services.asciidoc[Angular Services].
+One last remark, this routes can be secured using a special service called Guards, that forbid or permit the navigation depending on the implementation of a boolean method. This will be shown in its section in link:devon4ng-services.asciidoc[Angular Services].
 
 == Forms
 Angular provides a large amount of functionalities regarding this topic. All the info can be found in https://angular.io/guide/user-input[Angular Form docs].
@@ -90,4 +90,4 @@ Nowadays almost every application has data to show to the user, so is not strang
 The data table from Covalent works with inputs and output events, it needs, at least, the data to be shown and an array of columns, which has to be composed by a name that corresponds to the object in data and a label to show in the component. From this moment you have a function data table, now you can add events like sorting, paging, searching and so on, all the docs are https://teradata.github.io/covalent/#/components/data-table[here].
 
 '''
-*Next Chapter*: link:angular-services.asciidoc[Angular Services]
+*Next Chapter*: link:devon4ng-services.asciidoc[Angular Services]
