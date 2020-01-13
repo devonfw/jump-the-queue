@@ -1604,4 +1604,4 @@ image::images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png[Queue Page without A
 That is all regarding how to build your own devon4ng application example, now is up to you add features, change styles and do everything you could imagine. Just one final step to complete the tutorial, run the tutorial outside your local machine: Deployment.
 
 '''
-*Next Chapter*: link:angular-deployment.asciidoc[Deploy your devon4ng App]
+*Next Chapter*: link:devon4ng-deployment.asciidoc[Deploy your devon4ng App]
