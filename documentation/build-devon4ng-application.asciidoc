@@ -216,7 +216,7 @@ This tutorial is only going to develop a mobile view. The app is not going to be
 === Creating Components
 [NOTE]
 ====
-Learn more about creating new components in devon4ng xref:angular-components#Create-a-new-Component[here].
+Learn more about creating new components in devon4ng xref:devon4ng-components#Create-a-new-Component[here].
 ====
 
 The app consists of 3 main views:
@@ -234,7 +234,7 @@ _app.component_ will be our Root component, so we do not have to create any comp
 
 [NOTE]
 ====
-Learn more about the root component in devon4ng xref:angular-components#Root-Component[here].
+Learn more about the root component in devon4ng xref:devon4ng-components#Root-Component[here].
 ====
 
 This is the case of a header element, which will be on top of the window and on top of all the components, let's build it:
@@ -243,7 +243,7 @@ The first thing to know is about https://teradata.github.io/covalent/#/layouts[C
 
 [NOTE]
 ====
-Learn more about layouts in devon4ng link:angular-components#Teradata-Covalent-Layouts[here].
+Learn more about layouts in devon4ng link:devon4ng-components#Teradata-Covalent-Layouts[here].
 ====
 
 As we do not really need nothing more than a header we are going to use the simplest layout: *nav view*
@@ -420,7 +420,7 @@ Now we can use layouts, so lets use it on _app.component.html_ to make it look l
 
 [NOTE]
 ====
-Learn more about toolbars in devon4ng link:angular-components#Toolbars[here].
+Learn more about toolbars in devon4ng link:devon4ng-components#Toolbars[here].
 ====
 
 Once this done, our app should have a header and the "app works!" should remain in the body of the page:
@@ -489,7 +489,7 @@ import { CoreModule } from './shared/core.module';
 
 [NOTE]
 ====
-Learn more about routing in devon4ng xref:angular-components#Routing[here].
+Learn more about routing in devon4ng xref:devon4ng-components#Routing[here].
 ====
 
 Finally, we remove the `<h1>app works!</h1>` from _app.component.html_ and in its place we put a `<router-outlet></router-outlet>` tag. So the final result of our Root component will look like this:
@@ -638,7 +638,7 @@ After that we modify the `login.component.html` and add the form:
 
 [NOTE]
 ====
-Learn more about forms in devon4ng link:angular-components#Forms[here].
+Learn more about forms in devon4ng link:devon4ng-components#Forms[here].
 ====
 
 This form contains two input container from Material and inside of them, the input with the properties listed above and making all required.

@@ -162,4 +162,4 @@ Navigate to http://localhost:4200 to see the MyThaiStar app client running.
 Now that we know, what can be done with _devon4ng_, we are going to show you step-by-step how you can make your own app from scratch. We will explain how to create components and services, how to set up routing and how each other element of the application works.
 
 '''
-*Next Chapter*: link:angular-components.asciidoc[Angular Components]
+*Next Chapter*: link:devon4ng-components.asciidoc[devon4ng Components]
