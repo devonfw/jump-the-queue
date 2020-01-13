@@ -113,7 +113,7 @@ public class VisitormanagementTest extends ComponentTest {
 
 [NOTE]
 ====
-Please note, that the class `VisitormanagementTest` in the code snippet above, *extends* the class `ComponentTest`. Please make sure, that this is the case in your code too.
+Please note, that the class `VisitormanagementTest` in the code snippet above, *extends* the class `ComponentTest`. Make sure, that this is the case in your code too.
 ====
 
 Now we can start adding our first test. In link:jump-the-queue-design.asciidoc[JumpTheQueue] we have two main functionalities:
@@ -281,26 +281,23 @@ public class VisitormanagementTest extends ComponentTest{
 
     assertThat(result).isNotNull();
   }
-
-    ...
 }
 ----
 
 == Running the Tests with Maven
-We can use _Maven_ to automate the testing of our project. To do it we simply need to open the _devonfw_ console (_console.bat_ script) or a command line with access to _Maven_ and, in the project, execute the command `mvn clean test`. With this command _Maven_ will scan for classes named with the _Test_ word and will execute all the tests included in these classes.
+We can use _Maven_ to automate the testing of our project. To do so, just open a command prompt with access to _Maven_ (in our devonfw project folder we can simply right click and select `Open Devon CMD shell here`). Now enter and run:
 
-If we do it with _JumpTheQueue_ project
 ----
-\Devon-dist\....\jump-the-queue\java\jtqj>mvn clean test
+C:\...\workspaces\main\jump-the-queue\java\jtqj> mvn clean test
 ----
 
-The result will be similar to this
+_Maven_ will now scan for classes containing the word "Test" and execute all methods annotated with `@Test` in those classes. The result will look similar to this:
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_maven.png[JumpTheQueue Maven Testing]
 
-Even though the test that we have made created finished correctly since theres more tests that devon4j generated automaticly, theres going to be one error related to role assignment. In this tutorial we are going to do only the visitor side so we havent implemented role restriction. We encourage you that after finishing the tutorial you add code and try to make your own.
+Even though the test we made finished correctly, there are more tests -- that devon4j generated automatically -- which are going to contain one error related to role assignment. In this tutorial we are only going to implement the visitor side, so we won't implement role restrictions. We encourage you to add the code for this functionality yourself, after finishing this tutorial.
 
-After that we have seen how to create tests in _devonfw_, in the next chapter we are going to show how to package and deploy our project.
+After we have demonstrated how to create tests in _devonfw_, we are going to show you how to package and deploy your project in the next chapter.
 
 '''
 *Next Chapter*: link:devon4j-deployment.asciidoc[Deployment with devonfw]
