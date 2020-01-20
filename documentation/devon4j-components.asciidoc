@@ -135,7 +135,7 @@ jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
 ----
 
 ==== _Visitor_ Table
-We are going to create our own table for _Visitor(s)_ by right clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
+We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
 ----
 V0005__Create_Visitor.sql
 ----
@@ -287,21 +287,26 @@ Now create a new Java class in this package and call it `VisitorEntity`:
 image::images/devon4j/4.Components/new_class.png[New Class Creation, 500]
 
 We are going to need fields, which represent the data model, so our entity should contain the following code:
+
 [source,java]
 ----
-	private String username;
+  ...
 
-	private String name;
+  private String username;
 
-	private String phoneNumber;
+  private String name;
 
-	private String password;
+  private String phoneNumber;
 
-	private Boolean acceptedCommercial;
+  private String password;
 
-	private Boolean acceptedTerms;
+  private Boolean acceptedCommercial;
 
-	private Boolean userType;
+  private Boolean acceptedTerms;
+
+  private Boolean userType;
+
+  ...
 ----
 
 [NOTE]
@@ -312,11 +317,13 @@ We are not adding _id_ or _modificationCounter_, because CobiGen will generate t
 Now we need to declare our entity as a JPA entity with the `@Entity` annotation (_javax.persistence.Entity_) at class level. To map the entity to the database table, we will use the `@Table` annotation (_javax.persistence.Table_) defining the `name` of our already created _Visitor_ table (also at class level):
 [source, java]
 ----
-[...]
+...
 
 @Entity
 @Table(name = "Visitor")
-public class VisitorEntity ...
+public class VisitorEntity {
+  
+  ...
 ----
  
 Now we have to declare the _getter_ and _setter_ methods for the fields of our entity. We can do this manually or automatially generate them using Eclipse:
@@ -336,118 +343,118 @@ import javax.persistence.Table;
 @Table(name = "Visitor")
 public class VisitorEntity {
 
-	private String username;
+  private String username;
 
-	private String name;
+  private String name;
 
-	private String phoneNumber;
+  private String phoneNumber;
 
-	private String password;
+  private String password;
 
-	private Boolean acceptedCommercial;
+  private Boolean acceptedCommercial;
 
-	private Boolean acceptedTerms;
+  private Boolean acceptedTerms;
 
-	private Boolean userType;
+  private Boolean userType;
 
+  /**
+   * @return the username
+   */
+  public String getUsername() {
+    return username;
+  }
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+  /**
+   * @param username the username to set
+   */
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * @return the phoneNumber
+   */
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 
-	/**
-	 * @return the phoneNumber
-	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+  /**
+   * @param phoneNumber the phoneNumber to set
+   */
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
-	/**
-	 * @param phoneNumber the phoneNumber to set
-	 */
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+  /**
+   * @return the password
+   */
+  public String getPassword() {
+    return password;
+  }
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
+  /**
+   * @param password the password to set
+   */
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  /**
+   * @return the acceptedCommercial
+   */
+  public Boolean getAcceptedCommercial() {
+    return acceptedCommercial;
+  }
 
-	/**
-	 * @return the acceptedCommercial
-	 */
-	public Boolean getAcceptedCommercial() {
-		return acceptedCommercial;
-	}
+  /**
+   * @param acceptedCommercial the acceptedCommercial to set
+   */
+  public void setAcceptedCommercial(Boolean acceptedCommercial) {
+    this.acceptedCommercial = acceptedCommercial;
+  }
 
-	/**
-	 * @param acceptedCommercial the acceptedCommercial to set
-	 */
-	public void setAcceptedCommercial(Boolean acceptedCommercial) {
-		this.acceptedCommercial = acceptedCommercial;
-	}
+  /**
+   * @return the acceptedTerms
+   */
+  public Boolean getAcceptedTerms() {
+    return acceptedTerms;
+  }
 
-	/**
-	 * @return the acceptedTerms
-	 */
-	public Boolean getAcceptedTerms() {
-		return acceptedTerms;
-	}
+  /**
+   * @param acceptedTerms the acceptedTerms to set
+   */
+  public void setAcceptedTerms(Boolean acceptedTerms) {
+    this.acceptedTerms = acceptedTerms;
+  }
 
-	/**
-	 * @param acceptedTerms the acceptedTerms to set
-	 */
-	public void setAcceptedTerms(Boolean acceptedTerms) {
-		this.acceptedTerms = acceptedTerms;
-	}
+  /**
+   * @return the userType
+   */
+  public Boolean getUserType() {
+    return userType;
+  }
 
-	/**
-	 * @return the userType
-	 */
-	public Boolean getUserType() {
-		return userType;
-	}
+  /**
+   * @param userType the userType to set
+   */
+  public void setUserType(Boolean userType) {
+    this.userType = userType;
+  }
 
-	/**
-	 * @param userType the userType to set
-	 */
-	public void setUserType(Boolean userType) {
-		this.userType = userType;
-	}
 }
 ----
 
@@ -487,109 +494,110 @@ import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.VisitorEnti
 @Table(name = "AccessCode")
 public class AccessCodeEntity {
 
-	@Size(min = 2, max = 5)
-	private String ticketNumber;
+  @Size(min = 2, max = 5)
+  private String ticketNumber;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp creationTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Timestamp creationTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp startTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Timestamp startTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp endTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Timestamp endTime;
 
-	private VisitorEntity visitor;
+  private VisitorEntity visitor;
 
-	private QueueEntity queue;
+  private QueueEntity queue;
 
-	/**
-	 * @return the ticketNumber
-	 */
-	public String getTicketNumber() {
-		return ticketNumber;
-	}
+  /**
+   * @return the ticketNumber
+   */
+  public String getTicketNumber() {
+    return ticketNumber;
+  }
 
-	/**
-	 * @param ticketNumber the ticketNumber to set
-	 */
-	public void setTicketNumber(String ticketNumber) {
-		this.ticketNumber = ticketNumber;
-	}
+  /**
+   * @param ticketNumber the ticketNumber to set
+   */
+  public void setTicketNumber(String ticketNumber) {
+    this.ticketNumber = ticketNumber;
+  }
 
-	/**
-	 * @return the creationTime
-	 */
-	public Timestamp getCreationTime() {
-		return creationTime;
-	}
+  /**
+   * @return the creationTime
+   */
+  public Timestamp getCreationTime() {
+    return creationTime;
+  }
 
-	/**
-	 * @param creationTime the creationTime to set
-	 */
-	public void setCreationTime(Timestamp creationTime) {
-		this.creationTime = creationTime;
-	}
+  /**
+   * @param creationTime the creationTime to set
+   */
+  public void setCreationTime(Timestamp creationTime) {
+    this.creationTime = creationTime;
+  }
 
-	/**
-	 * @return the startTime
-	 */
-	public Timestamp getStartTime() {
-		return startTime;
-	}
+  /**
+   * @return the startTime
+   */
+  public Timestamp getStartTime() {
+    return startTime;
+  }
 
-	/**
-	 * @param startTime the startTime to set
-	 */
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
+  /**
+   * @param startTime the startTime to set
+   */
+  public void setStartTime(Timestamp startTime) {
+    this.startTime = startTime;
+  }
 
-	/**
-	 * @return the endTime
-	 */
-	public Timestamp getEndTime() {
-		return endTime;
-	}
+  /**
+   * @return the endTime
+   */
+  public Timestamp getEndTime() {
+    return endTime;
+  }
 
-	/**
-	 * @param endTime the endTime to set
-	 */
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
-	}
+  /**
+   * @param endTime the endTime to set
+   */
+  public void setEndTime(Timestamp endTime) {
+    this.endTime = endTime;
+  }
 
-	/**
-	 * @return the visitor
-	 */
-	@OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "idVisitor")
-	public VisitorEntity getVisitor() {
-		return visitor;
-	}
+  /**
+   * @return the visitor
+   */
+  @OneToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+  @JoinColumn(name = "idVisitor")
+  public VisitorEntity getVisitor() {
+    return visitor;
+  }
 
-	/**
-	 * @param visitor the visitor to set
-	 */
-	public void setVisitor(VisitorEntity visitor) {
-		this.visitor = visitor;
-	}
+  /**
+   * @param visitor the visitor to set
+   */
+  public void setVisitor(VisitorEntity visitor) {
+    this.visitor = visitor;
+  }
 
-	/**
-	 * @return the queue
-	 */
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "idQueue")
-	public QueueEntity getQueue() {
-		return queue;
-	}
+  /**
+   * @return the queue
+   */
+  @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+  @JoinColumn(name = "idQueue")
+  public QueueEntity getQueue() {
+    return queue;
+  }
 
-	/**
-	 * @param queue the queue to set
-	 */
-	public void setQueue(QueueEntity queue) {
-		this.queue = queue;
-	}
+  /**
+   * @param queue the queue to set
+   */
+  public void setQueue(QueueEntity queue) {
+    this.queue = queue;
+  }
+
 }
 ----
 
@@ -627,119 +635,120 @@ import javax.persistence.TemporalType;
 @Table(name = "DailyQueue")
 public class QueueEntity {
 
-	private String name;
+  private String name;
 
-	private String logo;
+  private String logo;
 
-	private String currentNumber;
+  private String currentNumber;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp attentionTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Timestamp attentionTime;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp minAttentionTime;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Timestamp minAttentionTime;
 
-	private Boolean active;
+  private Boolean active;
 
-	private int customers;
+  private int customers;
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 * @return the logo
-	 */
-	public String getLogo() {
-		return logo;
-	}
+  /**
+   * @return the logo
+   */
+  public String getLogo() {
+    return logo;
+  }
 
-	/**
-	 * @param logo the logo to set
-	 */
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+  /**
+   * @param logo the logo to set
+   */
+  public void setLogo(String logo) {
+    this.logo = logo;
+  }
 
-	/**
-	 * @return the currentNumber
-	 */
-	public String getCurrentNumber() {
-		return currentNumber;
-	}
+  /**
+   * @return the currentNumber
+   */
+  public String getCurrentNumber() {
+    return currentNumber;
+  }
 
-	/**
-	 * @param currentNumber the currentNumber to set
-	 */
-	public void setCurrentNumber(String currentNumber) {
-		this.currentNumber = currentNumber;
-	}
+  /**
+   * @param currentNumber the currentNumber to set
+   */
+  public void setCurrentNumber(String currentNumber) {
+    this.currentNumber = currentNumber;
+  }
 
-	/**
-	 * @return the attentionTime
-	 */
-	public Timestamp getAttentionTime() {
-		return attentionTime;
-	}
+  /**
+   * @return the attentionTime
+   */
+  public Timestamp getAttentionTime() {
+    return attentionTime;
+  }
 
-	/**
-	 * @param attentionTime the attentionTime to set
-	 */
-	public void setAttentionTime(Timestamp attentionTime) {
-		this.attentionTime = attentionTime;
-	}
+  /**
+   * @param attentionTime the attentionTime to set
+   */
+  public void setAttentionTime(Timestamp attentionTime) {
+    this.attentionTime = attentionTime;
+  }
 
-	/**
-	 * @return the minAttentionTime
-	 */
-	public Timestamp getMinAttentionTime() {
-		return minAttentionTime;
-	}
+  /**
+   * @return the minAttentionTime
+   */
+  public Timestamp getMinAttentionTime() {
+    return minAttentionTime;
+  }
 
-	/**
-	 * @param minAttentionTime the minAttentionTime to set
-	 */
-	public void setMinAttentionTime(Timestamp minAttentionTime) {
-		this.minAttentionTime = minAttentionTime;
-	}
+  /**
+   * @param minAttentionTime the minAttentionTime to set
+   */
+  public void setMinAttentionTime(Timestamp minAttentionTime) {
+    this.minAttentionTime = minAttentionTime;
+  }
 
-	/**
-	 * @return the active
-	 */
-	public Boolean getActive() {
-		return active;
-	}
+  /**
+   * @return the active
+   */
+  public Boolean getActive() {
+    return active;
+  }
 
-	/**
-	 * @param active the active to set
-	 */
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+  /**
+   * @param active the active to set
+   */
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
 
-	/**
-	 * @return the customers
-	 */
-	public int getCustomers() {
-		return customers;
-	}
+  /**
+   * @return the customers
+   */
+  public int getCustomers() {
+    return customers;
+  }
 
-	/**
-	 * @param customers the customers to set
-	 */
-	public void setCustomers(int customers) {
-		this.customers = customers;
-	}
+  /**
+   * @param customers the customers to set
+   */
+  public void setCustomers(int customers) {
+    this.customers = customers;
+  }
+
 }
 ----
 
@@ -882,7 +891,7 @@ Once CobiGen has finished we can fix the rest of the compilation errors related 
 * `accesscodemanagement.logic.api.to.AccessCodeCto`
 
 ==== Run the App
-If all compilation errors are solved run the app (right click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
+If all compilation errors are solved run the app (right-click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
 
 *Congratulations!* +
 You have created your first devon4j components. You should be able to access the login screen via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. You can login with the username and password "*waiter*". In the next chapter we will show and explain each of the created elements in detail.

@@ -216,7 +216,7 @@ This tutorial is only going to develop a mobile view. The app is not going to be
 === Creating Components
 [NOTE]
 ====
-Learn more about creating new components in devon4ng xref:angular-components#Create-a-new-Component[here].
+Learn more about creating new components in devon4ng xref:devon4ng-components#Create-a-new-Component[here].
 ====
 
 The app consists of 3 main views:
@@ -234,7 +234,7 @@ _app.component_ will be our Root component, so we do not have to create any comp
 
 [NOTE]
 ====
-Learn more about the root component in devon4ng xref:angular-components#Root-Component[here].
+Learn more about the root component in devon4ng xref:devon4ng-components#Root-Component[here].
 ====
 
 This is the case of a header element, which will be on top of the window and on top of all the components, let's build it:
@@ -243,7 +243,7 @@ The first thing to know is about https://teradata.github.io/covalent/#/layouts[C
 
 [NOTE]
 ====
-Learn more about layouts in devon4ng link:angular-components#Teradata-Covalent-Layouts[here].
+Learn more about layouts in devon4ng link:devon4ng-components#Teradata-Covalent-Layouts[here].
 ====
 
 As we do not really need nothing more than a header we are going to use the simplest layout: *nav view*
@@ -420,7 +420,7 @@ Now we can use layouts, so lets use it on _app.component.html_ to make it look l
 
 [NOTE]
 ====
-Learn more about toolbars in devon4ng link:angular-components#Toolbars[here].
+Learn more about toolbars in devon4ng link:devon4ng-components#Toolbars[here].
 ====
 
 Once this done, our app should have a header and the "app works!" should remain in the body of the page:
@@ -489,7 +489,7 @@ import { CoreModule } from './shared/core.module';
 
 [NOTE]
 ====
-Learn more about routing in devon4ng xref:angular-components#Routing[here].
+Learn more about routing in devon4ng xref:devon4ng-components#Routing[here].
 ====
 
 Finally, we remove the `<h1>app works!</h1>` from _app.component.html_ and in its place we put a `<router-outlet></router-outlet>` tag. So the final result of our Root component will look like this:
@@ -638,7 +638,7 @@ After that we modify the `login.component.html` and add the form:
 
 [NOTE]
 ====
-Learn more about forms in devon4ng link:angular-components#Forms[here].
+Learn more about forms in devon4ng link:devon4ng-components#Forms[here].
 ====
 
 This form contains two input container from Material and inside of them, the input with the properties listed above and making all required.
@@ -698,7 +698,7 @@ We need to inject an instance of Router object and declare it into the name _rou
 
 [NOTE]
 ====
-Learn more about Dependency Injection in devon4ng xref:angular-services#Dependency-Injection[here].
+Learn more about Dependency Injection in devon4ng xref:devon4ng-services#Dependency-Injection[here].
 ====
 
 [source, typescript]
@@ -766,14 +766,14 @@ Now, we are going to imitate the `login` to make our `register.component.html`:
 
 [NOTE]
 ====
-Learn more about services in devon4ng link:angular-services.asciidoc[here].
+Learn more about services in devon4ng link:devon4ng-services.asciidoc[here].
 ====
 
 Now we have a minimum of navigation flow into our application, we are going to generate out first service using the command `ng generate service register/services/register`. This will create a folder services inside register and create the service. Services are where we keep the logic that connects to our db and are going to be used by our `component.ts`. In order to use the service we are going to create some interface models, lets create a folder called `backendModels` inside shared and inside a file called `interfaces.ts`, in here we are going to add the model interfaces that will match our backend:
 
 [NOTE]
 ====
-Learn more about creating services in devon4ng xref:angular-services#Create-a-new-Service[here].
+Learn more about creating services in devon4ng xref:devon4ng-services#Create-a-new-Service[here].
 ====
 
 [source, typescript]
@@ -839,7 +839,7 @@ This method will send our model to the backend and return an Observable that we 
 
 [NOTE]
 ====
-Learn more about Observables and RxJs in devon4ng xref:angular-services#Server-Communication[here].
+Learn more about Observables and RxJs in devon4ng xref:devon4ng-services#Server-Communication[here].
 ====
 
 Now we are going to modify `register.component.ts` to call this service:
@@ -1038,7 +1038,7 @@ We will use this service to fill it with information from the logged in user whe
 
 [NOTE]
 ====
-Learn more about authentication in devon4ng xref:angular-services#Authentication[here].
+Learn more about authentication in devon4ng xref:devon4ng-services#Authentication[here].
 ====
 
 Now we are going to use this class to make the `auth-guard.service.ts`:
@@ -1088,7 +1088,7 @@ This service will be a bit different, because we have to implement an interface 
 
 [NOTE]
 ====
-Learn more about guards in devon4ng xref:angular-services#Guards[here].
+Learn more about guards in devon4ng xref:devon4ng-services#Guards[here].
 ====
 
 Once this is done, the last step is filling the `login.service.ts`, in this case theres going to be three methods:
@@ -1604,4 +1604,4 @@ image::images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png[Queue Page without A
 That is all regarding how to build your own devon4ng application example, now is up to you add features, change styles and do everything you could imagine. Just one final step to complete the tutorial, run the tutorial outside your local machine: Deployment.
 
 '''
-*Next Chapter*: link:angular-deployment.asciidoc[Deploy your devon4ng App]
+*Next Chapter*: link:devon4ng-deployment.asciidoc[Deploy your devon4ng App]

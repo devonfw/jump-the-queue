@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j Validations
-For validations _devon4j_ includes the http://hibernate.org/validator/[Hibernate Validator] as one of the available libraries in the _pom.xml_ file
+For validations, _devon4j_ includes the http://hibernate.org/validator/[Hibernate Validator] as one of the available libraries in the _pom.xml_ file.
 
 [source,xml]
 ----
@@ -21,107 +21,115 @@ For validations _devon4j_ includes the http://hibernate.org/validator/[Hibernate
 </dependency>
 ----
 
-Hibernate Validator allow us to check the values by adding annotations in our _Java_ classes.
+Hibernate Validator allow us to check received values, by adding annotations to our _Java_ classes.
 
 == MyThaiStar Validations
-In _MyThaiStar_ app we can find validations for some fields that we receive from the client.
+In the _MyThaiStar_ app, we can find validations for some fields that we receive from the client.
 
-The main part of the inputs from the client is related to the _booking_ process. The client needs to provide: `name`, `comment`, `bookingDate`, `email` and `assistants`. 
+The main part of client inputs is related to the _booking_ process. The client needs to provide: `name`, `comment`, `bookingDate`, `email` and `assistants`. 
 
 [source,java]
 ----
 @NotNull
 private String name;
-  
+
 ...
-  
+
 private String comment;
-  
+
 @NotNull
 @Future
 private Timestamp bookingDate;
 
 ...
-  
+
 @NotNull
 @EmailExtended
 private String email;
-  
+
 ...
-  
+
 @Min(value = 1, message = "Assistants must be greater than 0")
 @Digits(integer = 2, fraction = 0)
 private Integer assistants;
 ----
 
-- `@NotNull` checks that the field is not null before saving in the database.
+- *_@NotNull_*: Checks that the field is not null before saving in the database.
 
-- `@Future`, for dates, checks that the provided date is not in the past.
+- *_@Future_*: Checks that a provided date is not in the past.
 
-- `@Min` declares a minimum value for an integer.
+- *_@Min_*: Declares a minimum value for an integer.
 
-- `@Digits` checks the format of an integer.
+- *_@Digits_*: Checks the format of an integer.
 
-- `@Email` is the standard validator for email accounts. In this case the standard validator is not checking the domain of the email, so for _MyThaiStar_ we added a custom validator called '@EmailExtended' that is defined in a new 'general/common/api/validation/EmailExtended.java` class. In the next section we will see it in more detail.
+- *_@Email_*: Is the standard validator for email addresses. In this case the standard validator is not checking the domain of the email, so for _MyThaiStar_ we added a custom validator called `@EmailExtended` that is defined in a new `general/common/api/validation/EmailExtended.java` class. We will see it in more detail in the next section.
 
 == Add your own Validations
-In _JumpTheQueue_ app we have some inputs from the client so let's add some validations for that data to avoid errors and ensure the consistency of the information before trying to save to data base.
+In the _JumpTheQueue_ app, we receive some inputs from the client. So let's add some validations for that data, to avoid errors and ensure the consistency of the information, before saving it to the database.
 
-When registering a visitor the client provides:
+When registering a visitor, the client provides the following information:
 
-- _username_: must be not null and must match the format `<name>@<domain.toplevel>`.
+- *_username_*: Must be not null and must match the format `<name>@<domain.toplevel>`.
 
-- _name_: must be not null.
+- *_name_*: Must be not null.
 
-- _phoneNumber_: must be not null and must match a sequence of numbers and spaces.
+- *_phoneNumber_*: Must be not null and must match a sequence of numbers and spaces.
 
-- _password_: must be not null.
+- *_password_*: Must be not null.
 
-- _acceptedCommercial_: must be not null.
+- *_acceptedCommercial_*: Must be not null.
 
-- _accepterTerms_: must be not null.
+- *_acceptedTerms_*: Must be not null.
 
-- _userType_: must be not null.
+- *_userType_*: Must be not null.
 
 === Name Validation
-As we have just mentioned the name of the visitor must be not null, to do so Hibernate Validator provides us with the already mentioned `@NotNull` annotation (_javax.validation.constraints.NotNull_).
+As we have just mentioned, the name of the visitor must be not null. To do so, Hibernate Validator provides us with the already mentioned `@NotNull` annotation (_javax.validation.constraints.NotNull_).
 
-We are going to add the annotation in the 'visitormanagement/dataaccess/api/VisitorEntity.java' just before the field _name_
+We are going to add the annotation in the `jtqj-core` to `visitormanagement/dataaccess/api/VisitorEntity.java`, just before the field _name_:
 
 [source,java]
 ----
-@NotNull
-private String name;
+...
+
+  @NotNull
+  private String name;
+
+...
 ----
 
-Run the app with Eclipse and, using https://www.getpostman.com/downloads/[Postman] or a similar tool, call the register resource (POST) `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor` providing in the body a visitor object without a name
+Run the app with Eclipse and -- using https://www.getpostman.com/downloads/[Postman] -- call the register resource via *POST*: +
+`http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor`
+
+In the body, provide a visitor object without a name, like so:
 
 [source,json]
 ----
 {
-	"username": "mary@mail.com",
-	"phoneNumber": "1234567",
-	"password": "12345",
-	"acceptedCommercial": "true",
-	"acceptedTerms": "true",
-	"userType": "false"
+	"username" : "mary@mail.com",
+	"phoneNumber" : "1234567",
+	"password" : "12345",
+	"acceptedCommercial" : "true",
+	"acceptedTerms" : "true",
+	"userType" : "false"
 }
 ----
 
 
-You will get a _ValidationError_ message regarding the _name_ field
+You will get a _ValidationError_ message regarding the _name_ field:
 
 image::images/devon4j/7.Validations/jumpthequeue_validation_name.png[JumpTheQueue Name Validation]
 
-
 === Email Validation
-In the case of the email, as we have already commented for _MyThaiStar_, using the `@Email` annotation for validations will allow to enter emails like `something@something`. This does not fit the app requirements, so we need to add a custom email validator.
+In the case of the email -- as already explained in the _MyThaiStar_ section -- using the `@Email` annotation for validation, will allow users to enter emails such as `something@something`. This does not fit our app requirements, so we need to add a custom email validator.
 
-Add an annotation `EmailExtended.java` in a new `general.common.api.validation` package.
+In `jtqj-core`, add a class for our annotation, called `EmailExtended.java`, in a new `general.common.api.validation` package:
 
 .EmailExtended.java
 [source,java]
 ----
+...
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -148,38 +156,43 @@ public @interface EmailExtended {
 }
 ----
 
-This validator extends the `@Email` validation with an extra `@Pattern` that defines a https://en.wikipedia.org/wiki/Regular_expression[regular expression] that the fields annotated with `@EmailExtended` must match.
+This validator extends the `@Email` validation with an extra `@Pattern`, that defines a https://en.wikipedia.org/wiki/Regular_expression[regular expression], which the fields annotated with `@EmailExtended` must match.
 
-Now we can annotate the _username_ field in with `@NotNull` and `@EmailExtended` to fit the app requirements.
+Now we can annotate the _username_ field in our `VisitorEntity.java` with `@NotNull` and `@EmailExtended`, to fit the app requirements.
 
 [source,java]
 ----
-@NotNull
-@EmailExtended
-private String username;
+...
+
+  @NotNull
+  @EmailExtended
+  private String username;
+
+...
 ----
 
-Then, if we try to register a user with a null email we get the _ValidationError_ with message _"{email=[may not be null]}"_
+Then, if we restart the app and try to register a user without an email, we get a _ValidationError_ with the message: "_{username=[must not be null]}_":
 
 image::images/devon4j/7.Validations/jumpthequeue_validation_nullemail.png[JumpTheQueue Null E-Mail Validation]
 
-And if we provide an email that does not match the expected format we get the related _ValidationError_
+And if we provide an email, that does not match the expected format, we get the related _ValidationError_ with the message: "_{username=[Email must specify a domain, ...]}_":
 
 image::images/devon4j/7.Validations/jumpthequeue_validation_wrongemail.png[JumpTheQueue Wrong E-Mail Validation]
 
-Finally if we provide a valid email the registration process ends successfully.
-
+Finally, if we provide a valid email, the registration process ends successfully.
 
 === Phone Validation
-For validating the _phone_, apart from the `@NotNull` annotation, we need to use again a custom validation based on the `@Pattern` annotation and a _regular expression_.
+For validating the _phone_, apart from the `@NotNull` annotation, we need to use another custom validation, based on the `@Pattern` annotation and a _regular expression_.
 
-We are going to follow the same approach used for _EmailExtended_ validation.
+We are going to follow the same approach used for the _EmailExtended_ validation.
 
-Add an annotation `Phone.java` to the `general.common.api.validation` package. With the `@Pattern` annotation we can define a regular expression to filter phones (_"consists of sequence of numbers or spaces"_).
+In `jtqj-core`, add a class for our annotation, called `Phone.java` to the `general.common.api.validation` package. With the `@Pattern` annotation we can define a regular expression to filter for phone numbers (_"consists of sequence of numbers or spaces"_):
 
 .Phone.java
 [source,java]
 ----
+...
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -204,22 +217,26 @@ public @interface Phone {
 }
 ----
 
-Then we only need to apply the new validation to our _phone_ field in 'visitormanagement/dataaccess/api/VisitorEntity.java'
+Then we only need to apply the new validation to our _phone_ field in `visitormanagement/dataaccess/api/VisitorEntity.java`:
 
 [source,java]
 ----
-@NotNull
-@Phone
-private String phoneNumber;
+...
+
+  @NotNull
+  @Phone
+  private String phoneNumber;
+
+...
 ----
 
-As last step we can test our new validation. Call again the service defining a wrong phone, the response should be a _ValidationError_ like the following
+As a last step, we can now test our new validation. Call the previous service again, defining a wrong phone number. The response should be a _ValidationError_ with the message: "_{phoneNumber=[Phone must be valid]}_":
 
 image::images/devon4j/7.Validations/jumpthequeue_validation_wrongphone.png[JumpTheQueue Wrong Phone Number Validation]
 
-However, if we provide a valid phone the process should end successfully
+If we provide a valid phone number, the process should complete successfully.
 
-In this chapter we have seen how easy is to add validations in the server side of our _devon4j_ applications. In the next chapter we will show how to test our components using _Spring Test_ and _devon4j_'s test module.
+In this chapter, we have seen how easy is to add validations to the server side of our _devon4j_ applications. In the next chapter, we will show you how to test our components using _Spring Test_ and _devon4j_'s test module.
 
 '''
 *Next Chapter*: link:devon4j-testing.asciidoc[Testing in devon4j]

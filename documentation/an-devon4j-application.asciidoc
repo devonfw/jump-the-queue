@@ -12,40 +12,27 @@ endif::[]
 
 = devon4j Application
 
-== My Thai Star Basics
-As an example of how an devon4j application is built we are going to show the _My Thai Star_ application backend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
+== MyThaiStar Basics
+As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
 
-The _My Thai Star_ application is a solution for managing the online booking and orders of a restaurant, it is addressed as a showcase app but designed with real requirements although trying to serve as example of common use cases in web apps (master-detail model, login, authorization based on roles, pagination, search with filters, etc.).
+The _MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant. It is presented as a showcase app but designed with real requirements in mind. Moreover, it attempts to demonstrate common features provided by many modern web apps (routing with and without guards, use of flex-box, theming, re-usable components, mock back end, ...).
 
 image::images/devon4j/2.Example_app/mts.png[MyThaiStar Home Page]
 
 The main features of the app are:
 
-- anonymous users can book a table.
+* Anonymous users can:
+** Book a table.
+** Create an event and invite some friends via email.
+** See the menu of dishes and make their own orders.
 
-- anonymous users can create an event and invite some friends to the restaurant.
-
-- users can visit the meal catalog and see information about the available dishes (name, ingredients, picture, price). 
-
-- both, the host and the guests, can order food for the event based on the food catalog and can select dishes with extra ingredients.
-
-- all the booking and order creation / cancellation operations are related to mail notifications sent by the application to warn the involved users about the changes.
-
-- only users with role _waiter_ are able to access to a restricted area of the application to have access to a list with all of the bookings and orders and can access to the details of each one.
-
-- the waiters can filter the bookings/orders results to manage the list.
+* Logged-in users in the role _Waiter_ can also:
+** Access a restricted area to see and filter the list and details of all reservations and orders made by users.
 
 == MyThaiStar devon4j Backend Overview
-What we have shown in the previous section is the aspect of a My Thai Star client app that consumes the services created with the _devon4j_ server solution.
+In this section we are going to focus on the implementation of the server project. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4j_ server project with the devonfw framework.
 
-From now on we are going to focus on the implementation of that server project to show how is it formed and how you can create your own _devon4j_ server project with the devonfw framework.
-
-My Thai Star project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.Net_ and _Node_ for backend solutions and _Angular_ and _Xamarin_ as default clients.
-
-[NOTE]
-====
-The _My Thai Star_ project is also included in the devonfw distribution, in _workspaces/examples_ folder. Just execute _eclipse-examples.bat_ . Import the existing Maven project. In the folder examples you will find the folder My-Thai-Star. Import it.
-====
+The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for backend solutions _Angular_ and _Xamarin_ as default clients.
 
 === The devon4j Project
 Using the _devon4j_ approach for the Java backend project we will have a structure of a main _Maven_ project formed by four sub-projects:

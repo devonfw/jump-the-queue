@@ -11,68 +11,107 @@ ifdef::env-github[]
 endif::[]
 
 = Deployment of devon4j Applications
-As we already mentioned when introducing the xref:an-devon4j-application#the-devon4j-project[devon4j projects], the apps created with the _devon4j_ archetype are going to provide, apart from the _core_ project and _api_ project, a _server_ project that will configure the packaging of the app. 
+As mentioned already in the xref:an-devon4j-application#the-devon4j-project[devon4j project section], apart from the _core_ and _api_ project, apps created with _devon4j_ also provide a _server_ project that configures the packaging of the app. 
 
-In our _JumpTheQueue_ app we can verify that we have this _server_ project available
+In our _JumpTheQueue_ app we can verify that this _server_ project is available:
 
-image::images/devon4j/9.Deployment/jumpthequeue_server_structure.png[JumpTheQueue Server Structure, 350]
+image::images/devon4j/9.Deployment/jumpthequeue_server_structure.png[JumpTheQueue Server Structure, 250]
 
-So, using _Maven_, we are going to be able to easily package our app in a _.war_ file to be deployed in an application server like _Tomcat_ (the default server provided in devonfw).
+So -- using _Maven_ -- we are going to be able to easily package our app in a `.war` file to be deployed in an application server like _Tomcat_ (the default server provided in devonfw).
 
 == The _server_ Project
-The _server_ project provided in _devon4j_ applications is an almost empty _Maven_ project. It only has a _pom.xml_ file that is used to configure the packaging of the _core_ project. Taking a closer look to this _pom.xml_ file we can realize that it only presents a single dependency to the core project. 
+The _server_ project provided in _devon4j_ applications is an almost empty _Maven_ project. It only has a `pom.xml` file that is used to configure the packaging of the _core_ project. Taking a closer look at this `pom.xml` file, we realize that it only contains a single dependency to the core project:
 
 [source,xml]
 ----
 ...
 
-<dependencies>
-<dependency>
-    <groupId>${project.groupId}</groupId>
-    <artifactId>jumpthequeue-core</artifactId>
-    <version>${project.version}</version>
-</dependency>
-</dependencies>
-...
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jtqj-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 
+...
 ----
 
-And then it includes the https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html[spring-boot-maven-plugin] that allows us to package the project in a jar or war archives and run the application "in-place".
+It also includes the https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html[Spring Boot Maven Plugin], that allows us to package the project in `.jar` or `.war` archives and run the application "in-place":
 
 [source,xml]
 ----
 ...
 
-<plugins>
-    <plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-    ...
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        ...
 
+      </plugin>
+    </plugins>
+
+...
 ----
 
 == Disabling Security Tests
-First, since this is a basic tutorial and there is no security/permissions,the files `SecurityRestServiceImplTest` and the `PermissionCheckTest` need to be modified leaving one test of each that will return true and the rest in a commentary. First, in the core `jtqj-core` inside `src/test/java/.../general/common/service/impl/rest/SecurityRestServiceImplTest`:
+Since this is a basic tutorial and there is no security or permission handling, we have to modify the files `SecurityRestServiceImplTest` and `PermissionCheckTest` in `jtqj-core`, to ignore the tests for these features.
+
+First, in `src/test/java/.../general/service/impl/rest/SecurityRestServiceImplTest.java`:
 
 [source, java]
 ----
-....
+package com.devonfw.application.jtqj.general.service.impl.rest;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
+
+import com.devonfw.application.jtqj.general.common.api.to.UserProfileTo;
+import com.devonfw.application.jtqj.general.service.api.rest.SecurityRestService;
+import com.devonfw.application.jtqj.general.service.base.test.RestServiceTest;
+import com.devonfw.module.service.common.api.client.config.ServiceClientConfigBuilder;
+
+/**
+ * This class tests the login functionality of {@link SecurityRestServiceImpl}.
+ */
+@RunWith(SpringRunner.class)
 public class SecurityRestServiceImplTest extends RestServiceTest {
-  ....
+
+  /** Logger instance. */
+  private static final Logger LOG = LoggerFactory.getLogger(SecurityRestServiceImplTest.class);
+
+  /**
+   * Test the login functionality as it will be used from a JavaScript client.
+   */
   @Test
+  @Ignore // Security via Login is currently not implemented, so ignore this test
   public void testLogin() {
 
-	assertThat(true);
-   /**String login = "waiter";
+    String login = "waiter";
     String password = "waiter";
 
     ResponseEntity<String> postResponse = login(login, password);
     LOG.debug("Body: " + postResponse.getBody());
     assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(postResponse.getHeaders().containsKey(HttpHeaders.SET_COOKIE)).isTrue();*/
+    assertThat(postResponse.getHeaders().containsKey(HttpHeaders.SET_COOKIE)).isTrue();
   }
-  ....
- /** @Test
+
+  /**
+   * Test of {@code SecurityRestService.getCsrfToken()}.
+   */
+  @Test
   public void testGetCsrfToken() {
 
     String login = "waiter";
@@ -85,10 +124,14 @@ public class SecurityRestServiceImplTest extends RestServiceTest {
     assertThat(csrfToken.getParameterName()).isEqualTo("_csrf");
     assertThat(csrfToken.getToken()).isNotNull();
     LOG.debug("Csrf Token: {}", csrfToken.getToken());
-  }*/
-  ....
- /**@Test
+  }
+
+  /**
+   * Test of {@link SecurityRestService#getCurrentUser()}.
+   */
+  @Test
   public void testGetCurrentUser() {
+
     String login = "waiter";
     String password = "waiter";
     SecurityRestService securityService = getServiceClientFactory().create(SecurityRestService.class,
@@ -96,36 +139,69 @@ public class SecurityRestServiceImplTest extends RestServiceTest {
             .buildMap());
     UserProfileTo userProfile = securityService.getCurrentUser();
     assertThat(userProfile.getLogin()).isEqualTo(login);
-  }*/
-  ....
-  /**ResponseEntity<String> login(String userName, String tmpPassword) {
+  }
+
+  /**
+   * Performs the login as required by a JavaScript client.
+   *
+   * @param userName the username of the user
+   * @param tmpPassword the password of the user
+   * @return @ {@link ResponseEntity} containing containing a cookie in its header.
+   */
+  private ResponseEntity<String> login(String userName, String tmpPassword) {
 
     String tmpUrl = "http://localhost:" + String.valueOf(this.port) + "/services/rest/login";
 
     HttpEntity<String> postRequest = new HttpEntity<>(
         "{\"j_username\": \"" + userName + "\", \"j_password\": \"" + tmpPassword + "\"}", new HttpHeaders());
 
-    ResponseEntity<String> postResponse = new RestTemplate().exchange(tmpUrl, HttpMethod.POST, postRequest, String.class);
+    ResponseEntity<String> postResponse = new RestTemplate().exchange(tmpUrl, HttpMethod.POST, postRequest,
+        String.class);
     return postResponse;
-  }*/
-  ....
+  }
+
 }
+
 ----
 
-
-  And then inside `src/test/.../general/common/base/PermissionCheckTest`:
-
+And in `src/test/java/.../general/common/base/PermissionCheckTest.java`:
 
 [source, java]
 ----
-....
+package com.devonfw.application.jtqj.general.common.base;
+
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+
+import net.sf.mmm.util.filter.api.Filter;
+import net.sf.mmm.util.reflect.api.ReflectionUtil;
+import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
+
+import org.assertj.core.api.SoftAssertions;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.devonfw.module.test.common.base.ModuleTest;
+
+/**
+ * Tests the permission check in logic layer.
+ */
 public class PermissionCheckTest extends ModuleTest {
-  ....
+
+  /**
+   * Check if all relevant methods in use case implementations have permission checks i.e. {@link RolesAllowed},
+   * {@link DenyAll} or {@link PermitAll} annotation is applied. This is only checked for methods that are declared in
+   * the corresponding interface and thus have the {@link Override} annotations applied.
+   */
   @Test
+  @Ignore // Permission Checks are currently not implemented, so ignore this test
   public void permissionCheckAnnotationPresent() {
 
-	assertThat(true);
-    /**String packageName = "com.devonfw.application.jtqj";
+    String packageName = "com.devonfw.application.jtqj";
     Filter<String> filter = new Filter<String>() {
 
       @Override
@@ -158,74 +234,90 @@ public class PermissionCheckTest extends ModuleTest {
         }
       }
     }
-    assertions.assertAll();*/
+    assertions.assertAll();
   }
-  ....
 }
-....
+
 ----
 
-This is going to allow our application to pass the tests and be able to build.
+This is going to allow our application to pass the tests and be built.
 
 == Running the App with Maven
-Thanks to _Spring Boot_ and the `spring-boot-maven-plugin` we can run our app using Maven. To do so just open a command line with access to _Maven_ (in Devonfw we can do it using the _console.bat_). And:
+Thanks to _Spring Boot_ and the _Spring Boot Maven Plugin_, we can run our app using Maven. To do so, just open a command prompt with access to _Maven_ (in our devonfw project folder we can simply do so by right clicking and selecting `Open Devon CMD shell here`).
 
-1.- As is explained in https://github.com/devonfw/devon/wiki/getting-started-understanding-devon4j-spring-boot-config#step-2-including-properties[devonfw documentation] the `application.properties` used for packaging is `/src/main/resources/application.properties`. So we need to edit the app properties to access to the app. In `/jtqj-core/src/main/resources/application.properties` configure the properties:
+Now we need to follow these steps:
+
+1.- As is explained in the https://github.com/devonfw/devon4j/wiki/guide-configuration#environment-configuration[devon4j configuration guide], the default `application.properties` file used for packaging is located in `src/main/resources/` (*don't* use the one located in `src/main/resources/config/`). We need to modify some settings in this file in order to gain access to the app: +
 
 ----
 server.port=8081
+
+spring.application.name=jtqj
 server.servlet.context-path=/jumpthequeue
 ----
 
-2.- install the `jtqj` project in our local _Maven_ repository
+2.- Install the `jtqj` project in our local _Maven_ repository:
 
 ----
-D:\Devon-dist\...\jtqj>mvn install
+C:\...\workspaces\main\jumpthequeue\java\jtqj> mvn install
 ----
 
-3.- Go to the `jtqj/server` project and execute the command `mvn spring-boot:run`
+3.- Go to the `jtqj/server` project and boot the application:
 
 ----
-D:\Devon-dist\...\jtqj\server>mvn spring-boot:run
+C:\...\workspaces\main\jumpthequeue\java\jtqj\server> mvn spring-boot:run
 ----
 
-The app should be launched in the _Spring Boot_ embedded Tomcat server. Wait a few seconds until you see a console message like
+The app should be launched in the _Spring Boot_ embedded _Tomcat_ server. Wait a few seconds until you see a console message like this:
 
 ----
-{"timestamp":"2019-01-30T14:13:10.164+00:00","message":"Tomcat started on port(s): 8081 (http) with context path '/jumpthequeue'","logger_name":"org.springframework.boot.web.embedded.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","appname":"jtqj"}
+{"timestamp":"20XX-XX-XXTXX:XX:XX.XXX+00:00","message":"Tomcat started on port(s): 8081 (http) with context path '/jumpthequeue'","logger_name":"org.springframework.boot.web.embedded.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","appname":"jtqj"}
+{"timestamp":"20XX-XX-XXTXX:XX:XX.XXX+00:00","message":"Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)","logger_name":"com.devonfw.application.jtqj.SpringBootApp","thread_name":"main","level":"INFO","appname":"jtqj"}
 ----
 
-Now we can try to access to the app resource (GET)`http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1` we can verify that the app is running fine
+Now we can try to access the app resource.
+
+Open https://www.getpostman.com/[Postman], select the service *GET* and send: +
+`http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1`
 
 image::images/devon4j/9.Deployment/jumpthequeue_simpleget1.png[JumpTheQueue Simple GET Request]
 
+If you get a response similar to the one in the image, you have verified that the app is running fine.
+
 == Packaging the App with Maven
-In the same way, using _Maven_ we can package our project in a _.war_ file. As in the previous section, open a command line with access to _Maven_ (in devonfw _console.bat_ script) and execute the command `mvn clean package` in the project root directory
+In the same way, using _Maven_ we can package our project in a `.war` file. As in the previous section, open a command prompt with access to _Maven_ (in our devonfw project folder we can simply do so by right clicking and selecting `Open Devon CMD shell here`). Now execute the following command in the projects root directory:
 
 ----
-D:\Devon-dist\...\jtqj>mvn clean package
+C:\...\workspaces\main\jumpthequeue\java\jtqj> mvn clean package
 ----
 
-The packaging process (compilation, tests and _.war_ file generation) should be launched. Once the process is finished you should see a result like
+The packaging process (which includes compilation, tests and generation of the `.war` file) will be launched. Once the process is finished you should see a result like this:
 
 ----
-[INFO] Building war: C:\Devon-dist_3.0.0\jump-the-queue\java\jtqj\server\target\jtqj-server-v4.war
+[INFO] Packaging webapp
+[INFO] Assembling webapp [jtqj-server] in [C:\...\workspaces\main\jump-the-queue\jump-the-queue\java\jtqj\server\target\jtqj-server-v4]
+[INFO] Processing war project
+[INFO] Webapp assembled in [XXXX msecs]
+[INFO] Building war: C:\...\workspaces\main\jump-the-queue\jump-the-queue\java\jtqj\server\target\jtqj-server-v4.war
 [INFO]
-[INFO] --- spring-boot-maven-plugin:2.0.4.RELEASE:repackage (default) @ jtqj-server ---
-[INFO] Attaching archive: C:\...\jump-the-queue\java\jtqj\server\target\jtqj-server-bootified.war, with classifier: bootified
+[INFO] --- spring-boot-maven-plugin:2.1.6.RELEASE:repackage (default) @ jtqj-server ---
+[INFO] Attaching repackaged archive C:\...\workspaces\main\jump-the-queue\jump-the-queue\java\jtqj\server\target\jtqj-server-bootified.war with classifier bootified
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for jtqj v4:
 [INFO]
-[INFO] jtqj ............................................... SUCCESS [  2.582 s]
-[INFO] jtqj-api ........................................... SUCCESS [  6.725 s]
-[INFO] jtqj-core .......................................... SUCCESS [01:19 min]
-[INFO] jtqj-server ........................................ SUCCESS [ 10.308 s]
+[INFO] jtqj ............................................... SUCCESS [  X.XXX s]
+[INFO] jtqj-api ........................................... SUCCESS [ XX.XXX s]
+[INFO] jtqj-core .......................................... SUCCESS [XX:XX min]
+[INFO] jtqj-server ........................................ SUCCESS [ XX.XXX s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
+[INFO] Total time:  XX:XX min
+[INFO] Finished at: 20XX-XX-XXTXX:XX:XX+0X:00
+[INFO] ------------------------------------------------------------------------
 ----
 
-The packaging process has created a _.war_ file that has been stored in the `\java\jtqj\server\target` directory.
+The packaging process creates two `.war` files, that are stored in the `\java\jtqj\server\target` directory. They contain the web application and can be deployed on any Servlet/JSP container.
 
 '''
 *Next Chapter*: link:devon4ng-introduction.asciidoc[devon4ng Introduction]

@@ -16,10 +16,10 @@
 ==== devon4ng (Frontend)
 . link:devon4ng-introduction.asciidoc[devon4ng Introduction]
 . link:an-devon4ng-application.asciidoc[devon4ng Application]
-. link:angular-components.asciidoc[Angular Components]
-. link:angular-services.asciidoc[Angular Services]
+. link:devon4ng-components.asciidoc[devon4ng Components]
+. link:devon4ng-services.asciidoc[devon4ng Services]
 . link:build-devon4ng-application.asciidoc[Build a devon4ng Application]
-. link:angular-deployment.asciidoc[Angular Deployment]
+. link:devon4ng-deployment.asciidoc[devon4ng Deployment]
 
 ////
 ==== OASP4Fn (Serverless)

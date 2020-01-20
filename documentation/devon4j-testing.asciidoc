@@ -18,30 +18,34 @@ In this chapter we are going to focus on showing some test examples, and explain
 == MyThaiStar Testing Example
 In all the _devon4j_ projects (based on _Maven_ and _Spring_) we are going to find a dedicated package for testing.
 
+In addition to this, the testing part of the project also has its own _resources_ package, so we are going to be able to configure the application properties or other resources to create specific test scenarios:
+
 image::images/devon4j/8.Testing/mythaistar_testing_structure.png[MyThaiStar Testing Structure, 250]
 
-In addition to this the testing part of the project has also its own _resources_ package, so we are going to be able to configure the application properties or other resources to create specific testing scenarios.
+We should incorporate https://en.wikipedia.org/wiki/Unit_testing[unit tests] as one of our main efforts during development, even considering approaches like https://martinfowler.com/bliki/TestDrivenDevelopment.html[test-driven development] (TDD).
 
-We should incorporate the https://en.wikipedia.org/wiki/Unit_testing[unit test] as one of the main efforts during the development, considering even approaches like https://martinfowler.com/bliki/TestDrivenDevelopment.html[TDD].
+The tests in our applications should cover a significant amount of functionality. However, in this part of the tutorial, we are going to focus on the test of our _devon4j_ components.
 
-The tests in our applications should cover a significant amount of functionality, however in this part of the tutorial we are going to focus in the test of our _devon4j_ components.
-
-As you have seen in the previous snapshot, each component of our application should have a dedicated package for testing in the test _package_. Inside each testing package we will create the related test classes that should follow the naming convention
+As you have seen in the previous image, each component of our application should have a dedicated package for testing in the test _package_. Inside each testing package, we will create the related test classes. They should follow this naming convention:
 
 ----
 [Component]Test.java
 ----
 
-This is because we are going to use _Maven_ to launch the tests of our application and _Maven_ will look for test classes that end with _Test_ word.
+This is because we are going to use _Maven_ to launch the tests of our application and _Maven_ will look for test classes that end with the _Test_ keyword.
 
-Testing with _devon4j_ means that we have already available _Spring Test_ and _devon4j_ test module which means that we will find a significant amount of annotations and implementations that are going to provide us with all the needed libraries and tools to create tests in a really simply way.
+Testing under _devon4j_ means, that we already have _Spring Test_ and the _devon4j_ test module available. This also means, that we will find a significant amount of annotations and implementations, which are going to provide us with all the necessary libraries and tools to create our tests in a really simple way.
 
-Focusing on the components test means that we are going to test the implementation of the logic layer of our applications. Because of this, you can see in our test structure that our test classes are inside the `[component].logic.impl` package.
+Focusing on the component tests means, that we are going to test the implementation of the logic layer of our application. Because of this, you can see in our test structure, that our test classes are inside the `[component].logic.impl` package: 
 
-If we open one of the test classes we will find something like this
+image::images/devon4j/8.Testing/mythaistar_testing_structure.png[MyThaiStar Testing Structure, 250]
+
+If we open one of the test classes we will find something like this:
 
 [source,java]
 ----
+...
+
 @SpringBootTest(classes = SpringBootApp.class)
 public class DishmanagementTest extends ComponentTest {
 
@@ -54,41 +58,43 @@ public class DishmanagementTest extends ComponentTest {
     DishSearchCriteriaTo criteria = new DishSearchCriteriaTo();
     List<CategoryEto> categories = new ArrayList<>();
     criteria.setCategories(categories);
-    PaginatedListTo<DishCto> result = this.dishmanagement.findDishCtos(criteria);
+    PageRequest pageable = PageRequest.of(0, 100, new Sort(Direction.DESC, "price"));
+    criteria.setPageable(pageable);
+    Page<DishCto> result = this.dishmanagement.findDishCtos(criteria);
     assertThat(result).isNotNull();
   }
+
   ...
 
 }
 ----
 
-- `@SpringBootTest` is the _Spring Test_ annotation to load the context of our application. So we will have the application running like in a _real_ situation.
-
-- extending the _devon4j_ test class `ComponentTest` will inject in our test class functionalities like http://joel-costigliola.github.io/assertj/[assertions].
-
-- _Spring Test_ gives us the option for dependency injection, so we are going to be able to `@Inject` our components to test them.
-
-- Finally with the `@Test` annotation we can declare a test to be executed during testing process.
-
+* *_@SpringBootTest_* is the _Spring Test_ annotation to load the context of our application. So we will have the application running like in a _real_ situation.
+* Extending the _devon4j_ test class `ComponentTest` will inject functionalities like http://joel-costigliola.github.io/assertj/[assertions] into our test class.
+* _Spring Test_ gives us the option for dependency injection, so we are going to be able to `@Inject` our components to test them.
+* Finally with the `@Test` annotation we can declare a test to be executed during the testing process.
 
 == Testing our Application
-Now that we have briefly overview we are going to add some tests to our _JumpTheQueue_ application.
+Now that we have brief overview, we are going to add some tests to our _JumpTheQueue_ application.
 
-We have a main component for managing _visitors_, so we are going to create a dedicated package for the component within the `com.devonfw.application.jtqj` package. And inside this new package we are going to add a new test class named `VisitormanagementTest.java`
+We have a main component for managing _visitors_, so we are going to create a dedicated package for testing that component within the `com.devonfw.application.jtqj` package, called `visitormanagement.logic.impl`. Inside this new package we are going to add a new test class named `VisitormanagementTest.java`:
 
-image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQuehe Testing Structure, 350]
+image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQuehe Testing Structure, 300]
 
 [NOTE]
 ====
-You can see that we already have some test packages in the `src/test/java/com.devonfw.application.jtqj.general` package. Those tests are from the _devon4j_ archetype and we can use them as model for some tests in our apps. 
+You can see that we already have some test packages in the `src/test/java/com.devonfw.application.jtqj.general` package. Those tests are from the _devon4j_ archetype and we can use them as a model for further tests in our apps.
 ====
 
-In the `VisitormanagementTest` class we are going to add the annotations to run the app context when executing the tests, extend the `ComponentTest` class to obtain the assertions and inject our `visitormanagement` component.
+In the `VisitormanagementTest` class we are going to add annotations to run our app in the correct context when executing tests, extend the `ComponentTest` class to obtain assertions, and inject our `visitormanagement` component:
 
 [source,java]
 ----
+...
+
 import javax.inject.Inject;
 
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.devonfw.application.jtqj.SpringBootApp;
@@ -98,32 +104,39 @@ import com.devonfw.application.jtqj.visitormanagement.logic.api.to.VisitorSearch
 import com.devonfw.module.test.common.base.ComponentTest;
 
 @SpringBootTest(classes = SpringBootApp.class)
-public class VisitormanagementTest extends ComponentTest{
+public class VisitormanagementTest extends ComponentTest {
 
-	  @Inject
-	  private Visitormanagement visitormanagement;
+  @Inject
+  private Visitormanagement visitormanagement;
 }
 ----
 
 [NOTE]
 ====
-Please note that the class `VisitormanagementTest` in the code snippet above extends the class `ComponentTest`, so check if this is the case in your code.
+Please note, that the class `VisitormanagementTest` in the code snippet above, *extends* the class `ComponentTest`. Make sure, that this is the case in your code too.
 ====
 
 Now we can start adding our first test. In link:jump-the-queue-design.asciidoc[JumpTheQueue] we have two main functionalities:
 
-- register a visitor returning an _access code_.
+. Register a visitor, returning an _access code_.
+. List the current _visitors_.
 
-- list the current _visitors_.
+Let's add tests to check these functionalities:
 
-Let's add a test to check the first one.
+=== 1. Registration
+We are going to create a method with a descriptive name; _saveVisitorTest_, and we are going to add the `@Test` annotation to it.
 
-We are going to create a method called with a descriptive name, _saveVisitorTest_, and we are going to add to it the `@Test` annotation.
-
-Inside this test we are going to verify the registration process of our app. To do so we only need to call the _saveVisitor_ method of the component and provide a _VisitorEto_ object. After the method is called we are going the check the response of the method to verify that the expected business logic has been executed successfully.
+Inside this test, we are going to verify the registration process of our app. To do so, we only need to call the _saveVisitor_ method of the component and provide a _VisitorEto_ object. After the method is called, we are going to check the response of the method, to verify that the expected business logic has been executed correctly:
 
 [source,java]
 ----
+...
+
+@SpringBootTest(classes = SpringBootApp.class)
+public class VisitormanagementTest extends ComponentTest {
+
+  ...
+  
   @Test
   public void saveVisitorTest() {
 
@@ -141,28 +154,41 @@ Inside this test we are going to verify the registration process of our app. To 
 
     this.visitormanagement.deleteVisitor(visitorEtoResult.getId());
   }
+
+}
 ----
 
 [NOTE]
 ====
-In this saveVisitorTest() method that we give as an example, we can see that theres a deleteVisitor at the end, this would be only done if the tests are being use agaisnt the production db. In the case that we got a separate db, the last delete is not needed.
+In this `saveVisitorTest` method, that we give as an example, we can see that theres a `deleteVisitor` at the end. This would normally only be done, if the tests were run against a production database.If you use a separate database for testing, the last delete is not needed.
 ====
 
 [NOTE]
 ====
-Have you noticed that the _mock_ data of the test is the same data that we have used in previous chapters for the manual verification of our services? Exactly, from now on this test will allow us to automate the manual verification process.
+Have you noticed, that the _mock_ data of this test is the same data, that we used in previous chapters for the _manual_ verification of our services? Exactly! From now on, this test will allow us to _automate_ the manual verification process.
 ====
 
-Now is the moment for running the test. We can do it in several ways but to simplify the example just select the method to be tested, do right click over it and select _Run as > JUnit Test_
+Now is the time for running the test:
+
+We can do this in several ways, but to simplify the example, just right click the test-method and select `Run as > JUnit Test`:
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_runtest.png[JumpTheQueue Running Tests]
 
 [NOTE]
 ====
-We can also debug our tests using the _Debug As > JUnit Test_ option.
+We can also debug our tests using the `Debug As > JUnit Test` option.
 ====
 
-The result of the test will be shown in the _JUnit_ tab of Eclipse
+[IMPORTANT]
+====
+If you get an error-message saying: `No tests found with test runner 'JUnit 5'`, right-click the test-class, `Run As > Run Configurations...` and then select `JUnit 4` as your test runner:
+
+image::images/devon4j/8.Testing/jumpthequeue_testing_junit5_error.png[JumpTheQueue Running Tests]
+====
+
+//TODO: Test fails... continue here!
+
+The result of the test will be shown in the _JUnit_ tab of Eclipse:
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_result.png[JumpTheQueue Test Results 1]
 
@@ -178,6 +204,8 @@ assertThat(visitorEtoResult.getName()).isEqualTo("Mary");
 Now running again the test we should obtain the expected result
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_result2.png[umpTheQueue Test Results 2]
+
+=== 2. Finding Visitors
 
 For the second functionality (finding visitors) we can add a new test with a very similar approach. The only difference is that in this case we are going to need to declare a _Search Criteria_ object, that will contain a pageable to recover the first page and the first 100 values.
 
@@ -253,26 +281,23 @@ public class VisitormanagementTest extends ComponentTest{
 
     assertThat(result).isNotNull();
   }
-
-    ...
 }
 ----
 
 == Running the Tests with Maven
-We can use _Maven_ to automate the testing of our project. To do it we simply need to open the _devonfw_ console (_console.bat_ script) or a command line with access to _Maven_ and, in the project, execute the command `mvn clean test`. With this command _Maven_ will scan for classes named with the _Test_ word and will execute all the tests included in these classes.
+We can use _Maven_ to automate the testing of our project. To do so, just open a command prompt with access to _Maven_ (in our devonfw project folder we can simply right click and select `Open Devon CMD shell here`). Now enter and run:
 
-If we do it with _JumpTheQueue_ project
 ----
-\Devon-dist\....\jump-the-queue\java\jtqj>mvn clean test
+C:\...\workspaces\main\jump-the-queue\java\jtqj> mvn clean test
 ----
 
-The result will be similar to this
+_Maven_ will now scan for classes containing the word "Test" and execute all methods annotated with `@Test` in those classes. The result will look similar to this:
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_maven.png[JumpTheQueue Maven Testing]
 
-Even though the test that we have made created finished correctly since theres more tests that devon4j generated automaticly, theres going to be one error related to role assignment. In this tutorial we are going to do only the visitor side so we havent implemented role restriction. We encourage you that after finishing the tutorial you add code and try to make your own.
+Even though the test we made finished correctly, there are more tests -- that devon4j generated automatically -- which are going to contain one error related to role assignment. In this tutorial we are only going to implement the visitor side, so we won't implement role restrictions. We encourage you to add the code for this functionality yourself, after finishing this tutorial.
 
-After that we have seen how to create tests in _devonfw_, in the next chapter we are going to show how to package and deploy our project.
+After we have demonstrated how to create tests in _devonfw_, we are going to show you how to package and deploy your project in the next chapter.
 
 '''
 *Next Chapter*: link:devon4j-deployment.asciidoc[Deployment with devonfw]
