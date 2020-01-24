@@ -64,7 +64,7 @@ In addition, you can set Yarn as the default package manager to use with Angular
 
 Finally, once all these tools have been installed successfully, you are ready to create a new project. Theres two ways of creating a project:
 
-== 1.- Creating basic new project with the Angular/CLI
+== Creating a New Project with the Angular/CLI
 One of the best reasons to install Angular/CLI is because it has a feature that creates a whole new basic project where you want just running:
 
 `ng new <project name>`
@@ -86,20 +86,6 @@ Finally, it is time to check if the created project works properly. To do this, 
 And ... it worked:
 
 image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
-
-== 2.- Creating basic new project with Devcon
-Once the devcon has loaded, we go to devon4ng->create. Then we fill the clientname with the name of your project and then browse the folder where we want to create the project in. Once that is done, you can push the create button.
-
-Once devcon has finished you should see something like this:
-
-[NOTE]
-====
-The result on this screenshot can differ from the result.
-====
-
-image::images/devon4ng/3.BuildYourOwn/devcon4ng.png[Devcon devon4ng Create]
-
-Even though this tutorial is going to start with the second option. At this point, you should be ready to start the development with either.
 
 === Adding Google Material and Covalent Teradata
 [NOTE]
@@ -203,7 +189,7 @@ $background: map-get($theme, background);
 ....
 ----
 
-== Start the Development
+== Starting Development
 Now we have a fully functional blank project, all we have to do now is just create the components and services which will compose the application.
 
 First, we are going to develop the views of the app, through its components, and then we will create the services with the logic, security and back-end connection.
