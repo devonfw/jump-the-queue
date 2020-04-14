@@ -51,7 +51,11 @@ However, if you feel more comfortable with npm, you can keep using it.
 === Angular/CLI
 This CLI is specifically built to make Angular projects easier to develop, maintain and deploy, so we are going to make use of it.
 
-To install the Angular/CLI you have to run this command in your console prompt: `npm install –g @angular/cli`
+To install the Angular/CLI you have to run this command in your console prompt:
+
+```
+npm install –g @angular/cli
+```
 
 Now you should be able to run `ng version` and this will appear in the console:
 
