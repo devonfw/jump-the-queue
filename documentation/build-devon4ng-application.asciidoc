@@ -32,80 +32,86 @@ Once installed, the first thing you should do is install the extensions that wil
 2. Install the `devonfw Platform Extension Pack` (this might take a while).
 
 === Node.js
-Go to https://nodejs.org/en/[nodejs.org] and download the version you like the most, the LTS or the Current, as you wish.
+Go to https://nodejs.org/en/[nodejs.org] and download the version you like the most -- LTS or Current -- as you wish.
 
-The recommendation is to install the latest version of your election, but keep in mind that to use Angular CLI your version must be at least 8.x and npm 5.x, so if you have a node.js already installed in your computer this is a good moment to check your version and upgrade it if it's necessary.
+The recommendation is to install the latest version, but keep in mind that to use Angular CLI, your version must be at least 8.x and to use npm at least 5.x. If you have Node.js already installed on your computer, this is a good moment to check your version and upgrade if necessary.
 
 === TypeScript
-Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create javascript modules in Node.js, that is installed along with Node, so for install typescript you don’t have to install npm explicitly, only run this command:
+Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript you don’t have to install npm explicitly, just run this command:
 
 `npm install –g typescript`
 
 === Yarn
-As npm, https://yarnpkg.com/en/[Yarn] is a package manager, the differences are that Yarn is quite more faster and usable, so we decided to use it to manage the dependencies of devon4ng projects.
+Just like npm, https://yarnpkg.com/en/[Yarn] is a package manager for JavaScript/Node modules. Yarn is quite a bit faster and more usable in our opinion, so we decided to use it to manage the dependencies of devon4ng projects.
 
-To install it you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
+To install Yarn, you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
 
-Even though, if you feel more comfortable with npm, you can remain using npm, there is no problem regarding this point.
+However, if you feel more comfortable with npm, you can keep using it.
 
 === Angular/CLI
-CLI specially built for make Angular projects easier to develop, maintain and deploy, so we are going to make use of it.
+This CLI is specifically built to make Angular projects easier to develop, maintain and deploy, so we are going to make use of it.
 
-To install it you have to run this command in your console prompt: `npm install –g @angular/cli`
+To install the Angular/CLI you have to run this command in your console prompt: `npm install –g @angular/cli`
 
-Then, you should be able to run `ng version` and this will appear in the console:
+Now you should be able to run `ng version` and this will appear in the console:
 
 image::images/devon4ng/3.BuildYourOwn/angularcli.png[Angular CLI Version]
 
-In addition, you can set Yarn as the default package manager to use with Angular/CLI running this command: 
+In addition, you can set Yarn as the default package manager to use with Angular/CLI by running this command: 
 
 `ng config -g cli.packageManager yarn`
 
-Finally, once all these tools have been installed successfully, you are ready to create a new project. Theres two ways of creating a project:
+Finally, once all these tools have been installed successfully, you are ready to create a new project.
 
 == Creating a New Project with the Angular/CLI
-One of the best reasons to install Angular/CLI is because it has a feature that creates a whole new basic project where you want just running:
+One of the main reasons to install Angular/CLI is to use the feature that creates a whole new basic project by simply running:
 
-`ng new <project name>`
+```cmd
+C:\...\workspaces\main\jumpthequeue>  ng new <project name>
+```
 
-Where <project name> is the name of the project you want to create. In this case, we are going to call it `angular` since we got the project distributed with the folders of the different systems. After executing the command, it will ask two things:
+Where <project name> is the name of the Angular project you want to create. In this case, we are going to call it `angular` itself, since we want to distribute this code as part of our complete `jumpthequeue` project. After executing the command, Angular/CLI will ask if we want to use Angular routing (Yes) and what stylesheet format we want to use (SCSS):
 
 image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 
-This command will create the basic files and install the dependencies stored in `package.json`
+This command will create the basic files and directories and install dependencies stored in `package.json`:
 
-image::images/devon4ng/3.BuildYourOwn/ngnew.jpg[Angular Project Creation]
+image::images/devon4ng/3.BuildYourOwn/ngnew.png[Angular Project Creation]
 
 Then, if we move to the folder of the project we have just created and open visual code we will have something like this:
 
 image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
-Finally, it is time to check if the created project works properly. To do this, move to the projects root folder and run: `ng serve -o`
+Finally, it is time to check if the created project works properly. To do this, move to the projects root folder (`C:/.../workspaces/main/jumpthequeue/angular`) and run:
 
-And ... it worked:
+```
+ng serve -o
+```
+
+If everything worked, you'll see the default Angular landing page:
 
 image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
 
 === Adding Google Material and Covalent Teradata
+
 [NOTE]
 ====
-If you dont have the latest angular version install the corresponding version of the dependencies to your angular version. To do so, add @`version` behind. Example: npm install @angular/material@7.1.2 or yarn add @angular/material@7.1.2
-
-If you are using the devonfw distribution, we recommend the use of the workspaces_vs as a folder to create the project. Since the folder will be in a new place and not inside the one we created for the backend, we recomend to switch the name appropriately. Once you finished generating the project, execute the script `update-all-workspaces.bat` and it will include a script in the root of the devonfw dist with your new workspace for visual studio.
+If you don't have the latest Angular version, install the corresponding version of dependencies for your Angular version by adding `@<version>` behind the dependency names, for example: `npm install @angular/material@7.1.2` or `yarn add @angular/material@7.1.2`
 ====
-Execute: `update-all-workspaces.bat.`
-Goto the directory: `cd angular`. And run the following commands:
 
+Go to the `C:/.../workspaces/main/jumpthequeue/angular` directory and run the following command to add *Google Material* to the project dependencies:
 
-First, we are going to add *Google Material* to project dependencies running the following commands:
+`yarn add @angular/material`
 
-`yarn add @angular/material @angular/cdk`
+Now we are going to add the *Angular CDK* (Component Dev Kit):
 
-Then we are going to add animations:
+`yarn add @angular/cdk`
+
+Then we are going to add *Animations*:
 
 `yarn add @angular/animations`
 
-The angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
+The Angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
 
 `yarn add hammerjs`
 
@@ -113,7 +119,7 @@ That is all regarding Angular/Material. We are now going to install *Covalent Te
 
 `yarn add @covalent/core` 
 
-Now that we have all dependencies we can check in the project's package.json file if everything has been correctly added (the following dependencies section is shown as it was at the time of writing this document):
+Now that we have all dependencies, we can check in the project's `package.json` file if everything has been correctly added (the following dependencies section is shown as it was at the time of writing this document):
 
 [source, json]
 ----
@@ -137,7 +143,7 @@ Now that we have all dependencies we can check in the project's package.json fil
   },
 ----
 
-Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In futur steps a `CoreModule` will be created, this module will contain the imports of these libraries, this will avoid code repetition.
+Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In future steps a `CoreModule` will be created. This module will contain the imports of these libraries, this will avoid code repetition.
 
 Now let's continue to make some config modifications to have all the styles imported to use Material and Teradata:
 
@@ -168,24 +174,28 @@ $background: map-get($theme, background);
 
 [source, json]
 ----
-....
-            "styles": [
-              "src/styles.css",
-              "src/theme.scss",
-              "node_modules/@covalent/core/common/platform.css"
-            ],
-....
+...
+
+  "styles": [
+    "src/styles.css",
+    "src/theme.scss",
+    "node_modules/@covalent/core/common/platform.css"
+  ],
+
+...
 ----
 
 3. In the same file than previous step, the `hammer` library is going to be added. In order to do so, we add inside both "scripts" arrays (inside build and test) the minimified script:
 
 [source,json]
 ----
-....
-            "scripts": [
-              "node_modules/hammerjs/hammer.min.js"
-            ]
-....
+...
+
+  "scripts": [
+    "node_modules/hammerjs/hammer.min.js"
+  ]
+
+...
 ----
 
 == Starting Development
@@ -233,7 +243,7 @@ Learn more about layouts in devon4ng link:devon4ng-components#Teradata-Covalent-
 
 As we do not really need nothing more than a header we are going to use the simplest layout: *nav view*
 
-In order to be able to use covalent and angular mats, we are going to create a core module that we will import in every module where we want to use covalent and angular. First, we create a folder called `shared` in the `app` root. Inside there, we are going to create a file called `core.module.ts` and we will fill it with the next content:
+In order to be able to use covalent and Angular  mats, we are going to create a core module that we will import in every module where we want to use covalent and Angular . First, we create a folder called `shared` in the `app` root. Inside there, we are going to create a file called `core.module.ts` and we will fill it with the next content:
 
 [source, typescript]
 ----
@@ -794,7 +804,7 @@ export const environment: {production: boolean, baseUrlRestServices: string} = {
 
 Now in the service, we are going to add a `registerVisitor` method.
 
-To call the server in this method we are going to inject the Angular HttpClient class from @angular/common/http, this class is the standard used by angular to make Http calls, so we are going to use it. The register call demands a `Visitor` model  that we created in the `interfaces` file, so we are going to build a post call and send that information to the proper URL of that server service, it will return an observable.
+To call the server in this method we are going to inject the Angular HttpClient class from @angular/common/http, this class is the standard used by Angular to make Http calls, so we are going to use it. The register call demands a `Visitor` model  that we created in the `interfaces` file, so we are going to build a post call and send that information to the proper URL of that server service, it will return an observable.
 
 [source, typescript]
 ----
