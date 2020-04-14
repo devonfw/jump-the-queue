@@ -39,7 +39,9 @@ The recommendation is to install the latest version, but keep in mind that to us
 === TypeScript
 Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript you don’t have to install npm explicitly, just run this command:
 
-`npm install –g typescript`
+----
+npm install –g typescript
+----
 
 === Yarn
 Just like npm, https://yarnpkg.com/en/[Yarn] is a package manager for JavaScript/Node modules. Yarn is quite a bit faster and more usable in our opinion, so we decided to use it to manage the dependencies of devon4ng projects.
@@ -53,9 +55,9 @@ This CLI is specifically built to make Angular projects easier to develop, maint
 
 To install the Angular/CLI you have to run this command in your console prompt:
 
-```
+----
 npm install –g @angular/cli
-```
+----
 
 Now you should be able to run `ng version` and this will appear in the console:
 
@@ -63,16 +65,18 @@ image::images/devon4ng/3.BuildYourOwn/angularcli.png[Angular CLI Version]
 
 In addition, you can set Yarn as the default package manager to use with Angular/CLI by running this command: 
 
-`ng config -g cli.packageManager yarn`
+----
+ng config -g cli.packageManager yarn
+----
 
 Finally, once all these tools have been installed successfully, you are ready to create a new project.
 
 == Creating a New Project with the Angular/CLI
 One of the main reasons to install Angular/CLI is to use the feature that creates a whole new basic project by simply running:
 
-```cmd
+----
 C:\...\workspaces\main\jumpthequeue>  ng new <project name>
-```
+----
 
 Where <project name> is the name of the Angular project you want to create. In this case, we are going to call it `angular` itself, since we want to distribute this code as part of our complete `jumpthequeue` project. After executing the command, Angular/CLI will ask if we want to use Angular routing (Yes) and what stylesheet format we want to use (SCSS):
 
@@ -88,9 +92,9 @@ image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
 Finally, it is time to check if the created project works properly. To do this, move to the projects root folder (`C:/.../workspaces/main/jumpthequeue/angular`) and run:
 
-```
+----
 ng serve -o
-```
+----
 
 If everything worked, you'll see the default Angular landing page:
 
@@ -105,23 +109,33 @@ If you don't have the latest Angular version, install the corresponding version 
 
 Go to the `C:/.../workspaces/main/jumpthequeue/angular` directory and run the following command to add *Google Material* to the project dependencies:
 
-`yarn add @angular/material`
+----
+yarn add @angular/material
+----
 
 Now we are going to add the *Angular CDK* (Component Dev Kit):
 
-`yarn add @angular/cdk`
+----
+yarn add @angular/cdk
+----
 
 Then we are going to add *Animations*:
 
-`yarn add @angular/animations`
+----
+yarn add @angular/animations
+----
 
 The Angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
 
-`yarn add hammerjs`
+----
+yarn add hammerjs
+----
 
 That is all regarding Angular/Material. We are now going to install *Covalent Teradata* dependency:
 
-`yarn add @covalent/core` 
+----
+yarn add @covalent/core
+----
 
 Now that we have all dependencies, we can check in the project's `package.json` file if everything has been correctly added (the following dependencies section is shown as it was at the time of writing this document):
 
@@ -364,7 +378,6 @@ import {
   ],
 })
 export class CoreModule {}
-
 ----
 
 [NOTE]
@@ -1238,7 +1251,6 @@ export class LoginComponent implements OnInit {
     this.loginService.login(loginFormValues.username, loginFormValues.password);
   }
 }
-
 ----
 
 Finally, in the `register.components.ts` we are going to inject the `LoginService` and use it to login the visitor after registering him. This will also send the user to the `ViewQueue` that we will create and secure later in the tutorial.
@@ -1451,7 +1463,6 @@ export class AccessCodeService {
     return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/', accessCode);
   }
 }
-
 ----
 
 In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the backend like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has a AccessCode and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
@@ -1490,7 +1501,6 @@ export class QueueService {
      );
   }
 }
-
 ----
 
 Now, we are going to make the template `view-queue.component.html` that will use them and we will also introduce a new concept (`async pipes in templates`).
