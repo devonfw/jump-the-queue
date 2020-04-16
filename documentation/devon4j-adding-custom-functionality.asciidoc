@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j adding Custom Functionality
-In the xref:devon4j-layers[previous chapter] we have seen that, using _CobiGen_, we can generate all the structure and functionality of an _devon4j_ component in a few clicks.
+In the xref:devon4j-layers[previous chapter] we have seen that, using _CobiGen_, we can generate all the structure and functionality of a _devon4j_ component in a few clicks.
 
 In this chapter we are going to show how to add custom functionalities to our projects, that are out of the scope of code, that _CobiGen_ is able to generate.
 
