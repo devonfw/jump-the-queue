@@ -198,7 +198,7 @@ public class PermissionCheckTest extends ModuleTest {
    * the corresponding interface and thus have the {@link Override} annotations applied.
    */
   @Test
-  @Disable // Permission Checks are currently not implemented, so ignore this test
+  @Disabled // Permission Checks are currently not implemented, so ignore this test
   public void permissionCheckAnnotationPresent() {
 
     String packageName = "com.devonfw.application.jtqj";
