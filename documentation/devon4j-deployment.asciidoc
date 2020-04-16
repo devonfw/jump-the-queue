@@ -58,7 +58,7 @@ It also includes the https://docs.spring.io/spring-boot/docs/current/reference/h
 == Disabling Security Tests
 Since this is a basic tutorial and there is no security or permission handling, we have to modify the files `SecurityRestServiceImplTest` and `PermissionCheckTest` in `jtqj-core`, to disable the tests for these features. This is done by adding the `@Disabled` annotation to the affected test methods.
 
-Your Eclipse should automatically add the required dependencies for the annotation once you save the files, so they should contain the same `import` statements as shown below. More specifically `org.junit.jupiter` will be replacing by the older `org.junit` test framework, if it was used before.
+Your Eclipse should automatically add the required dependencies for the annotation once you save the files, so they should contain the same `import` statements as shown below. More specifically `org.junit.jupiter` will be replacing the older `org.junit` test framework, which was used before.
 
 First, in `src/test/java/.../general/service/impl/rest/SecurityRestServiceImplTest.java` disable the `testLogin()` method and make sure that the class is annotated with `@ExtendWith(SpringExtension.class)`, instead of the older `@RunWith(SpringRunner.class)` annotation:
 
