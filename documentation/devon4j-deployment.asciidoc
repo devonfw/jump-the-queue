@@ -56,17 +56,19 @@ It also includes the https://docs.spring.io/spring-boot/docs/current/reference/h
 ----
 
 == Disabling Security Tests
-Since this is a basic tutorial and there is no security or permission handling, we have to modify the files `SecurityRestServiceImplTest` and `PermissionCheckTest` in `jtqj-core`, to ignore the tests for these features.
+Since this is a basic tutorial and there is no security or permission handling, we have to modify the files `SecurityRestServiceImplTest` and `PermissionCheckTest` in `jtqj-core`, to disable the tests for these features. This is done by adding the `@Disabled` annotation to the affected test methods.
 
-First, in `src/test/java/.../general/service/impl/rest/SecurityRestServiceImplTest.java`:
+Your Eclipse should automatically add the required dependencies for the annotation once you save the files, so they should contain the same `import` statements as shown below. More specifically `org.junit.jupiter` will be replacing by the older `org.junit` test framework, if it was used before.
+
+First, in `src/test/java/.../general/service/impl/rest/SecurityRestServiceImplTest.java` disable the `testLogin()` method and make sure that the class is annotated with `@ExtendWith(SpringExtension.class)`, instead of the older `@RunWith(SpringRunner.class)` annotation:
 
 [source, java]
 ----
 package com.devonfw.application.jtqj.general.service.impl.rest;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -75,7 +77,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import com.devonfw.application.jtqj.general.common.api.to.UserProfileTo;
@@ -86,7 +88,7 @@ import com.devonfw.module.service.common.api.client.config.ServiceClientConfigBu
 /**
  * This class tests the login functionality of {@link SecurityRestServiceImpl}.
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class SecurityRestServiceImplTest extends RestServiceTest {
 
   /** Logger instance. */
@@ -96,7 +98,7 @@ public class SecurityRestServiceImplTest extends RestServiceTest {
    * Test the login functionality as it will be used from a JavaScript client.
    */
   @Test
-  @Ignore // Security via Login is currently not implemented, so ignore this test
+  @Disabled // Security via Login is currently not implemented, so ignore this test
   public void testLogin() {
 
     String login = "waiter";
@@ -159,12 +161,10 @@ public class SecurityRestServiceImplTest extends RestServiceTest {
         String.class);
     return postResponse;
   }
-
 }
-
 ----
 
-And in `src/test/java/.../general/common/base/PermissionCheckTest.java`:
+And in `src/test/java/.../general/common/base/PermissionCheckTest.java` just disable the `permissionCheckAnnotationPresent()` method:
 
 [source, java]
 ----
@@ -182,8 +182,8 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.devonfw.module.test.common.base.ModuleTest;
 
@@ -198,7 +198,7 @@ public class PermissionCheckTest extends ModuleTest {
    * the corresponding interface and thus have the {@link Override} annotations applied.
    */
   @Test
-  @Ignore // Permission Checks are currently not implemented, so ignore this test
+  @Disable // Permission Checks are currently not implemented, so ignore this test
   public void permissionCheckAnnotationPresent() {
 
     String packageName = "com.devonfw.application.jtqj";
@@ -237,7 +237,6 @@ public class PermissionCheckTest extends ModuleTest {
     assertions.assertAll();
   }
 }
-
 ----
 
 This is going to allow our application to pass the tests and be built.
