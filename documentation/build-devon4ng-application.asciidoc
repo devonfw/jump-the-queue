@@ -11,18 +11,41 @@ ifdef::env-github[]
 endif::[]
 
 == Build your own devon4ng Application
+
 In this chapter we are going to see how to build a new devon4ng from scratch. The proposal of this tutorial is to end having enough knowledge of Angular and the rest of technologies regarding devon4ng to know how to start developing on it and if you want more advanced and specific functionalities see them on the cookbook.
 
 == Goal of JumpTheQueue
-This mock-up images shows what you are going to have as a result when the tutorial is finished. An app to manage codes assigned to queuers in order to easy the management of the queue, with a code, you can jump positions in queue and know everywhere which is your position.
+
+These mock-ups show what you can expect when the tutorial is finished. An app to manage codes assigned to queuers in order to easy the management of the queue, with a code, you can jump positions in queue and know everywhere which is your position.
 
 image::images/devon4ng/3.BuildYourOwn/mockups.png[JumpTheQueue Mock-Ups, 500]
 
 So, hands on it, let's configure the environment and build this app!
 
-== Installing Global Tools
+== Setting up the devonfw Tools (recommended)
 
-=== Visual Studio Code: 
+We will be utilizing Node.js, npm and Yarn to create our Angular front end. Using these tool from inside a devonfw environment avoids a manual download/installation, and keeps the tools isolated from other projects, so we don't run into version conflicts down the road.
+
+These tools should already be located inside your devonfw environment. However, to make sure they are present and up-to-date, execute the following commands inside the `C:/.../workspaces/main/jumpthequeue` directory:
+
+----
+devon node setup
+
+devon yarn setup
+
+devon ng setup
+----
+
+== Installing Global Tools (optional)
+
+[WARNING]
+====
+If you are using a devonfw work environment -- as instructed in the https://github.com/devonfw/jump-the-queue/wiki/build-devon4j-application#setting-up-a-devonfw-work-environment[devon4j] part of this tutorial -- you *DON'T* have to install these tools globally, since they can be accessed from the devon CLI. +
+A global installation is only useful if you want to create Angular projects _outside_ of a devonfw environment. In that case you can use the same commands listed on this page, without the initial `devon` keyword in front of them.
+====
+
+=== Visual Studio Code
+
 To install the editor download the installer from the https://code.visualstudio.com/Download[official page] and install it.
 
 Once installed, the first thing you should do is install the extensions that will help you during the development. To do that, follow these steps:
@@ -32,11 +55,13 @@ Once installed, the first thing you should do is install the extensions that wil
 2. Install the `devonfw Platform Extension Pack` (this might take a while).
 
 === Node.js
+
 Go to https://nodejs.org/en/[nodejs.org] and download the version you like the most -- LTS or Current -- as you wish.
 
 The recommendation is to install the latest version, but keep in mind that to use Angular CLI, your version must be at least 8.x and to use npm at least 5.x. If you have Node.js already installed on your computer, this is a good moment to check your version and upgrade if necessary.
 
 === TypeScript
+
 Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript you don’t have to install npm explicitly, just run this command:
 
 ----
@@ -44,6 +69,7 @@ npm install –g typescript
 ----
 
 === Yarn
+
 Just like npm, https://yarnpkg.com/en/[Yarn] is a package manager for JavaScript/Node modules. Yarn is quite a bit faster and more usable in our opinion, so we decided to use it to manage the dependencies of devon4ng projects.
 
 To install Yarn, you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
@@ -51,6 +77,7 @@ To install Yarn, you only have to go to the official https://yarnpkg.com/en/docs
 However, if you feel more comfortable with npm, you can keep using it.
 
 === Angular/CLI
+
 This CLI is specifically built to make Angular projects easier to develop, maintain and deploy, so we are going to make use of it.
 
 To install the Angular/CLI you have to run this command in your console prompt:
@@ -72,28 +99,41 @@ ng config -g cli.packageManager yarn
 Finally, once all these tools have been installed successfully, you are ready to create a new project.
 
 == Creating a New Project with the Angular/CLI
-One of the main reasons to install Angular/CLI is to use the feature that creates a whole new basic project by simply running:
+
+One of the main reasons to use Angular/CLI is its feature to creates a whole new basic project by simply running:
 
 ----
-C:\...\workspaces\main\jumpthequeue>  ng new <project name>
+C:\...\workspaces\main\jumpthequeue> devon ng create <project name>
 ----
 
-Where <project name> is the name of the Angular project you want to create. In this case, we are going to call it `angular` itself, since we want to distribute this code as part of our complete `jumpthequeue` project. After executing the command, Angular/CLI will ask if we want to use Angular routing (Yes) and what stylesheet format we want to use (SCSS):
+Where <project name> is the name of the Angular project you want to create. In this case, we are going to call it `angular` itself, since we want to distribute this code as part of our complete `jumpthequeue` project. After executing the command, Angular/CLI will ask, if we want to use Angular routing (Yes) and what stylesheet format we want to use (SCSS):
 
 image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 
-This command will create the basic files and directories and install dependencies stored in `package.json`:
+This command will create the basic files, directories, and install  the dependencies stored in `package.json`:
 
 image::images/devon4ng/3.BuildYourOwn/ngnew.png[Angular Project Creation]
 
-Then, if we move to the folder of the project we have just created and open visual code we will have something like this:
+After project creation, navigate into the `angular` folder and execute the following command, to set Yarn as our default package manager for this project:
+
+----
+devon ng config cli.packageManager yarn
+----
+
+Now install/check the required dependencies with Yarn by executing:
+
+----
+devon yarn install
+----
+
+Now run `vscode-main.bat` to start the VS Code instance for the main workspace and expand the `jumpthequeue/angular` folder, i.e. the project we have just created. It should look like this:
 
 image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
 Finally, it is time to check if the created project works properly. To do this, move to the projects root folder (`C:/.../workspaces/main/jumpthequeue/angular`) and run:
 
 ----
-ng serve -o
+devon ng serve -o
 ----
 
 If everything worked, you'll see the default Angular landing page:
@@ -104,68 +144,68 @@ image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
 
 [NOTE]
 ====
-If you don't have the latest Angular version, install the corresponding version of dependencies for your Angular version by adding `@<version>` behind the dependency names, for example: `npm install @angular/material@7.1.2` or `yarn add @angular/material@7.1.2`
+If you don't have the latest Angular version, install the corresponding version of dependencies for your Angular version by adding `@<version>` behind the dependency names, for example: `npm install @angular/material@7.1.2` or `yarn add @angular/material@7.1.2`. +
+This will mostly be the case when using global tools that haven't been updated for a while. So if you're using a fresh install or the devonfw environment, this shouldn't be a problem.
 ====
 
 Go to the `C:/.../workspaces/main/jumpthequeue/angular` directory and run the following command to add *Google Material* to the project dependencies:
 
 ----
-yarn add @angular/material
+devon yarn add @angular/material
 ----
 
 Now we are going to add the *Angular CDK* (Component Dev Kit):
 
 ----
-yarn add @angular/cdk
+devon yarn add @angular/cdk
 ----
 
 Then we are going to add *Animations*:
 
 ----
-yarn add @angular/animations
+devon yarn add @angular/animations
 ----
 
 The Angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
 
 ----
-yarn add hammerjs
+devon yarn add hammerjs
 ----
 
 That is all regarding Angular/Material. We are now going to install *Covalent Teradata* dependency:
 
 ----
-yarn add @covalent/core
+devon yarn add @covalent/core
 ----
 
-Now that we have all dependencies, we can check in the project's `package.json` file if everything has been correctly added (the following dependencies section is shown as it was at the time of writing this document):
+Now that we have all dependencies downloaded, we can check the projects `package.json` file and see if everything has been correctly added (The following dependencies were current at the time of writing. You might see newer versions, which is fine.):
 
 [source, json]
 ----
   "dependencies": {
-    "@angular/animations": "^7.2.0",
-    "@angular/cdk": "^7.2.1",
-    "@angular/common": "~7.2.0",
-    "@angular/compiler": "~7.2.0",
-    "@angular/core": "~7.2.0",
-    "@angular/forms": "~7.2.0",
-    "@angular/material": "^7.2.1",
-    "@angular/platform-browser": "~7.2.0",
-    "@angular/platform-browser-dynamic": "~7.2.0",
-    "@angular/router": "~7.2.0",
-    "@covalent/core": "2.0.0-beta.4",
-    "core-js": "^2.5.4",
+    "@angular/animations": "^9.1.2",
+    "@angular/cdk": "^9.2.1",
+    "@angular/common": "~9.1.1",
+    "@angular/compiler": "~9.1.1",
+    "@angular/core": "~9.1.1",
+    "@angular/forms": "~9.1.1",
+    "@angular/material": "^9.2.1",
+    "@angular/platform-browser": "~9.1.1",
+    "@angular/platform-browser-dynamic": "~9.1.1",
+    "@angular/router": "~9.1.1",
+    "@covalent/core": "^3.0.1",
     "hammerjs": "^2.0.8",
-    "rxjs": "~6.3.3",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
-  },
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
+  }
 ----
 
-Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In future steps a `CoreModule` will be created. This module will contain the imports of these libraries, this will avoid code repetition.
+Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In future steps a `CoreModule` will be created. This module will contain the imports of these libraries, which will avoid code repetition.
 
 Now let's continue to make some config modifications to have all the styles imported to use Material and Teradata:
 
-1. Create `theme.scss`, a file to config themes on the app, we will use one _primary_ color, one secondary, called _accent_ and another one for _warning_. Also Teradata accepts a foreground and background color. Go to _/src_ into the project and create a file called *theme.scss* whose content will be like this:
+1.- Inside `angular/src` we will create a `theme.scss` file, to configure the themes of our app. We will use one _primary_ color, one secondary -- called _accent_ -- and another one for _warnings_. Teradata also accepts a foreground and background color. Paste the following content into the file:
 
 [source, scss]
 ----
@@ -188,7 +228,7 @@ $background: map-get($theme, background);
 @include covalent-theme($theme);
 ----
 
-2. Now we have to add these styles in angular/CLI config. Go to _angular.json_ in the root folder, then search both of the "styles" arrays (inside build and test) and add theme and Covalent platform.css to make it look like this:
+2.- Now we have to add these styles to our Angular/CLI config. Go to `angular.json` in the `angular` root folder, then search both of the "styles" arrays (inside build and test) and add `theme.scss` and Covalents `platform.css` to make it look like this:
 
 [source, json]
 ----
@@ -203,7 +243,7 @@ $background: map-get($theme, background);
 ...
 ----
 
-3. In the same file than previous step, the `hammer` library is going to be added. In order to do so, we add inside both "scripts" arrays (inside build and test) the minimified script:
+3.- In the same file than the previous step, the minimified `hammer.min.js` library/script will be added. To do so, paste the following code inside both "scripts" arrays (build and test):
 
 [source,json]
 ----
@@ -217,6 +257,7 @@ $background: map-get($theme, background);
 ----
 
 == Starting Development
+
 Now we have a fully functional blank project, all we have to do now is just create the components and services which will compose the application.
 
 First, we are going to develop the views of the app, through its components, and then we will create the services with the logic, security and back-end connection.
@@ -227,6 +268,8 @@ This tutorial is only going to develop a mobile view. The app is not going to be
 ====
 
 === Creating Components
+
+//FIXME: Link
 [NOTE]
 ====
 Learn more about creating new components in devon4ng xref:devon4ng-components#Create-a-new-Component[here].
@@ -245,6 +288,7 @@ To see our progress, move to the root folder of the project and run `ng serve` t
 ==== Root Component
 _app.component_ will be our Root component, so we do not have to create any component yet, we are going to use it to add to the app the elements that will be common no matter in what view we are.
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about the root component in devon4ng xref:devon4ng-components#Root-Component[here].
@@ -254,6 +298,7 @@ This is the case of a header element, which will be on top of the window and on 
 
 The first thing to know is about https://teradata.github.io/covalent/#/layouts[Covalent Layouts] because we are going to use it a lot, one for every view component.
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about layouts in devon4ng link:devon4ng-components#Teradata-Covalent-Layouts[here].
@@ -499,6 +544,7 @@ import { CoreModule } from './shared/core.module';
 ...
 ----
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about routing in devon4ng xref:devon4ng-components#Routing[here].
@@ -708,6 +754,7 @@ Two events were added. First, when we submit the form, the method `submitLogin()
 
 We need to inject an instance of Router object and declare it into the name _router_ in order to use it into the code, as we did on onRegisterClick(), using the navigate function and redirecting to the next view, in our case, using the route we are going to define in _app.routing.module.ts_:
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about Dependency Injection in devon4ng xref:devon4ng-services#Dependency-Injection[here].
@@ -783,6 +830,7 @@ Learn more about services in devon4ng link:devon4ng-services.asciidoc[here].
 
 Now we have a minimum of navigation flow into our application, we are going to generate out first service using the command `ng generate service register/services/register`. This will create a folder services inside register and create the service. Services are where we keep the logic that connects to our db and are going to be used by our `component.ts`. In order to use the service we are going to create some interface models, lets create a folder called `backendModels` inside shared and inside a file called `interfaces.ts`, in here we are going to add the model interfaces that will match our backend:
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about creating services in devon4ng xref:devon4ng-services#Create-a-new-Service[here].
@@ -849,6 +897,7 @@ export class RegisterService {
 
 This method will send our model to the backend and return an Observable that we will use on the `component.ts`. Here you can see more info about the observables and RxJs in devon4ng.
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about Observables and RxJs in devon4ng xref:devon4ng-services#Server-Communication[here].
@@ -1048,6 +1097,7 @@ export class AuthService {
 
 We will use this service to fill it with information from the logged in user when the user logs in. This will allows us to check the information of the logged in user in anyway necessary.
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about authentication in devon4ng xref:devon4ng-services#Authentication[here].
@@ -1098,6 +1148,7 @@ export class AuthGuardService implements CanActivate {
 
 This service will be a bit different, because we have to implement an interface called CanActivate, which has a method called canActivate returning a boolean, this method will be called when navigating to a specified routes and depending on the return of this implemented method, the navigation will be done or rejected.
 
+//FIXME: Link
 [NOTE]
 ====
 Learn more about guards in devon4ng xref:devon4ng-services#Guards[here].
