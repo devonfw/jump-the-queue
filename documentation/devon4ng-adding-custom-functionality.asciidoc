@@ -289,7 +289,7 @@ As you can see, now the body content is the HTML of `FormLoginComponent`. This i
 
 For now, we are going to leave the header this way, but in the future, we will separate it into another component inside a layout folder.
 
-=== LoginFormComponent
+=== LoginForm Component
 
 As we have already created this component from the section before, let's move on to building the template of the login view.
 
@@ -711,24 +711,32 @@ image::images/devon4ng/3.BuildYourOwn/register.png[Register Page, 250]
 
 Now if we try the method and take a look at the browser console, we should see the visitor model being returned.
 
-=== Login, Auth and AuthGuard
+== Creating Services
 
-Now that we registered a `Visitor`, it's time to create the `AuthService`, `AuthGuardService` and `LoginService`. The `AuthService` will be the one that contains the login info, the `AuthGuardService` will check if a user is authorised to use a component (via the `canActivate` method), and the `LoginService` will be used to fill the `AuthService`.
+Now that we registered a `Visitor`, it's time to create 3 important services:
+
+- AuthService
+- AuthGuardService
+- LoginService
+
+The `AuthService` will be the one that contains the login info, the `AuthGuardService` will check if a user is authorised to use a component (via the `canActivate` method), and the `LoginService` will be used to fill the `AuthService`.
 
 [NOTE]
 ====
-To keep this tutorial simple, we are going to make the password check client side. *!THIS IS NOT CORRECT!* Normally you would send the username and password to the backend, check that the values are correct, and create a corresponding token, which you would pass in the header and use it on the `AuthService` -- checking with some interceptors that the token is both on the `AuthService` and in the request.
+To keep this tutorial simple, we are going to make the password check client side. *THIS IS NOT CORRECT!* Normally you would send the username and password to the backend, check that the values are correct, and create a corresponding token, which you would pass in the header and use it on the `AuthService` -- checking with some interceptors that the token is both on the `AuthService` and in the request.
 ====
 
-We are going to create 3 services via `devon ng generate service <path>`:
+=== Login, Auth and AuthGuard
 
-. A `LoginService` via: +
+We are going to create the 3 services via `devon ng generate service <path>`:
+
+. `LoginService` via: +
 `devon ng generate service form-login/components/login/services/login`
 
-. An `Auth` service via: +
+. `Auth` service via: +
 `devon ng generate service core/authentication/auth`
 
-. An `AuthGuard` service via: +
+. `AuthGuard` service via: +
 `devon ng generate service core/authentication/auth-guard`
 
 After generating them, we are going to start modyfing the interfaces. In `angular/src/app/shared/backendModels/interfaces` We are going to add `Role`, `FilterVisitor`, `Pageable` and a `Sort` interface:
@@ -1075,9 +1083,13 @@ constructor(private registerService: RegisterService, private router: Router, pu
 ...
 ----
 
-=== Separating the Header from the Layout
+== Finishing Touches
 
-In order to do this, we are going to generate a new component inside `app/layout/header` via:
+Now we only need to generate two more components and services, in order to finish the implementation of our _JumpTheQueu_ app.
+
+=== Separating Header from Layout
+
+By separating the header on top of the page from the layout, we enable the reuse of this component and reach a better separation of concerns across our application. To do this, we are going to generate a new component inside `angular/src/app/layout/header` via:
 
 ----
 devon ng generate component layout/header
@@ -1127,7 +1139,7 @@ As the last view, we are going to learn how to use our Observables on the HTML t
 First, we are going to generate the component via:
 
 ----
-ng generate component view-queue
+devon ng generate component view-queue
 ----
 
 After that, we are going to include the component in the `app-routing.module.ts`, also adding the guard, to only allow users that are `VISITOR` to see the component. It is important to insert the following code before `{ path: '**', redirectTo: '/FormLogin', pathMatch: 'full' }`:
