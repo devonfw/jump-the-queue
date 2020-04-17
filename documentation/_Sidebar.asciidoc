@@ -19,6 +19,7 @@
 . link:devon4ng-components.asciidoc[devon4ng Components]
 . link:devon4ng-services.asciidoc[devon4ng Services]
 . link:build-devon4ng-application.asciidoc[Build a devon4ng Application]
+. link:devon4ng-adding-custom-functionality.asciidoc[devon4ng Custom Functionality]
 . link:devon4ng-deployment.asciidoc[devon4ng Deployment]
 
 ////

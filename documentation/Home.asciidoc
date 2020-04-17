@@ -54,8 +54,9 @@ IMPORTANT: If you haven't already, please read the devonfw https://github.com/de
 . link:devon4ng-introduction.asciidoc[devon4ng Introduction]
 . link:an-devon4ng-application.asciidoc[devon4ng Application]
 . link:devon4ng-components.asciidoc[devon4ng Components]
-. link:devon4ng-services.asciidoc[Angular Services]
+. link:devon4ng-services.asciidoc[devon4ng Services]
 . link:build-devon4ng-application.asciidoc[Build a devon4ng Application]
+. link:devon4ng-adding-custom-functionality.asciidoc[devon4ng Custom Functionality]
 . link:devon4ng-deployment.asciidoc[Angular Deployment]
 
 ////
