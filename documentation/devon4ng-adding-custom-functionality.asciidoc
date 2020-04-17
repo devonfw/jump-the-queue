@@ -726,7 +726,7 @@ The `AuthService` will be the one that contains the login info, the `AuthGuardSe
 To keep this tutorial simple, we are going to make the password check client side. *THIS IS NOT CORRECT!* Normally you would send the username and password to the backend, check that the values are correct, and create a corresponding token, which you would pass in the header and use it on the `AuthService` -- checking with some interceptors that the token is both on the `AuthService` and in the request.
 ====
 
-=== Login, Auth and AuthGuard
+=== Login, Auth and AuthGuard Services
 
 We are going to create the 3 services via `devon ng generate service <path>`:
 
@@ -1085,7 +1085,7 @@ constructor(private registerService: RegisterService, private router: Router, pu
 
 == Finishing Touches
 
-Now we only need to generate two more components and services, in order to finish the implementation of our _JumpTheQueu_ app.
+Now we only need to generate two more components (`header` and `view-queue`) and services (`AccessCodeService` and `QueueService`), in order to finish the implementation of our _JumpTheQueue_ app.
 
 === Separating Header from Layout
 
@@ -1132,9 +1132,9 @@ In the header logic (`header.component.ts`) we are simply going to inject the `A
 
 Separating components will allow us to keep the code clean and easy to work with.
 
-=== Generating ViewQueue
+=== ViewQueue Component
 
-As the last view, we are going to learn how to use our Observables on the HTML template directly, without having to `subscribe()` to them.
+For the last view, we are going to learn how to use our Observables on the HTML template directly, without having to `subscribe()` to them.
 
 First, we are going to generate the component via:
 
@@ -1205,6 +1205,8 @@ export class Queue {
 }
 ...
 ----
+
+=== AccessCode and Queue Services
 
 After this is done, we are going to generate the `AccessCodeService` and the `QueueService`:
 
