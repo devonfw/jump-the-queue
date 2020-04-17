@@ -11,12 +11,16 @@ ifdef::env-github[]
 endif::[]
 
 = Deploy a devon4ng Application
-When you have a finished version of your application and you want to deploy it somewhere you just make sure you have all your test running correctly and your app compiles. Then, run this Angular/cli command in your project root folder:
 
-`ng build`
+If you have a finished version of your app and want to deploy it somewhere, you only need to make sure that all tests are passed and that your app compiles correctly (this is tested continuously during `ng serve`). After this, run the following command inside your `angular` root folder:
 
-This process will compile the project and generate a folder called *dist*:
+`devon ng build`
+
+This will compile the project and generate a folder called `dist`, which will contain all your TypeScript code transpiled into pure JavaScript:
 
 image::images/devon4ng/6.Deployment/dist_folder.jpg[Compiled Dist Folder]
 
-Dist folder contains all your *typescript code transpiled to javascript*, that is all, now you have all you need in that folder to deploy your project wherever you want.
+You can also use the `devon ng deploy` command to automatically deploy your project to a cloud platform of your choice. For more information on this, please read the guide on https://angular.io/guide/deployment#automatic-deployment-with-the-cli[automatic deployment with the Angular/CLI].
+
+'''
+*Congratulations!* You have successfully completed the _JumpTheQueue_ tutorial.
