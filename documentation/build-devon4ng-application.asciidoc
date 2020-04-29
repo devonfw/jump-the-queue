@@ -159,60 +159,64 @@ For the next steps we'll have to stop the development mode by pressing `Ctrl + C
 
 [NOTE]
 ====
-If you don't have the latest Angular version, install the corresponding version of dependencies for your Angular version by adding `@<version>` behind the dependency names, for example: `npm install @angular/material@7.1.2` or `yarn add @angular/material@7.1.2`. +
-This will mostly be the case when using global tools that haven't been updated for a while. So if you're using a fresh install or the devonfw environment, this shouldn't be a problem.
+We will be using very specific module versions in this tutorial, to ensure that all dependencies are compatible with the legacy Angular 7 project. For this reason we will be appending `@<version>` behind each dependency.
+
+If you create a new project with the _latest_ Angular version on your own later down the line, you can omit this tag. This way, the latest compatible version of a dependency will be downloaded and linked.
+
+For Angular Material this would be for example be done via `npm install @angular/material` or `yarn add @angular/material`.
 ====
 
 Go to the `C:/.../workspaces/main/jumpthequeue/angular` directory and run the following command to add *Google Material* to the project dependencies:
 
 ----
-yarn add @angular/material
+yarn add @angular/material@7.1.0
 ----
 
 Now we are going to add the *Angular CDK* (Component Dev Kit):
 
 ----
-yarn add @angular/cdk
+yarn add @angular/cdk@7.1.0
 ----
 
 Then we are going to add *Animations*:
 
 ----
-yarn add @angular/animations
+yarn add @angular/animations@7.1.0
 ----
 
 The Angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
 
 ----
-yarn add hammerjs
+yarn add hammerjs@^2.0.8
 ----
 
 That is all regarding Angular/Material. We are now going to install *Covalent Teradata* dependency:
 
 ----
-yarn add @covalent/core
+yarn add @covalent/core@2.0.0-beta.4
 ----
 
-Now that we have all dependencies downloaded, we can check the project's `package.json` file and see if everything has been correctly added (The following dependencies were current at the time of writing. You might see newer versions, which is fine.):
+Now that we have downloaded and linked all dependencies, we can check the project's `package.json` file and see if everything has been correctly added (Some of the minor dependencies may have a different versions for you, which is fine. Our main concern are the versions of the modules manually installed in the previous steps.):
 
 [source, json]
 ----
   "dependencies": {
-    "@angular/animations": "^9.1.2",
-    "@angular/cdk": "^9.2.1",
-    "@angular/common": "~9.1.1",
-    "@angular/compiler": "~9.1.1",
-    "@angular/core": "~9.1.1",
-    "@angular/forms": "~9.1.1",
-    "@angular/material": "^9.2.1",
-    "@angular/platform-browser": "~9.1.1",
-    "@angular/platform-browser-dynamic": "~9.1.1",
-    "@angular/router": "~9.1.1",
-    "@covalent/core": "^3.0.1",
+    "@angular/animations": "7.1.0",
+    "@angular/cdk": "7.1.0",
+    "@angular/common": "~7.1.0",
+    "@angular/compiler": "~7.1.0",
+    "@angular/core": "~7.1.0",
+    "@angular/forms": "~7.1.0",
+    "@angular/material": "7.1.0",
+    "@angular/platform-browser": "~7.1.0",
+    "@angular/platform-browser-dynamic": "~7.1.0",
+    "@angular/router": "~7.1.0",
+    "@covalent/core": "2.0.0-beta.4",
+    "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
-    "rxjs": "~6.5.4",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26"
   }
 ----
 
