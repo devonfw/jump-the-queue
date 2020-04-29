@@ -12,15 +12,15 @@ endif::[]
 
 = Build your own devon4ng Application
 
-In this chapter we are going to see how to build a new devon4ng from scratch. The proposal of this tutorial is to end having enough knowledge of Angular and the rest of technologies regarding devon4ng to know how to start developing on it and if you want more advanced and specific functionalities see them on the cookbook.
+In this chapter we are going to see how to build a new devon4ng from scratch. The proposal of this tutorial is to end having enough knowledge of Angular and the of the remaining technologies regarding devon4ng to know how to start developing. If you need more advanced and specific functionalities, you can find them on the cookbook.
 
 == Goal of JumpTheQueue
 
-These mock-ups show what you can expect when the tutorial is finished. An app to manage codes assigned to queuers in order to easy the management of the queue, with a code, you can jump positions in queue and know everywhere which is your position.
+These mock-ups show what you can expect to see after you finished this tutorial. It will be an App to manage codes assigned to people attending a queue in order to ease the management of the queue. With a code, you can jump between positions in the queue and you will be able to keep track of your position.
 
 image::images/devon4ng/3.BuildYourOwn/mockups.png[JumpTheQueue Mock-Ups, 500]
 
-So, hands on it, let's configure the environment and build this app!
+So, hands on it: Let's configure the environment and build this app!
 
 == Setting up the devonfw Tools (recommended)
 
@@ -44,7 +44,7 @@ A global installation is only useful if you want to create Angular projects _out
 
 === Visual Studio Code
 
-To install the editor download the installer from the https://code.visualstudio.com/Download[official page] and install it.
+To install the editor, download the installer from the https://code.visualstudio.com/Download[official page] and install it.
 
 Once installed, the first thing you should do is install the extensions that will help you during the development. To do that, follow these steps:
 
@@ -60,7 +60,7 @@ The recommendation is to install the latest version, but keep in mind that to us
 
 === TypeScript
 
-Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript you don’t have to install npm explicitly, just run this command:
+Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript, you don’t have to install npm explicitly, just run this command:
 
 ----
 npm install –g typescript
@@ -78,7 +78,7 @@ However, if you feel more comfortable with npm, you can keep using it.
 
 This CLI is specifically built to make Angular projects easier to develop, maintain and deploy, so we are going to make use of it.
 
-To install the Angular/CLI you have to run this command in your console prompt:
+To install the Angular/CLI, you have to run this command in your console prompt:
 
 ----
 npm install –g @angular/cli
@@ -193,7 +193,7 @@ That is all regarding Angular/Material. We are now going to install *Covalent Te
 yarn add @covalent/core
 ----
 
-Now that we have all dependencies downloaded, we can check the projects `package.json` file and see if everything has been correctly added (The following dependencies were current at the time of writing. You might see newer versions, which is fine.):
+Now that we have all dependencies downloaded, we can check the project's `package.json` file and see if everything has been correctly added (The following dependencies were current at the time of writing. You might see newer versions, which is fine.):
 
 [source, json]
 ----
@@ -216,11 +216,11 @@ Now that we have all dependencies downloaded, we can check the projects `package
   }
 ----
 
-Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In future steps a `CoreModule` will be created. This module will contain the imports of these libraries, which will avoid code repetition.
+Angular Material and Covalent need the following modules to work: `CdkTableModule`, `BrowserAnimationsModule` and *every Covalent and Material Module* used in the application. These modules come from `@angular/material`, `@angular/cdk/table`, `@angular/platform-browser/animations` and `@covalent/core`. In future steps a `CoreModule` will be created. This module will contain the imports of these libraries which will avoid code repetition.
 
 Now let's continue to make some config modifications to have all the styles imported to use Material and Teradata:
 
-1.- Inside `angular/src` we will create a `theme.scss` file, to configure the themes of our app. We will use one _primary_ color, one secondary -- called _accent_ -- and another one for _warnings_. Teradata also accepts a foreground and background color. Paste the following content into the file:
+1.- Inside `angular/src` we will create a `theme.scss` file to configure the themes of our app. We will use one _primary_ color, one secondary -- called _accent_ -- and another one for _warnings_. Teradata also accepts a foreground and background color. Paste the following content into the file:
 
 [source, scss]
 ----
@@ -258,7 +258,7 @@ $background: map-get($theme, background);
 ...
 ----
 
-3.- In the same file than the previous step, the minimified `hammer.min.js` library/script will be added. To do so, paste the following code inside both "scripts" arrays (build and test):
+3.- In the same file, the minimified `hammer.min.js` library/script will be added. To do so, paste the following code inside both "scripts" arrays (build and test):
 
 [source,json]
 ----
@@ -271,7 +271,7 @@ $background: map-get($theme, background);
 ...
 ----
 
-Now we have successfully set up a blank Angular project with Google Material and Covalent Teradata modules, we can continue by adding custom functionality and components to the app.
+Now we have successfully set up a blank Angular project with Google Material and Covalent Teradata modules. We can continue by adding custom functionality and components to the app.
 
 '''
 *Next Chapter*: link:devon4ng-adding-custom-functionality.asciidoc[Customizing a devon4ng Project]

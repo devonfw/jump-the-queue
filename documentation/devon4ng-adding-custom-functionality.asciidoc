@@ -12,13 +12,13 @@ endif::[]
 
 = devon4j adding Custom Functionality
 
-Now we have a fully functional blank project. All we have to do now, is create the components and services which will compose our application.
+Now we have a fully functional blank project. All we have to do now is to create the components and services which will compose our application.
 
 First, we are going to develop the views of the app through its components, then we will create the services with the logic, security and back-end connection.
 
 [NOTE]
 ====
-This tutorial is only going to develop a mobile view. The app is not going to be responsive or well suited for desktop use. The new https://github.com/devonfw-forge/jump-the-queue-v2[JumpTheQueue V2] implements these features, but no tutorial walkthrough currently exists for it.
+This tutorial is only going to develop a mobile view. The app is not going to be responsive or well suited for desktop use. The new https://github.com/devonfw-forge/jump-the-queue-v2[JumpTheQueue V2] implements these features, but currently no tutorial walkthrough exists for it.
 ====
 
 == Creating Components
@@ -26,40 +26,40 @@ This tutorial is only going to develop a mobile view. The app is not going to be
 [NOTE]
 ====
 You have already learned about creating Components in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#create-a-new-component[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Our app is going to consists of 3 main views:
+Our app is going to consist of 3 main views:
 
 * Login
 * Register
 * ViewQueue
 
-To navigate between these views/components, we are going to implement routes to them using the Angular Router.
+To navigate between these views/components, we are going to implement routes using the Angular Router.
 
 To see our progress, move to the root folder of the `angular` project and run `devon ng serve -o` again. This will recompile and publish our client app to http://localhost:4200. Angular will keep watching for changes, so whenever we modify the code, the app will automatically reload.
 
 === Root Component
 
-`app.component.ts` inside `angular/src/app` will be our root component, so we don't have to create a new file yet. We are going to add elements to the root component that will be common no matter what view we are in.
+`app.component.ts` inside `angular/src/app` will be our root component, so we don't have to create a new file yet. We are going to add elements to the root component that will be common no matter what view will be displayed.
 
 [NOTE]
 ====
 You have already learned about the Root Component in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#root-component[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-This applies to the header element, which will be on top of the window and on top of all other components. If you want, you can read more about https://teradata.github.io/covalent/#/layouts[Covalent layouts], which we are going to use a lot from now on, for every view component.
+This applies to the header element which will be on top of the window and on top of all other components. If you want, you can read more about https://teradata.github.io/covalent/#/layouts[Covalent layouts], which we are going to use a lot from now on, for every view component.
 
 [NOTE]
 ====
 You have already learned about Covalent Layouts in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#teradata-covalent-layouts[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
 We don't really need anything more than a header, so we are going to use the simplest layout for this purpose; the *nav view*.
 
-In order to be able to use Covalent and Angular Material, we are going to create a core module, which we will import into every other module where we want to use Covalent and Angular Material. First, we create a folder called `shared` in the `angular/src/app` directory. Inside there, we are going to create a file called `core.module.ts`, and will fill it with the following content:
+In order to be able to use Covalent and Angular Material we are going to create a core module, which we will import into every other module where we want to use Covalent and Angular Material. First, we create a folder called `shared` in the `angular/src/app` directory. Inside there we are going to create a file called `core.module.ts` and will fill it with the following content:
 
 [source, typescript]
 ----
@@ -183,7 +183,7 @@ export class CoreModule {}
 This `CoreModule` has almost every module of the different components for *Angular Material* and *Covalent Teradata*. If you decide to use a component that is not included yet, you need to add the corresponding module here.
 ====
 
-Remember that we need to import this `CoreModule` module into the `AppModule` and inside every module of the different components that use *Angular Material* and *Covalent Teradata*. If a component does not have a module, it will be imported in the `AppModule` and hence, have the `CoreModule`. Our `app.module.ts` should have the following content:
+Remember that we need to import this `CoreModule` module into the `AppModule` and inside every module of the different components that use *Angular Material* and *Covalent Teradata*. If a component does not have a module, it will be imported in the `AppModule` and hence automatically have the `CoreModule`. Our `app.module.ts` should have the following content:
 
 [source, typescript]
 ----
@@ -216,7 +216,7 @@ export class AppModule { }
 Remember this step because you will have to repeat it for every other component from Teradata you use in your app.
 ====
 
-Now we can this layout, so lets implement it in `app.component.html` to make it look like this:
+Now we can use this layout, so let's implement it in `app.component.html`. Use the following code:
 
 [source, html]
 ----
@@ -233,16 +233,16 @@ Now we can this layout, so lets implement it in `app.component.html` to make it 
 [NOTE]
 ====
 You have already learned about Toolbars in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#toolbars[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Once this done, our app should have a header and "app works!" should appear in the body of the page:
+Once this is done, our app should have a header and "app works!" should appear in the body of the page:
 
 image::images/devon4ng/3.BuildYourOwn/root_header.jpg[Root Header, 250]
 
-To go a step further, we have to modify the body of the root component, because it should be the *output of the router*, so now it's time to prepare the routing system.
+To go a step further, we have to modify the body of the root component because it should be the *output of the router*. Now it's time to prepare the routing system.
 
-First we need to create a component to show as default, which will be our access view. Later we will modify it, but for now we just need to have it. Stop the `ng serve` and run:
+First, we need to create a component to show as default which will be our access view. We will modify it later. Stop `ng serve` and run:
 
 ----
 devon ng generate component form-login
@@ -260,7 +260,7 @@ import { FormLoginComponent } from './form-login/form-login.component';
 
 const appRoutes: Routes = [
   { path: 'FormLogin', component: FormLoginComponent},        // Redirect if url path is /FormLogin.
-  { path: '**', redirectTo: '/FormLogin', pathMatch: 'full' } // Redirect if url path do not match with any other route.
+  { path: '**', redirectTo: '/FormLogin', pathMatch: 'full' } // Redirect if url path do not match any other route.
 ];
 
 @NgModule({
@@ -278,16 +278,16 @@ export class AppRoutingModule {}
 [NOTE]
 ====
 You have already learned about Routing in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#routing[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Finally, we remove the `<h1>app works!</h1>` from `app.component.html` and in its place we put a `<router-outlet></router-outlet>` tag, so the final result of our root component will look like this:
+Finally, we remove the `<h1>app works!</h1>` from `app.component.html` and replace it with a `<router-outlet></router-outlet>` tag. The final result of our root component will look like this:
 
 image::images/devon4ng/3.BuildYourOwn/root_router.jpg[Root Router, 250]
 
-As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to formlogin when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match with the given path.
+As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to formlogin when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match the given path.
 
-For now, we are going to leave the header this way, but in the future, we will separate it into another component inside a layout folder.
+For now we are going to leave the header like this. In the future we will separate it into another component inside a layout folder.
 
 === LoginForm Component
 
@@ -306,13 +306,13 @@ First, we need to add the Covalent Layout and the card to the file `form-login.c
 
 This will add a grey background to the view and a card on top of it with the title "Login" now that we have the basic structure of the view.
 
-Now, we are going to add this image:
+Now we are going to add this image:
 
 image::images/devon4ng/3.BuildYourOwn/jumptheq.png[JumpTheQueue Logo Image, 250]
 
 In order to have it available, save it in the following path of the project: `angular/src/assets/images/` and name it `jumptheq.png`.
 
-So the final code with the form added will look like this:
+The final code with the form added will look like this:
 
 [source, html]
 ----
@@ -328,11 +328,11 @@ This code will give us as a result similar to this:
 image::images/devon4ng/3.BuildYourOwn/formlogin.png[Form Login, 250]
 
 This is going to be the container for the login. +
-Now lets continue with the second component: Login.
+Now we will continue with the second component: Login.
 
 === Login Component
 
-Our first step will be to create the component in the exact same way we did with the `FormLogin` component, but this time we are going to generate it in a new folder called components inside formlogin. Putting every child component on that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
+Our first step will be to create the component in the exact same way we created the `FormLogin` component but this time we are going to generate it in a new folder called components inside formlogin. Putting every child component inside that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
 
 ----
 devon ng generate component form-login/components/login
@@ -377,7 +377,7 @@ import { LoginModule } from './components/login/login-module';
 export class FormLoginModule {}
 ----
 
-As you can see, the `LoginModule` is already added to the `FormLoginModule`. Once this is done, we need to remove the `FormLoginComponent` and the `LoginComponent` from the `declarations`, since they are already declared in their own modules. Then add the `FormLoginModule`. Those things are done in the `AppModule`:
+As you can see, the `LoginModule` is already added to the `FormLoginModule`. Once this is done, we need to remove the `FormLoginComponent` and the `LoginComponent` from the `declarations` since they are already declared in their own modules. Then add the `FormLoginModule`. This will be done inside `AppModule`:
 
 [source, typescript]
 ----
@@ -399,7 +399,7 @@ import { FormLoginModule } from './form-login/form-login-module';
 
 [NOTE]
 ====
-This is done so the `form-login` (container/wrapper) and the `login` stay separated. This will allow us to reuse the login without having the card around in other views.
+This is done so the `form-login` (container/wrapper) and the `login` stay separated allowing us to reuse the login without having the card around in other views.
 ====
 
 After this, we modify the `login.component.html` and add the form: 
@@ -433,14 +433,14 @@ After this, we modify the `login.component.html` and add the form:
 [NOTE]
 ====
 You have already learned about Forms in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#forms[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-This form contains two input containers from Material and inside of them, the input with the properties listed above.
+This form contains two input containers from Material. The containers enclose the input with the properties listed above.
 
-We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the auth service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct, but leave out the click event. We will come back later to make this work.
+We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the auth service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct. We will tackle the on-click-event later.
 
-As a last step, we will add this component to the `form-login-component.html`:
+As a last step we will add this component to the `form-login-component.html`:
 
 [source, html]
 ----
@@ -456,11 +456,11 @@ Now you should see something like this:
 
 image::images/devon4ng/3.BuildYourOwn/login.png[JumpTheQueue Login Screen, 250]
 
-With two components already created, we need to use the router to navigate between them. Following the application flow of events, we are going to add a _navigate_ function to the  register button, so when we press it, we will be redirected to our future register component.
+With two components already created, we need to use the router to navigate between them. Following the application flow of events, we are going to add a _navigate_ function to the register button. When we press it, we will be redirected to our future register component.
 
 === Register Component
 
-First we are going to generate the register component via:
+First, we are going to generate the register component via:
 
 ----
 devon ng generate component register`
@@ -477,7 +477,7 @@ This will create our component so we can start working on it. Turning back to `l
 <button mat-raised-button (click)="onRegisterClick()" color="primary">Register</button>
 ----
 
-Two events were added. First, when we submit the form, the method `submitLogin()` is going to be called. Second, when the user clicks the button, `(click)` will send an event to the function `onRegisterClick()`. This function should be in the `login.component.ts`, which is going to be created now:
+Two events were added. First, when we submit the form, the method `submitLogin()` is going to be called. Second, when the user clicks the button `(click)` will send an event to the function `onRegisterClick()`. This function should be inside `login.component.ts` which is going to be created now:
 
 [source, typescript]
 ----
@@ -504,7 +504,7 @@ import { RegisterComponent } from './register/register.component';
 const appRoutes: Routes = [
   { path: 'FormLogin', component: FormLoginComponent},          // Redirect if url path is /FormLogin.
   { path: 'Register', component: RegisterComponent},            // Redirect if url path is /Register.
-  { path: '**', redirectTo: '/FormLogin', pathMatch: 'full' }   // Redirect if url path do not match with any other route.
+  { path: '**', redirectTo: '/FormLogin', pathMatch: 'full' }   // Redirect if url path do not match any other route.
 ];
 ...
 ----
@@ -512,10 +512,10 @@ const appRoutes: Routes = [
 [NOTE]
 ====
 You have already learned about Dependency Injection in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-services#dependency-injection[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Now, we are going to imitate the `login` to make our `register.component.html`:
+Now we are going to imitate the `login` to shape our `register.component.html`:
 
 [source, html]
 ----
@@ -564,7 +564,7 @@ Now, we are going to imitate the `login` to make our `register.component.html`:
 </form>
 ----
 
-Now that we have a minimum of navigation flow into our application, we are going to generate our first service using the command:
+Now that we have a minimum of navigation flow inside our application, we are going to generate our first service using the command:
 
 ----
 devon ng generate service register/services/register
@@ -572,7 +572,7 @@ devon ng generate service register/services/register
 
 This will create a folder "services" inside "register" and create the service itself. Services are where we keep the logic that connects to our database and fetches data which is going to be used by our `component.ts`.
 
-In order to use the service, we are going to create some interface models. Lets create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts`, in which we are going to add the model interfaces that will match our backend:
+In order to use the service, we are going to create some interface models. Let's create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts` in which we are going to add the model interfaces that will match our backend:
 
 [source, typescript]
 ----
@@ -591,10 +591,10 @@ export class Visitor {
 [NOTE]
 ====
 You have already learned about creating new services in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-services#create-a-new-service[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-If we take a closer look, we can see that id has a `?` behind it. This marks the fact, that the id is optional.
+If we take a closer look, we can see that id has a `?` behind it. This indicates that the id is optional.
 
 [NOTE]
 ====
@@ -613,7 +613,7 @@ export const environment: {production: boolean, baseUrlRestServices: string} = {
 
 Now in the service, we are going to add a `registerVisitor` method.
 
-To call the server in this method we are going to inject the Angular `HttpClient` class from `@angular/common/http`. This class is the standard used by Angular to make HTTP calls, so we are going to use it. The register call demands a `Visitor` model, which we created in the `interfaces` file. We are going to build a POST call and send the information to the proper URL of the server service. The call will return an observable:
+To call the server in this method we are going to inject the Angular `HttpClient` class from `@angular/common/http`. This class is the standard used by Angular to perform HTTP calls. The register call demands a `Visitor` model which we created in the `interfaces` file. We are going to build a POST call and send the information to the proper URL of the server service. The call will return an observable:
 
 [source, typescript]
 ----
@@ -643,7 +643,7 @@ This method will send our model to the backend and return an Observable that we 
 [NOTE]
 ====
 You have already learned about Observables and RxJs in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-services#server-communication[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
 Now we are going to modify `register.component.ts` to call this service:
@@ -654,12 +654,12 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './services/register.service';
 import { Visitor } from '../shared/backendModels/interfaces';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
@@ -688,13 +688,13 @@ export class RegisterComponent implements OnInit {
 }
 ----
 
-In this file, we injected `RegisterService` and `Router` to use them. Then, inside the method `submitRegister`, we created a visitor that we are going to pass to the service. We called the service method `registerVisitor`, we passed the visitor and we subscribed to the `Observable<Visitor>`, which we returned from the service. This subscription allows us to control three things:
+In this file we injected `RegisterService` and `Router` to use them. Then, inside the method `submitRegister`, we created a visitor that we are going to pass to the service. We called the service method `registerVisitor`, we passed the visitor and we subscribed to the `Observable<Visitor>`, which we returned from the service. This subscription allows us to control three things:
 
-. What to do, when the data is received.
+. What to do when the data is received.
 
-. What to do, when there's an error.
+. What to do when there's an error.
 
-. What to do, when the call is complete.
+. What to do when the call is complete.
 
 Finally, we modify the `register.component.html` to send the form values to the method:
 
@@ -707,7 +707,7 @@ Finally, we modify the `register.component.html` to send the form values to the 
 
 image::images/devon4ng/3.BuildYourOwn/register.png[Register Page, 250]
 
-Now if we try the method and take a look at the browser console, we should see the visitor model being returned.
+Using the method and taking a look at the browser console, we should see the visitor model being returned.
 
 == Creating Services
 
@@ -717,11 +717,11 @@ Now that we registered a `Visitor`, it's time to create 3 important services:
 - AuthGuardService
 - LoginService
 
-The `AuthService` will be the one that contains the login info, the `AuthGuardService` will check if a user is authorised to use a component (via the `canActivate` method), and the `LoginService` will be used to fill the `AuthService`.
+The `AuthService` will be the one that contains the login info, the `AuthGuardService` will check if a user is authorized to use a component (via the `canActivate` method), and the `LoginService` will be used to fill the `AuthService`.
 
 [NOTE]
 ====
-To keep this tutorial simple, we are going to make the password check client side. *THIS IS NOT CORRECT!* Normally you would send the username and password to the backend, check that the values are correct, and create a corresponding token, which you would pass in the header and use it on the `AuthService` -- checking with some interceptors that the token is both on the `AuthService` and in the request.
+To keep this tutorial simple, we are going to perform the password check client side. *THIS IS NOT CORRECT!* Usually, you would send the username and password to the backend, check that the values are correct, and create a corresponding token which you would pass in the header and use it inside the `AuthService` -- checking with some interceptors that the token is both in the `AuthService` and in the request.
 ====
 
 === Login, Auth and AuthGuard Services
@@ -737,7 +737,7 @@ We are going to create the 3 services via `devon ng generate service <path>`:
 . `AuthGuard` service via: +
 `devon ng generate service core/authentication/auth-guard`
 
-After generating them, we are going to start modyfing the interfaces. In `angular/src/app/shared/backendModels/interfaces` We are going to add `Role`, `FilterVisitor`, `Pageable` and a `Sort` interface:
+After generating the services, we are going to start modyfing the interfaces. Inside `angular/src/app/shared/backendModels/interfaces` we are going to add `Role`, `FilterVisitor`, `Pageable` and a `Sort` interface:
 
 [source, typescript]
 ----
@@ -767,10 +767,10 @@ export class Role {
 
 [NOTE]
 ====
-As you can see, we added a `Pageable`, since a lot of the search methods in the backend are using `SearchCriterias`. These need pageables, which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
+As you can see, we added a `Pageable`, since a lot of the search methods in the backend are using `SearchCriterias`. These need pageables which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
 ====
 
-Then we are going to create a `config.ts` file in the root (`angular/app`). We are going to use that file to set up default config variables, for example: role names with their permission number, default pagination settings etc. For now we are just adding the roles:
+Then we are going to create a `config.ts` file inside the root (`angular/app`). We are going to use that file to set up default config variables, for example: role names with their permission number, default pagination settings etc. For now we are just adding the roles:
 
 [source, typescript]
 ----
@@ -850,15 +850,15 @@ export class AuthService {
 }
 ----
 
-We will use this service to fill it with information from the logged-in user, once the user logs in. This will allow us to check the information of the logged-in user in anyway necessary.
+We will use this service to fill it with information from the logged-in user once the user logs in. This will allow us to check the information of the logged-in user in any way necessary.
 
 [NOTE]
 ====
 You have already learned about Authentication in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-services#authentication[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Now we are going to use this class to make the `auth-guard.service.ts`:
+Now we are going to use this class to fill the `auth-guard.service.ts`:
 
 [source, typescript]
 ----
@@ -900,21 +900,21 @@ export class AuthGuardService implements CanActivate {
 }
 ----
 
-This service will be a bit different, because we have to implement an interface called `CanActivate`, which has a method called `canActivate()` returning a boolean. This method will be called, when navigating to a specified route, and -- depending on the return value of this implemented method -- the navigation will proceed or be rejected.
+This service will be slightly different because we have to implement an interface called `CanActivate`. It has a method called `canActivate()` returning a boolean. This method will be called when navigating to a specified route, and -- depending on the return value of this implemented method -- the navigation will proceed or be rejected.
 
 [NOTE]
 ====
 You have already learned about Guards in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-services#guards[here]. +
-You can go back and read that section again, to refresh your memory.
+You can go back and read that section again to refresh your memory.
 ====
 
-Once this is done, the last step is filling the `login.service.ts`. In this case, there's going to be three methods:
+Once this is done, the last step is to fill the `login.service.ts`. In this case, there's going to be three methods:
 
 . `getVisitorByUsername(username: string)`: +
 A method that recovers a single user corresponding to the email.
 
 . `login(username: string, password: string)`: +
-A method, which is going to use the previous method, to check that the username and password match with the form input and then fill the `AuthService`.
+A method, which is going to use the previous method, to check that the username and password match the form input and then fill the `AuthService`.
 
 . `logout()`: +
 This is going to be used to reset the `AuthService` and log out the user.
@@ -932,7 +932,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/authentication/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -996,11 +996,11 @@ export class LoginService {
 }
 ----
 
-If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` which correspond to the `Criteria` in the backend. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result, when the POST call is made. That's why we return the first page and only a single result.
+If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` corresponding to the `Criteria` in the backend. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result as soon as the POST call is performed. That's why we return the first page and only a single result.
 
 [NOTE]
 ====
-For the tutorial we are only doing the visitor side of the application, thats why we `setLogged(false)` if its `userType === true` (BOSS side).
+For the tutorial we are only considering the visitor side of the application. That's why we `setLogged(false)` if it's `userType === true` (BOSS side).
 ====
 
 Then we add to the `login-module.ts` and `LoginService`:
@@ -1018,7 +1018,7 @@ import { LoginService } from './services/login.service';
 ...
 ----
 
-After that, we are going to add the `AuthGuard` and the `Auth` into the `share/core-module.ts`. This will allow us to employ these two services when importing the core module, which avoids having to provide these services in every component:
+After that, we are going to add the `AuthGuard` and the `Auth` into the `shared/core-module.ts`. This will allow us to employ these two services when importing the core module avoiding having to provide these services in every component:
 
 [source, typescript]
 ----
@@ -1033,7 +1033,7 @@ After that, we are going to add the `AuthGuard` and the `Auth` into the `share/c
 
 You need to import these modules as well, as shown earlier.
 
-Finally, we modify the `login.component.html` to send the form values to the `login.component.ts` like we did with the register form. Afterwards, we are going to modify the `register.components.ts`: When the visitor registers, we can log him in automatically, to avoid any nuisances. Let's start with the `login.component.html`:
+Finally, we modify the `login.component.html` to send the form values to the `login.component.ts` like we did with the register form. Afterwards, we are going to modify the `register.components.ts`: When the visitor registers, we can log him in automatically to avoid any nuisances. Let's start with the `login.component.html`:
 
 [source, html]
 ----
@@ -1042,7 +1042,7 @@ Finally, we modify the `login.component.html` to send the form values to the `lo
 ...
 ----
 
-As you can see, in the form we just added, the values to the `ngSubmit` allow us to call the method `submitLogin()` within the logic, sending the `loginForm.form.values` which are the forms input values. In the next step we are going to modify the `login.components.ts`, adding the the `submitLogin()` method that calls the `LoginService`, giving the service the necessary values from the form (i.e. the `loginFormValues`).
+As you can see, in the form we just added, the values to the `ngSubmit` allow us to call the method `submitLogin()` within the logic, sending the `loginForm.form.values` which are the form's input values. In the next step we are going to modify the `login.components.ts`, adding the `submitLogin()` method. This method calls the `LoginService`, providing the service with the necessary values received from the form (i.e. the `loginFormValues`).
 
 [source, typescript]
 ----
@@ -1083,7 +1083,7 @@ constructor(private registerService: RegisterService, private router: Router, pu
 
 == Finishing Touches
 
-Now we only need to generate two more components (`header` and `view-queue`) and services (`AccessCodeService` and `QueueService`), in order to finish the implementation of our _JumpTheQueue_ app.
+Now we only need to generate two more components (`header` and `view-queue`) and services (`AccessCodeService` and `QueueService`) in order to finish the implementation of our _JumpTheQueue_ app.
 
 === Separating Header from Layout
 
@@ -1115,7 +1115,7 @@ Jump The Queue
 </button>
 ----
 
-In the header logic (`header.component.ts`) we are simply going to inject the `AuthService` and `LoginService`, then we are going call `logout()` from `LoginService` in the `OnClickLogout()`. Finally, the `AuthService` is needed because it's being used by the HTML template to control, if the user is logged in with `isLogged()`:
+In the header logic (`header.component.ts`) we are simply going to inject the `AuthService` and `LoginService`, then we are going call `logout()` from `LoginService` in the `OnClickLogout()`. Finally, the `AuthService` is needed because it's being used by the HTML template to control if the user is logged in with `isLogged()`:
 
 [source, typescript]
 ----
@@ -1132,7 +1132,7 @@ Separating components will allow us to keep the code clean and easy to work with
 
 === ViewQueue Component
 
-For the last view, we are going to learn how to use our Observables on the HTML template directly, without having to `subscribe()` to them.
+For the last view, we are going to learn how to use our Observables on the HTML template directly without having to `subscribe()` to them.
 
 First, we are going to generate the component via:
 
@@ -1297,7 +1297,7 @@ export class AccessCodeService {
 }
 ----
 
-In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the backend, like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see, if the visitor has an `AccessCode`, and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
+In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the backend like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has an `AccessCode` and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
 
 - For the `QueueService` we are only going to need to find the active queue:
 
@@ -1335,7 +1335,7 @@ export class QueueService {
 }
 ----
 
-Now, we are going to make the template `view-queue.component.html` (which will use this data), and we will also introduce a new concept: "_async pipes in templates_".
+Now we are going to create the template `view-queue.component.html` (which will use this data) and we will also introduce a new concept: "_async pipes in templates_".
 
 [source, html]
 ----
@@ -1383,11 +1383,11 @@ Now, we are going to make the template `view-queue.component.html` (which will u
 
 If you watch closely, the starting `td-layout` has an `*ngIf` inside it. This `*ngIf` allows us to asynchronously pipe the observables that we will asign in the next steps. This solution avoids having to use `subscribe()` (as it subscribes automatically) and -- as a result -- we dont have to worry about where to `unsubscribe()` from the observables.
 
-In this HTML, we give `*ngif` another use: We use it to hide certain panels. Using `accessCodeVisitor`, we hide the ticket number panel and the "leave the queue"-button, and show the button to join the queue. On the contrary we can hide the ticket number and the "leave the queue"-button and only show the "join the queue"-button.
+In this HTML, we give `*ngif` another use: We use it to hide certain panels. Using `accessCodeVisitor`, we hide the ticket number panel and the "leave the queue"-button and show the button to join the queue. On the contrary we can hide the ticket number and the "leave the queue"-button and only show the "join the queue"-button.
 
 [NOTE]
 ====
-In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it, but don't control the `unsubcribe()` method, the app could end up containing a memory leak, since -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
+In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubcribe()` method, the app could end up containing a memory leak. This is because -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
 ====
 
 Finally, to adapt the async pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queuers variable directly to the observable, so we can load it using `*ngIf`.
@@ -1405,7 +1405,7 @@ import { QueueService } from './services/queue.service';
 @Component({
   selector: 'app-view-queue',
   templateUrl: './view-queue.component.html',
-  styleUrls: ['./view-queue.component.css']
+  styleUrls: ['./view-queue.component.scss']
 })
 export class ViewQueueComponent implements OnInit {
 
@@ -1438,15 +1438,15 @@ export class ViewQueueComponent implements OnInit {
 }
 ----
 
-In this last component, we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an async pipe, everytime we modify the status of the `Observables` they are going to update the template.
+In this last component we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an async pipe, everytime we modify the status of the `Observables`, they are going to update the template.
 
 image::images/devon4ng/3.BuildYourOwn/withCodeAccess.png[Queue Page with Access Code, 250]
 
 image::images/devon4ng/3.BuildYourOwn/withoutCodeAccess.png[Queue Page without Access Code, 250]
 
-This is all on how to build your own devon4ng application. Now it's up to you, to add features, change styles, and do everything you can imagine doing with this app.
+This is all on how to build your own devon4ng application. Now it's up to you to add features, change styles and do everything you can imagine doing with this app.
 
-As a final step to complete the tutorial however, we are going to run the app outside of our local machine by deploying it.
+As a final step to complete the tutorial, however, we are going to run the app outside of our local machine by deploying it.
 
 '''
 *Next Chapter*: link:devon4ng-deployment.asciidoc[Deploy your devon4ng App]
