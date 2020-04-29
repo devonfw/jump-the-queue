@@ -39,7 +39,7 @@ devon yarn setup
 [WARNING]
 ====
 If you are using a devonfw work environment -- as instructed in the https://github.com/devonfw/jump-the-queue/wiki/build-devon4j-application#setting-up-a-devonfw-work-environment[devon4j] part of this tutorial -- you *DON'T* have to install these tools globally, since they can be accessed from the devon CLI. +
-A global installation is only useful if you want to create Angular projects _outside_ of a devonfw environment. In that case you can use the same commands listed on this page, without the initial `devon` keyword in front of them.
+A global installation is only useful if you want to create Angular projects _outside_ of a devonfw environment or without the devon CLI.
 ====
 
 === Visual Studio Code
