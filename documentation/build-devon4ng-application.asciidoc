@@ -24,16 +24,14 @@ So, hands on it, let's configure the environment and build this app!
 
 == Setting up the devonfw Tools (recommended)
 
-We will be utilizing Node.js, npm and Yarn to create our Angular front end. Using these tool from inside a devonfw environment avoids a manual download/installation, and keeps the tools isolated from other projects, so we don't run into version conflicts down the road.
+We will be utilizing Node.js, npm and Yarn to create our Angular front end. Using Node.js inside the devonfw environment avoids a manual download and installation, and keeps the tool isolated from other projects, so we don't run into version conflicts down the road.
 
-These tools should already be located inside your devonfw environment. However, to make sure they are present and up-to-date, execute the following commands inside the `C:/.../workspaces/main/jumpthequeue` directory:
+Node should already be 'installed' inside your devonfw environment (in the `software/node` directory). However, to make sure we have its most current version and the right package manager (Yarn) available, execute the following commands anywhere inside the devonfw environment:
 
 ----
 devon node setup
 
 devon yarn setup
-
-devon ng setup
 ----
 
 == Installing Global Tools (optional)
@@ -100,13 +98,26 @@ Finally, once all these tools have been installed successfully, you are ready to
 
 == Creating a New Project with the Angular/CLI
 
-One of the main reasons to use Angular/CLI is its feature to creates a whole new basic project by simply running:
+One of the main reasons to use Angular/CLI is the feature to create whole new projects from scratch by simply running one command. We are going create an Angular 7  (legacy) project, to keep this tutorial working even if a new Angular version is released. Inside the `C:\...\workspaces\main\jumpthequeue` directory run:
 
 ----
-C:\...\workspaces\main\jumpthequeue> devon ng create <project name>
+npx -p @angular/cli@7 ng new angular
 ----
 
-Where <project name> is the name of the Angular project you want to create. In this case, we are going to call it `angular` itself, since we want to distribute this code as part of our complete `jumpthequeue` project. After executing the command, Angular/CLI will ask, if we want to use Angular routing (Yes) and what stylesheet format we want to use (SCSS):
+[NOTE]
+====
+If you want to create a 'real' project on your own later on, you should do so using the _lastest_ Angular version by running:
+
+----
+ng new <project name>
+----
+
+Where <project name> is the name of the Angular project you want to create.
+
+In the case shown above we called our project `angular`, since we want to distribute its code as part of our complete `jumpthequeue` project. This is analogous to the `java` directory used for our devon4j backend.
+====
+
+After executing the command, Angular/CLI will ask, if we want to use Angular routing (*Yes*) and what stylesheet format we want to use (*SCSS*):
 
 image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 
@@ -114,31 +125,35 @@ This command will create the basic files, directories, and install  the dependen
 
 image::images/devon4ng/3.BuildYourOwn/ngnew.png[Angular Project Creation]
 
-After project creation, navigate into the `angular` folder and execute the following command, to set Yarn as our default package manager for this project:
+After project creation, navigate *into* the `C:/.../workspaces/main/jumpthequeue/angular` folder and execute the following command, to set Yarn as your default package manager for this project:
 
 ----
-devon ng config cli.packageManager yarn
+ng config cli.packageManager yarn
 ----
 
-Now install/check the required dependencies with Yarn by executing:
+Now install the required dependencies using Yarn by executing:
 
 ----
-devon yarn install
+yarn install
 ----
 
 Now run `vscode-main.bat` to start the VS Code instance for the main workspace and expand the `jumpthequeue/angular` folder, i.e. the project we have just created. It should look like this:
 
 image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
-Finally, it is time to check if the created project works properly. To do this, move to the projects root folder (`C:/.../workspaces/main/jumpthequeue/angular`) and run:
+Finally, it's time to check if the created project works properly. To do this, simply run:
 
 ----
-devon ng serve -o
+ng serve -o
 ----
 
-If everything worked, you'll see the default Angular landing page:
+If everything was compiled correctly, you'll see the default Angular 7 landing page:
 
 image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
+
+The `ng serve` command starts the development mode of the Angular/CLI. This means, that everytime you make a change in the code and save it, the project will automatically recompile and run. The `-o` option causes the project to open in your default browser once compiled.
+
+For the next steps we'll have to stop the development mode by pressing `Ctrl + C` and terminating the batch job (*Y*).
 
 === Adding Google Material and Covalent Teradata
 
@@ -151,31 +166,31 @@ This will mostly be the case when using global tools that haven't been updated f
 Go to the `C:/.../workspaces/main/jumpthequeue/angular` directory and run the following command to add *Google Material* to the project dependencies:
 
 ----
-devon yarn add @angular/material
+yarn add @angular/material
 ----
 
 Now we are going to add the *Angular CDK* (Component Dev Kit):
 
 ----
-devon yarn add @angular/cdk
+yarn add @angular/cdk
 ----
 
 Then we are going to add *Animations*:
 
 ----
-devon yarn add @angular/animations
+yarn add @angular/animations
 ----
 
 The Angular animations library implements a domain-specific language (DSL) for defining web animation sequences for HTML elements as multiple transformations over time. Finally, some material components need gestures support, so we need to add this dependency:
 
 ----
-devon yarn add hammerjs
+yarn add hammerjs
 ----
 
 That is all regarding Angular/Material. We are now going to install *Covalent Teradata* dependency:
 
 ----
-devon yarn add @covalent/core
+yarn add @covalent/core
 ----
 
 Now that we have all dependencies downloaded, we can check the projects `package.json` file and see if everything has been correctly added (The following dependencies were current at the time of writing. You might see newer versions, which is fine.):

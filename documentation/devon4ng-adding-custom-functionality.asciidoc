@@ -338,7 +338,7 @@ Our first step will be to create the component in the exact same way we did with
 devon ng generate component form-login/components/login
 ----
 
-After _Angular/CLI_ has finished generating the component, we gotta create two modules, one for the form-login and one for the login:
+After _Angular/CLI_ has finished generating the component, we have to create two modules, one for the form-login and one for the login:
 
 1.- We create a new file called `login-module.ts` in the login root:
 
@@ -356,7 +356,6 @@ import { LoginComponent } from './login.component';
   exports: [LoginComponent],
 })
 export class LoginModule {}
-
 ----
 
 2.- We create a new file called `form-login-module.ts` in the form-login root:
@@ -376,16 +375,15 @@ import { LoginModule } from './components/login/login-module';
   exports: [FormLoginComponent],
 })
 export class FormLoginModule {}
-
 ----
 
 As you can see, the `LoginModule` is already added to the `FormLoginModule`. Once this is done, we need to remove the `FormLoginComponent` and the `LoginComponent` from the `declarations`, since they are already declared in their own modules. Then add the `FormLoginModule`. Those things are done in the `AppModule`:
 
 [source, typescript]
 ----
-....
+...
 import { FormLoginModule } from './form-login/form-login-module';
-....
+...
   declarations: [
     AppComponent,
   ]
@@ -396,7 +394,7 @@ import { FormLoginModule } from './form-login/form-login-module';
     CoreModule,
     AppRoutingModule
   ]
-....
+...
 ----
 
 [NOTE]
