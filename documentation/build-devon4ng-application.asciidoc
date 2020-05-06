@@ -26,7 +26,7 @@ So, hands on it: Let's configure the environment and build this app!
 
 We will be utilizing Node.js, npm and Yarn to create our Angular front end. Using Node.js inside the devonfw environment avoids a manual download and installation, and keeps the tool isolated from other projects, so we don't run into version conflicts down the road.
 
-Node should already be 'installed' inside your devonfw environment (in the `software/node` directory). However, to make sure we have its most current version and the right package manager (Yarn) available, execute the following commands anywhere inside the devonfw environment:
+Node should already be 'installed' inside your devonfw environment (in the `/software/node` directory). However, to make sure we have its most current version and the right package manager (Yarn) available, execute the following commands anywhere inside the devonfw environment:
 
 ----
 devon node setup
@@ -121,11 +121,11 @@ After executing the command, Angular/CLI will ask, if we want to use Angular rou
 
 image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 
-This command will create the basic files, directories, and install  the dependencies stored in `package.json`:
+This command will establish a project directory structure, initialize default files, and store references to basic dependencies in the `package.json` file:
 
 image::images/devon4ng/3.BuildYourOwn/ngnew.png[Angular Project Creation]
 
-After project creation, navigate *into* the `C:/.../workspaces/main/jumpthequeue/angular` folder and execute the following command, to set Yarn as your default package manager for this project:
+After project creation, navigate into the new `/angular` folder and execute the following command, to set Yarn as your default package manager for this project:
 
 ----
 ng config cli.packageManager yarn
@@ -137,7 +137,7 @@ Now install the required dependencies using Yarn by executing:
 yarn install
 ----
 
-Now run `vscode-main.bat` to start the VS Code instance for the main workspace and expand the `jumpthequeue/angular` folder, i.e. the project we have just created. It should look like this:
+Now run `vscode-main.bat` to start the VS Code instance for the main workspace and expand the `/jumpthequeue/angular` directory, i.e. the project we have just created. It should look like this:
 
 image::images/devon4ng/3.BuildYourOwn/filesnew.png[Angular New Project Files]
 
