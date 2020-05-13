@@ -22,6 +22,11 @@ As we already mentioned in the xref:devon4j-overview#devon4j-architecture-overvi
 == Layers Implementation
 image::images/devon4j/5.Layers/dependency_injection.png[Dependency Injection, 250]
 
+[NOTE]
+====
+If you haven't learned about *Dependency Injection* yet, please visit the https://github.com/devonfw/devon4j/wiki/guide-dependency-injection[devon4j guide to Dependency Injection]. Dependency Injection is an important principle in enterprise software development, that enables https://en.wikipedia.org/wiki/Separation_of_concerns[separation of concerns], decouples https://en.wikipedia.org/wiki/Application_programming_interface[interfaces] from their implementation and allows us to potentially https://en.wikipedia.org/wiki/Code_reuse[reuse code].
+====
+
 Following the https://github.com/devonfw/devon4j/wiki/guide-dependency-injection[devon4j recommendations] for _Dependency Injection_ in MyThaiStar's layers we will find:
 
 * Separation of API and implementation: Inside each layer we will separate the elements in different packages: _api_ and _impl_. The _api_ will store the _interface_ with the methods definition and inside the _impl_ we will store the class that implements the _interface_:
