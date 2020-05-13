@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "angular"
+  "defaultProject": "angular",
+  "cli": {
+    "packageManager": "yarn"
+  }
 }
