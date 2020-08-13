@@ -28,7 +28,7 @@
     "minimist": "0.2.1",
     "node-sass": "^4.14.1",
     "rxjs": "~6.3.3",
-    "serialize-javascript": "2.1.1",
+    "serialize-javascript": "3.1.0",
     "set-value": "2.0.1",
     "tslib": "^1.9.0",
     "webpack-dev-server": "3.1.11",
