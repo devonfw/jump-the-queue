@@ -16,10 +16,6 @@ Now we have a fully functional blank project. All we have to do now is to create
 
 First, we are going to develop the views of the app through its components, then we will create the services with the logic, security and back-end connection.
 
-[NOTE]
-====
-This tutorial is only going to develop a mobile view. The app is not going to be responsive or well suited for desktop use. The new https://github.com/devonfw-forge/jump-the-queue-v2[JumpTheQueue V2] implements these features, but currently no tutorial walkthrough exists for it.
-====
 
 == Creating Components
 
@@ -188,7 +184,7 @@ Remember that we need to import this `CoreModule` module into the `AppModule` an
 [source, typescript]
 ----
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // Application components and services
 import { AppRoutingModule } from './app-routing.module';
@@ -206,10 +202,16 @@ import { CoreModule } from './shared/core.module';
   ],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
 ----
+[NOTE]
+====
+Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message."
+To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" insde the @NgModule of all the afected modules.
+====
 
 [NOTE]
 ====
@@ -229,6 +231,12 @@ Now we can use this layout, so let's implement it in `app.component.html`. Use t
   </h1>
 </td-layout-nav>
 ----
+
+[NOTE]
+====
+You have already learned about Toolbars in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#toolbars[here]. +
+You can go back and read that section again to refresh your memory.
+====
 
 [NOTE]
 ====
@@ -344,7 +352,7 @@ After _Angular/CLI_ has finished generating the component, we have to create two
 
 [source, typescript]
 ----
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from 'src/app/shared/core.module';
 import { LoginComponent } from './login.component';
@@ -354,6 +362,7 @@ import { LoginComponent } from './login.component';
   providers: [],
   declarations: [LoginComponent],
   exports: [LoginComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class LoginModule {}
 ----
@@ -362,7 +371,7 @@ export class LoginModule {}
 
 [source, typescript]
 ----
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormLoginComponent } from './form-login.component';
 import { CoreModule } from '../shared/core.module';
@@ -373,6 +382,7 @@ import { LoginModule } from './components/login/login-module';
   providers: [],
   declarations: [FormLoginComponent],
   exports: [FormLoginComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FormLoginModule {}
 ----
