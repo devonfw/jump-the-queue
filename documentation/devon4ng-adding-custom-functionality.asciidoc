@@ -761,7 +761,7 @@ export class FilterVisitor {
 export class Pageable {
     pageSize: number;
     pageNumber: number;
-    sort?: Sort[];
+    sort: any[];
 }
 
 export class Sort {
@@ -958,11 +958,12 @@ export class LoginService {
 
         pageable.pageNumber = 0;
         pageable.pageSize = 1;
+        pageable.sort= [];
         filters.username = username;
         filters.pageable = pageable;
         return this.http.post<Visitor>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
        .pipe(
-            map(visitors => visitors['content'][0]),
+            map(visitors => visitors.content[0]),
         );
     }
 
@@ -1199,6 +1200,7 @@ export class AccessCode {
     endTime?: string;
     visitorId: number;
     queueId: number;
+    content: any;
 }
 
 export class Queue {
@@ -1210,6 +1212,7 @@ export class Queue {
     minAttentionTime: string;
     active: boolean;
     customers: number;
+    content: any;
 }
 ...
 ----
@@ -1285,13 +1288,13 @@ export class AccessCodeService {
     return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
     .pipe(
       map(accesscodes => {
-        if (accesscodes['content'][0]) {
-          return accesscodes['content'][0]['accessCode'];
+        if (accesscodes.content[0]) {
+          return accesscodes.content[0].accessCode;
         } else {
           return null;
         }
       }),
-     );
+    );
   }
 
   deleteAccessCode(codeAccessId: number) {
@@ -1336,10 +1339,11 @@ export class QueueService {
     const pageable: Pageable = new Pageable();
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
+    pageable.sort = [];
     filters.pageable = pageable;
     return this.http.post<Queue>(`${this.baseUrl}` + '/queuemanagement/v1/queue/search', filters)
     .pipe(
-         map(queues => queues['content'][0]),
+         map(queues => queues.content[0]),
      );
   }
 }
