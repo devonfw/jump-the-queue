@@ -134,8 +134,14 @@ jtqj-core/src/main/resources/db/type/h2/V0003__Create_BinaryObject.sql
 jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
 ----
 
+[NOTE]
+====
+May be you need to install some sql editor from ecplipse marketplace, or use an external one.
+====
+----
+
 ==== _Visitor_ Table
-We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/type/h2` and selecting `New > File`. Following the naming scheme we are going to call it:
+We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/migration/1.0` and selecting `New > File`. Following the naming scheme we are going to call it:
 ----
 V0005__Create_Visitor.sql
 ----
@@ -153,7 +159,7 @@ create table Visitor(
   acceptedCommercial BOOL DEFAULT '0',
   acceptedTerms BOOL NOT NULL DEFAULT '0',
   userType BOOL DEFAULT '0',
-  CONSTRAINT PK_Visitor PRIMARY KEY(id),
+  CONSTRAINT PK_Visitor PRIMARY KEY(id)
 );
 ----
 
@@ -186,7 +192,7 @@ create table DailyQueue(
   minAttentionTime TIMESTAMP NOT NULL DEFAULT '60000',
   active BOOL NOT NULL DEFAULT '1',
   customers INTEGER NOT NULL DEFAULT '0',
-  CONSTRAINT PK_DailyQueue PRIMARY KEY(id),
+  CONSTRAINT PK_DailyQueue PRIMARY KEY(id)
 );
 ----
 
@@ -220,7 +226,7 @@ CREATE TABLE AccessCode(
   idQueue BIGINT NOT NULL,
   CONSTRAINT PK_AccessCode PRIMARY KEY(id),
   CONSTRAINT FK_AccessCode_idVisitor FOREIGN KEY(idVisitor) REFERENCES Visitor(id),
-  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES DailyQueue(id),
+  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES DailyQueue(id)
 );
 ----
 
@@ -791,6 +797,15 @@ The next dialogs will show us if there are outdated templates. In that case just
 image::images/devon4j/4.Components/cobigen_health_2.png[CobiGen Health Check 2, 550]
 
 image::images/devon4j/4.Components/cobigen_health_3.png[CobiGen Health Check 3, 400]
+
+In case you receive an error like this:
+image::images/devon4j/4.Components/templates_not_found.png[CobiGen Health Check 3, 400]
+
+You need to force download of templates as in the following image: 
+image::images/devon4j/4.Components/adapt-templates.png[CobiGen Health Check 3, 550]
+
+Now the templates shold be downloaded, and you will see a new folder in the workspace:
+image::images/devon4j/4.Components/cobigen-folder.png[CobiGen Health Check 3, 400]
 
 ==== _Queue_ Component Structure (Entity without Relations)
 In order to create the whole structure of a component with CobiGen we only need to right-click our component core entity (_QueueEntity_) and select `CobiGen > Generate`.
