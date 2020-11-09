@@ -596,6 +596,9 @@ export class Visitor {
     acceptedTerms: boolean;
     userType: boolean;
 }
+export class VisitorArray {
+    content: Visitor[];
+}
 ----
 
 [NOTE]
@@ -761,7 +764,7 @@ export class FilterVisitor {
 export class Pageable {
     pageSize: number;
     pageNumber: number;
-    sort: any[];
+    sort: Sort[];
 }
 
 export class Sort {
@@ -961,7 +964,7 @@ export class LoginService {
         pageable.sort= [];
         filters.username = username;
         filters.pageable = pageable;
-        return this.http.post<Visitor>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
+        return this.http.post<VisitorArray>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
        .pipe(
             map(visitors => visitors.content[0]),
         );
@@ -1176,7 +1179,7 @@ Now in order to make this view work, we are going to do these things:
 
 . Modify the logic of the component `view-queue.component.ts`.
 
-First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode` and `AccessCode`. These are going to be necessary in order to communicate with the backend.
+First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the backend.
 
 [source, typescript]
 ----
@@ -1213,6 +1216,16 @@ export class Queue {
     active: boolean;
     customers: number;
     content: any;
+}
+
+export class QueueArray {
+    content: Queue[];
+}
+
+export class AccessCodeArray {
+    content: [{
+        accessCode: AccessCode
+    }];
 }
 ...
 ----
@@ -1259,15 +1272,15 @@ export class AccessCodeService {
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
     filters.pageable = pageable;
-    return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
+    return this.http.post<AccessCodeArray>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
     .pipe(
         map(accesscodes => {
-          if (!accesscodes['content'][0]) {  // if theres no response it means theres noone in the queue
+          if (!accesscodes.content[0]) {  // if theres no response it means theres noone in the queue
             return null;
           } else {
-            if (accesscodes['content'][0]['accessCode'].startTime != null) {
+            if (accesscodes.content[0].accessCode.startTime != null) {
               // if start time is not null it means that hes being attended
-              return accesscodes['content'][0]['accessCode'];
+              return accesscodes.content[0].accessCode;
             } else {
               // noone being attended
               return null;
@@ -1285,7 +1298,7 @@ export class AccessCodeService {
     pageable.pageSize = 1;
     filters.visitorId = visitorId;
     filters.pageable = pageable;
-    return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
+    return this.http.post<AccessCodeArray>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
     .pipe(
       map(accesscodes => {
         if (accesscodes.content[0]) {
@@ -1341,7 +1354,7 @@ export class QueueService {
     pageable.pageSize = 1;
     pageable.sort = [];
     filters.pageable = pageable;
-    return this.http.post<Queue>(`${this.baseUrl}` + '/queuemanagement/v1/queue/search', filters)
+    return this.http.post<QueueArray>(`${this.baseUrl}` + '/queuemanagement/v1/queue/search', filters)
     .pipe(
          map(queues => queues.content[0]),
      );
