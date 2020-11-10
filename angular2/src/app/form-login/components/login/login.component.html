@@ -1,0 +1,22 @@
+<form (ngSubmit)="submitLogin(loginForm.form.value)" #loginForm="ngForm" layout-padding>
+  <div layout="row" flex>
+      <mat-form-field flex>
+              <input matInput placeholder="Email" ngModel email name="username" required>
+      </mat-form-field>
+  </div>
+  <div layout="row" flex>
+      <mat-form-field flex>
+          <input matInput placeholder="Password" ngModel name="password" type="password" required>
+      </mat-form-field>
+  </div>
+  <div layout="row" flex>
+  </div>
+  <div layout="row" flex layout-margin>
+      <div layout="column" flex>
+        <button mat-raised-button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+      </div>
+      <div layout="column" flex>
+        <button mat-raised-button (click)="onRegisterClick()" color="primary">Register</button>
+      </div>
+  </div>
+</form>
