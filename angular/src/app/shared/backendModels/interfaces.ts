@@ -71,7 +71,7 @@ export class AccessCodeArray {
   content: [
     {
       accessCode: AccessCode;
-    },
+    }
   ];
 }
 
