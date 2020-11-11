@@ -1,17 +1,12 @@
+import { TestBed } from '@angular/core/testing';
 
-import { TestBed, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
-import { CoreModule } from 'src/app/shared/core.module';
 
 describe('AuthService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-        imports: [CoreModule],
-        providers: [AuthService],
-    });
-  });
+  beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should create', inject([AuthService], (service: AuthService) => {
+  it('should be created', () => {
+    const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
-  }));
+  });
 });

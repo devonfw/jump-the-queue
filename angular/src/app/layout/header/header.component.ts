@@ -5,14 +5,15 @@ import { LoginService } from 'src/app/form-login/components/login/services/login
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private loginService: LoginService,
+  ) {}
 
-  constructor(private authService: AuthService, private loginService: LoginService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClickLogout(): void {
     this.loginService.logout();

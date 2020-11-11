@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment: {production: boolean, baseUrlRestServices: string} = {
+export const environment: {
+  production: boolean;
+  baseUrlRestServices: string;
+} = {
   production: false,
-  baseUrlRestServices: 'http://localhost:8081/jumpthequeue/services/rest'
+  baseUrlRestServices: 'http://localhost:8081/jumpthequeue/services/rest',
 };
 
 /*
