@@ -54,6 +54,10 @@ C:\...\workspaces\main\jumpthequeue\java>
 ====
 We are using the `java` https://github.com/devonfw/devon-ide/blob/master/documentation/java.asciidoc[commandlet] of the devon-ide. After the command `create` we are passing the arguments `package`, `groupId` and `version` in this case.
 ====
+[WARNING]
+====
+Be sure that you are using devonfw CMD or bash, as the command is not working properly with devonfw PowerShell.
+====
 
 image::images/devon4j/3.BuildYourOwn/build_successful.png[Build Success, 800]
 
@@ -132,8 +136,8 @@ The backend is now accessible via http://localhost:8081/jumpthequeue[localhost:8
 You can view the exposed services by logging in with these credentials:
 
 ----
-Username:   waiter
-Password:   waiter
+Username:   admin
+Password:   admin
 ----
 
 image::images/devon4j/3.BuildYourOwn/rest_services.png[RESTful Services, 550]
