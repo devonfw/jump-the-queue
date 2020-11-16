@@ -1,5 +1,4 @@
 export class Visitor {
-  [x: string]: any;
   id?: number;
   username: string;
   name: string;
