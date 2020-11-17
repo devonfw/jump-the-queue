@@ -16,10 +16,6 @@ Now we have a fully functional blank project. All we have to do now is to create
 
 First, we are going to develop the views of the app through its components, then we will create the services with the logic, security and back-end connection.
 
-[NOTE]
-====
-This tutorial is only going to develop a mobile view. The app is not going to be responsive or well suited for desktop use. The new https://github.com/devonfw-forge/jump-the-queue-v2[JumpTheQueue V2] implements these features, but currently no tutorial walkthrough exists for it.
-====
 
 == Creating Components
 
@@ -188,7 +184,7 @@ Remember that we need to import this `CoreModule` module into the `AppModule` an
 [source, typescript]
 ----
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // Application components and services
 import { AppRoutingModule } from './app-routing.module';
@@ -206,10 +202,16 @@ import { CoreModule } from './shared/core.module';
   ],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
 ----
+[NOTE]
+====
+Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message."
+To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" insde the @NgModule of all the afected modules.
+====
 
 [NOTE]
 ====
@@ -229,6 +231,12 @@ Now we can use this layout, so let's implement it in `app.component.html`. Use t
   </h1>
 </td-layout-nav>
 ----
+
+[NOTE]
+====
+You have already learned about Toolbars in devon4ng https://github.com/devonfw/jump-the-queue/wiki/devon4ng-components#toolbars[here]. +
+You can go back and read that section again to refresh your memory.
+====
 
 [NOTE]
 ====
@@ -344,7 +352,7 @@ After _Angular/CLI_ has finished generating the component, we have to create two
 
 [source, typescript]
 ----
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from 'src/app/shared/core.module';
 import { LoginComponent } from './login.component';
@@ -354,6 +362,7 @@ import { LoginComponent } from './login.component';
   providers: [],
   declarations: [LoginComponent],
   exports: [LoginComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class LoginModule {}
 ----
@@ -362,7 +371,7 @@ export class LoginModule {}
 
 [source, typescript]
 ----
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormLoginComponent } from './form-login.component';
 import { CoreModule } from '../shared/core.module';
@@ -373,6 +382,7 @@ import { LoginModule } from './components/login/login-module';
   providers: [],
   declarations: [FormLoginComponent],
   exports: [FormLoginComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FormLoginModule {}
 ----
@@ -586,6 +596,9 @@ export class Visitor {
     acceptedTerms: boolean;
     userType: boolean;
 }
+export class VisitorArray {
+    content: Visitor[];
+}
 ----
 
 [NOTE]
@@ -751,7 +764,7 @@ export class FilterVisitor {
 export class Pageable {
     pageSize: number;
     pageNumber: number;
-    sort?: Sort[];
+    sort: Sort[];
 }
 
 export class Sort {
@@ -948,11 +961,12 @@ export class LoginService {
 
         pageable.pageNumber = 0;
         pageable.pageSize = 1;
+        pageable.sort= [];
         filters.username = username;
         filters.pageable = pageable;
-        return this.http.post<Visitor>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
+        return this.http.post<VisitorArray>(`${this.baseUrl}` + '/visitormanagement/v1/visitor/search', filters)
        .pipe(
-            map(visitors => visitors['content'][0]),
+            map(visitors => visitors.content[0]),
         );
     }
 
@@ -1165,7 +1179,7 @@ Now in order to make this view work, we are going to do these things:
 
 . Modify the logic of the component `view-queue.component.ts`.
 
-First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode` and `AccessCode`. These are going to be necessary in order to communicate with the backend.
+First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the backend.
 
 [source, typescript]
 ----
@@ -1189,6 +1203,7 @@ export class AccessCode {
     endTime?: string;
     visitorId: number;
     queueId: number;
+    content: any;
 }
 
 export class Queue {
@@ -1200,6 +1215,17 @@ export class Queue {
     minAttentionTime: string;
     active: boolean;
     customers: number;
+    content: any;
+}
+
+export class QueueArray {
+    content: Queue[];
+}
+
+export class AccessCodeArray {
+    content: [{
+        accessCode: AccessCode
+    }];
 }
 ...
 ----
@@ -1246,15 +1272,15 @@ export class AccessCodeService {
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
     filters.pageable = pageable;
-    return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
+    return this.http.post<AccessCodeArray>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
     .pipe(
         map(accesscodes => {
-          if (!accesscodes['content'][0]) {  // if theres no response it means theres noone in the queue
+          if (!accesscodes.content[0]) {  // if theres no response it means theres noone in the queue
             return null;
           } else {
-            if (accesscodes['content'][0]['accessCode'].startTime != null) {
+            if (accesscodes.content[0].accessCode.startTime != null) {
               // if start time is not null it means that hes being attended
-              return accesscodes['content'][0]['accessCode'];
+              return accesscodes.content[0].accessCode;
             } else {
               // noone being attended
               return null;
@@ -1272,16 +1298,16 @@ export class AccessCodeService {
     pageable.pageSize = 1;
     filters.visitorId = visitorId;
     filters.pageable = pageable;
-    return this.http.post<AccessCode>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
+    return this.http.post<AccessCodeArray>(`${this.baseUrl}` + '/accesscodemanagement/v1/accesscode/cto/search', filters)
     .pipe(
       map(accesscodes => {
-        if (accesscodes['content'][0]) {
-          return accesscodes['content'][0]['accessCode'];
+        if (accesscodes.content[0]) {
+          return accesscodes.content[0].accessCode;
         } else {
           return null;
         }
       }),
-     );
+    );
   }
 
   deleteAccessCode(codeAccessId: number) {
@@ -1326,10 +1352,11 @@ export class QueueService {
     const pageable: Pageable = new Pageable();
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
+    pageable.sort = [];
     filters.pageable = pageable;
-    return this.http.post<Queue>(`${this.baseUrl}` + '/queuemanagement/v1/queue/search', filters)
+    return this.http.post<QueueArray>(`${this.baseUrl}` + '/queuemanagement/v1/queue/search', filters)
     .pipe(
-         map(queues => queues['content'][0]),
+         map(queues => queues.content[0]),
      );
   }
 }

@@ -1,44 +1,74 @@
-<form layout-padding (ngSubmit)="submitRegister(registerForm.form.value)" #registerForm="ngForm">
+<form
+  layout-padding
+  (ngSubmit)="submitRegister(registerForm.value)"
+  #registerForm="ngForm"
+>
   <div layout="row" flex>
-      <mat-form-field flex>
-        <input matInput placeholder="Email" ngModel email name="username" required>
-      </mat-form-field>
+    <mat-form-field flex>
+      <input
+        matInput
+        placeholder="Email"
+        ngModel
+        email
+        name="username"
+        required
+      />
+    </mat-form-field>
   </div>
   <div layout="row" flex>
-      <mat-form-field flex>
-        <input matInput placeholder="Password" ngModel name="password" type="password" required>
-      </mat-form-field>
+    <mat-form-field flex>
+      <input
+        matInput
+        placeholder="Password"
+        ngModel
+        name="password"
+        type="password"
+        required
+      />
+    </mat-form-field>
   </div>
   <div layout="row" flex>
-      <mat-form-field flex>
-        <input matInput placeholder="Name" ngModel name="name" required>
-      </mat-form-field>
+    <mat-form-field flex>
+      <input matInput placeholder="Name" ngModel name="name" required />
+    </mat-form-field>
   </div>
   <div layout="row" flex>
-      <mat-form-field flex>
-        <input matInput placeholder="Phone Number" ngModel name="phoneNumber" required>
-      </mat-form-field>
+    <mat-form-field flex>
+      <input
+        matInput
+        placeholder="Phone Number"
+        ngModel
+        name="phoneNumber"
+        required
+      />
+    </mat-form-field>
   </div>
   <div layout-xs="row" flex>
-      <div layout="column" flex>
-        <mat-checkbox name="acceptedTerms" ngModel required>Accept Terms And conditions</mat-checkbox>
-  
-      </div>
+    <div layout="column" flex>
+      <mat-checkbox name="acceptedTerms" ngModel required
+        >Accept Terms And conditions</mat-checkbox
+      >
+    </div>
   </div>
   <div layout-xs="row" flex>
-      <div layout="column" flex>
-        <mat-checkbox name="acceptedCommercial" ngModel required>I want to receive notifications</mat-checkbox>
-      </div>
+    <div layout="column" flex>
+      <mat-checkbox name="acceptedCommercial" ngModel required
+        >I want to receive notifications</mat-checkbox
+      >
+    </div>
   </div>
+  <div layout="row" flex></div>
   <div layout="row" flex>
-  </div>
-  <div layout="row" flex>
-      <div layout="column" flex="10">
-        </div>
-      <div layout="column" flex>
-          <button mat-raised-button type="submit" [disabled]="!registerForm.form.valid">Register</button>
-      </div>
-      <div layout="column" flex="10">
-      </div>
+    <div layout="column" flex="10"></div>
+    <div layout="column" flex>
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!registerForm.form.valid"
+      >
+        Register
+      </button>
+    </div>
+    <div layout="column" flex="10"></div>
   </div>
 </form>

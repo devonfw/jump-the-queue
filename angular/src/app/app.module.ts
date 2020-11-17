@@ -1,13 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import 'hammerjs';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-// Application components and services
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormLoginModule } from './form-login/form-login-module';
+import { AppComponent } from './app.component';
 import { CoreModule } from './shared/core.module';
+import { FormLoginModule } from './form-login/form-login.module';
 import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { ViewQueueComponent } from './view-queue/view-queue.component';
@@ -17,17 +14,11 @@ import { ViewQueueComponent } from './view-queue/view-queue.component';
     AppComponent,
     RegisterComponent,
     HeaderComponent,
-    ViewQueueComponent
+    ViewQueueComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormLoginModule,
-    CoreModule,
-    AppRoutingModule,
-    HttpClientModule,
-  ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, CoreModule, FormLoginModule],
+  providers: [],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

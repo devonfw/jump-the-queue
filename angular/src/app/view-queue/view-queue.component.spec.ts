@@ -8,9 +8,8 @@ describe('ViewQueueComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewQueueComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewQueueComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

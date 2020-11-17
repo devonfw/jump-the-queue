@@ -108,10 +108,6 @@ import { AuthGuardService } from '../core/authentication/auth-guard.service';
     HttpClientModule,
   ],
   declarations: [],
-  providers: [
-    HttpClientModule,
-    AuthService,
-    AuthGuardService,
-  ],
+  providers: [HttpClientModule, AuthService, AuthGuardService],
 })
 export class CoreModule {}

@@ -3,12 +3,14 @@ import { find } from 'lodash';
 import { Role } from 'src/app/shared/backendModels/interfaces';
 import { config } from 'src/app/config';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   private logged = false;
   private user = '';
   private userId = 0;
-  private currentRole = 'CUSTOMER';
+  private currentRole = 'NONE';
   private token: string;
 
   public isLogged(): boolean {
@@ -48,7 +50,7 @@ export class AuthService {
   }
 
   public getPermission(roleName: string): number {
-    const role: Role = <Role>find(config.roles, { name: roleName });
+    const role: Role = find(config.roles, { name: roleName }) as Role;
     return role.permission;
   }
 
