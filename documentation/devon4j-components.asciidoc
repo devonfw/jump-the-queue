@@ -138,7 +138,6 @@ jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
 ====
 May be you need to install some sql editor from ecplipse marketplace, or use an external one.
 ====
-----
 
 ==== _Visitor_ Table
 We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/migration/1.0` and selecting `New > File`. Following the naming scheme we are going to call it:
