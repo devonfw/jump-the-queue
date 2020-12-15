@@ -32,8 +32,7 @@
               "src/theme.scss",
               "node_modules/@covalent/core/common/platform.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
