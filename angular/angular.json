@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/angular",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,8 +32,7 @@
               "src/theme.scss",
               "node_modules/@covalent/core/common/platform.css"
             ],
-            "scripts": ["node_modules/hammerjs/hammer.min.js"],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -56,6 +56,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -88,7 +92,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/hammerjs/hammer.min.js"],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -140,6 +144,7 @@
   },
   "defaultProject": "angular",
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": false
   }
 }
