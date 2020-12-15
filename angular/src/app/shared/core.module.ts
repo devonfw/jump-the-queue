@@ -33,18 +33,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkTableModule } from '@angular/cdk/table';
-import {
-  CovalentChipsModule,
-  CovalentLayoutModule,
-  CovalentExpansionPanelModule,
-  CovalentDataTableModule,
-  CovalentPagingModule,
-  CovalentDialogsModule,
-  CovalentLoadingModule,
-  CovalentMediaModule,
-  CovalentNotificationsModule,
-  CovalentCommonModule,
-} from '@covalent/core';
+import { CovalentChipsModule } from '@covalent/core/chips';
+import { CovalentLayoutModule } from '@covalent/core/layout';
+import { CovalentExpansionPanelModule } from '@covalent/core/expansion-panel';
+import { CovalentDataTableModule } from '@covalent/core/data-table';
+import { CovalentPagingModule } from '@covalent/core/paging';
+import { CovalentDialogsModule } from '@covalent/core/dialogs';
+import { CovalentLoadingModule } from '@covalent/core/loading';
+import { CovalentMediaModule } from '@covalent/core/media';
+import { CovalentNotificationsModule } from '@covalent/core/notifications';
+import { CovalentCommonModule } from '@covalent/core/common';
 import { AuthService } from '../core/authentication/auth.service';
 import { AuthGuardService } from '../core/authentication/auth-guard.service';
 
