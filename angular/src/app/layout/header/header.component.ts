@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/form-login/components/login/services/login
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private loginService: LoginService,
   ) {}
 
