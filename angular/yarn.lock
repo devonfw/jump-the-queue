@@ -1004,12 +1004,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@covalent/core@2.0.0-beta.4":
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-2.0.0-beta.4.tgz#1cd60f81f96b0320f6f410aa5d731aa21f129478"
-  integrity sha512-I+PqgFW76WB/JlbhVwRbYte0W9fPIVQB8DAtuF7gfAMV6JOxgez2DfU5dOiv5+nK/NlGXh2srBNBxziMy0t68A==
-  dependencies:
-    tslib "^1.9.0"
+"@covalent/core@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-3.1.0.tgz#40c5898e26ed9ac9dd5c54fa5cf48dc514ad8ea9"
+  integrity sha512-/jgyeSI+y7Wssu+ZKNQa6pJJIqTchl72Vr9MHCy97n+/G5yJoG9CYcbzKScr/twhSW7IqUN75cAFOQ3M/B+afQ==
 
 "@istanbuljs/schema@^0.1.2":
   version "0.1.2"
