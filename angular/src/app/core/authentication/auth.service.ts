@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { find } from 'lodash';
+import { find } from 'lodash-es';
 import { Role } from 'src/app/shared/backendModels/interfaces';
 import { config } from 'src/app/config';
 
