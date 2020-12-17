@@ -3,6 +3,7 @@ package com.devonfw.application.jtqj.visitormanagement.dataaccess.api.repo;
 import static com.querydsl.core.alias.Alias.$;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ public interface VisitorRepository extends DefaultRepository<VisitorEntity> {
 	 * @return the {@link Page} of the {@link VisitorEntity} objects that matched
 	 *         the search.
 	 */
+
+	List<VisitorEntity> findByUsername(String username);
+
 	default Page<VisitorEntity> findByCriteria(VisitorSearchCriteriaTo criteria) {
 
 		VisitorEntity alias = newDslAlias();
@@ -68,7 +72,7 @@ public interface VisitorRepository extends DefaultRepository<VisitorEntity> {
 
 	/**
 	 * Add sorting to the given query on the given alias
-	 * 
+	 *
 	 * @param query to add sorting to
 	 * @param alias to retrieve columns from for sorting
 	 * @param sort  specification of sorting

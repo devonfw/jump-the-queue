@@ -32,6 +32,10 @@ export class RegisterComponent implements OnInit {
       .registerVisitor(visitor)
       .subscribe((visitorResult: Visitor) => {
         this.loginService.login(visitorResult.username, visitorResult.password);
+      }, error => {
+        this.snackBar.open('access error', 'OK', {
+          duration: 2000,
+        });
       });
   }
 

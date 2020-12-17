@@ -52,7 +52,7 @@ export class LoginService {
     this.getVisitorByUsername(username).subscribe(
       (visitorFound) => {
         if (
-          visitorFound.username === username &&
+          visitorFound && visitorFound.username === username &&
           visitorFound.password === password
         ) {
           this.authService.setUserId(visitorFound.id);
