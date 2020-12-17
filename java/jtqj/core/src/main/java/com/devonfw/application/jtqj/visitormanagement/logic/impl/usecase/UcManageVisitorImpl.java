@@ -37,9 +37,14 @@ public class UcManageVisitorImpl extends AbstractVisitorUc implements UcManageVi
 	@Override
 	public VisitorEto saveVisitor(VisitorEto visitor) {
 
+		if (!getVisitorRepository().findByUsername(visitor.getUsername()).isEmpty()) {
+			throw new RuntimeException("Record already exists");
+		}
+
 		Objects.requireNonNull(visitor, "visitor");
 
 		VisitorEntity visitorEntity = getBeanMapper().map(visitor, VisitorEntity.class);
+
 
 		// initialize, validate visitorEntity here if necessary
 		VisitorEntity resultEntity = getVisitorRepository().save(visitorEntity);
