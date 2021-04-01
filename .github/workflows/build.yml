@@ -16,3 +16,7 @@ jobs:
         run: |
           cd java/jtqj
           mvn install
+          cd/
+          cd angular
+          ng build
+          ng test
