@@ -1,0 +1,15 @@
+name: CI Build for angular
+on: [push, pull_request]
+jobs:
+  build:
+    if: ${{github.repository == 'devonfw/jump-the-queue'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: build
+        run: |
+          cd angular
+          npm install -g @angular/cli
+          ng build
+          ng test
