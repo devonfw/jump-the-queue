@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: 14.x
       - run: |
+          npm install -g @angular/cli
           cd angular
           ng build
           ng test
