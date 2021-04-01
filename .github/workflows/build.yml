@@ -12,11 +12,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
-      - name: Build project with Maven
+      - name: Build angular
         run: |
-          cd java/jtqj
-          mvn install
-          cd/
           cd angular
           ng build
           ng test
