@@ -1,4 +1,4 @@
-name: CI Build
+name: CI Build for angular
 on: [push, pull_request]
 jobs:
   build:
@@ -12,6 +12,5 @@ jobs:
           node-version: 14.x
       - run: |
           cd angular
-          npm ci
-          npm run build
-          npm test
+          ng build
+          ng test
