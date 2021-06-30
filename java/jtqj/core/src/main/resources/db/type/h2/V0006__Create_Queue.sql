@@ -8,5 +8,5 @@ create table DailyQueue(
   minAttentionTime TIMESTAMP NOT NULL DEFAULT '60000',
   active BOOL NOT NULL DEFAULT '1',
   customers INTEGER NOT NULL DEFAULT '0',
-  CONSTRAINT PK_DailyQueue PRIMARY KEY(id),
+  CONSTRAINT PK_DailyQueue PRIMARY KEY(id)
 );
