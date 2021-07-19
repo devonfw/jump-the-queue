@@ -12,4 +12,4 @@ jobs:
           cd angular
           npm install
           npm run build
-          npm run test
+          npm run test -- --watch=false --browsers=ChromeHeadless
