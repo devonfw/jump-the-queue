@@ -10,6 +10,6 @@ jobs:
       - name: build
         run: |
           cd angular
-          npm install
+          yarn install
           npm run build
           npm run test -- --watch=false --browsers=ChromeHeadless
