@@ -8,13 +8,13 @@
   <description>Application based on the Open Application Standard Platform for Java (devon4j).</description>
 
   <properties>
-    <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
-    <devon4j.version>3.1.1</devon4j.version>
+    <spring.boot.version>2.4.4</spring.boot.version>
+    <devon4j.version>2021.04.002</devon4j.version>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <devonfw.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySystemTest</devonfw.test.excluded.groups>
-    <jackson.version>2.9.9.20190727</jackson.version> <!-- Overriding Jackson for fixing vulnerabilities -->
+    <jackson.version>2.12.2</jackson.version> <!-- Overriding Jackson for fixing vulnerabilities -->
   </properties>
 
   <modules>
@@ -316,7 +316,7 @@
     <profile>
       <id>systemtest</id>
       <properties>
-        <devonfw.test.excluded.groups></devonfw.test.excluded.groups>
+        <devonfw.test.excluded.groups/>
       </properties>
     </profile>
     <profile>

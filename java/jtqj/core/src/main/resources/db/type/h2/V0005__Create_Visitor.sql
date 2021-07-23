@@ -8,5 +8,5 @@ create table Visitor(
   acceptedCommercial BOOL DEFAULT '0',
   acceptedTerms BOOL NOT NULL DEFAULT '0',
   userType BOOL DEFAULT '0',
-  CONSTRAINT PK_Visitor PRIMARY KEY(id),
+  CONSTRAINT PK_Visitor PRIMARY KEY(id)
 );

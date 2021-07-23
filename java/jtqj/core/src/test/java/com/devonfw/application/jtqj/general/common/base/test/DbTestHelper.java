@@ -3,7 +3,6 @@ package com.devonfw.application.jtqj.general.common.base.test;
 import javax.inject.Named;
 
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.MigrationVersion;
 
 /**
  * This class provides methods for handling the database during testing where resets (and other operations) may be
@@ -14,14 +13,13 @@ public class DbTestHelper {
 
   private Flyway flyway;
 
-  private MigrationVersion migrationVersion;
-
   /**
    * The constructor.
    *
    * @param flyway an instance of type {@link Flyway}.
    */
   public DbTestHelper(Flyway flyway) {
+
     super();
     this.flyway = flyway;
   }
@@ -41,20 +39,6 @@ public class DbTestHelper {
   public void resetDatabase() {
 
     dropDatabase();
-    if (this.migrationVersion != null) {
-      this.flyway.setTarget(this.migrationVersion);
-    }
     this.flyway.migrate();
   }
-
-  /**
-   * This method sets the internal value of the {@code migrationVersion}.
-   *
-   * @param migrationVersion new {@code String} value of {@code migrationVersion}. Must not be null
-   */
-  public void setMigrationVersion(String migrationVersion) {
-
-    this.migrationVersion = MigrationVersion.fromVersion(migrationVersion);
-  }
-
 }

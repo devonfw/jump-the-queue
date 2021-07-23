@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.devonfw.java.jtqj</groupId>
@@ -20,7 +20,7 @@
     <!-- Bean-Mapping for conversion from TO to Entity and vice versa -->
     <dependency>
       <groupId>com.devonfw.java.modules</groupId>
-      <artifactId>devon4j-beanmapping</artifactId>
+      <artifactId>devon4j-beanmapping-dozer</artifactId>
     </dependency>
 
     <!-- Security for authorization integration with spring-security -->
@@ -163,7 +163,7 @@
     <!-- Tests -->
     <dependency>
       <groupId>com.devonfw.java.modules</groupId>
-      <artifactId>devon4j-test</artifactId>
+      <artifactId>devon4j-test-junit4</artifactId>
       <scope>test</scope>
     </dependency>
 
