@@ -10,6 +10,5 @@ jobs:
       - name: build
         run: |
           cd angular
-          npm install -g @angular/cli
-          ng build
-          ng test
+          yarn install
+          npm run build
