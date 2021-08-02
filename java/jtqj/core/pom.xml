@@ -30,6 +30,17 @@
     </dependency>
 
     <dependency>
+      <groupId>com.devonfw.java.starters</groupId>
+      <artifactId>devon4j-starter-security-cors</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.devonfw.java.starters</groupId>
+      <artifactId>devon4j-starter-security-csrf</artifactId>
+    </dependency>
+
+
+    <dependency>
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-web</artifactId>
     </dependency>
@@ -153,7 +164,7 @@
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
     </dependency>
-    
+
     <!-- Enable JSON logging for easy integration with xPaaS and ELK/Graylog/Splunk/etc. -->
     <dependency>
       <groupId>net.logstash.logback</groupId>
