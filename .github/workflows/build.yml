@@ -13,7 +13,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
+      # Spellcheck
+      - uses: actions/checkout@v2
+      - uses: igsekor/pyspelling-any@v0.0.2
       - name: Build project with Maven
         run: |
           cd java/jtqj
           mvn install
+
