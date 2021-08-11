@@ -44,7 +44,7 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
   public void configure(HttpSecurity http) throws Exception {
 
     String[] unsecuredResources = new String[] { "/login", "/security/**", "/services/rest/login",
-    "/services/rest/logout" };
+    "/services/rest/logout", "/services/rest/visitormanagement/v1/visitor" };
 
     // disable CSRF protection by default, use csrf starter to override.
     http = http.csrf().disable();
@@ -110,7 +110,8 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
   @Inject
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-    auth.inMemoryAuthentication().withUser("admin").password(this.passwordEncoder.encode("admin")).roles("Admin");
+    auth.inMemoryAuthentication().withUser("admin@cg.com").password(this.passwordEncoder.encode("admin"))
+        .roles("Admin");
   }
 
 }
