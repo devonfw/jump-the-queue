@@ -48,10 +48,12 @@ public interface AccessCodeRepository extends DefaultRepository<AccessCodeEntity
     if (endTime != null) {
       query.where($(alias.getEndTime()).eq(endTime));
     }
-    Long visitor = criteria.getVisitorId();
-    if (visitor != null) {
-      query.where($(alias.getVisitor().getId()).eq(visitor));
+
+    String username = criteria.getUsername();
+    if (username != null) {
+      query.where($(alias.getVisitor().getUsername()).eq(username));
     }
+
     Long queue = criteria.getQueueId();
     if (queue != null) {
       query.where($(alias.getQueue().getId()).eq(queue));

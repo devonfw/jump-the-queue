@@ -44,7 +44,7 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
   public void configure(HttpSecurity http) throws Exception {
 
     String[] unsecuredResources = new String[] { "/login", "/security/**", "/services/rest/login",
-    "/services/rest/logout", "/services/rest/visitormanagement/v1/visitor" };
+    "/services/rest/logout", "**/visitor" };
 
     // disable CSRF protection by default, use csrf starter to override.
     http = http.csrf().disable();
