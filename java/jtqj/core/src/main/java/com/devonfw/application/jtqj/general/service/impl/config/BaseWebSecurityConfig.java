@@ -3,6 +3,7 @@ package com.devonfw.application.jtqj.general.service.impl.config;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.devonfw.application.jtqj.general.common.base.AdvancedDaoAuthenticationProvider;
 import com.devonfw.module.security.common.api.config.WebSecurityConfigurer;
 import com.devonfw.module.security.common.impl.rest.AuthenticationSuccessHandlerSendingOkHttpStatusCode;
 import com.devonfw.module.security.common.impl.rest.JsonUsernamePasswordAuthenticationFilter;
@@ -106,12 +108,26 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
     return jsonFilter;
   }
 
-  @SuppressWarnings("javadoc")
   @Inject
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+  private AdvancedDaoAuthenticationProvider advancedDaoAuthenticationProvider;
 
-    auth.inMemoryAuthentication().withUser("admin@cg.com").password(this.passwordEncoder.encode("admin"))
-        .roles("Admin");
+  @Bean
+  public AdvancedDaoAuthenticationProvider advancedDaoAuthenticationProvider() {
+
+    AdvancedDaoAuthenticationProvider authProvider = new AdvancedDaoAuthenticationProvider();
+    authProvider.setPasswordEncoder(this.passwordEncoder);
+    authProvider.setUserDetailsService(this.userDetailsService);
+    return authProvider;
+  }
+
+  @SuppressWarnings("javadoc")
+  @Override
+  // public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+  public void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+    auth.authenticationProvider(this.advancedDaoAuthenticationProvider);
+    // auth.inMemoryAuthentication().withUser("admin@cg.com").password(this.passwordEncoder.encode("admin"))
+    // .roles("Admin");
   }
 
 }

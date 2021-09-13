@@ -3,6 +3,7 @@ package com.devonfw.application.jtqj.general.common.impl.security;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.VisitorEntity;
+import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.repo.VisitorRepository;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControl;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControlProvider;
 import com.devonfw.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
@@ -38,21 +41,21 @@ public class BaseUserDetailsService implements UserDetailsService {
 
   private AccessControlProvider accessControlProvider;
 
+  @Inject
+  private VisitorRepository userRepository;
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
     Set<GrantedAuthority> authorities = getAuthorities(username);
-    UserDetails user;
-    try {
-      user = getAmBuilder().getDefaultUserDetailsService().loadUserByUsername(username);
-      User userData = new User(user.getUsername(), user.getPassword(), authorities);
-      return userData;
-    } catch (Exception e) {
-      e.printStackTrace();
-      UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      LOG.warn("Failed to get user {}.", username, exception);
-      throw exception;
+    List<VisitorEntity> users = this.userRepository.findByUsername(username);
+    if (users.size() == 0) {
+      throw new UsernameNotFoundException("Authentication failed." + username);
     }
+    VisitorEntity user = users.get(0);
+    // {noop} to script the encryption and decryption of password.
+    return new User(user.getUsername(), "{noop}" + user.getPassword(), authorities);
+
   }
 
   /**
