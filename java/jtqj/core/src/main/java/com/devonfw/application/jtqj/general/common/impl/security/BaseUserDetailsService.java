@@ -53,7 +53,7 @@ public class BaseUserDetailsService implements UserDetailsService {
       throw new UsernameNotFoundException("Authentication failed." + username);
     }
     VisitorEntity user = users.get(0);
-    // {noop} to script the encryption and decryption of password.
+    // {noop} to skip the encryption and decryption of password.
     return new User(user.getUsername(), "{noop}" + user.getPassword(), authorities);
 
   }
