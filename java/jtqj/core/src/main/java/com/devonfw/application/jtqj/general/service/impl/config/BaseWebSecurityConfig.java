@@ -4,16 +4,16 @@ import javax.inject.Inject;
 import javax.servlet.Filter;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.devonfw.application.jtqj.general.common.base.AdvancedDaoAuthenticationProvider;
@@ -53,20 +53,18 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
     // load starters as pluggins.
     http = this.webSecurityConfigurer.configure(http);
 
-    http
-        //
-        .userDetailsService(this.userDetailsService)
-        // define all urls that are not to be secured
-        .authorizeRequests().antMatchers(unsecuredResources).permitAll().anyRequest().authenticated().and()
-        // configure parameters for simple form login (and logout)
-        .formLogin().successHandler(new SimpleUrlAuthenticationSuccessHandler()).defaultSuccessUrl("/")
-        .failureUrl("/login.html?error").loginProcessingUrl("/j_spring_security_login").usernameParameter("username")
-        .passwordParameter("password").and()
-        // logout via POST is possible
-        .logout().logoutSuccessUrl("/login.html").and()
-        // register login and logout filter that handles rest logins
-        .addFilterAfter(getSimpleRestAuthenticationFilter(), BasicAuthenticationFilter.class)
-        .addFilterAfter(getSimpleRestLogoutFilter(), LogoutFilter.class);
+    /*
+     * http.userDetailsService(this.userDetailsService).exceptionHandling().and().sessionManagement().and()
+     * .authorizeRequests().antMatchers(unsecuredResources).permitAll().antMatchers(HttpMethod.POST, "/login")
+     * .permitAll().anyRequest().authenticated().and()
+     *
+     * .addFilterAfter(getSimpleRestAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+     */
+
+    http.userDetailsService(this.userDetailsService).exceptionHandling().and().sessionManagement().and()
+        .authorizeRequests().antMatchers(unsecuredResources).permitAll().antMatchers(HttpMethod.POST, "/login")
+        .permitAll().anyRequest().authenticated().and()
+        .addFilterAfter(getSimpleRestAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   /**

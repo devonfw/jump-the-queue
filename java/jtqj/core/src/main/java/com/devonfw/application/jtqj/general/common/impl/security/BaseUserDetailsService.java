@@ -3,7 +3,6 @@ package com.devonfw.application.jtqj.general.common.impl.security;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,8 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.VisitorEntity;
-import com.devonfw.application.jtqj.visitormanagement.dataaccess.api.repo.VisitorRepository;
+import com.devonfw.application.jtqj.visitormanagement.logic.api.Visitormanagement;
+import com.devonfw.application.jtqj.visitormanagement.logic.api.to.VisitorEto;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControl;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControlProvider;
 import com.devonfw.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
@@ -42,20 +41,22 @@ public class BaseUserDetailsService implements UserDetailsService {
   private AccessControlProvider accessControlProvider;
 
   @Inject
-  private VisitorRepository userRepository;
+  private Visitormanagement visitormanagement;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    Set<GrantedAuthority> authorities = getAuthorities(username);
-    List<VisitorEntity> users = this.userRepository.findByUsername(username);
-    if (users.size() == 0) {
-      throw new UsernameNotFoundException("Authentication failed." + username);
-    }
-    VisitorEntity user = users.get(0);
-    // {noop} to skip the encryption and decryption of password.
-    return new User(user.getUsername(), "{noop}" + user.getPassword(), authorities);
+    User user = null;
+    try {
+      VisitorEto vistorEto = this.visitormanagement.findByUsername(username);
+      Set<GrantedAuthority> authorities = getAuthorities(username);
+      // {noop} to skip the encryption and decryption of password.
+      user = new User(vistorEto.getUsername(), "{noop}" + vistorEto.getPassword(), authorities);
 
+    } catch (Exception e) {
+      throw new UsernameNotFoundException("Authentication failed, for user:" + username, e);
+    }
+    return user;
   }
 
   /**

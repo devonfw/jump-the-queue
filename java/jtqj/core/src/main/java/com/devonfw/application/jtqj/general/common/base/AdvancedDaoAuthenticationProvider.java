@@ -44,7 +44,7 @@ public class AdvancedDaoAuthenticationProvider extends DaoAuthenticationProvider
 
     List<VisitorEntity> users = this.userRepository.findByUsername(auth.getName());
     if (users.size() == 0) {
-      throw new RuntimeException("No such user exists.." + auth.getName());
+      throw new BadCredentialsException("Credentials are invalid");
     }
 
     VisitorEntity user = users.get(0);
