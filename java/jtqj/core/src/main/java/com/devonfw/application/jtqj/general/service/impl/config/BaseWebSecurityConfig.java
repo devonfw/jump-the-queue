@@ -53,14 +53,6 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
     // load starters as pluggins.
     http = this.webSecurityConfigurer.configure(http);
 
-    /*
-     * http.userDetailsService(this.userDetailsService).exceptionHandling().and().sessionManagement().and()
-     * .authorizeRequests().antMatchers(unsecuredResources).permitAll().antMatchers(HttpMethod.POST, "/login")
-     * .permitAll().anyRequest().authenticated().and()
-     *
-     * .addFilterAfter(getSimpleRestAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-     */
-
     http.userDetailsService(this.userDetailsService).exceptionHandling().and().sessionManagement().and()
         .authorizeRequests().antMatchers(unsecuredResources).permitAll().antMatchers(HttpMethod.POST, "/login")
         .permitAll().anyRequest().authenticated().and()
