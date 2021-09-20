@@ -31,7 +31,7 @@ export class ViewQueueComponent implements OnInit {
       }),
     );
     this.accessCodeVisitor$ = this.accessCodeService.getVisitorAccessCode(
-      this.authService.getUserId(),
+      this.authService.getUser(),
     );
     this.queue$ = this.queueService.getActiveQueue();
   }

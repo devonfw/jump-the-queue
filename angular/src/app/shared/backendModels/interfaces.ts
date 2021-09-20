@@ -33,7 +33,8 @@ export class Role {
 
 export class FilterAccessCode {
   pageable: Pageable;
-  visitorId?: Number;
+  visitorId?: number;
+  username?: string;
   endTime?: string;
 }
 
