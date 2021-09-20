@@ -20,6 +20,18 @@ import com.devonfw.module.security.common.impl.accesscontrol.AccessControlSchema
 @Configuration
 public class WebSecurityBeansConfig {
 
+
+  /**
+   * This method provides a new instance of {@code CsrfTokenRepository}
+   *
+   * @return the newly created {@code CsrfTokenRepository}
+   */
+  @Bean
+  public CsrfTokenRepository csrfTokenRepository() {
+
+    return new HttpSessionCsrfTokenRepository();
+  }
+
   /**
    * This method provides a new instance of {@code AccessControlProvider}
    *
@@ -42,16 +54,6 @@ public class WebSecurityBeansConfig {
     return new AccessControlSchemaProviderImpl();
   }
 
-  /**
-   * This method provides a new instance of {@code CsrfTokenRepository}
-   *
-   * @return the newly created {@code CsrfTokenRepository}
-   */
-  @Bean
-  public CsrfTokenRepository csrfTokenRepository() {
-
-    return new HttpSessionCsrfTokenRepository();
-  }
 
   /**
    * This method provides a new instance of {@code DefaultRolesPrefixPostProcessor}

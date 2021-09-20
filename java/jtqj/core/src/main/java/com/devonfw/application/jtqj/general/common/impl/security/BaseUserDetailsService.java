@@ -19,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.devonfw.application.jtqj.visitormanagement.logic.api.Visitormanagement;
+import com.devonfw.application.jtqj.visitormanagement.logic.api.to.VisitorEto;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControl;
 import com.devonfw.module.security.common.api.accesscontrol.AccessControlProvider;
 import com.devonfw.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
@@ -38,21 +40,23 @@ public class BaseUserDetailsService implements UserDetailsService {
 
   private AccessControlProvider accessControlProvider;
 
+  @Inject
+  private Visitormanagement visitormanagement;
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    Set<GrantedAuthority> authorities = getAuthorities(username);
-    UserDetails user;
+    User user = null;
     try {
-      user = getAmBuilder().getDefaultUserDetailsService().loadUserByUsername(username);
-      User userData = new User(user.getUsername(), user.getPassword(), authorities);
-      return userData;
+      VisitorEto vistorEto = this.visitormanagement.findByUsername(username);
+      Set<GrantedAuthority> authorities = getAuthorities(username);
+      // {noop} to skip the encryption and decryption of password.
+      user = new User(vistorEto.getUsername(), "{noop}" + vistorEto.getPassword(), authorities);
+
     } catch (Exception e) {
-      e.printStackTrace();
-      UsernameNotFoundException exception = new UsernameNotFoundException("Authentication failed.", e);
-      LOG.warn("Failed to get user {}.", username, exception);
-      throw exception;
+      throw new UsernameNotFoundException("Authentication failed, for user:" + username, e);
     }
+    return user;
   }
 
   /**
