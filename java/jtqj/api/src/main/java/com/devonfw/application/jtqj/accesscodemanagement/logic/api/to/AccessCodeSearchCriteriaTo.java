@@ -11,133 +11,146 @@ import com.devonfw.module.basic.common.api.query.StringSearchConfigTo;
  */
 public class AccessCodeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private String ticketNumber;
-	private Timestamp creationTime;
-	private Timestamp startTime;
-	private Timestamp endTime;
+  private String ticketNumber;
 
-	private Long visitorId;
+  private Timestamp creationTime;
 
-	private Long queueId;
-	private StringSearchConfigTo ticketNumberOption;
+  private Timestamp startTime;
 
-	/**
-	 * @return ticketNumberId
-	 */
+  private Timestamp endTime;
 
-	public String getTicketNumber() {
-		return ticketNumber;
-	}
+  private String username;
 
-	/**
-	 * @param ticketNumber setter for ticketNumber attribute
-	 */
+  private Long queueId;
 
-	public void setTicketNumber(String ticketNumber) {
-		this.ticketNumber = ticketNumber;
-	}
+  private StringSearchConfigTo ticketNumberOption;
 
-	/**
-	 * @return creationTimeId
-	 */
+  /**
+   * @return ticketNumberId
+   */
 
-	public Timestamp getCreationTime() {
-		return creationTime;
-	}
+  public String getUsername() {
 
-	/**
-	 * @param creationTime setter for creationTime attribute
-	 */
+    return this.username;
+  }
 
-	public void setCreationTime(Timestamp creationTime) {
-		this.creationTime = creationTime;
-	}
+  /**
+   * @param ticketNumber setter for ticketNumber attribute
+   */
 
-	/**
-	 * @return startTimeId
-	 */
+  public void setUsername(String username) {
 
-	public Timestamp getStartTime() {
-		return startTime;
-	}
+    this.username = username;
+  }
 
-	/**
-	 * @param startTime setter for startTime attribute
-	 */
+  /**
+   * @return ticketNumberId
+   */
 
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
+  public String getTicketNumber() {
 
-	/**
-	 * @return endTimeId
-	 */
+    return this.ticketNumber;
+  }
 
-	public Timestamp getEndTime() {
-		return endTime;
-	}
+  /**
+   * @param ticketNumber setter for ticketNumber attribute
+   */
 
-	/**
-	 * @param endTime setter for endTime attribute
-	 */
+  public void setTicketNumber(String ticketNumber) {
 
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
-	}
+    this.ticketNumber = ticketNumber;
+  }
 
-	/**
-	 * getter for visitorId attribute
-	 *
-	 * @return visitorId
-	 */
+  /**
+   * @return creationTimeId
+   */
 
-	public Long getVisitorId() {
-		return visitorId;
-	}
+  public Timestamp getCreationTime() {
 
-	/**
-	 * @param visitor setter for visitor attribute
-	 */
+    return this.creationTime;
+  }
 
-	public void setVisitorId(Long visitorId) {
-		this.visitorId = visitorId;
-	}
+  /**
+   * @param creationTime setter for creationTime attribute
+   */
 
-	/**
-	 * getter for queueId attribute
-	 *
-	 * @return queueId
-	 */
+  public void setCreationTime(Timestamp creationTime) {
 
-	public Long getQueueId() {
-		return queueId;
-	}
+    this.creationTime = creationTime;
+  }
 
-	/**
-	 * @param queue setter for queue attribute
-	 */
+  /**
+   * @return startTimeId
+   */
 
-	public void setQueueId(Long queueId) {
-		this.queueId = queueId;
-	}
+  public Timestamp getStartTime() {
 
-	/**
-	 * @return the {@link StringSearchConfigTo} used to search for
-	 *         {@link #getTicketNumber() ticketNumber}.
-	 */
-	public StringSearchConfigTo getTicketNumberOption() {
+    return this.startTime;
+  }
 
-		return this.ticketNumberOption;
-	}
+  /**
+   * @param startTime setter for startTime attribute
+   */
 
-	/**
-	 * @param ticketNumberOption new value of {@link #getTicketNumberOption()}.
-	 */
-	public void setTicketNumberOption(StringSearchConfigTo ticketNumberOption) {
+  public void setStartTime(Timestamp startTime) {
 
-		this.ticketNumberOption = ticketNumberOption;
-	}
+    this.startTime = startTime;
+  }
+
+  /**
+   * @return endTimeId
+   */
+
+  public Timestamp getEndTime() {
+
+    return this.endTime;
+  }
+
+  /**
+   * @param endTime setter for endTime attribute
+   */
+
+  public void setEndTime(Timestamp endTime) {
+
+    this.endTime = endTime;
+  }
+
+  /**
+   * getter for queueId attribute
+   *
+   * @return queueId
+   */
+
+  public Long getQueueId() {
+
+    return this.queueId;
+  }
+
+  /**
+   * @param queue setter for queue attribute
+   */
+
+  public void setQueueId(Long queueId) {
+
+    this.queueId = queueId;
+  }
+
+  /**
+   * @return the {@link StringSearchConfigTo} used to search for {@link #getTicketNumber() ticketNumber}.
+   */
+  public StringSearchConfigTo getTicketNumberOption() {
+
+    return this.ticketNumberOption;
+  }
+
+  /**
+   * @param ticketNumberOption new value of {@link #getTicketNumberOption()}.
+   */
+  public void setTicketNumberOption(StringSearchConfigTo ticketNumberOption) {
+
+    this.ticketNumberOption = ticketNumberOption;
+  }
 
 }
