@@ -750,7 +750,7 @@ We are going to create the 3 services via `ng generate service <path>`:
 . `AuthGuard` service via: +
 `ng generate service core/authentication/auth-guard`
 
-After generating the services, we are going to start modyfing the interfaces. Inside `angular/src/app/shared/backendModels/interfaces` we are going to add `Role`, `FilterVisitor`, `Pageable` and a `Sort` interface:
+After generating the services, we are going to start modifying the interfaces. Inside `angular/src/app/shared/backendModels/interfaces` we are going to add `Role`, `FilterVisitor`, `Pageable` and a `Sort` interface:
 
 [source, typescript]
 ----
@@ -1414,7 +1414,7 @@ In this HTML, we give `*ngif` another use: We use it to hide certain panels. Usi
 
 [NOTE]
 ====
-In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubcribe()` method, the app could end up containing a memory leak. This is because -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
+In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubscribe()` method, the app could end up containing a memory leak. This is because -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
 ====
 
 Finally, to adapt the async pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queuers variable directly to the observable, so we can load it using `*ngIf`.
