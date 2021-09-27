@@ -26,7 +26,7 @@ There is nothing specifically Angular about services. Angular has no definition 
 Yet services are fundamental to any Angular application. Components are big consumers of services.
 ____
 
-Services are often created in a shared folder, with the purpose of containing all the logic of a component or a complex type of operation. For example, in the case of MyThaiStar, all components which call the server, or have methods with more complex logic, have their own service that implements them. There are also services, which -- instead of being used by just one component -- are used several times troughout the code, in many components, like the price calculator for example.
+Services are often created in a shared folder, with the purpose of containing all the logic of a component or a complex type of operation. For example, in the case of MyThaiStar, all components which call the server, or have methods with more complex logic, have their own service that implements them. There are also services, which -- instead of being used by just one component -- are used several times throughout the code, in many components, like the price calculator for example.
 
 Just like components, services have to be declared as a NgModule. In this case via the `providers` array.
 
