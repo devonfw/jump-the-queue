@@ -57,6 +57,6 @@ TIP: You can check, what modules you have installed by running `npm list -g`. Yo
 * Download and install the _stable_ version of https://yarnpkg.com/en/docs/install#windows-stable[Yarn]
 * Now run the command `ng config -g cli.packageManager yarn`
 +
-NOTE: We feel like Yarn is quite a bit faster and generally more usable than npm. However, if you are already familiar with npm, you can contiue using it.
+NOTE: We feel like Yarn is quite a bit faster and generally more usable than npm. However, if you are already familiar with npm, you can continue using it.
 
 Finally, if you are using the *devonfw distribution*, we recommend storing all your devon4ng projects in the folder `workspaces_vs`. This allows you to execute the script `update-all-workspaces.bat`, in order to generate a launch script for each individual project called `vscode-<YourProjectName>.bat`.
