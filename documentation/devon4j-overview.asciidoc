@@ -64,7 +64,7 @@ The following tools are included in the https://github.com/devonfw/ide[devonfw I
 As part of the _devonfw_ framework, devon4j projects are integrated into a customized Eclipse instance, which provides pre-configurations and pre-installed plugins, focusing on code quality and productivity boosting. 
 
 === CobiGen
-A generic incremental generator for end to end code generation that allows us to automate the generation of major components of our apps. Based on entities, CobiGen can generate all CRUD functionality for us, starting with services and ending with the persistance data layer.
+A generic incremental generator for end to end code generation that allows us to automate the generation of major components of our apps. Based on entities, CobiGen can generate all CRUD functionality for us, starting with services and ending with the persistence data layer.
 
 == devon4j Architecture Overview
 devon4j provides a solution for industrialized web apps based on _components_ and a three-layers architecture.
