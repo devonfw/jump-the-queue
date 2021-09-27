@@ -16,7 +16,7 @@ If you have a finished version of your app and want to deploy it somewhere, you 
 
 `devon ng build`
 
-This will compile the project and generate a folder called `dist`, which will contain all your TypeScript code transpiled into pure JavaScript:
+This will compile the project and generate a folder called `dist`, which will contain all your TypeScript code transpiler into pure JavaScript:
 
 image::images/devon4ng/6.Deployment/dist_folder.jpg[Compiled Dist Folder]
 
