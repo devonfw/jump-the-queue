@@ -305,7 +305,7 @@ To execute our handlers locally we will make use of the https://github.com/dhera
 
 [IMPORTANT]
 ====
-To run this command you must have the _serverless.yml_ file generated, and the serverless-offline plugin specified in the plugin section (that is aucomatically added by the default configuration of OASP4Fn). To search for more information about the serverless plugins, you can dive into the https://serverless.com/framework/docs/providers/aws/guide/plugins/[serverless documentation].
+To run this command you must have the _serverless.yml_ file generated, and the serverless-offline plugin specified in the plugin section (that is automatically added by the default configuration of OASP4Fn). To search for more information about the serverless plugins, you can dive into the https://serverless.com/framework/docs/providers/aws/guide/plugins/[serverless documentation].
 ====
 
 and you will see the following output:
