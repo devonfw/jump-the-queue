@@ -219,7 +219,7 @@ export let isVisitor = (object: any): object is Visitor => {
 } 
 ----
 
-So the handler that will register the user to the queue will be able to take the visitor information, generata a unique code with the above function package, insert it into our data base, along with the result of the handler, the generated code and the hour to the visit, so the resulting handler will look like this:
+So the handler that will register the user to the queue will be able to take the visitor information, generate a unique code with the above function package, insert it into our data base, along with the result of the handler, the generated code and the hour to the visit, so the resulting handler will look like this:
 
 [source, typescript]
 ----
