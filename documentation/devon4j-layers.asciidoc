@@ -121,7 +121,7 @@ In _devon4j_ applications the default implementation for web services is based o
 In this tutorial we are going to focus only on the _REST_ implementation of services.
 
 ==== Service Definition
-The services definition is done by the _service interface_ located in the `service.api.rest` package. In the _boooking_ component of MyThaiStar application we can see a service definition statement like the following:
+The services definition is done by the _service interface_ located in the `service.api.rest` package. In the _booking_ component of MyThaiStar application we can see a service definition statement like the following:
 
 [source,java]
 ----
@@ -334,13 +334,13 @@ The _queue_ component will have a similar structure. The _access code_ component
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_core_cto.png[JumpTheQueue Core Structure CTO, 350]
 
-Theres only a single difference in the core. If you look closely, you'll see that CobiGen didn't generate the _usecasemanage_ implementation. This is due to the complexity of entities with relations. In this case CobiGen will leave us to create the _save_ and _delete_ methods, so we can properly adress them.
+There is only a single difference in the core. If you look closely, you'll see that CobiGen didn't generate the _usecasemanage_ implementation. This is due to the complexity of entities with relations. In this case CobiGen will leave us to create the _save_ and _delete_ methods, so we can properly address them.
 
 *Access Code Component API (with Relations)*
 
 image::images/devon4j/5.Layers/jumpthequeue_structure_api_cto.png[JumpTheQueue API Structure CTO, 350]
 
-Theres _two_ differences here:
+There is _two_ differences here:
 
 . As you can see, CobiGen generated a CTO for our entity with relations.
 . As explained in the core, the _usecasemanage_ definition is missing.
@@ -428,7 +428,7 @@ In the 'Body' tab, below the address bar, we'll have to define a _SearchCriteria
 }
 ----
 
-In the 'Headers' tab we'll have to ensure that `Content-Type` `application/json` is set, indicating to the server, that it'll have to interpret the body as JSON format (otherwise, you may face an 415 unsuported type error).
+In the 'Headers' tab we'll have to ensure that `Content-Type` `application/json` is set, indicating to the server, that it'll have to interpret the body as JSON format (otherwise, you may face an 415 unsupported type error).
 
 [NOTE]
 ====
