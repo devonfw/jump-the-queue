@@ -9,5 +9,5 @@ CREATE TABLE AccessCode(
   idQueue BIGINT NOT NULL,
   CONSTRAINT PK_AccessCode PRIMARY KEY(id),
   CONSTRAINT FK_AccessCode_idVisitor FOREIGN KEY(idVisitor) REFERENCES Visitor(id),
-  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES DailyQueue(id),
+  CONSTRAINT FK_AccessCode_idQueue FOREIGN KEY(idQueue) REFERENCES DailyQueue(id)
 );

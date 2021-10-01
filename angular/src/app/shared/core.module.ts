@@ -45,6 +45,7 @@ import { CovalentNotificationsModule } from '@covalent/core/notifications';
 import { CovalentCommonModule } from '@covalent/core/common';
 import { AuthService } from '../core/authentication/auth.service';
 import { AuthGuardService } from '../core/authentication/auth-guard.service';
+import { HttpRequestInterceptorService } from './http-request-interceptor.service';
 
 @NgModule({
   imports: [
@@ -103,6 +104,15 @@ import { AuthGuardService } from '../core/authentication/auth-guard.service';
     HttpClientModule,
   ],
   declarations: [],
-  providers: [HttpClientModule, AuthService, AuthGuardService],
+  providers: [
+    HttpClientModule,
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptorService,
+      multi: true,
+    },
+  ],
 })
 export class CoreModule {}

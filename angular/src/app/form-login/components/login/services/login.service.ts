@@ -25,53 +25,52 @@ export class LoginService {
     public snackBar: MatSnackBar,
   ) {}
 
-  getVisitorByUsername(username: string): Observable<Visitor> {
-    const filters: FilterVisitor = new FilterVisitor();
-    const pageable: Pageable = new Pageable();
+  authenticate(username: string, password: string): Observable<any> {
+    let options: any;
 
-    pageable.pageNumber = 0;
-    pageable.pageSize = 1;
-    pageable.sort = [];
-    filters.username = username;
-    filters.pageable = pageable;
-    return this.http
-      .post<VisitorArray>(
-        `${this.baseUrl}` + '/visitormanagement/v1/visitor/search',
-        filters,
-      )
-      .pipe(
-        map((visitors) => {
-          return visitors.content[0];
-        }),
-      );
+    // CSRF
+    if (environment.security === 'csrf') {
+      options = {
+        withCredentials: true,
+        responseType: 'text',
+        observe: 'response',
+      };
+    }
+
+    // JWT
+    if (environment.security === 'jwt') {
+      options = { observe: 'response' };
+    }
+
+    return this.http.post(
+      `${this.baseUrl}` + '/login',
+      {
+        username, password
+      },
+      options,
+    );
+
+  }
+
+  getCsrf(): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + '/csrf/v1/token', { withCredentials: true });
   }
 
   login(username: string, password: string): void {
-    // Checks if given username and password are the ones aved in the database
-    console.log(password);
-    this.getVisitorByUsername(username).subscribe(
-      (visitorFound) => {
-        if (
-          visitorFound && visitorFound.username === username &&
-          visitorFound.password === password
-        ) {
-          this.authService.setUserId(visitorFound.id);
-          this.authService.setLogged(true);
-          this.authService.setUser(visitorFound.username);
-          visitorFound.userType = false;
-          if (visitorFound.userType === false) {
-            this.authService.setRole('VISITOR');
-            this.router.navigate(['ViewQueue']);
-          } else {
-            this.authService.setLogged(false);
-            this.snackBar.open('access error', 'OK', {
-              duration: 2000,
-            });
-          }
-        } else {
-          this.snackBar.open('access error', 'OK', {
-            duration: 2000,
+    this.authenticate(username, password).subscribe(
+      (res) => {
+        // CSRF
+        if (environment.security === 'csrf') {
+          this.getCsrf().subscribe((data: any) => {
+            this.authService.setToken(data.token);
+            this.checkInUser(res, username);
           });
+        }
+
+        // JWT
+        if (environment.security === 'jwt') {
+          this.authService.setToken(res.headers.get('Authorization'));
+          this.checkInUser(res, username);
         }
       },
       (err: any) => {
@@ -80,6 +79,7 @@ export class LoginService {
         });
       },
     );
+
   }
 
   logout(): void {
@@ -87,5 +87,13 @@ export class LoginService {
     this.authService.setUser('');
     this.authService.setUserId(0);
     this.router.navigate(['FormLogin']);
+  }
+
+  checkInUser(userDetails, username): void {
+    this.authService.setUserId(userDetails.id);
+    this.authService.setLogged(true);
+    this.authService.setUser(username);
+    this.authService.setRole('VISITOR');
+    this.router.navigate(['ViewQueue']);
   }
 }

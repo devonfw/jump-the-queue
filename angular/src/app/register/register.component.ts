@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterService } from './services/register.service';
 import { Visitor } from '../shared/backendModels/interfaces';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { LoginService } from '../form-login/components/login/services/login.serv
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   constructor(
     private registerService: RegisterService,
     private router: Router,
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     visitor.password = formValue.password;
     visitor.acceptedCommercial = formValue.acceptedCommercial;
     visitor.acceptedTerms = formValue.acceptedTerms;
-    visitor.userType = false;
+    visitor.userType = true;
 
     this.registerService
       .registerVisitor(visitor)
@@ -39,5 +39,4 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  ngOnInit() {}
 }

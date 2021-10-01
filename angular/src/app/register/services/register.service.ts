@@ -40,16 +40,8 @@ export class RegisterService {
   }
 
   registerVisitor(visitor: Visitor): Observable<Visitor> {
-    this.getVisitorByUsername(visitor.username).subscribe(
-      (visitorFound) => {
-        if (visitorFound) {
-          return undefined;
-        }
-      }
-    )
-    //if (user == 'asas') {return undefined}
     return this.http.post<Visitor>(
-      `${this.baseUrl}` + '/visitormanagement/v1/visitor/',
+      `${this.baseUrl}` + '/visitormanagement/v1/visitor',
       visitor,
     );
   }

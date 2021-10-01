@@ -31,6 +31,7 @@ export class AccessCodeService {
     filters.endTime = null;
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
+    pageable.sort = [];
     filters.pageable = pageable;
     return this.http
       .post<AccessCodeArray>(
@@ -55,13 +56,14 @@ export class AccessCodeService {
       );
   }
 
-  getVisitorAccessCode(visitorId: number): Observable<AccessCode> {
+  getVisitorAccessCode(visitorName: string): Observable<AccessCode> {
     const filters: FilterAccessCode = new FilterAccessCode();
     const pageable: Pageable = new Pageable();
 
     pageable.pageNumber = 0;
     pageable.pageSize = 1;
-    filters.visitorId = visitorId;
+    pageable.sort = [];
+    filters.username = visitorName;
     filters.pageable = pageable;
     return this.http
       .post<AccessCodeArray>(

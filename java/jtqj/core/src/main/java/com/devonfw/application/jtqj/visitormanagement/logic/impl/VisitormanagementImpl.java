@@ -1,6 +1,5 @@
 package com.devonfw.application.jtqj.visitormanagement.logic.impl;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,32 +18,39 @@ import com.devonfw.application.jtqj.visitormanagement.logic.api.usecase.UcManage
 @Named
 public class VisitormanagementImpl extends AbstractComponentFacade implements Visitormanagement {
 
-	@Inject
-	private UcFindVisitor ucFindVisitor;
+  @Inject
+  private UcFindVisitor ucFindVisitor;
 
-	@Inject
-	private UcManageVisitor ucManageVisitor;
+  @Inject
+  private UcManageVisitor ucManageVisitor;
 
-	@Override
-	public VisitorEto findVisitor(long id) {
+  @Override
+  public VisitorEto findVisitor(long id) {
 
-		return this.ucFindVisitor.findVisitor(id);
-	}
+    return this.ucFindVisitor.findVisitor(id);
+  }
 
-	@Override
-	public Page<VisitorEto> findVisitors(VisitorSearchCriteriaTo criteria) {
-		return this.ucFindVisitor.findVisitors(criteria);
-	}
+  @Override
+  public Page<VisitorEto> findVisitors(VisitorSearchCriteriaTo criteria) {
 
-	@Override
-	public VisitorEto saveVisitor(VisitorEto visitor) {
+    return this.ucFindVisitor.findVisitors(criteria);
+  }
 
-		return this.ucManageVisitor.saveVisitor(visitor);
-	}
+  @Override
+  public VisitorEto saveVisitor(VisitorEto visitor) {
 
-	@Override
-	public boolean deleteVisitor(long id) {
+    return this.ucManageVisitor.saveVisitor(visitor);
+  }
 
-		return this.ucManageVisitor.deleteVisitor(id);
-	}
+  @Override
+  public boolean deleteVisitor(long id) {
+
+    return this.ucManageVisitor.deleteVisitor(id);
+  }
+
+  @Override
+  public VisitorEto findByUsername(String username) {
+
+    return this.ucFindVisitor.findByUsername(username);
+  }
 }
