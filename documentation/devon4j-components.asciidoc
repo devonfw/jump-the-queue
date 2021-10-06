@@ -164,7 +164,7 @@ create table Visitor(
 
 * _id_: The ID of each visitor.
 * _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
-* _username_: The visitors email adress.
+* _username_: The visitors email address.
 * _name_: The visitors name.
 * _password_: The visitors password.
 * _phoneNumber_: The visitors phone number.
@@ -803,7 +803,7 @@ image::images/devon4j/4.Components/templates_not_found.png[CobiGen Health Check 
 You need to force download of templates as in the following image: 
 image::images/devon4j/4.Components/adapt-templates.png[CobiGen Health Check 3, 550]
 
-Now the templates shold be downloaded, and you will see a new folder in the workspace:
+Now the templates should be downloaded, and you will see a new folder in the workspace:
 image::images/devon4j/4.Components/cobigen-folder.png[CobiGen Health Check 3, 400]
 
 ==== _Queue_ Component Structure (Entity without Relations)

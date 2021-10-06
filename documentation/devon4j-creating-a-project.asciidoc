@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = Introduction
-In this chapter you will learn to create a workspace and create a projekt using the CLI or the GUI. When using devon, each project has its own workspace and can be edited by different instances of the IDE, e.g. eclipse.
+In this chapter you will learn to create a workspace and create a project using the CLI or the GUI. When using devon, each project has its own workspace and can be edited by different instances of the IDE, e.g. eclipse.
 
 
 == Command Line Interface
@@ -52,7 +52,7 @@ image::images/tutorialsources/devcon-create-backend.png[Devcon Backend Creation]
 
 [NOTE]
 ==== 
-The two commands `devon` and `devcon` can be used synonymously. With the -h option you will allways get help, e.g. `devon -h` or `devon workspaces -h`.
+The two commands `devon` and `devcon` can be used synonymously. With the -h option you will always get help, e.g. `devon -h` or `devon workspaces -h`.
 ====
 
 We see later, how to access these server. For now just use ctr+c to stop it from running.

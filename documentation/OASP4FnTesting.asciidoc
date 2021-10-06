@@ -103,7 +103,7 @@ describe('register', function () {
 
 Note that we declare and instantiate a HttpEvent and only declare the Context, that's why we don't use the context variable inside our handlers but our event variable yes.
 
-Also, realise that we have modified the mocha default timeout (that is 2000ms) to 6000ms, and we change it to match the default AWS lambda timeout. Be careful here, and look that the function passed to the _describe_ is not an arrow function, that's because the scope of an arrow function is bounded when it's created not when it's called, so if that function would been an arrow function we couldn't have acces to the mocha methods and properties.
+Also, realize that we have modified the mocha default timeout (that is 2000ms) to 6000ms, and we change it to match the default AWS lambda timeout. Be careful here, and look that the function passed to the _describe_ is not an arrow function, that's because the scope of an arrow function is bounded when it's created not when it's called, so if that function would been an arrow function we couldn't have acces to the mocha methods and properties.
 
 Once we have tested the _register_ handler, we have to add tests for the _search_ handler, so you have to repeat the last process until you have something like this:
 

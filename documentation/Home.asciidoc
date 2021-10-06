@@ -29,7 +29,7 @@ Here's some general advice up front:
 
 * If Eclipse detects _errors_ as a result of its static code analysis, read the displayed tooltips and consider applying the suggested solutions. If this doesn't resolve the issue or if you encounter runtime errors, do the following:
 
-** _Backtrack_ your steps and make sure you haven't made any mistaktes previously. Be especially careful when using _CobigGen_, since generating wrong/unnecessary classes will most likely break the application.
+** _Backtrack_ your steps and make sure you haven't made any mistakes previously. Be especially careful when using _CobigGen_, since generating wrong/unnecessary classes will most likely break the application.
 
 ** _Compare_ your own code with the finished application code in this repository to rule out any other potential mistakes. As a last resort you might copy/paste the provided files into your own project.
 
