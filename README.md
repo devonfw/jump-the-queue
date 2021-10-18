@@ -23,8 +23,9 @@ To build application on local execute below commands:
     
 4.  **Build Jump-the-queue front-end:**
     
-    To build Jump-the-queue front-end navigate to `jump-the-queue\angular` folder from command line and execute command `npm install` .
-    To launch jump-the-queue FE navigate to `jump-the-queue\angular` folder from command line and execute `npm start`
+    To build Jump-the-queue front-end navigate to `jump-the-queue\angular` folder from command line and execute command `yarn install`.
+    To launch jump-the-queue FE navigate to `jump-the-queue\angular` folder from command line and execute `yarn start`.
+	Alternatively, you can use npm if you face issues with yarn (build using `npm install` and launch using `npm start`).
     
 5.  **Access the application.**
 
