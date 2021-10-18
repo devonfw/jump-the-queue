@@ -24,7 +24,7 @@ export class RegisterComponent {
     visitor.name = formValue.name;
     visitor.phoneNumber = formValue.phoneNumber;
     visitor.password = formValue.password;
-    visitor.acceptedCommercial = formValue.acceptedCommercial;
+    visitor.acceptedCommercial = Boolean(formValue.acceptedCommercial);
     visitor.acceptedTerms = formValue.acceptedTerms;
     visitor.userType = true;
 
