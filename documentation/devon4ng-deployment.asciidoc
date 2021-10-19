@@ -23,4 +23,4 @@ image::images/devon4ng/6.Deployment/dist_folder.jpg[Compiled Dist Folder]
 You can also use the `devon ng deploy` command to automatically deploy your project to a cloud platform of your choice. For more information on this, please read the guide on https://angular.io/guide/deployment#automatic-deployment-with-the-cli[automatic deployment with the Angular/CLI].
 
 '''
-*Congratulations!* You have successfully completed the _JumpTheQueue_ tutorial.
+*Congratulations!!!!* You have successfully completed the _JumpTheQueue_ tutorial.
