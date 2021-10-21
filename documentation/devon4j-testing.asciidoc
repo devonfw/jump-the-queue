@@ -160,7 +160,7 @@ public class VisitormanagementTest extends ComponentTest {
 
 [NOTE]
 ====
-In this `saveVisitorTest` method, that we give as an example, we can see that theres a `deleteVisitor` at the end. This would normally only be done, if the tests were run against a production database.If you use a separate database for testing, the last delete is not needed.
+In this `saveVisitorTest` method, that we give as an example, we can see that there is a `deleteVisitor` at the end. This would normally only be done, if the tests were run against a production database.If you use a separate database for testing, the last delete is not needed.
 ====
 
 [NOTE]

@@ -547,7 +547,7 @@ The result should be something similar to this:
 
 image::images/devon4j/6.Customizations/jumpthequeue_accesscode.png[JumpTheQueue AccessCode]
 
-In order to know, if the new codeaccess has been succesfully created, we can search all the CTOs, like we did in the previous steps. The new accesscode should be on the bottom:
+In order to know, if the new codeaccess has been successfully created, we can search all the CTOs, like we did in the previous steps. The new accesscode should be on the bottom:
 
 image::images/devon4j/6.Customizations/jumpthequeue_listwithcode.png[JumpTheQueue List with Code]
 
