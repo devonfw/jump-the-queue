@@ -79,7 +79,7 @@ Now that we have brief overview, we are going to add some tests to our _JumpTheQ
 
 We have a main component for managing _visitors_, so we are going to create a dedicated package for testing that component within the `com.devonfw.application.jtqj` package, called `visitormanagement.logic.impl`. Inside this new package we are going to add a new test class named `VisitormanagementTest.java`:
 
-image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQuehe Testing Structure, 300]
+image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQueue Testing Structure, 300]
 
 [NOTE]
 ====
