@@ -26,7 +26,7 @@ Having all the dependencies serf-contained in the distribution's _zip_ file, use
 == Pre-packaged Software
 The list of software pre-installed with devonfw distributions is:
 
-- _Eclipse_: pre-configured and fully functional IDE to develop Java based apps.
+- _Eclipse_: pre-configured and fully functional `IDE` to develop Java based apps.
 
 - _Java_: all the Java environment configured and ready to be used within the distribution.
 
@@ -65,9 +65,9 @@ All those tasks can be done manually using _Maven_, _Tomcat_, _Sencha Cmd_, _Bow
 
 === Cobigen
 
-_Cobigen_ is a code generator included in the context of _devonfw_ that allows users to generate all the structure and code of the components, helping to save a lot of time waisted in repetitive tasks.
+_Cobigen_ is a code generator included in the context of _devonfw_ that allows users to generate all the structure and code of the components, helping to save a lot of time consumed in repetitive tasks.
 
-image::images/devon/cobigen.png[CobiGen]
+image::images/devon/cobigen.png[`CobiGen`]
 
 == ip modules
 
@@ -90,4 +90,4 @@ The current available modules are:
 - _winauth single sign on_: module that allows applications to authenticate the users by the Windows credentials.
 
 '''
-*Next Chapter*: link:devonfw-ide-setup.asciidoc[devonfw IDE Setup]
+*Next Chapter*: link:devonfw-ide-setup.asciidoc[devonfw `IDE` Setup]
