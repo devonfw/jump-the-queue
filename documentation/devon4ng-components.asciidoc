@@ -75,7 +75,7 @@ Angular provides a large amount of functionality for user input forms. The compl
 
 Basically, forms can be built as always, using the `<form>` tag and adding some inputs and selectors to it. In the case of Angular however, forms have been extended to provide more utility:
 
-* By declaring the `ngForm` as a property of the form tag via `#formName="ngForm"`, you get access to Angulars form-functionalities.
+* By declaring the `ngForm` as a property of the form tag via `#formName="ngForm"`, you get access to Angular's form-functionalities.
 * By Adding `ngModel`, you can use Angular's data binding to insert user input from the form directly into your code.
 * By adding a name property, you can pass the form via the submit action and make use of all the functionalities Angular forms provide, like accessing the form values by name, or resetting the form.
 * You can check for invalid input in the fields of a form, and use this information to disable the submit button for example.

@@ -39,7 +39,7 @@ As npm, https://yarnpkg.com/en/[Yarn] is a package manager, the differences are 
 
 To install it you only have to go to the official https://yarnpkg.com/en/docs/install[installation page] and follow the instructions.
 
-Even though, if you feel more confortable with npm, you can remain using npm, there is no problem regarding this point.
+Even though, if you feel more comfortable with npm, you can remain using npm, there is no problem regarding this point.
 
 === Serverless
 Lastly, we are going to install the serverless framework, that are going to help us deploying our handlers in our provider we have chosen.

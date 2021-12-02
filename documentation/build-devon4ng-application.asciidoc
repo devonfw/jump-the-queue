@@ -106,7 +106,7 @@ npx -p @angular/cli@7 ng new angular
 
 [NOTE]
 ====
-If you want to create a 'real' project on your own later on, you should do so using the _lastest_ Angular version by running:
+If you want to create a 'real' project on your own later on, you should do so using the _latest_ Angular version by running:
 
 ----
 ng new <project name>
@@ -151,7 +151,7 @@ If everything was compiled correctly, you'll see the default Angular 7 landing p
 
 image::images/devon4ng/3.BuildYourOwn/appnew.png[Angular Default Page]
 
-The `ng serve` command starts the development mode of the Angular/CLI. This means, that everytime you make a change in the code and save it, the project will automatically recompile and run. The `-o` option causes the project to open in your default browser once compiled.
+The `ng serve` command starts the development mode of the Angular/CLI. This means, that every time you make a change in the code and save it, the project will automatically recompile and run. The `-o` option causes the project to open in your default browser once compiled.
 
 For the next steps we'll have to stop the development mode by pressing `Ctrl + C` and terminating the batch job (*Y*).
 
@@ -262,7 +262,7 @@ $background: map-get($theme, background);
 ...
 ----
 
-3.- In the same file, the minimified `hammer.min.js` library/script will be added. To do so, paste the following code inside both "scripts" arrays (build and test):
+3.- In the same file, the minimized `hammer.min.js` library/script will be added. To do so, paste the following code inside both "scripts" arrays (build and test):
 
 [source,json]
 ----

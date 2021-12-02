@@ -15,36 +15,42 @@ matrix:
   - pyspelling.filters.context: 
       context_visible_first: true
       escapes: '^.*[\/\\][^\/\\]+$'
+  #Ignore for url starting with http or https
+  - pyspelling.filters.context: 
+      context_visible_first: true
+      delimiters:
+      - open: 'https?:\S+?'
+        close: '\s'
   #Ignore content between backticks
   - pyspelling.filters.context: 
       context_visible_first: true
       delimiters:
       - open: '`+[^`]+'
         close: '`+'
-  #Ignore for upper camel case
+  #Ignore links
+  - pyspelling.filters.context: 
+      context_visible_first: true
+      delimiters:
+      - open: 'link:[^[]+'
+        close: '\['
+  #Ignore Image tags
+  - pyspelling.filters.context: 
+      context_visible_first: true
+      delimiters:
+      - open: 'image:[^[]+'
+        close: '\['
+  #Ignore Image tags link part
   - pyspelling.filters.context:
       context_visible_first: true
       delimiters:
-      - open: '\b[A-Z][a-z0-9]+[A-Z]'
-        close: '[a-z0-9]*\b'
-  #Ignore for lower camel case
-  - pyspelling.filters.context:
+      - open: ',.+?link=[^\]]+'
+        close: '\]'
+  #Ignore include tag
+  - pyspelling.filters.context: 
       context_visible_first: true
       delimiters:
-      - open: '\b[a-z]+[A-Z]'
-        close: '[a-z0-9]*\b'
-  #Ignore for constants in upper case
-  - pyspelling.filters.context:
-      context_visible_first: true
-      delimiters:
-      - open: '\b[A-Z]+'
-        close: '([_][A-Z]+)*\b'
-  #Ignore for special cases in CobiGen in upper camel case
-  - pyspelling.filters.context:
-      context_visible_first: true
-      delimiters:
-      - open: '\b__[A-Z][a-z0-9]+[A-Z]'
-        close: '[a-z0-9.]*__\b'
+      - open: 'include:[^[]+'
+        close: '\['
   - pyspelling.filters.context:
       context_visible_first: true
       escapes: \\[\\-~]
@@ -55,9 +61,9 @@ matrix:
       # ----
       - open: '(?s)^(?P<open> *-{4,})$'
         close: '^(?P=open)$'  
-  - pyspelling.filters.context:
-      context_visible_first: true
-      delimiters:
-      # Ignore multiline content between [source, *] and blank line
-      - open: '\[source,.*\]'
-        close: '^\s*$' 
+  - pyspelling.filters.context: 
+      context_visible_first: true 
+      delimiters: 
+      # Ignore multiline content between [source, *] and blank line 
+      - open: '\[source,.*\]\r?\n\s*----' 
+        close: '\s*----'

@@ -79,7 +79,7 @@ Now that we have brief overview, we are going to add some tests to our _JumpTheQ
 
 We have a main component for managing _visitors_, so we are going to create a dedicated package for testing that component within the `com.devonfw.application.jtqj` package, called `visitormanagement.logic.impl`. Inside this new package we are going to add a new test class named `VisitormanagementTest.java`:
 
-image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQuehe Testing Structure, 300]
+image::images/devon4j/8.Testing/jumpthequeue_testing_structure.png[JumpTheQueue Testing Structure, 300]
 
 [NOTE]
 ====
@@ -203,7 +203,7 @@ assertThat(visitorEtoResult.getName()).isEqualTo("Mary");
 
 Now running again the test we should obtain the expected result
 
-image::images/devon4j/8.Testing/jumpthequeue_testing_result2.png[umpTheQueue Test Results 2]
+image::images/devon4j/8.Testing/jumpthequeue_testing_result2.png[JumpTheQueue Test Results 2]
 
 === 2. Finding Visitors
 
@@ -226,7 +226,7 @@ For the second functionality (finding visitors) we can add a new test with a ver
 Use `*import* org.springframework.data.domain` to solve the errors.
 To run both tests (all the tests included in the class) we only need to do right click in any part of the class and select _Run As > JUnit Test_. All the methods annotated with `@Test` will be checked.
 
-image::images/devon4j/8.Testing/jumpthequeue_testing_result3.png[umpTheQueue Test Results 3]
+image::images/devon4j/8.Testing/jumpthequeue_testing_result3.png[JumpTheQueue Test Results 3]
 
 === Extra Functionalities
 The _devon4j_ test module provide us with some extra functionalities that we can use to create tests in an easier way.

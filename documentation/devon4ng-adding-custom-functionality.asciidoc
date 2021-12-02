@@ -210,7 +210,7 @@ export class AppModule { }
 [NOTE]
 ====
 Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message."
-To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" insde the @NgModule of all the afected modules.
+To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the @NgModule of all the affected modules.
 ====
 
 [NOTE]

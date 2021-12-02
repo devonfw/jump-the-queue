@@ -52,7 +52,7 @@ image::images/tutorialsources/devcon-create-backend.png[Devcon Backend Creation]
 
 [NOTE]
 ==== 
-The two commands `devon` and `devcon` can be used synonymously. With the -h option you will always get help, e.g. `devon -h` or `devon workspaces -h`.
+There are two commands `devon` and `devcon`. Any of these two commands can be used. With the -h option you will always get help, e.g. `devon -h` or `devon workspaces -h`.
 ====
 
 We see later, how to access these server. For now just use ctr+c to stop it from running.

@@ -73,7 +73,7 @@ image::images/devon4j/1.Overview/devon4j_architecture.png[devon4j Architecture, 
 
 A _component_ is a package that contains the services and logic related to one feature of the app.
 
-Each component will be divided in three layers: _service_, _logic_ and _dataacess_.
+Each component will be divided in three layers: _service_, _logic_ and _dataaccess_.
 
 * *Service* Layer: will expose the REST api to exchange information with the client applications.
 
