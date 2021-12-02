@@ -127,9 +127,9 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
 
 These methods are simply going to call the `ucManageQueue` methods that were just added. 
 
-=== Creating the usecasemanage for the `AccessCode`
+=== Creating the usecasemanage for the Access Code
 
-==== Adding method to the `AccessCode` _usecasefind_
+==== Adding method to the Access Code _usecasefind_
 Before creating the usecasemanage, a method needs to be added to the usecasefind, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
 
 [source,java]
@@ -454,7 +454,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 ----
 
 === Adding to the Service
-To add the new service, we need to add its definition to the `jtqj-api` in `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/accessCode` `REST` resource bound to three methods, one called _findAccessCodeEtos_, another one called _saveAccessCode_ and yet another one called _deleteAccessCode_.
+To add the new service, we need to add its definition to the `jtqj-api` in `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/accessCode` REST resource bound to three methods, one called _findAccessCodeEtos_, another one called _saveAccessCode_ and yet another one called _deleteAccessCode_.
 
 [source,java]
 ----
@@ -533,7 +533,7 @@ Now run the app again via Eclipse and use Postman to call the new save service v
 
 In the body, provide an `AccessCode` object with the following required parameters:
 
-//TODO: This fails due to an `SQL` Error: 23506
+//TODO: This fails due to an SQL Error: 23506
 
 [source,json]
 ----
@@ -551,7 +551,7 @@ In order to know, if the new codeaccess has been successfully created, we can se
 
 image::images/devon4j/6.Customizations/jumpthequeue_listwithcode.png[JumpTheQueue List with Code]
 
-To test the delete, you can send a *DELETE* to this `URL`:
+To test the delete, you can send a *DELETE* to this URL:
 `http://localhost:8081/jumpthequeue/services/rest/accesscodemanagement/v1/accesscode/{id}`
 Pass the _AccessCode_ ID of the new entry, which can be found in the returned result of the save or the search operation.
 
