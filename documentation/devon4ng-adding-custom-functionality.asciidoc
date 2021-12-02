@@ -27,9 +27,9 @@ You can go back and read that section again to refresh your memory.
 
 Our app is going to consist of 3 main views:
 
-* Login
-* Register
-* ViewQueue
+* `Login`
+* `Register`
+* `ViewQueue`
 
 To navigate between these views/components, we are going to implement routes using the Angular Router.
 
@@ -209,8 +209,8 @@ export class AppModule { }
 ----
 [NOTE]
 ====
-Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message."
-To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the @NgModule of all the affected modules.
+Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the `@NgModule.schemas` of this component to suppress this message."
+To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the `@NgModule` of all the affected modules.
 ====
 
 [NOTE]
@@ -297,7 +297,7 @@ As you can see, now the body content is the HTML of `FormLoginComponent`. This i
 
 For now we are going to leave the header like this. In the future we will separate it into another component inside a layout folder.
 
-=== LoginForm Component
+=== `LoginForm` Component
 
 As we have already created this component from the section before, let's move on to building the template of the login view.
 
@@ -1144,7 +1144,7 @@ In the header logic (`header.component.ts`) we are simply going to inject the `A
 
 Separating components will allow us to keep the code clean and easy to work with.
 
-=== ViewQueue Component
+=== `ViewQueue` Component
 
 For the last view, we are going to learn how to use our Observables on the HTML template directly without having to `subscribe()` to them.
 

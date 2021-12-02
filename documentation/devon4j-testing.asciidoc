@@ -69,7 +69,7 @@ public class DishmanagementTest extends ComponentTest {
 }
 ----
 
-* *_@SpringBootTest_* is the _Spring Test_ annotation to load the context of our application. So we will have the application running like in a _real_ situation.
+* `*_@SpringBootTest_*` is the _Spring Test_ annotation to load the context of our application. So we will have the application running like in a _real_ situation.
 * Extending the _devon4j_ test class `ComponentTest` will inject functionalities like http://joel-costigliola.github.io/assertj/[assertions] into our test class.
 * _Spring Test_ gives us the option for dependency injection, so we are going to be able to `@Inject` our components to test them.
 * Finally with the `@Test` annotation we can declare a test to be executed during the testing process.
@@ -124,9 +124,9 @@ Now we can start adding our first test. In link:jump-the-queue-design.asciidoc[J
 Let's add tests to check these functionalities:
 
 === 1. Registration
-We are going to create a method with a descriptive name; _saveVisitorTest_, and we are going to add the `@Test` annotation to it.
+We are going to create a method with a descriptive name; `saveVisitorTest`, and we are going to add the `@Test` annotation to it.
 
-Inside this test, we are going to verify the registration process of our app. To do so, we only need to call the _saveVisitor_ method of the component and provide a _VisitorEto_ object. After the method is called, we are going to check the response of the method, to verify that the expected business logic has been executed correctly:
+Inside this test, we are going to verify the registration process of our app. To do so, we only need to call the `saveVisitor` method of the component and provide a `VisitorEto` object. After the method is called, we are going to check the response of the method, to verify that the expected business logic has been executed correctly:
 
 [source,java]
 ----
@@ -231,9 +231,9 @@ image::images/devon4j/8.Testing/jumpthequeue_testing_result3.png[JumpTheQueue Te
 === Extra Functionalities
 The _devon4j_ test module provide us with some extra functionalities that we can use to create tests in an easier way.
 
-Extending _ComponentTest_ class we also have available the _doSetUp()_ and _doTearDown()_ methods, that we can use to initialize and release resources in our test classes.
+Extending `ComponentTest` class we also have available the `doSetUp()` and `doTearDown()` methods, that we can use to initialize and release resources in our test classes.
 
-In our _JumpTheQueue_ test class we could declare the _visitor_ object in the _doSetUp_ method, so we can use this resource in several test methods instead of declaring it again and again.
+In our _JumpTheQueue_ test class we could declare the _visitor_ object in the `doSetUp` method, so we can use this resource in several test methods instead of declaring it again and again.
 
 Doing this our test class would be as follows
 

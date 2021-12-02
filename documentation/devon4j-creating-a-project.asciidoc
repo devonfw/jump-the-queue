@@ -27,11 +27,11 @@ In this chapter you will learn to create a workspace and create a project using 
 
 * Execute: `devon devon4j create –p` and insert the following entries. 
 
-** Serverpath: hit Enter. (So it will be the current directory).
+** Server path: hit Enter. (So it will be the current directory).
 
-** Servername: myServer (or any name you like).
+** Servername: `myServer` (or any name you like).
 
-** Packagename: com.capgemini.myServer 
+** Package name: `com.capgemini.myServer` 
 
 ** Groupid: com.capgemini  
 
@@ -68,7 +68,7 @@ We see later, how to access these server. For now just use ctr+c to stop it from
 
 image::images/tutorialsources/devcon-gui-workspace.png[Devcon GUI Workspace 1, 600]
 
-* Insert: MyProject. Click "Start".
+* Insert: `MyProject`. Click "Start".
 
 image::images/tutorialsources/devcon-gui-ws02.png[Devcon GUI Workspace 2, 600]
 
@@ -76,11 +76,11 @@ image::images/tutorialsources/devcon-gui-ws02.png[Devcon GUI Workspace 2, 600]
 
 * Open "devon4j". Select "create".
 
-** Serverpath: ../MyProject/Servers
+** Server path: `../MyProject/Servers`
 
 ** Servername: mp
 
-** Packagename: com.devonfw.application.mp
+** Package name: com.devonfw.application.mp
 
 ** Groupid: com.devonfw.mp
 

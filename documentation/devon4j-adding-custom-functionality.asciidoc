@@ -18,7 +18,7 @@ In this chapter we are going to show how to add custom functionalities to our pr
 == Return the Access Code
 The _JumpTheQueue_ design defines a xref:jump-the-queue-design#user-story-register[User Story] in which a visitor can register into an event and obtain an access code to avoid a queue.
 
-In our _standard_ implementation of the _JumpTheQueue_ app we have used _CobiGen_ to generate the components, so we have a default implementation of the services. Since the _AccessCode_ component is more complex and requires the use of _CTOs_, we need to create our own _usecasemanage_ and the methods _save_ and _delete_.
+In our _standard_ implementation of the _JumpTheQueue_ app we have used _CobiGen_ to generate the components, so we have a default implementation of the services. Since the `AccessCode` component is more complex and requires the use of _CTOs_, we need to create our own _usecasemanage_ and the methods _save_ and _delete_.
 
 We also have to add some methods to the _Queue_ component, since when saving/deleting an `AccessCode`, the amount of customers in the `Queue` needs to increase/decrease.
 
@@ -29,7 +29,7 @@ In our case, two new methods are going to be needed; `decreaseQueueCustomer` and
 . Implement the methods in the `usecaseimpl`.
 . Modify the management implementation `managementimpl`.
 
-==== 1. Modifying _UcManageQueue_
+==== 1. Modifying `_UcManageQueue_`
 Inside `jtqj-api/queuemanagement/logic/api/usecase/UcManageQueue` the declarations of the two methods are going to be added:
 
 [source, java]
@@ -99,7 +99,7 @@ public class UcManageQueueImpl extends AbstractQueueUc implements UcManageQueue 
 }
 ----
 
-==== 3. Modify the Management Implementation _QueuemanagementImpl_
+==== 3. Modify the Management Implementation `_QueuemanagementImpl_`
 Since the `Queuemanagement` extends the usecase `UcManageQueue` the methods from the previous step need to be added in the `QueuemanagementImpl`. 
 
 [source,java]
@@ -129,8 +129,8 @@ These methods are simply going to call the `ucManageQueue` methods that were jus
 
 === Creating the usecasemanage for the Access Code
 
-==== Adding method to the Access Code _usecasefind_
-Before creating the usecasemanage, a method needs to be added to the usecasefind, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
+==== Adding method to the Access Code `usecasefind`
+Before creating the usecasemanage, a method needs to be added to the `usecasefind`, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
 
 [source,java]
 ----
@@ -454,7 +454,7 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
 ----
 
 === Adding to the Service
-To add the new service, we need to add its definition to the `jtqj-api` in `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/accessCode` REST resource bound to three methods, one called _findAccessCodeEtos_, another one called _saveAccessCode_ and yet another one called _deleteAccessCode_.
+To add the new service, we need to add its definition to the `jtqj-api` in `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/accessCode` REST resource bound to three methods, one called `findAccessCodeEtos`, another one called `saveAccessCode` and yet another one called `deleteAccessCode`.
 
 [source,java]
 ----
@@ -553,7 +553,7 @@ image::images/devon4j/6.Customizations/jumpthequeue_listwithcode.png[JumpTheQueu
 
 To test the delete, you can send a *DELETE* to this URL:
 `http://localhost:8081/jumpthequeue/services/rest/accesscodemanagement/v1/accesscode/{id}`
-Pass the _AccessCode_ ID of the new entry, which can be found in the returned result of the save or the search operation.
+Pass the `AccessCode` ID of the new entry, which can be found in the returned result of the save or the search operation.
 
 In this chapter we learned, how easy it is to extend a _devon4j_ application. With only a few steps you can add new services to your backend, to fit the functional requirements of your project, or edit services to adapt the default implementation to your needs.
 

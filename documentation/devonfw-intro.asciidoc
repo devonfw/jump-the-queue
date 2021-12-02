@@ -36,7 +36,7 @@ The list of software pre-installed with devonfw distributions is:
 
 - _Sencha_: devonfw also includes a installation of the _Sencha Cmd_ tool.
 
-- _Sonarqube_: a code quality tool.
+- _SonarQube_: a code quality tool.
 
 - _Tomcat_: a web server ready to test the deploy of our artifacts.
 
