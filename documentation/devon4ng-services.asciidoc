@@ -28,7 +28,7 @@ ____
 
 Services are often created in a shared folder, with the purpose of containing all the logic of a component or a complex type of operation. For example, in the case of MyThaiStar, all components which call the server, or have methods with more complex logic, have their own service that implements them. There are also services, which -- instead of being used by just one component -- are used several times throughout the code, in many components, like the price calculator for example.
 
-Just like components, services have to be declared as a NgModule. In this case via the `providers` array.
+Just like components, services have to be declared as a `NgModule`. In this case via the `providers` array.
 
 == Dependency Injection
 The https://angular.io/guide/architecture#dependency-injection[Angular Architecture Documentation] says the following about DI:
@@ -58,7 +58,7 @@ Authentication is a special service created to maintain user sessions in the app
 Basically, the objective of this service is to manage, what the user can or can not see, depending on their actions in the application.
 
 == Guards
-https://angular.io/guide/router#milestone-5-route-guards[Guards] are services, that implement an interface called *CanActivate*. This interface forces developers to implement the `canActivate` method, which returns a simple boolean. Is up to you to decide, what conditions you are going to implement, to forbid or allow the navigation to a certain component.
+https://angular.io/guide/router#milestone-5-route-guards[Guards] are services, that implement an interface called `*CanActivate*`. This interface forces developers to implement the `canActivate` method, which returns a simple boolean. Is up to you to decide, what conditions you are going to implement, to forbid or allow the navigation to a certain component.
 
 Guards are strongly related to the Router, because routes can carry the property `canActivate:[GuardServiceName]`. You can create as many Guards as you want, to secure every single component of your app, just as you require.
 

@@ -139,8 +139,8 @@ There is no need to put real credentials in the file as we are going to work loc
 Finally, it's worth saying that there are more ways to pass the credentials to the sdk, but this is the best in our case, for more information about credentials take a look on to the   
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html[official documentation].
 
-== Adding Typings
-The template we have cloned comes with a declaration types at the root of the handlers folder with typings for AWS lambda service and events, but must add more types for the data we are going to manage, so we are going to export an interface Visitor and an interface Code in our declaration file, that will look like this:
+== Adding Types
+The template we have cloned comes with a declaration types at the root of the handlers folder with types for AWS lambda service and events, but must add more types for the data we are going to manage, so we are going to export an interface Visitor and an interface Code in our declaration file, that will look like this:
 
 [source, typescript]
 ----

@@ -60,7 +60,7 @@ The recommendation is to install the latest version, but keep in mind that to us
 
 === TypeScript
 
-Let’s install what is going to be the main language during development: TypeScript. This ES6 superset is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript, you don’t have to install npm explicitly, just run this command:
+Let’s install what is going to be the main language during development: TypeScript. This ES6 super set is tightly coupled to the Angular framework and will help us to get a final clean and distributable JavaScript code. This is installed globally with npm, the package manager used to install and create JavaScript modules in Node.js, that is installed along with Node. To install TypeScript, you don’t have to install npm explicitly, just run this command:
 
 ----
 npm install –g typescript
@@ -117,7 +117,7 @@ Where <project name> is the name of the Angular project you want to create.
 In the case shown above we called our project `angular`, since we want to distribute its code as part of our complete `jumpthequeue` project. This is analogous to the `java` directory used for our devon4j backend.
 ====
 
-After executing the command, Angular/CLI will ask, if we want to use Angular routing (*Yes*) and what stylesheet format we want to use (*SCSS*):
+After executing the command, Angular/CLI will ask, if we want to use Angular routing (*Yes*) and what style sheet format we want to use (*SCSS*):
 
 image::images/devon4ng/3.BuildYourOwn/ngnewoptions.png[Angular Options]
 

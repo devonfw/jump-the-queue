@@ -29,7 +29,7 @@ HTML is the language of the Angular template. Almost all HTML syntax is valid te
 Some legal HTML doesn't make much sense in a template. The `<html>`, `<body>`, and `<base>` elements have no useful role. Pretty much everything else is fair game. Moreover, Angular has some extended HTML functionalities, involving data binding, structural directives like loops or if's and property bindings.
 
 ____
-A component must belong to a NgModule in order for it to be usable by another component or application. To specify that a component is a member of a NgModule, you should list it in the declarations field of that NgModule.
+A component must belong to a `NgModule` in order for it to be usable by another component or application. To specify that a component is a member of a `NgModule`, you should list it in the declarations field of that `NgModule`.
 ____
 
 Every Angular application is composed of components depending on the root component: _app.component.ts_. You can route from one component to another, use their selector to instantiate a component inside of another component's template, input data into a child component, in order to use it inside the child component, or send event-outputs to the parent component, to execute some actions when the event is triggered.

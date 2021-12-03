@@ -357,7 +357,7 @@ As already mentioned, in this tutorial we will be using https://www.getpostman.c
 First, open your _JumpTheQueue_ project in Eclipse and run the app (right-click `SpringBootApp.java > Run as > Java Application`.
 
 ==== Simple Call
-If you remember, we added some xref:devon4j-components#mock-data[mock data] previously, to have some visitor info available. Let's try to retrieve a visitor's information by using our `_visitormanagement service_`.
+If you remember, we added some xref:devon4j-components#mock-data[mock data] previously, to have some visitor info available. Let's try to retrieve a visitor's information by using our `visitormanagement service`.
 
 Select the service *GET* and send: +
 `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1/`
