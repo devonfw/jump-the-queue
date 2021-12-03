@@ -13,7 +13,7 @@ endif::[]
 = devon4j Application
 
 == MyThaiStar Basics
-As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
+As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application front-end project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
 
 The _MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant. It is presented as a showcase app but designed with real requirements in mind. Moreover, it attempts to demonstrate common features provided by many modern web apps (routing with and without guards, use of flex-box, theme, re-usable components, mock back end, ...).
 
@@ -61,12 +61,13 @@ image::images/devon4j/2.Example_app/component_layers.png[Component Layers]
 
 
 == Running MyThaiStar Backend
-Using _Spring Boot_ features, we can easily run our _Java_ backend applications using the _Run as > Java application_ over the _SpringBootApp.java_ main class.
+Using _Spring Boot_ features, we can easily run our _Java_ backend applications using the _Run as > Java application_ over the `_SpringBootApp.java_` main class.
 
 image::images/devon4j/2.Example_app/run.png[MyThaiStar Backend Launch]
 
 Once we see a console messages like:
 
+[source,bash]
 ----
 Tomcat started on port(s): 8081 (http)
 Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)

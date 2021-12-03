@@ -146,9 +146,9 @@ public interface BookingmanagementRestService {
 
 * *_@GET_*: Annotation for the _HTTP GET_ method.
 
-* *_@Path_*: The path definition for the _getBooking_ resource.
+* *_@Path_*: The path definition for the `getBooking` resource.
 
-* *_@PathParam_*: Annotation to configure the _id_ received in the _url_ as a parameter.
+* `*_@PathParam_*`: Annotation to configure the _id_ received in the _url_ as a parameter.
 
 ==== Service Implementation
 The service implementation is a class located in the `service.impl.rest` package that implements the previous defined interface.
@@ -241,7 +241,7 @@ In the above _MyThaiStar_ logic layer example we can see:
 * delegation of the transaction management through Spring's `@Transactional` annotation
 
 === Transfer Objects
-In the code examples of the _logic_ layer section you may have seen a _BookingCto_ object. This is one of the https://github.com/devonfw/devon4j/wiki/guide-transferobject[transfer objects] defined in _devon4j_. It is used to transfer data between the layers.
+In the code examples of the _logic_ layer section you may have seen a `BookingCto` object. This is one of the https://github.com/devonfw/devon4j/wiki/guide-transferobject[transfer objects] defined in _devon4j_. It is used to transfer data between the layers.
 
 The main benefits of using _Transfer Objects_ are:
 
@@ -271,7 +271,7 @@ Apart from the _Entities_ of components, we are going to find the same elements,
 
 However, in this layer the implementation is slightly different: The `[Target]Repository` extends `com.devonfw.module.jpa.dataaccess.api.data.DefaultRepository`, which provides us with the basic _dataaccess_ methods: `save(Entity)`, `findOne(id)`, `findAll(ids)`, `delete(id)`, etc.
 
-Because of that, in the `[Target]Repository` implementation of the layer, we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_), we will only find the paginated _findBookings_ implementation here:
+Because of that, in the `[Target]Repository` implementation of the layer, we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_), we will only find the paginated `findBookings` implementation here:
 
 [source,java]
 ----
@@ -295,7 +295,7 @@ public interface BookingRepository extends DefaultRepository<BookingEntity> {
 }
 ----
 
-The implementation of _findBookings_ uses https://github.com/devonfw/devon4j/blob/develop/documentation/guide-repository.asciidoc[Spring Data] and http://www.querydsl.com/[QueryDSL] to manage dynamic queries.
+The implementation of `findBookings` uses https://github.com/devonfw/devon4j/blob/develop/documentation/guide-repository.asciidoc[Spring Data] and http://www.querydsl.com/[QueryDSL] to manage dynamic queries.
 
 === Layers of the JumpTheQueue Application
 The sections above describe the main elements of layers of the _devon4j_ components. If you have completed the exercise in the link:devon4j-components.asciidoc[previous chapter], you may have noticed that all those components are already created for us by _CobiGen_.
@@ -311,8 +311,8 @@ You'll see the following components:
 . Definition for _dataaccess_ layer repository.
 . The entity that we created to be used by _CobiGen_ to generate the component structure.
 . Definition of _abstract usecase_ in the _logic_ layer.
-. Implementation of the _usecasefind_ layer in the _logic_ layer.
-. Implementation of the _usecasemanage_ layer in the _logic_ layer.
+. Implementation of the `usecasefind` layer in the _logic_ layer.
+. Implementation of the `usecasemanage` layer in the _logic_ layer.
 . Implementation of the _logic_ layer.
 . Implementation of the _rest service_.
 
@@ -323,8 +323,8 @@ image::images/devon4j/5.Layers/jumpthequeue_structure_api.png[JumpTheQueue API S
 . definition for _entity_ in the api layer.
 . Entity Transfer Object located in the api layer.
 . Search Criteria Transfer Object located in the api layer.
-. Definition of _usecasefind_ in the _logic_ layer.
-. Definition of _usecasemanage_ in the _logic_ layer.
+. Definition of `usecasefind` in the _logic_ layer.
+. Definition of `usecasemanage` in the _logic_ layer.
 . Definition of the _logic_ layer.
 . Definition of the _rest service_ of the component.
 
@@ -357,7 +357,7 @@ As already mentioned, in this tutorial we will be using https://www.getpostman.c
 First, open your _JumpTheQueue_ project in Eclipse and run the app (right-click `SpringBootApp.java > Run as > Java Application`.
 
 ==== Simple Call
-If you remember, we added some xref:devon4j-components#mock-data[mock data] previously, to have some visitor info available. Let's try to retrieve a visitor's information by using our _visitormanagement service_.
+If you remember, we added some xref:devon4j-components#mock-data[mock data] previously, to have some visitor info available. Let's try to retrieve a visitor's information by using our `_visitormanagement service_`.
 
 Select the service *GET* and send: +
 `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/1/`
@@ -415,7 +415,7 @@ If the _Search Criteria Transfer Object_ is empty, we will retrieve all visitors
 Select the service *POST* and enter: +
 `http://localhost:8081/jumpthequeue/services/rest/visitormanagement/v1/visitor/search`
 
-In the 'Body' tab, below the address bar, we'll have to define a _SearchCriteria_ object, which will have a _pageable_ defined (make sure, the 'raw' option is selected):
+In the 'Body' tab, below the address bar, we'll have to define a `SearchCriteria` object, which will have a _pageable_ defined (make sure, the 'raw' option is selected):
 
 [source,json]
 ----
@@ -477,11 +477,11 @@ public class UcManageVisitorImpl extends AbstractVisitorUc implements UcManageVi
 }
 ----
 
-To save a visitor we only need to use the _REST_ resource `/services/rest/visitormanagement/v1/visitor` and provide the visitor definition for _VisitorEto_ in the body.
+To save a visitor we only need to use the _REST_ resource `/services/rest/visitormanagement/v1/visitor` and provide the visitor definition for `VisitorEto` in the body.
 
 [NOTE]
 ====
-You can see the definition for _VisitorEto_ in:
+You can see the definition for `VisitorEto` in:
 `visitormanagement/logic/api/to/VisitorEto.java`
 ====
 

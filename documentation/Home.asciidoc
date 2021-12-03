@@ -50,7 +50,7 @@ IMPORTANT: If you haven't already, please read the devonfw https://github.com/de
 . link:devon4j-testing.asciidoc[devon4j Testing]
 . link:devon4j-deployment.asciidoc[devon4j Deployment]
 
-=== devon4ng (Frontend)
+=== devon4ng (Front-end)
 . link:devon4ng-introduction.asciidoc[devon4ng Introduction]
 . link:an-devon4ng-application.asciidoc[devon4ng Application]
 . link:devon4ng-components.asciidoc[devon4ng Components]

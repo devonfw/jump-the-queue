@@ -57,7 +57,7 @@ Currently, the **OASP4Fn architecture** defines a series of adapters to help dev
 image::images/oasp4fn/1.Introduction/oasp4fn_available.png[OASP4Fn Available]
 
 === TypeScript
-The Serverless framework is not prepared by default to use TypeScript. OASP4Fn allows the developer to use **TypeScript** as the programming language in any development, as it provides the **types definitions** and a **preconfigured webpack building system** that automates the transpilation of the different handlers. 
+The Serverless framework is not prepared by default to use TypeScript. OASP4Fn allows the developer to use **TypeScript** as the programming language in any development, as it provides the **types definitions** and a **pre-configured webpack building system** that automates the transpilation of the different handlers. 
 
 === Infrastructure as Code 
 The service made with OASP4Fn must follow a **specified structure**, that along with a configuration file will allow the user to avoid having to configure his service manually. 

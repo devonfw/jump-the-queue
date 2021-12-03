@@ -67,7 +67,7 @@ We are now going to create our first app components. Our example application nee
 * register a user (returning an access code)
 * show registered queue members
 
-To accomplish this we are going to work with three entities; _Visitor_, _Queue_ and _AccessCode_:
+To accomplish this we are going to work with three entities; _Visitor_, _Queue_ and `_AccessCode_`:
 
 image::images/devon4j/4.Components/jtq_entities.png[JumpTheQueue Entities, 750]
 
@@ -236,7 +236,7 @@ CREATE TABLE AccessCode(
 * _startTime_: The date and time, from which the code is valid.
 * _endTime_: The date and time, when the code expires.
 * _idVisitor_: The relation with the _Visitor_ table.
-* _idQueue_: The relation with the _DailyQueue_ table.
+* _idQueue_: The relation with the `_DailyQueue_` table.
 
 ==== Mock Data
 Finally we are going to provide a certain amount of mock data, which will be available right from the start in our application. Create a new SQL script in `/jtqj-core/src/main/resources/db/migration/1.0/`, called:
@@ -277,7 +277,7 @@ Now that we have defined the database for our entities, we should start creating
 We are going to use CobiGen to generate the component structure. That means that -- as already commented -- we can generate all the structure and layers starting from a _core_ element: a simple _Plain Old Java Object_ that represents our _Entity_. So, in order to use CobiGen, we have to create our entities in the expected locations (as you will see in the following section): `<entitymanagement>.dataaccess.api`.
 
 ==== _Visitor_ Component
-To implement the component we will need to define a _VisitorEntity_ to connect and manage the data of the _Visitor_ table in the database. The name of this component will be `visitormanagement`, the entity will be called `VisitorEntity`.
+To implement the component we will need to define a `_VisitorEntity_` to connect and manage the data of the _Visitor_ table in the database. The name of this component will be `visitormanagement`, the entity will be called `VisitorEntity`.
 
 Right-click on the root folder of the project `/jtqj-core/src/main/java`, select `New > Package` and create the following package:
 ----
@@ -335,7 +335,7 @@ Now we have to declare the _getter_ and _setter_ methods for the fields of our e
 
 image::images/devon4j/4.Components/getter_setter.png[Generating Getter and Setter Methods with Eclipse]
 
-The resulting implementation of our _VisitorEntity_ class should now look like this:
+The resulting implementation of our `_VisitorEntity_` class should now look like this:
 
 [source,java]
 ----
@@ -463,8 +463,8 @@ public class VisitorEntity {
 }
 ----
 
-==== _AccessCode_ component
-We are going to repeat the same process for the _AccessCode_ component. Create these packages in `/jtqj-core/src/main/java`:
+==== `_AccessCode_` component
+We are going to repeat the same process for the `_AccessCode_` component. Create these packages in `/jtqj-core/src/main/java`:
 ----
 com.devonfw.application.jtqj.accesscodemanagement.dataaccess.api
 ----
@@ -474,7 +474,7 @@ We will end up with the following structure:
 
 image::images/devon4j/4.Components/accesscode_entity.png[`AccessCode` Entity, 250]
 
-The contents of _AccessCodeEntity_ before using CobiGen will be:
+The contents of `_AccessCodeEntity_` before using CobiGen will be:
 
 [source,java]
 ----
@@ -613,7 +613,7 @@ These will be resolved, when we create the corresponding class in the next step.
 ====
 
 ==== _Queue_ Component
-Finally, we are going to repeat the same process for our last entity _QueueEntity_ component. Create these packages in `/jtqj-core/src/main/java`:
+Finally, we are going to repeat the same process for our last entity `_QueueEntity_` component. Create these packages in `/jtqj-core/src/main/java`:
 ----
 com.devonfw.application.jtqj.queuemanagement.dataaccess.api
 ----
@@ -623,7 +623,7 @@ We will end up with the following structure:
 
 image::images/devon4j/4.Components/queue_entity.png[Queue Entity, 250]
 
-The contents of _QueueEntity_ before using CobiGen will be:
+The contents of `_QueueEntity_` before using CobiGen will be:
 
 [source,java]
 ----
@@ -807,7 +807,7 @@ Now the templates should be downloaded, and you will see a new folder in the wor
 image::images/devon4j/4.Components/cobigen-folder.png[CobiGen Health Check 3, 400]
 
 ==== _Queue_ Component Structure (Entity without Relations)
-In order to create the whole structure of a component with CobiGen we only need to right-click our component core entity (_QueueEntity_) and select `CobiGen > Generate`.
+In order to create the whole structure of a component with CobiGen we only need to right-click our component core entity (`_QueueEntity_`) and select `CobiGen > Generate`.
 
 image::images/devon4j/4.Components/cobigen1.png[CobiGen Generate, 550]
 
@@ -868,8 +868,8 @@ We can fix these errors manually by adding `*import* java.sql.Timestamp` to the 
 
 image::images/devon4j/4.Components/cobigen5_manual_import.png[CobiGen Manual Import]
 
-==== _AccessCode_ Component Structure (Entity with Relations)
-We repeat this process on our _AccessCodeEntity_, but in this case -- since its an entity with relations -- we are going to have to select different CobiGen options:
+==== `_AccessCode_` Component Structure (Entity with Relations)
+We repeat this process on our `_AccessCodeEntity_`, but in this case -- since its an entity with relations -- we are going to have to select different CobiGen options:
 
 image::images/devon4j/4.Components/cobigen-accesscode-new.png[CobiGen New `AccessCode`]
 
@@ -890,7 +890,7 @@ There will be some compilation errors left. This is because we have some depende
 image::images/devon4j/4.Components/cobigen6_expected_errors.png[CobiGen Expected Errors]
 
 ==== _Visitor_ Component Structure (Entity without Relations)
-Finally we are going to generate the same classes that we generated for the _QueueEntity_ component for our _VisitorEntity_ component:
+Finally we are going to generate the same classes that we generated for the `_QueueEntity_` component for our `_VisitorEntity_` component:
 
 image::images/devon4j/4.Components/cobigen-visitor-new.png[CobiGen New Visitor]
 
