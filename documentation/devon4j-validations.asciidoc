@@ -224,7 +224,7 @@ Then we only need to apply the new validation to our _phone_ field in `visitorma
 ...
 ```
 
-As a last step, we can now test our new validation. Call the previous service again, defining a wrong phone number. The response should be a _ValidationError_ with the message: "_{`phoneNumber`=[Phone must be valid]}_":
+As a last step, we can now test our new validation. Call the previous service again, defining a wrong phone number. The response should be a `ValidationError` with the message: "_{`phoneNumber`=[Phone must be valid]}_":
 
 image::images/devon4j/7.Validations/jumpthequeue_validation_wrongphone.png[JumpTheQueue Wrong Phone Number Validation]
 
