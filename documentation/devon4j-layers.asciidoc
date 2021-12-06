@@ -35,8 +35,7 @@ image::images/devon4j/5.Layers/layer_api_impl.png[Layer API Implementation]
 
 * Usage of https://jcp.org/en/jsr/detail?id=330[JSR330]: The Java standard set of annotations for _Dependency Injection_ (`@Named`, `@Inject`, `@PostConstruct`, `@PreDestroy`, etc.) provides us with all the needed annotations to define our beans and inject them:
 
-[source, java]
-----
+```
 @Named
 public class MyBeanImpl implements MyBean {
   
@@ -53,7 +52,7 @@ public class MyBeanImpl implements MyBean {
     // shutdown bean, free resources if required (otherwise omit this method)
   }
 }
-----
+```
 
 === Communication between Layers
 The communication between layers is solved using the described _Dependency Injection_ pattern, based on _Spring_ and the _Java_ standards: `java.inject` (https://jcp.org/en/jsr/detail?id=330[JSR330]) combined with https://jcp.org/en/jsr/detail?id=250[JSR250].
@@ -61,8 +60,7 @@ The communication between layers is solved using the described _Dependency Injec
 image::images/devon4j/5.Layers/layers_impl.png[Layer Implementation]
 
 ==== Service Layer - Logic Layer
-[source,java]
-----
+```
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -82,11 +80,10 @@ public class BookingmanagementRestServiceImpl implements BookingmanagementRestSe
   ...
 
 }
-----
+```
 
 ==== Logic Layer - Data Access Layer
-[source,java]
-----
+```
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -111,7 +108,7 @@ public class BookingmanagementImpl extends AbstractComponentFacade implements Bo
   ...
 
 }
-----
+```
 
 === Service Layer
 As we mentioned at the beginning, the _service_ layer is where the services of our application (_REST_ or _SOAP_) will be located.
@@ -123,8 +120,7 @@ In this tutorial we are going to focus only on the _REST_ implementation of serv
 ==== Service Definition
 The services definition is done by the _service interface_ located in the `service.api.rest` package. In the _booking_ component of MyThaiStar application we can see a service definition statement like the following:
 
-[source,java]
-----
+```
 @Path("/bookingmanagement/v1")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -136,7 +132,7 @@ public interface BookingmanagementRestService {
 
   ...
 }
-----
+```
 
 *JAX-RS annotations:*
 
@@ -153,8 +149,7 @@ public interface BookingmanagementRestService {
 ==== Service Implementation
 The service implementation is a class located in the `service.impl.rest` package that implements the previous defined interface.
 
-[source,java]
-----
+```
 @Named("BookingmanagementRestService")
 public class BookingmanagementRestServiceImpl implements BookingmanagementRestService {
 
@@ -169,7 +164,7 @@ public class BookingmanagementRestServiceImpl implements BookingmanagementRestSe
 
   ...
 }
-----
+```
 
 As you can see, this layer simply delegates method-calls to the _logic_ layer, in order to resolve business logic requirements of the app.
 
@@ -187,20 +182,18 @@ Within the _logic_ layer we must avoid including code related to services or dat
 ==== Logic Layer Definition
 As in the _service_ layer, the logic implementation will be defined by an interface located in a `logic.api` package.
 
-[source,java]
-----
+```
 public interface Bookingmanagement {
 
   BookingCto findBooking(Long id);
   ...
 }
-----
+```
 
 ==== Logic Layer Implementation
 In a `logic.impl` package an "_...Impl_" class will implement the interface defined in the previous section.
 
-[source,java]
-----
+```
 @Named
 @Transactional
 public class BookingmanagementImpl extends AbstractComponentFacade implements Bookingmanagement {
@@ -233,7 +226,7 @@ public class BookingmanagementImpl extends AbstractComponentFacade implements Bo
 
   ...
 }
-----
+```
 
 In the above _MyThaiStar_ logic layer example we can see:
 
@@ -273,8 +266,7 @@ However, in this layer the implementation is slightly different: The `[Target]Re
 
 Because of that, in the `[Target]Repository` implementation of the layer, we only need to add the _custom_ methods that are not implemented yet. Following the _MyThaiStar_ component example (_bookingmanagement_), we will only find the paginated `findBookings` implementation here:
 
-[source,java]
-----
+```
 import org.springframework.data.jpa.repository.Query;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -293,7 +285,7 @@ public interface BookingRepository extends DefaultRepository<BookingEntity> {
     ...
   }
 }
-----
+```
 
 The implementation of `findBookings` uses https://github.com/devonfw/devon4j/blob/develop/documentation/guide-repository.asciidoc[Spring Data] and http://www.querydsl.com/[QueryDSL] to manage dynamic queries.
 
@@ -372,8 +364,7 @@ To make testing easier, we are going to "open" the application, to avoid the sec
 
 In the file `general/service/impl/config/BaseWebSecurityConfig.java` edit the `configure()` method and remove the HTTP request filter. This will authorize every request and allow us access to the app:
 
-[source,java]
-----
+```
 @Override
 public void configure(HttpSecurity http) throws Exception {
 
@@ -383,14 +374,13 @@ public void configure(HttpSecurity http) throws Exception {
     http.addFilterBefore(getCorsFilter(), CsrfFilter.class);
   }
 }
-----
+```
 
 Finally in the file `/jtqj-core/src/main/resources/application.properties` set `security.cors.enabled` to true:
 
-[source,java]
-----
+```
 security.cors.enabled=true
-----
+```
 
 Now we run the app again and send the same GET request. We should now be able to obtain the data of our visitor:
 
@@ -401,12 +391,11 @@ _CobiGen_ has created a complete set of services for us, so we can access a pagi
 
 We are going to use the following service defined in `visitormanagement/service/api/rest/VisitormanagementRestService.java`:
 
-[source,java]
-----
+```
 	@Path("/visitor/search")
 	@POST
 	public Page<VisitorEto> findVisitors(VisitorSearchCriteriaTo searchCriteriaTo);
-----
+```
 
 The service definition states, that we will need to provide a _Search Criteria Transfer Object_. This object will work as a filter for the search, as you can see in `visitormanagement/dataaccess/api/repo/VisitorRepository.java` in the `findByCriteria` method.
 
@@ -417,8 +406,7 @@ Select the service *POST* and enter: +
 
 In the 'Body' tab, below the address bar, we'll have to define a `SearchCriteria` object, which will have a _pageable_ defined (make sure, the 'raw' option is selected):
 
-[source,json]
-----
+```
 {
 	"pageable" : {
 		"pageNumber" : "0",
@@ -426,7 +414,7 @@ In the 'Body' tab, below the address bar, we'll have to define a `SearchCriteria
 		"sort": []
 	}
 }
-----
+```
 
 In the 'Headers' tab we'll have to ensure that `Content-Type` `application/json` is set, indicating to the server, that it'll have to interpret the body as JSON format (otherwise, you may face an 415 unsupported type error).
 
@@ -442,8 +430,7 @@ image::images/devon4j/5.Layers/jumpthequeue_paginated1.png[JumpTheQueue Paginate
 
 If we want to filter the results, we can define a _criteria_ object in the body. Instead of the previously empty criteria, we now provide an object like this:
 
-[source,json]
-----
+```
 {
 	"username": "test1@mail.com",
 	"pageable" : {
@@ -452,7 +439,7 @@ If we want to filter the results, we can define a _criteria_ object in the body.
 		"sort": []
 	}
 }
-----
+```
 
 This will filter the results to find only visitors with username `test1@mail.com`. If we repeat the request now, the result will be this:
 
@@ -467,15 +454,14 @@ By default _CobiGen_ has generated the _Read_ operation in the _UcFindEntityImpl
 
 To delegate _Spring_ to manage _transactions_, we only have to add the `@Transactional` annotation to our _usecase_  implementations. Since _devonfw 2.2.0_ CobiGen adds this annotation automatically, so we don't have to do it manually. Check your logic implementation classes and add the annotation in case it's not present:
 
-[source,java]
-----
+```
 @Named
 @Validated
 @Transactional
 public class UcManageVisitorImpl extends AbstractVisitorUc implements UcManageVisitor {
   ...
 }
-----
+```
 
 To save a visitor we only need to use the _REST_ resource `/services/rest/visitormanagement/v1/visitor` and provide the visitor definition for `VisitorEto` in the body.
 
@@ -490,8 +476,7 @@ Select the service *POST* and enter: +
 
 Provide a _Visitor_ object in the body, such as this:
 
-[source,json]
-----
+```
 {
 	"username": "mary@mail.com",
 	"name": "Mary",
@@ -501,7 +486,7 @@ Provide a _Visitor_ object in the body, such as this:
 	"acceptedTerms": "true",
 	"userType": "false"
 }
-----
+```
 
 We will get the following result:
 
