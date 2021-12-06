@@ -77,37 +77,37 @@ The components will be defined as follows:
 |===
 |Visitor | Access Code | Daily Queue
 
-|username
-|ticketNumber
-|name
+|`username`
+|`ticketNumber`
+|`name`
 
-|name
-|creationTime
-|logo
+|`name`
+|`creationTime`
+|`logo`
 
-|password
-|startTime
-|password
+|`password`
+|`startTime`
+|`password`
 
-|phoneNumber
-|endTime
-|currentNumber
+|`phoneNumber`
+|`endTime`
+|`currentNumber`
 
-|acceptedCommercial
+|`acceptedCommercial`
 |--
-|attentionTime
+|`attentionTime`
 
-|acceptedTerms
+|`acceptedTerms`
 |--
-|minAttentionTime
+|`minAttentionTime`
 
-|userType
+|`userType`
 |--
-|active
+|`active`
 
 |--
 |--
-|customers
+|`customers`
 |===
 
 In addition, we will have to represent two relationships:
