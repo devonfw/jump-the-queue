@@ -28,7 +28,7 @@ In the _MyThaiStar_ app, we can find validations for some fields that we receive
 
 The main part of client inputs is related to the _booking_ process. The client needs to provide: `name`, `comment`, `bookingDate`, `email` and `assistants`. 
 
-[source,java]
+[source, java]
 ----
 @NotNull
 private String name;
@@ -88,7 +88,7 @@ As we have just mentioned, the name of the visitor must be not null. To do so, H
 
 We are going to add the annotation in the `jtqj-core` to `visitormanagement/dataaccess/api/VisitorEntity.java`, just before the field _name_:
 
-[source,java]
+[source, java]
 ----
 ...
 
@@ -126,7 +126,7 @@ In the case of the email -- as already explained in the _MyThaiStar_ section -- 
 In `jtqj-core`, add a class for our annotation, called `EmailExtended.java`, in a new `general.common.api.validation` package:
 
 .`EmailExtended.java`
-[source,java]
+[source, java]
 ----
 ...
 
@@ -160,7 +160,7 @@ This validator extends the `@Email` validation with an extra `@Pattern`, that de
 
 Now we can annotate the _username_ field in our `VisitorEntity.java` with `@NotNull` and `@EmailExtended`, to fit the app requirements.
 
-[source,java]
+[source, java]
 ----
 ...
 
@@ -189,7 +189,7 @@ We are going to follow the same approach used for the `EmailExtended` validation
 In `jtqj-core`, add a class for our annotation, called `Phone.java` to the `general.common.api.validation` package. With the `@Pattern` annotation we can define a regular expression to filter for phone numbers (_"consists of sequence of numbers or spaces"_):
 
 .Phone.java
-[source,java]
+[source, java]
 ----
 ...
 
@@ -219,7 +219,7 @@ public @interface Phone {
 
 Then we only need to apply the new validation to our _phone_ field in `visitormanagement/dataaccess/api/VisitorEntity.java`:
 
-[source,java]
+[source, java]
 ----
 ...
 
