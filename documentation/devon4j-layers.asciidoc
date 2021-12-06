@@ -432,7 +432,7 @@ In the 'Headers' tab we'll have to ensure that `Content-Type` `application/json`
 
 [NOTE]
 ====
-You can see the definition of the _VisitorSearchCriteriaTo_ in:
+You can see the definition of the `VisitorSearchCriteriaTo` in:
 `visitormanagement/logic/api/to/VisitorSearchCriteriaTo.java`
 ====
 
