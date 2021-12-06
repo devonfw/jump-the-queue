@@ -145,7 +145,7 @@ We are going to create our own table for _Visitor(s)_ by right-clicking the fold
 V0005__Create_Visitor.sql
 ----
 
-A visitor will provide: _username_, _name_, _password_, _phoneNumber_, _acceptedCommercial_ and _acceptedTerms_ in order to obtain an _Access Code_. We need to represent this data in our table:
+A visitor will provide: `username`, `name`, `password`, `phoneNumber`, `acceptedCommercial` and `acceptedTerms` in order to obtain an _Access Code_. We need to represent this data in our table:
 [source, sql]
 ----
 create table Visitor(
@@ -162,18 +162,18 @@ create table Visitor(
 );
 ----
 
-* _id_: The `ID` of each visitor.
-* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
-* _username_: The visitors email address.
-* _name_: The visitors name.
-* _password_: The visitors password.
-* _phoneNumber_: The visitors phone number.
-* _accepterCommercial_: A boolean to denote if the visitor has the accepted commercial agreements.
-* _accepterTerms_: A boolean to denote if the visitor has accepted the terms & conditions.
-* _userType_: Denotes the type of user.
+* `id`: The `ID` of each visitor.
+* `modificationCounter`: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* `username`: The visitors email address.
+* `name`: The visitors name.
+* `password`: The visitors password.
+* `phoneNumber`: The visitors phone number.
+* `acceptedCommercial`: A boolean to denote if the visitor has the accepted commercial agreements.
+* `acceptedTerms`: A boolean to denote if the visitor has accepted the terms & conditions.
+* `userType`: Denotes the type of user.
 
 ==== _Daily Queue_ Table
-In a second table we will represent the _Daily Queue_, which will contain _name_, _logo_, _currentNumber_, _attentionTime_, _minAttentionTime_, _active_ and _customers_. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
+In a second table we will represent the _Daily Queue_, which will contain `name`, `logo`, `currentNumber`, `attentionTime`, `minAttentionTime`, `active` and `customers`. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
 ----
 V0006__Create_Queue.sql
 ----
@@ -195,18 +195,18 @@ create table DailyQueue(
 );
 ----
 
-* _id_: The `ID` of each queue.
-* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
-* _name_: The queues name.
-* _logo_: The queues logo.
-* _currentNumber_: the queue's number being attended.
-* _attentionTime_: Average time required to attend a visitor.
-* _minAttentionTime_: Minimum time required to attend a visitor, set by default.
-* _active_: A boolean to denote if the queue is active.
-* _customer_: The queues total number of customers.
+* `id`: The `ID` of each queue.
+* `modificationCounter`: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* `name`: The queues name.
+* `logo`: The queues logo.
+* `currentNumber`: the queue's number being attended.
+* `attentionTime`: Average time required to attend a visitor.
+* `minAttentionTime`: Minimum time required to attend a visitor, set by default.
+* `active`: A boolean to denote if the queue is active.
+* `customer`: The queues total number of customers.
 
 ==== _Access Code_ Table
-The third table will represent the _Access Code_ and contain the _ticketNumber_, _creationTime_, _startTime_ and _endTime_. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
+The third table will represent the _Access Code_ and contain the `ticketNumber`, `creationTime`, `startTime` and `endTime`. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
 ----
 V0007__Create_Access_Code.sql
 ----
@@ -229,14 +229,14 @@ CREATE TABLE AccessCode(
 );
 ----
 
-* _id_: The `ID` of each code.
-* _modificationCounter_: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
-* _ticketNumber_: The number of the ticket for a queue.
-* _creationTime_: The date and time of creation.
-* _startTime_: The date and time, from which the code is valid.
-* _endTime_: The date and time, when the code expires.
-* _idVisitor_: The relation with the _Visitor_ table.
-* _idQueue_: The relation with the `_DailyQueue_` table.
+* `id`: The `ID` of each code.
+* `modificationCounter`: Used internally by https://en.wikipedia.org/wiki/Java_Persistence_API[JPA] to take care of https://en.wikipedia.org/wiki/Optimistic_concurrency_control[optimistic locking] for us.
+* `ticketNumber`: The number of the ticket for a queue.
+* `creationTime`: The date and time of creation.
+* `startTime`: The date and time, from which the code is valid.
+* `endTime`: The date and time, when the code expires.
+* `idVisitor`: The relation with the _Visitor_ table.
+* `idQueue`: The relation with the `_DailyQueue_` table.
 
 ==== Mock Data
 Finally we are going to provide a certain amount of mock data, which will be available right from the start in our application. Create a new SQL script in `/jtqj-core/src/main/resources/db/migration/1.0/`, called:
@@ -316,7 +316,7 @@ We are going to need fields, which represent the data model, so our entity shoul
 
 [NOTE]
 ====
-We are not adding _id_ or _modificationCounter_, because CobiGen will generate these fields for us.
+We are not adding `id` or `modificationCounter`, because CobiGen will generate these fields for us.
 ====
 
 Now we need to declare our entity as a` JPA` entity with the `@Entity` annotation (_javax.persistence.Entity_) at class level. To map the entity to the database table, we will use the `@Table` annotation (_javax.persistence.Table_) defining the `name` of our already created _Visitor_ table (also at class level):
