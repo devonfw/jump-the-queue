@@ -32,8 +32,7 @@ In our case, two new methods are going to be needed; `decreaseQueueCustomer` and
 ==== 1. Modifying `_UcManageQueue_`
 Inside `jtqj-api/queuemanagement/logic/api/usecase/UcManageQueue` the declarations of the two methods are going to be added:
 
-[source, java]
-----
+```
 ...
 
 public interface UcManageQueue {
@@ -55,13 +54,12 @@ public interface UcManageQueue {
 	void increaseQueueCustomer(long queueId);
 
 }
-----
+```
 
 ==== 2. Implementing the Methods in _UcManageQueueImpl_
 In `jtqj-core/src/main/java/queuemanagement/logic/impl/usecase/UcManageQueueImpl` the implementation of the methods, that were just added in the interface, are going to be added:
 
-[source, java]
-----
+```
 ...
 
 public class UcManageQueueImpl extends AbstractQueueUc implements UcManageQueue {
@@ -97,13 +95,12 @@ public class UcManageQueueImpl extends AbstractQueueUc implements UcManageQueue 
   }
 
 }
-----
+```
 
 ==== 3. Modify the Management Implementation `_QueuemanagementImpl_`
 Since the `Queuemanagement` extends the usecase `UcManageQueue` the methods from the previous step need to be added in the `QueuemanagementImpl`. 
 
-[source,java]
-----
+```
 ...
 
 public class QueuemanagementImpl extends AbstractComponentFacade implements Queuemanagement {
@@ -123,7 +120,7 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
   }
 
 }
-----
+```
 
 These methods are simply going to call the `ucManageQueue` methods that were just added. 
 
@@ -132,8 +129,7 @@ These methods are simply going to call the `ucManageQueue` methods that were jus
 ==== Adding method to the Access Code `usecasefind`
 Before creating the usecasemanage, a method needs to be added to the `usecasefind`, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
 
-[source,java]
-----
+```
 ...
 
 import com.devonfw.application.jtqj.accesscodemanagement.logic.api.to.AccessCodeEto;
@@ -153,12 +149,11 @@ public interface UcFindAccessCode {
   Page<AccessCodeEto> findAccessCodeEtos(AccessCodeSearchCriteriaTo criteria);
 
 }
-----
+```
 
 Once that is finished, we will see that an error is going to appear in `UcFindAccessCodeImpl` and `AccesscodemanagementImpl`. The second error will be solved in later steps. To solve the first error, in `jtqj-core` the `accesscodemanagement/logic/impl/usecase/UcFindAccessCodeImpl` class needs to implement another method:
 
-[source,java]
-----
+```
 ...
 
 public class UcFindAccessCodeImpl extends AbstractAccessCodeUc implements UcFindAccessCode {
@@ -174,15 +169,14 @@ public class UcFindAccessCodeImpl extends AbstractAccessCodeUc implements UcFind
   }
 
 }
-----
+```
 
 This method uses a `AcessCodeSearchCriteriaTo` to find a page of entities -- `AccessCodeEntity` -- using the repository. After that, it changes the mapping of the list from `AccessCodeEntity` to `AccessCodeEto`. 
 
 ==== Creating the _usecasemanage_
 In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, we are going to create a new interface called `UcManageAccessCode`, where we will define the save and delete methods:
 
-[source,java]
-----
+```
 ...
 
 import com.devonfw.application.jtqj.accesscodemanagement.logic.api.to.AccessCodeEto;
@@ -207,14 +201,13 @@ public interface UcManageAccessCode {
   AccessCodeEto saveAccessCode(AccessCodeEto accessCodeEto);
 
 }
-----
+```
 
 Then `jtqj-core`, inside the package `accesscodemanagement/logic/impl/usecase`, we are going to create a class called `UcManageAccessCodeImpl`, implementing the definition we just made and extending `AbstractAccessCodeUc`. This will allow us to have access to the repository.
 
 Also, here is the part where we will use the methods that we created in the `Queue` component:
 
-[source,java]
-----
+```
 ...
 
 import java.sql.Timestamp;
@@ -366,15 +359,14 @@ public class UcManageAccessCodeImpl extends AbstractAccessCodeUc implements UcMa
   }
 
 }
-----
+```
 
 Taking a closer look at the code, we can see that, in order to use the methods from the `UcFindAccessCodeImpl`, we need to use the parent (`Accesscodemanagement`) instead of the class directly. Also, following the `devon4j` structure, each component needs to take care of its own. In this case, by using the method `getQueuemanagement()`, we get access to the `Queuemanagement` injection that will allow the use of the methods we created earlier in the use cases in the queue component.
 
 === Adding to the Logic
 Inside `jtqj-api`, in the class `accesscodemanagement/logic/api/Accesscodemanagement` we are going to extend the `UcManageAccessCode` that we just defined:
 
-[source,java]
-----
+```
 ...
 
 import com.devonfw.application.jtqj.accesscodemanagement.logic.api.usecase.UcFindAccessCode;
@@ -386,13 +378,12 @@ import com.devonfw.application.jtqj.accesscodemanagement.logic.api.usecase.UcMan
 public interface Accesscodemanagement extends UcFindAccessCode, UcManageAccessCode {
 
 }
-----
+```
 
 After that, in `jtqj-core`, in the class `accesscodemanagement/logic/impl/AccesscodemanagementImpl`, we will see that an error has appeared because the methods
 from the extended interfaces are missing. We add the unimplemented methods and inject the `usecasemanage` solving the error:
 
-[source,java]
-----
+```
 ...
 
 import javax.inject.Inject;
@@ -451,13 +442,12 @@ public class AccesscodemanagementImpl extends AbstractComponentFacade implements
   }
 
 }
-----
+```
 
 === Adding to the Service
 To add the new service, we need to add its definition to the `jtqj-api` in `accesscodemanagement/service/api/rest/AccesscodemanagementRestService.java`. We are going to create a new `/accessCode` REST resource bound to three methods, one called `findAccessCodeEtos`, another one called `saveAccessCode` and yet another one called `deleteAccessCode`.
 
-[source,java]
-----
+```
 ...
 
 public interface AccesscodemanagementRestService {
@@ -494,12 +484,11 @@ public interface AccesscodemanagementRestService {
   public void deleteAccessCode(@PathParam("id") long id);
 
 }
-----
+```
 
 Then we need to implement the new methods in the `accesscodemanagement/service/impl/rest/AccesscodemanagementRestServiceImpl.java` class:
 
-[source,java]
-----
+```
 ...
 
 public class AccesscodemanagementRestServiceImpl implements AccesscodemanagementRestService {
@@ -525,7 +514,7 @@ public class AccesscodemanagementRestServiceImpl implements Accesscodemanagement
   }
 
 }
-----
+```
 
 === Testing the Changes
 Now run the app again via Eclipse and use Postman to call the new save service via *POST*: +
@@ -535,13 +524,12 @@ In the body, provide an `AccessCode` object with the following required paramete
 
 //TODO: This fails due to an SQL Error: 23506
 
-[source,json]
-----
+```
 {
   "queueId" : "1",
   "visitorId" : "1000000"
 }
-----
+```
 
 The result should be something similar to this:
 
