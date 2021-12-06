@@ -55,7 +55,7 @@ The "remaining time" feature is not further developed/implemented.
 === User Story: Leave the Queue
 As a user of _JumpTheQueue_, I want to be able to leave a queue I previously joined.
 
-=== Et cetera
+=== Etcetera
 As a user of _JumpTheQueue_, I have to confirm either my E-Mail address or my phone number by entering a code which was sent to me, so my contact-data can be verified.
 
 [NOTE]
@@ -163,45 +163,45 @@ type Error :: trivial: Error information with code & error description
 == Entities & Value Objects
 [cols="2", options="header"]
 |===========================
-2+|Visitor (Entity)
+2+|`Visitor` (Entity)
 s|Field           s|Type
-|Id                |ID
-|Username          |NamedItem 
-|Name              |NamedItem
-|Password          |NamedItem
-|PhoneNumber       |Option<TelephoneNumber>
-|AcceptedComercial |boolean
-|AcceptedTerms     |boolean
-|UserType          |boolean
+|`Id`                |ID
+|`Username`          |`NamedItem` 
+|`Name`              |`NamedItem`
+|`Password`          |`NamedItem`
+|`PhoneNumber`       |Option< `TelephoneNumber` >
+|`AcceptedComercial` |`boolean`
+|`AcceptedTerms`     |`boolean`
+|`UserType`          |`boolean`
 |===========================
 
 [cols="2", options="header"]
 |===========================
-2+|AccessCode (Entity)
+2+|`AccessCode` (Entity)
 s|Field      s|Type
-|Id           |ID
-|Ticketnumber |NamedItem 
-|StartTime    |Option<DateTime>
-|EndTime      |Option<DateTime>
-|StartTime    |Option<DateTime>
-|Visitor      |NamedItem
-|Queue        |NamedItem
+|`Id`           |ID
+|`Ticketnumber` |`NamedItem` 
+|`StartTime`    |Option< `DateTime` >
+|`EndTime`      |Option< `DateTime` >
+|`StartTime`    |Option< `DateTime` >
+|`Visitor`      |`NamedItem`
+|`Queue`        |`NamedItem`
 |===========================
 
 [cols="2", options="header"]
 |===========================
-2+|DailyQueue (Entity)
+2+|`DailyQueue` (Entity)
 s|Field            s|Type
-|Id                 |ID
-|Name               |NamedItem 
-|Logo               |NamedItem
-|AttentionTime      |Option<DateTime>
-|MinAttentionTime   |Option<DateTime>
-|Active             |boolean
-|Customers          |NamedItem
+|`Id`                 |ID
+|`Name`               |`NamedItem` 
+|`Logo`               |`NamedItem`
+|`AttentionTime`      |Option< `DateTime` >
+|`MinAttentionTime`   |Option< `DateTime` >
+|`Active`             |`boolean`
+|`Customers`          |`NamedItem`
 |===========================
  
-There must be a 1 - 1 relationship between a Visitor and a VisitorTicker.
+There must be a 1 - 1 relationship between a `Visitor` and a `VisitorTicker`.
 
 '''
 *Next Chapter*: link:devon4j-overview.asciidoc[devon4j Overview]
