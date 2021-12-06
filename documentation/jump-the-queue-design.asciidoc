@@ -55,7 +55,7 @@ The "remaining time" feature is not further developed/implemented.
 === User Story: Leave the Queue
 As a user of _JumpTheQueue_, I want to be able to leave a queue I previously joined.
 
-=== Etcetera
+=== Et cetera
 As a user of _JumpTheQueue_, I have to confirm either my E-Mail address or my phone number by entering a code which was sent to me, so my contact-data can be verified.
 
 [NOTE]

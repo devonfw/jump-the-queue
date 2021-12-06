@@ -28,8 +28,7 @@ In the _MyThaiStar_ app, we can find validations for some fields that we receive
 
 The main part of client inputs is related to the _booking_ process. The client needs to provide: `name`, `comment`, `bookingDate`, `email` and `assistants`. 
 
-[source, java]
-----
+```
 @NotNull
 private String name;
 
@@ -52,7 +51,7 @@ private String email;
 @Min(value = 1, message = "Assistants must be greater than 0")
 @Digits(integer = 2, fraction = 0)
 private Integer assistants;
-----
+```
 
 - `@NotNull`: Checks that the field is not null before saving in the database.
 
