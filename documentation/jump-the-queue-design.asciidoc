@@ -55,7 +55,7 @@ The "remaining time" feature is not further developed/implemented.
 === User Story: Leave the Queue
 As a user of _JumpTheQueue_, I want to be able to leave a queue I previously joined.
 
-=== Etcetera
+=== User Story: Verify contact data
 As a user of _JumpTheQueue_, I have to confirm either my E-Mail address or my phone number by entering a code which was sent to me, so my contact-data can be verified.
 
 [NOTE]
@@ -84,12 +84,9 @@ image::images/jumpthequeue/mockups.png[JumpTheQueue Mock-Up, 800]
 image::images/jumpthequeue/model.png[JumpTheQueue Model, 650]
 
 
-{sp} +
-
 .Each event has multiple queues, each queue holds multiple visitors with access codes.
 image::images/jumpthequeue/event.png[JumpTheQueue Event, 650]
 
-{sp} +
 
 [NOTE]
 ====
