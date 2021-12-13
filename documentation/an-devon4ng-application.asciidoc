@@ -34,18 +34,18 @@ In the previous section we have shown the aspect of the _MyThaiStar_ server proj
 
 In this section we are going to focus on the implementation of the front-end components, services and directives. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4ng_ client project with the devonfw framework.
 
-The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for backend solutions _Angular_ and _Xamarin_ as default clients.
+The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for back-end solutions _Angular_ and _Xamarin_ as default clients.
 
 === The devon4ng Project
 Using the _devon4ng_ approach for the client project we will have the structure of a main _Angular_ project as follows:
 
 image::images/devon4ng/2.Example_app/project_main_files.jpg[Angular Project Structure]
 
-In the _e2e_ folder will be all end-to-end tests.
+In the `e2e` folder will be all end-to-end tests.
 
-In the _node modules_ folder, all installed dependencies will be stored.
+In the `node modules` folder, all installed dependencies will be stored.
 
-The _src_ folder contains all the application code.
+The `src` folder contains all the application code.
 
 Finally, the rest of the files are configuration files for different technologies involved in the project.
 
