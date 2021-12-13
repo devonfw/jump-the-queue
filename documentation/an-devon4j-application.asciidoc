@@ -29,23 +29,23 @@ The main features of the app are:
 * Logged-in users in the role _Waiter_ can also:
 ** Access a restricted area to see and filter the list and details of all reservations and orders made by users.
 
-== MyThaiStar devon4j Backend Overview
+== MyThaiStar devon4j Back-end Overview
 In this section we are going to focus on the implementation of the server project. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4j_ server project with the devonfw framework.
 
-The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for backend solutions _Angular_ and _Xamarin_ as default clients.
+The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for back-end solutions _Angular_ and _Xamarin_ as default clients.
 
 === The devon4j Project
-Using the _devon4j_ approach for the Java backend project we will have a structure of a main _Maven_ project formed by four sub-projects:
+Using the _devon4j_ approach for the Java back-end project we will have a structure of a main _Maven_ project formed by four sub-projects:
 
 image::images/devon4j/2.Example_app/project_modules.png[Maven Project Structure]
 
-In the _core_ project we will store all the logic and functionality of the application.
+In the `core` project we will store all the logic and functionality of the application.
 
-In the _api_ project contains the definitions of all interfaces in the application.
+In the `api` project contains the definitions of all interfaces in the application.
 
-The _batch_ project contains components related to the https://spring.io/projects/spring-batch[Spring Batch] framework which handles batch processing.
+The `batch` project contains components related to the https://spring.io/projects/spring-batch[Spring Batch] framework which handles batch processing.
 
-The _server_ project configures the packaging of the application.
+The `server` project configures the packaging of the application.
 
 === The Components
 In early chapters we have mentioned that the devon4j applications should be divided in different components that will provide the functionality for the different features of the application. Following the naming convention `[Target]management` being the _Target_ the main _entity_ that we want to manage.
@@ -55,15 +55,15 @@ The components, as part of the logic of the app, are located in the _core_ proje
 image::images/devon4j/2.Example_app/project_components.png[Application Components]
 
 === The Component Structure (Layers)
-Each component of the app is internally divided following the three-layer architecture (_service_, _logic_ and _dataaccess_) that Devon4j proposes. So we will have three different packages to order our component's elements:
+Each component of the app is internally divided following the three-layer architecture (`service`, `logic` and `dataaccess`) that Devon4j proposes. So we will have three different packages to order our component's elements:
 
 image::images/devon4j/2.Example_app/component_layers.png[Component Layers]
 
 
-== Running MyThaiStar Backend
-Using _Spring Boot_ features, we can easily run our _Java_ backend applications using the _Run as > Java application_ over the `_SpringBootApp.java_` main class.
+== Running MyThaiStar Back-end
+Using _Spring Boot_ features, we can easily run our _Java_ back-end applications using the _Run as > Java application_ over the `SpringBootApp.java` main class.
 
-image::images/devon4j/2.Example_app/run.png[MyThaiStar Backend Launch]
+image::images/devon4j/2.Example_app/run.png[MyThaiStar Back-end Launch]
 
 Once we see a console messages like:
 
@@ -73,16 +73,16 @@ Tomcat started on port(s): 8081 (http)
 Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)
 ----
 
-we can start accessing our _Java_ backend.
+we can start accessing our _Java_ back-end.
 
-To show the backend services results we are going to use https://www.getpostman.com/[Postman] app for desktop, although you can use any other similar application.
+To show the back-end services results we are going to use https://www.getpostman.com/[Postman] app for desktop, although you can use any other similar application.
 
 Now, with _Postman_, we can do a simple _GET_ request to obtain the info of a _dish_ with _id=1_ (`http://localhost:8081/mythaistar/services/rest/dishmanagement/v1/dish/1`). And we obtain a result like this:
 
 image::images/devon4j/2.Example_app/get_request.png[Postman Get Request Result]
 
-== Creating your own devon4j Backend App
-Once we have seen what we can achieve using _devon4j_ as our backend solution, in next sections we are going to see how to create our own _devon4j_ project step by step, starting from how to create a new _devon4j_ project and explaining how to generate each element of the application.
+== Creating your own devon4j Back-end App
+Once we have seen what we can achieve using _devon4j_ as our back-end solution, in next sections we are going to see how to create our own _devon4j_ project step by step, starting from how to create a new _devon4j_ project and explaining how to generate each element of the application.
 
 '''
 *Next Chapter*: link:build-devon4j-application.asciidoc[Create your own devon4j App]
