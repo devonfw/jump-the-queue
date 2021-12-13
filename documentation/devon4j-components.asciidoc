@@ -13,7 +13,7 @@ endif::[]
 = Components
 image::images/devon4j/4.Components/architecture.png[Architecture, 700]
 
-When working with _devon4j_ the recommended approach for designing an applications is _Component Oriented Design_. Each component will represent a significant part (or feature) of our application related to _CRUD_ operations. Internally, the components will be divided into three layers (_service_, _logic_, and _dataaccess_) and will communicate in two directions: service with database or -- in the _logic_ layer -- a component with another component.
+When working with _devon4j_ the recommended approach for designing an applications is _Component Oriented Design_. Each component will represent a significant part (or feature) of our application related to _CRUD_ operations. Internally, the components will be divided into three layers (`service`, `logic`, and `dataaccess`) and will communicate in two directions: service with database or -- in the _logic_ layer -- a component with another component.
 
 == Principles
 The benefits of dividing our application into components are:
@@ -31,7 +31,7 @@ The benefits of dividing our application into components are:
 - https://en.wikipedia.org/wiki/Data_consistency[data consistency] (a component is responsible for its data and changes to this data shall only happen via the component)
 
 === Component Structure
-A component consists of three packages, which correspond to the three layers defined by the _devon4j_ architecture: _service_, _logic_ and _dataaccess_.
+A component consists of three packages, which correspond to the three layers defined by the _devon4j_ architecture: `service`, `logic` and `dataaccess`.
 
 image::images/devon4j/4.Components/layers.png[Component Layers, 300]
 
@@ -127,23 +127,23 @@ If you feel more comfortable managing all the entities in a single component, yo
 Projects created with the _devon4j_ archetype already contain a pre-defined database schema, which we can use as a basis to create our own. We are going to utilize the http://www.h2database.com/html/main.html[H2 Database Engine], because our generated _devon4j_ application uses it by default.
 
 There are four pre-defined database schemas:
-----
+```
 jtqj-core/src/main/resources/db/type/h2/V0001__Create_Sequence.sql
 jtqj-core/src/main/resources/db/type/h2/V0002__Create_RevInfo.sql
 jtqj-core/src/main/resources/db/type/h2/V0003__Create_BinaryObject.sql
 jtqj-core/src/main/resources/db/migration/1.0/V0004__Add_blob_data.sql
-----
+```
 
 [NOTE]
 ====
-May be you need to install some sql editor from eclipse marketplace, or use an external one.
+May be you need to install some SQL editor from eclipse marketplace, or use an external one.
 ====
 
 ==== _Visitor_ Table
 We are going to create our own table for _Visitor(s)_ by right-clicking the folder `/jtqj-core/src/main/resources/db/migration/1.0` and selecting `New > File`. Following the naming scheme we are going to call it:
-----
+```
 V0005__Create_Visitor.sql
-----
+```
 
 A visitor will provide: `username`, `name`, `password`, `phoneNumber`, `acceptedCommercial` and `acceptedTerms` in order to obtain an _Access Code_. We need to represent this data in our table:
 [source, sql]
@@ -168,15 +168,15 @@ create table Visitor(
 * `name`: The visitors name.
 * `password`: The visitors password.
 * `phoneNumber`: The visitors phone number.
-* `acceptedCommercial`: A boolean to denote if the visitor has the accepted commercial agreements.
-* `acceptedTerms`: A boolean to denote if the visitor has accepted the terms & conditions.
+* `acceptedCommercial`: A `boolean` to denote if the visitor has the accepted commercial agreements.
+* `acceptedTerms`: A `boolean` to denote if the visitor has accepted the terms & conditions.
 * `userType`: Denotes the type of user.
 
 ==== _Daily Queue_ Table
 In a second table we will represent the _Daily Queue_, which will contain `name`, `logo`, `currentNumber`, `attentionTime`, `minAttentionTime`, `active` and `customers`. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
-----
+```
 V0006__Create_Queue.sql
-----
+```
 
 It will contain the following declarations:
 [source, sql]
@@ -202,14 +202,14 @@ create table DailyQueue(
 * `currentNumber`: the queue's number being attended.
 * `attentionTime`: Average time required to attend a visitor.
 * `minAttentionTime`: Minimum time required to attend a visitor, set by default.
-* `active`: A boolean to denote if the queue is active.
+* `active`: A `boolean` to denote if the queue is active.
 * `customer`: The queues total number of customers.
 
 ==== _Access Code_ Table
 The third table will represent the _Access Code_ and contain the `ticketNumber`, `creationTime`, `startTime` and `endTime`. This table will be created in `/jtqj-core/src/main/resources/db/type/h2`, and is called:
-----
+```
 V0007__Create_Access_Code.sql
-----
+```
 
 It will contain the following declarations:
 [source, sql]
@@ -240,9 +240,9 @@ CREATE TABLE AccessCode(
 
 ==== Mock Data
 Finally we are going to provide a certain amount of mock data, which will be available right from the start in our application. Create a new SQL script in `/jtqj-core/src/main/resources/db/migration/1.0/`, called:
-----
+```
 V0008__Master_data.sql
-----
+```
 
 Copy and paste the following data into it:
 [source,sql]
@@ -280,9 +280,9 @@ We are going to use CobiGen to generate the component structure. That means that
 To implement the component we will need to define a `_VisitorEntity_` to connect and manage the data of the _Visitor_ table in the database. The name of this component will be `visitormanagement`, the entity will be called `VisitorEntity`.
 
 Right-click on the root folder of the project `/jtqj-core/src/main/java`, select `New > Package` and create the following package:
-----
+```
 com.devonfw.application.jtqj.visitormanagement.dataaccess.api
-----
+```
 
 image::images/devon4j/4.Components/new_package_1.png[New Package Creation Step 1, 500]
 image::images/devon4j/4.Components/new_package_2.png[New Package Creation Step 2, 500]
@@ -319,7 +319,7 @@ We are going to need fields, which represent the data model, so our entity shoul
 We are not adding `id` or `modificationCounter`, because CobiGen will generate these fields for us.
 ====
 
-Now we need to declare our entity as a` JPA` entity with the `@Entity` annotation (_javax.persistence.Entity_) at class level. To map the entity to the database table, we will use the `@Table` annotation (_javax.persistence.Table_) defining the `name` of our already created _Visitor_ table (also at class level):
+Now we need to declare our entity as a `JPA` entity with the `@Entity` annotation (`javax.persistence.Entity`) at class level. To map the entity to the database table, we will use the `@Table` annotation (`javax.persistence.Table`) defining the `name` of our already created _Visitor_ table (also at class level):
 [source, java]
 ----
 ...
@@ -465,9 +465,9 @@ public class VisitorEntity {
 
 ==== `_AccessCode_` component
 We are going to repeat the same process for the `_AccessCode_` component. Create these packages in `/jtqj-core/src/main/java`:
-----
+```
 com.devonfw.application.jtqj.accesscodemanagement.dataaccess.api
-----
+```
 
 \... and create a class called `AccessCodeEntity` inside of them. +
 We will end up with the following structure:
@@ -614,9 +614,9 @@ These will be resolved, when we create the corresponding class in the next step.
 
 ==== _Queue_ Component
 Finally, we are going to repeat the same process for our last entity `_QueueEntity_` component. Create these packages in `/jtqj-core/src/main/java`:
-----
+```
 com.devonfw.application.jtqj.queuemanagement.dataaccess.api
-----
+```
 
 \... and create a class called `QueueEntity` inside of them. +
 We will end up with the following structure:
@@ -764,9 +764,9 @@ Now we have finished preparing the _core_ of our components and can start using 
 Now we can resolve the compilation errors related to `QueueEntity` in the `AccessCodeEntity.java` by applying the suggestions of the IDE. To do this, open the offending file, click the first red light bulb on the left border of the editor and select `Import 'QueueEntity' (com.devonfw. ...)`.
 
 Or just manually add this line to your import statements:
-----
+```
 import com.devonfw.application.jtqj.queuemanagement.dataaccess.api.QueueEntity;
-----
+```
 ====
 
 === The Component Structure (using CobiGen)
@@ -854,11 +854,11 @@ Once CobiGen has finished generating the new classes, we will check for and fix 
 
 First, we need to adjust manually some imports related to _Timestamp_ in:
 
-*jtqj-core:*
+*`jtqj-core`:*
 
 * `queuemanagement.dataaccess.api.repo.QueueRepository`
 
-*jtqj-api:*
+*`jtqj-api`:*
 
 * `queuemanagement.common.api.Queue`
 * `queuemanagement.logic.api.to.QueueEto`
@@ -875,11 +875,11 @@ image::images/devon4j/4.Components/cobigen-accesscode-new.png[CobiGen New `Acces
 
 After CobiGen has finished generating, fix the issues regarding `*import* java.sql.Timestamp` (as you did in the last step) in the following files:
 
-*jtqj-core:*
+*`jtqj-core`:*
 
 * `accesscodemanagement.dataaccess.api.repo.AccessCodeRepository`
 
-*jtqj-api:*
+*`jtqj-api`:*
 
 * `accesscodemanagement.common.api.AccessCode`
 * `accesscodemanagement.logic.api.to.AccessCodeEto`
@@ -896,16 +896,16 @@ image::images/devon4j/4.Components/cobigen-visitor-new.png[CobiGen New Visitor]
 
 Once CobiGen has finished we can fix the rest of the compilation errors related to `VisitorEto` by manually importing the class into:
 
-*jtqj-core:*
+*`jtqj-core`:*
 
 * `accesscodemanagement.logic.impl.usecase.UcFindAccessCodeImpl`
 
-*jtqj-api:*
+*`jtqj-api`:*
 
 * `accesscodemanagement.logic.api.to.AccessCodeCto`
 
 ==== Run the App
-If all compilation errors are solved run the app (right-click `SpringBootApp.java > Run As > Java Application`). The backend should launch without errors.
+If all compilation errors are solved run the app (right-click `SpringBootApp.java > Run As > Java Application`). The back-end should launch without errors.
 
 *Congratulations!* +
 You have created your first devon4j components. You should be able to access the login screen via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. You can login with the username and password "*waiter*". In the next chapter we will show and explain each of the created elements in detail.
