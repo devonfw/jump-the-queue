@@ -582,7 +582,7 @@ ng generate service register/services/register
 
 This will create a folder "services" inside "register" and create the service itself. Services are where we keep the logic that connects to our database and fetches data which is going to be used by our `component.ts`.
 
-In order to use the service, we are going to create some interface models. Let's create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts` in which we are going to add the model interfaces that will match our backend:
+In order to use the service, we are going to create some interface models. Let's create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts` in which we are going to add the model interfaces that will match our back-end:
 
 [source, typescript]
 ----
@@ -651,7 +651,7 @@ export class RegisterService {
 }
 ----
 
-This method will send our model to the backend and return an Observable that we will use on the `component.ts`.
+This method will send our model to the back-end and return an Observable that we will use on the `component.ts`.
 
 [NOTE]
 ====
@@ -734,7 +734,7 @@ The `AuthService` will be the one that contains the login info, the `AuthGuardSe
 
 [NOTE]
 ====
-To keep this tutorial simple, we are going to perform the password check client side. *THIS IS NOT CORRECT!* Usually, you would send the username and password to the backend, check that the values are correct, and create a corresponding token which you would pass in the header and use it inside the `AuthService` -- checking with some interceptors that the token is both in the `AuthService` and in the request.
+To keep this tutorial simple, we are going to perform the password check client side. *THIS IS NOT CORRECT!* Usually, you would send the username and password to the back-end, check that the values are correct, and create a corresponding token which you would pass in the header and use it inside the `AuthService` -- checking with some interceptors that the token is both in the `AuthService` and in the request.
 ====
 
 === Login, Auth and AuthGuard Services
@@ -780,7 +780,7 @@ export class Role {
 
 [NOTE]
 ====
-As you can see, we added a `Pageable`, since a lot of the search methods in the backend are using `SearchCriterias`. These need pageables which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
+As you can see, we added a `Pageable`, since a lot of the search methods in the back-end are using `SearchCriterias`. These need pageables which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
 ====
 
 Then we are going to create a `config.ts` file inside the root (`angular/app`). We are going to use that file to set up default config variables, for example: role names with their permission number, default pagination settings etc. For now we are just adding the roles:
@@ -1010,7 +1010,7 @@ export class LoginService {
 }
 ----
 
-If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` corresponding to the `Criteria` in the backend. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result as soon as the POST call is performed. That's why we return the first page and only a single result.
+If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` corresponding to the `Criteria` in the back-end. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result as soon as the POST call is performed. That's why we return the first page and only a single result.
 
 [NOTE]
 ====
@@ -1179,7 +1179,7 @@ Now in order to make this view work, we are going to do these things:
 
 . Modify the logic of the component `view-queue.component.ts`.
 
-First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the backend.
+First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the back-end.
 
 [source, typescript]
 ----
@@ -1323,7 +1323,7 @@ export class AccessCodeService {
 }
 ----
 
-In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the backend like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has an `AccessCode` and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
+In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the back-end like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has an `AccessCode` and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
 
 - For the `QueueService` we are only going to need to find the active queue:
 
@@ -1362,7 +1362,7 @@ export class QueueService {
 }
 ----
 
-Now we are going to create the template `view-queue.component.html` (which will use this data) and we will also introduce a new concept: "_async pipes in templates_".
+Now we are going to create the template `view-queue.component.html` (which will use this data) and we will also introduce a new concept: `async` pipes in templates.
 
 [source, html]
 ----
@@ -1408,16 +1408,16 @@ Now we are going to create the template `view-queue.component.html` (which will 
 </td-layout>
 ----
 
-If you watch closely, the starting `td-layout` has an `*ngIf` inside it. This `*ngIf` allows us to asynchronously pipe the observables that we will asign in the next steps. This solution avoids having to use `subscribe()` (as it subscribes automatically) and -- as a result -- we dont have to worry about where to `unsubscribe()` from the observables.
+If you watch closely, the starting `td-layout` has an `*ngIf` inside it. This `*ngIf` allows us to asynchronously pipe the observables that we will assign in the next steps. This solution avoids having to use `subscribe()` (as it subscribes automatically) and -- as a result -- we don't have to worry about where to `unsubscribe()` from the observables.
 
 In this HTML, we give `*ngif` another use: We use it to hide certain panels. Using `accessCodeVisitor`, we hide the ticket number panel and the "leave the queue"-button and show the button to join the queue. On the contrary we can hide the ticket number and the "leave the queue"-button and only show the "join the queue"-button.
 
 [NOTE]
 ====
-In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubscribe()` method, the app could end up containing a memory leak. This is because -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
+In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you don't `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubscribe()` method, the app could end up containing a memory leak. This is because -- every time we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
 ====
 
-Finally, to adapt the async pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queuers variable directly to the observable, so we can load it using `*ngIf`.
+Finally, to adapt the `async` pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queue variable directly to the observable, so we can load it using `*ngIf`.
 
 [source, typescript]
 ----
@@ -1465,7 +1465,7 @@ export class ViewQueueComponent implements OnInit {
 }
 ----
 
-In this last component we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an async pipe, everytime we modify the status of the `Observables`, they are going to update the template.
+In this last component we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an `async` pipe, every time we modify the status of the `Observables`, they are going to update the template.
 
 image::images/devon4ng/3.BuildYourOwn/withCodeAccess.png[Queue Page with Access Code, 250]
 
