@@ -209,7 +209,7 @@ export class AppModule { }
 ----
 [NOTE]
 ====
-Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the `@NgModule.schemas` of this component to suppress this message."
+Even if we setup module correctly the HTML file can give us this red flag: "If `td-layout` is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the `@NgModule.schemas` of this component to suppress this message."
 To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the `@NgModule` of all the affected modules.
 ====
 
@@ -252,9 +252,9 @@ To go a step further, we have to modify the body of the root component because i
 
 First, we need to create a component to show as default which will be our access view. We will modify it later. Stop `ng serve` and run:
 
-----
+```
 ng generate component form-login
-----
+```
 
 It will add a folder to our project with all the files needed for a component. Now we can move on to the router task again. Run `ng serve` again to continue the development.
 
@@ -293,7 +293,7 @@ Finally, we remove the `<h1>app works!</h1>` from `app.component.html` and repla
 
 image::images/devon4ng/3.BuildYourOwn/root_router.jpg[Root Router, 250]
 
-As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to formlogin when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match the given path.
+As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to login form when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match the given path.
 
 For now we are going to leave the header like this. In the future we will separate it into another component inside a layout folder.
 
@@ -312,7 +312,7 @@ First, we need to add the Covalent Layout and the card to the file `form-login.c
 </td-layout>
 ----
 
-This will add a grey background to the view and a card on top of it with the title "Login" now that we have the basic structure of the view.
+This will add a gray background to the view and a card on top of it with the title "Login" now that we have the basic structure of the view.
 
 Now we are going to add this image:
 
@@ -340,11 +340,11 @@ Now we will continue with the second component: Login.
 
 === Login Component
 
-Our first step will be to create the component in the exact same way we created the `FormLogin` component but this time we are going to generate it in a new folder called components inside formlogin. Putting every child component inside that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
+Our first step will be to create the component in the exact same way we created the `FormLogin` component but this time we are going to generate it in a new folder called components inside `formlogin`. Putting every child component inside that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
 
-----
+```
 ng generate component form-login/components/login
-----
+```
 
 After _Angular/CLI_ has finished generating the component, we have to create two modules, one for the form-login and one for the login:
 
@@ -448,7 +448,7 @@ You can go back and read that section again to refresh your memory.
 
 This form contains two input containers from Material. The containers enclose the input with the properties listed above.
 
-We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the auth service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct. We will tackle the on-click-event later.
+We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the `auth` service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct. We will tackle the on-click-event later.
 
 As a last step we will add this component to the `form-login-component.html`:
 
@@ -472,9 +472,9 @@ With two components already created, we need to use the router to navigate betwe
 
 First, we are going to generate the register component via:
 
-----
+```
 ng generate component register`
-----
+```
 
 This will create our component so we can start working on it. Turning back to `login.component.html` we have to modify these lines of code:
 
@@ -576,9 +576,9 @@ Now we are going to imitate the `login` to shape our `register.component.html`:
 
 Now that we have a minimum of navigation flow inside our application, we are going to generate our first service using the command:
 
-----
+```
 ng generate service register/services/register
-----
+```
 
 This will create a folder "services" inside "register" and create the service itself. Services are where we keep the logic that connects to our database and fetches data which is going to be used by our `component.ts`.
 
@@ -1103,9 +1103,9 @@ Now we only need to generate two more components (`header` and `view-queue`) and
 
 By separating the header on top of the page from the layout, we enable the reuse of this component and reach a better separation of concerns across our application. To do this, we are going to generate a new component inside `angular/src/app/layout/header` via:
 
-----
+```
 ng generate component layout/header
-----
+```
 
 Now we are going to add it to the main view `app.component.html`:
 
@@ -1118,7 +1118,7 @@ Now we are going to add it to the main view `app.component.html`:
 ...
 ----
 
-After adding the component to the header view (`app-header`), we are going to modify the HTML of the component (`header.component.html`) and the logic of the component (`header.component.ts`). As a first step, we are going to modify the HTML, adding an icon as a button, which checks whether or not the user is logged in via `*ngIf` by calling the auth service's `isLogged()` method. This will make the icon appear only if the user is logged in:
+After adding the component to the header view (`app-header`), we are going to modify the HTML of the component (`header.component.html`) and the logic of the component (`header.component.ts`). As a first step, we are going to modify the HTML, adding an icon as a button, which checks whether or not the user is logged in via `*ngIf` by calling the `auth` service's `isLogged()` method. This will make the icon appear only if the user is logged in:
 
 [source, html]
 ----
@@ -1150,9 +1150,9 @@ For the last view, we are going to learn how to use our Observables on the HTML 
 
 First, we are going to generate the component via:
 
-----
+```
 ng generate component view-queue
-----
+```
 
 After that, we are going to include the component in the `app-routing.module.ts`, also adding the guard, to only allow users that are `VISITOR` to see the component. It is important to insert the following code before `{ path: '**', redirectTo: '/FormLogin', pathMatch: 'full' }`:
 
@@ -1234,11 +1234,11 @@ export class AccessCodeArray {
 
 After this is done, we are going to generate the `AccessCodeService` and the `QueueService`:
 
-----
+```
 ng generate service view-queue/services/Queue
 
 ng generate service view-queue/services/AccessCode
-----
+```
 
 Once this is done, we are going to modify them and add the necessary methods: 
 

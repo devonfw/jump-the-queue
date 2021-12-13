@@ -39,7 +39,7 @@ A full name (first name / last name) is mandatory. This name as well as the user
 As a user of _JumpTheQueue_, I accept that the organizer of the event can store my personal data and send me commercial notices (aka “spam”).
 
 ==== Acceptance Criteria
-The terms and conditions must be accepted by ticking the corresponding checkboxes.
+The terms and conditions must be accepted by ticking the corresponding check boxes.
 
 === User Story: Join a Queue
 As a user of _JumpTheQueue_, I want to join the queue at the event.
