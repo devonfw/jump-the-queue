@@ -48,9 +48,9 @@ For more information, please visit the https://angular.io/guide/dependency-injec
 == Create a new Service
 Security or other global services will be stored in a shared folder, at the same level as the rest of the components. Services that are specific to a certain component, will be stored in a folder for the respective component. We can specify the path to a service when creating it with the Angular CLI:
 
-----
+```
 ng generate service <path>/<service_name>
-----
+```
 
 == Authentication
 Authentication is a special service created to maintain user sessions in the application. In the case of our tutorial application it serves as an indicator of the log-in state and stores the name of the user, but it can be extended to store tokens, validate permissions of roles, and so on.
