@@ -2,7 +2,7 @@
 
 ==== link:jump-the-queue-design.asciidoc[JumpTheQueue Design]
 
-==== devon4j (Backend)
+==== devon4j (Back-end)
 . link:devon4j-overview.asciidoc[devon4j Overview]
 . link:an-devon4j-application.asciidoc[devon4j Application]
 . link:build-devon4j-application.asciidoc[Build a devon4j Application]

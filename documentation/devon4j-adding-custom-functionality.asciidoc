@@ -18,12 +18,12 @@ In this chapter we are going to show how to add custom functionalities to our pr
 == Return the Access Code
 The _JumpTheQueue_ design defines a xref:jump-the-queue-design#user-story-register[User Story] in which a visitor can register into an event and obtain an access code to avoid a queue.
 
-In our _standard_ implementation of the _JumpTheQueue_ app we have used _CobiGen_ to generate the components, so we have a default implementation of the services. Since the `AccessCode` component is more complex and requires the use of _CTOs_, we need to create our own _usecasemanage_ and the methods _save_ and _delete_.
+In our _standard_ implementation of the _JumpTheQueue_ app we have used _CobiGen_ to generate the components, so we have a default implementation of the services. Since the `AccessCode` component is more complex and requires the use of _CTOs_, we need to create our own `usecasemanage` and the methods `save` and `delete`.
 
 We also have to add some methods to the _Queue_ component, since when saving/deleting an `AccessCode`, the amount of customers in the `Queue` needs to increase/decrease.
 
 === Adding Methods to the _Queue_ Component
-In our case, two new methods are going to be needed; `decreaseQueueCustomer` and `increaseQueueCustomer`. In order to add those methods to the queuemanagement, we need to follow these three steps:
+In our case, two new methods are going to be needed; `decreaseQueueCustomer` and `increaseQueueCustomer`. In order to add those methods to the `queuemanagement`, we need to follow these three steps:
 
 . Modify the corresponding `usecase` interface, adding the methods.
 . Implement the methods in the `usecaseimpl`.
@@ -124,10 +124,10 @@ public class QueuemanagementImpl extends AbstractComponentFacade implements Queu
 
 These methods are simply going to call the `ucManageQueue` methods that were just added. 
 
-=== Creating the usecasemanage for the Access Code
+=== Creating the `usecasemanage` for the Access Code
 
 ==== Adding method to the Access Code `usecasefind`
-Before creating the usecasemanage, a method needs to be added to the `usecasefind`, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
+Before creating the `usecasemanage`, a method needs to be added to the `usecasefind`, that will recover our `AccessCodeEto`. In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, the file `UcFindAccessCode` is going to be modified, adding the new method to the interface:
 
 ```
 ...
@@ -173,7 +173,7 @@ public class UcFindAccessCodeImpl extends AbstractAccessCodeUc implements UcFind
 
 This method uses a `AcessCodeSearchCriteriaTo` to find a page of entities -- `AccessCodeEntity` -- using the repository. After that, it changes the mapping of the list from `AccessCodeEntity` to `AccessCodeEto`. 
 
-==== Creating the _usecasemanage_
+==== Creating the `usecasemanage`
 In `jtqj-api`, inside the package `accesscodemanagement/logic/api/usecase/`, we are going to create a new interface called `UcManageAccessCode`, where we will define the save and delete methods:
 
 ```
@@ -543,7 +543,7 @@ To test the delete, you can send a *DELETE* to this URL:
 `http://localhost:8081/jumpthequeue/services/rest/accesscodemanagement/v1/accesscode/{id}`
 Pass the `AccessCode` ID of the new entry, which can be found in the returned result of the save or the search operation.
 
-In this chapter we learned, how easy it is to extend a _devon4j_ application. With only a few steps you can add new services to your backend, to fit the functional requirements of your project, or edit services to adapt the default implementation to your needs.
+In this chapter we learned, how easy it is to extend a _devon4j_ application. With only a few steps you can add new services to your back-end, to fit the functional requirements of your project, or edit services to adapt the default implementation to your needs.
 
 In the next chapter we will show how to add validations for the data, that we receive from the client.
 

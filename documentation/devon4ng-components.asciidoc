@@ -41,9 +41,9 @@ Creating a component can be as simple as creating a file with a name like this: 
 
 All of this files can easily be generated along with the component itself by using `ng generate`. Angular CLI offers the functionality to create a component, generate other, related files and add the new component to the `app.module.ts` automatically. The structure of the command is:
 
-----
+```
 ng generate component <component_name>
-----
+```
 
 == Toolbars
 Angular Material provides components that are specifically designed to be used with a certain page layout. This is also the case for https://material.angular.io/components/toolbar/overview[Toolbars].
@@ -68,7 +68,7 @@ You can also configure routes to redirect to a certain component, when a passed 
 
 There are some cases when a component also has its own navigation contained inside of it. To make this sub-navigation possible, Routers can use child-routes. These are special properties of a route, which you can declare inside of a child-array. With this child-array correctly set up, you can navigate to a component, and have it sub-navigate to other components inside of it.
 
-*One last remark:* Routes can be secured using a special service called _Guards_, which _forbids_ or _permits_ the navigation to a component, depending on the return of a boolean value. This will be shown in the chapter link:devon4ng-services.asciidoc[devon4ng Services].
+*One last remark:* Routes can be secured using a special service called _Guards_, which _forbids_ or _permits_ the navigation to a component, depending on the return of a Boolean value. This will be shown in the chapter link:devon4ng-services.asciidoc[devon4ng Services].
 
 == Forms
 Angular provides a large amount of functionality for user input forms. The complete information can be found in the https://angular.io/guide/user-input[Angular User Input] section.

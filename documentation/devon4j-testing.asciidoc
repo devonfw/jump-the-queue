@@ -192,7 +192,7 @@ The result of the test will be shown in the _JUnit_ tab of Eclipse:
 
 image::images/devon4j/8.Testing/jumpthequeue_testing_result.png[JumpTheQueue Test Results 1]
 
-Seems that everything went ok, our register process passes the test. Let's complete the test checking if the just created user is _"Mary"_.
+Seems that everything went okay, our register process passes the test. Let's complete the test checking if the just created user is _"Mary"_.
 
 We can do it simply adding more _asserts_ to check the _result_ object
 
