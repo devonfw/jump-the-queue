@@ -50,7 +50,7 @@ image::images/tutorialsources/devonfw-ide-setup-run.png[devonfw Running an Appli
 +
 . Open `console.bat`.
 +
-. Goto the folder `workspaces\main\my-thai-star\angular` in the `console.bat` terminal.
+. Go to the folder `workspaces\main\my-thai-star\angular` in the `console.bat` terminal.
 +
 . Execute the command: `yarn install`. Wait till everything is finished.
 +

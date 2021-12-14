@@ -247,7 +247,7 @@ $background: map-get($theme, background);
 @include covalent-theme($theme);
 ----
 
-2.- Now we have to add these styles to our Angular/CLI config. Go to `angular.json` in the `angular` root folder, then search both of the "styles" arrays (inside build and test) and add `theme.scss` and Covalent's `platform.css` to make it look like this:
+2.- Now we have to add these styles to our Angular/CLI config. Go to `angular.json` in the `angular` root folder, then search both of the "styles" arrays (inside build and test) and add `theme.scss` and also the `platform.css` from Covalent library to make it look like this:
 
 [source, json]
 ----
