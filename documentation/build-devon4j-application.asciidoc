@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = Build your own devon4j Application
-In this step we are going to create our work environment and establish the first part of our backend. Like most *devonfw* projects, our backend will be build in Java and thus utilize the tools, libraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
+In this step we are going to create our work environment and establish the first part of our back-end. Like most *devonfw* projects, our back-end will be build in Java and thus utilize the tools, libraries and frameworks provided by the https://github.com/devonfw/devon4j[devon4j] stack.
 
 == Setting up a devonfw Work Environment
 Follow the setup instructions listed https://github.com/devonfw/devon-ide/blob/master/documentation/setup.asciidoc[here]. +
@@ -19,11 +19,11 @@ After you have done so, your working directory should look like this:
 
 image::images/devon4j/3.BuildYourOwn/after_setup.png[After Setup, 250]
 
-Press "Shift + Right Click" and select "Open Devon `CMD` shell here". +
+Press "Shift + Right Click" and select "Open Devon CMD shell here". +
 Your shell should now show the message:
 
 ____
-devon-ide environment variables have been set for C:\\... in workspace main
+devon IDE environment variables have been set for C:\\... in workspace main
 ____
 
 Navigate into workspace "main" by entering:
@@ -33,7 +33,7 @@ C:\...> cd workspaces\main
 ----
 
 == Creating the Project
-Now we are going to create the folder structure for our backend by running the following commands:
+Now we are going to create the folder structure for our back-end by running the following commands:
 
 ----
 C:\...\workspaces\main>                 mkdir jumpthequeue
@@ -43,7 +43,7 @@ C:\...\workspaces\main\jumpthequeue>    cd java
 C:\...\workspaces\main\jumpthequeue\java>
 ----
 
-Here we are going to generate our devon4j application template as a starting point for our backend:
+Here we are going to generate our devon4j application template as a starting point for our back-end:
 
 ----
 C:\...\workspaces\main\jumpthequeue\java>
@@ -52,11 +52,11 @@ C:\...\workspaces\main\jumpthequeue\java>
 
 [NOTE]
 ====
-We are using the `java` https://github.com/devonfw/devon-ide/blob/master/documentation/java.asciidoc[commandlet] of the devon-ide. After the command `create` we are passing the arguments `package`, `groupId` and `version` in this case.
+We are using the `java` https://github.com/devonfw/devon-ide/blob/master/documentation/java.asciidoc[commandlet] of the devon IDE. After the command `create` we are passing the arguments `package`, `groupId` and `version` in this case.
 ====
 [WARNING]
 ====
-Be sure that you are using devonfw `CMD` or bash, as the command is not working properly with devonfw `PowerShell`.
+Be sure that you are using devonfw CMD or bash, as the command is not working properly with devonfw PowerShell.
 ====
 
 image::images/devon4j/3.BuildYourOwn/build_successful.png[Build Success, 800]
@@ -82,8 +82,8 @@ Eclipse will detect the pre-generated Maven project structure inside our project
 In our case it should find the `api`, `core` and `server` packages. +
 Finally click `Finish` and wait for the import to complete.
 
-== Preparing the Backend for an Initial Launch
-Before test-launching our backend we have to change the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
+== Preparing the Back-end for an Initial Launch
+Before test-launching our back-end we have to change the _server context path_ of our application. Via the Eclipse Package Explorer navigate to:
 
 ----
 /jtqj-core/src/main/resources/config/
@@ -102,8 +102,8 @@ For a more manageable view of the package structure inside the Eclipse Package E
 image::images/devon4j/3.BuildYourOwn/hierarchical_view.png[Hierarchical View, 550]
 ====
 
-== Launching the Backend
-Finally, using _Spring Boot_ (which provides us with an embedded _Tomcat_ server), we can run the backend of our app in one easy step. Navigate to:
+== Launching the Back-end
+Finally, using _Spring Boot_ (which provides us with an embedded _Tomcat_ server), we can run the back-end of our app in one easy step. Navigate to:
 
 ----
 /jtqj-core/src/main/java/com.devonfw.application.jtqj/
@@ -132,7 +132,7 @@ If you did everything right up until now the console should show a message like 
 ... c.d.application.jtqj.SpringBootApp       : Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)
 ----
 
-The backend is now accessible via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. +
+The back-end is now accessible via http://localhost:8081/jumpthequeue[localhost:8081/jumpthequeue]. +
 You can view the exposed services by logging in with these credentials:
 
 ----
@@ -151,7 +151,7 @@ You are redirected to a login screen because -- by default -- a new _devon4j_ ap
 When creating _devon4j_ based apps this way, we get the following features _out-of-the-box_:
 
 * _Maven_ project with _api_ project, _core_ project and _server_ project:
-** _api_ project for the common `API`
+** _api_ project for the common API
 ** _core_ project for the app implementation
 ** _server_ project ready to package the app for deployment
 

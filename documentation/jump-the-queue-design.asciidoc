@@ -39,7 +39,7 @@ A full name (first name / last name) is mandatory. This name as well as the user
 As a user of _JumpTheQueue_, I accept that the organizer of the event can store my personal data and send me commercial notices (aka “spam”).
 
 ==== Acceptance Criteria
-The terms and conditions must be accepted by ticking the corresponding checkboxes.
+The terms and conditions must be accepted by ticking the corresponding check boxes.
 
 === User Story: Join a Queue
 As a user of _JumpTheQueue_, I want to join the queue at the event.
@@ -55,7 +55,7 @@ The "remaining time" feature is not further developed/implemented.
 === User Story: Leave the Queue
 As a user of _JumpTheQueue_, I want to be able to leave a queue I previously joined.
 
-=== Etcetera
+=== User Story: Verify contact data
 As a user of _JumpTheQueue_, I have to confirm either my E-Mail address or my phone number by entering a code which was sent to me, so my contact-data can be verified.
 
 [NOTE]
@@ -84,12 +84,9 @@ image::images/jumpthequeue/mockups.png[JumpTheQueue Mock-Up, 800]
 image::images/jumpthequeue/model.png[JumpTheQueue Model, 650]
 
 
-{sp} +
-
 .Each event has multiple queues, each queue holds multiple visitors with access codes.
 image::images/jumpthequeue/event.png[JumpTheQueue Event, 650]
 
-{sp} +
 
 [NOTE]
 ====
@@ -163,45 +160,45 @@ type Error :: trivial: Error information with code & error description
 == Entities & Value Objects
 [cols="2", options="header"]
 |===========================
-2+|Visitor (Entity)
+2+|`Visitor` (Entity)
 s|Field           s|Type
-|Id                |ID
-|Username          |NamedItem 
-|Name              |NamedItem
-|Password          |NamedItem
-|PhoneNumber       |Option<TelephoneNumber>
-|AcceptedComercial |boolean
-|AcceptedTerms     |boolean
-|UserType          |boolean
+|`Id`                |ID
+|`Username`          |`NamedItem` 
+|`Name`              |`NamedItem`
+|`Password`          |`NamedItem`
+|`PhoneNumber`       |Option< `TelephoneNumber` >
+|`AcceptedComercial` |`boolean`
+|`AcceptedTerms`     |`boolean`
+|`UserType`          |`boolean`
 |===========================
 
 [cols="2", options="header"]
 |===========================
-2+|AccessCode (Entity)
+2+|`AccessCode` (Entity)
 s|Field      s|Type
-|Id           |ID
-|Ticketnumber |NamedItem 
-|StartTime    |Option<DateTime>
-|EndTime      |Option<DateTime>
-|StartTime    |Option<DateTime>
-|Visitor      |NamedItem
-|Queue        |NamedItem
+|`Id`           |ID
+|`Ticketnumber` |`NamedItem` 
+|`StartTime`    |Option< `DateTime` >
+|`EndTime`      |Option< `DateTime` >
+|`StartTime`    |Option< `DateTime` >
+|`Visitor`      |`NamedItem`
+|`Queue`        |`NamedItem`
 |===========================
 
 [cols="2", options="header"]
 |===========================
-2+|DailyQueue (Entity)
+2+|`DailyQueue` (Entity)
 s|Field            s|Type
-|Id                 |ID
-|Name               |NamedItem 
-|Logo               |NamedItem
-|AttentionTime      |Option<DateTime>
-|MinAttentionTime   |Option<DateTime>
-|Active             |boolean
-|Customers          |NamedItem
+|`Id`                 |ID
+|`Name`               |`NamedItem` 
+|`Logo`               |`NamedItem`
+|`AttentionTime`      |Option< `DateTime` >
+|`MinAttentionTime`   |Option< `DateTime` >
+|`Active`             |`boolean`
+|`Customers`          |`NamedItem`
 |===========================
  
-There must be a 1 - 1 relationship between a Visitor and a VisitorTicker.
+There must be a 1 - 1 relationship between a `Visitor` and a `VisitorTicker`.
 
 '''
 *Next Chapter*: link:devon4j-overview.asciidoc[devon4j Overview]

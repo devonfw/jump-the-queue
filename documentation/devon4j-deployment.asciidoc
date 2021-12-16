@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 = Deployment of devon4j Applications
-As mentioned already in the xref:an-devon4j-application#the-devon4j-project[devon4j project section], apart from the _core_ and _api_ project, apps created with _devon4j_ also provide a _server_ project that configures the packaging of the app. 
+As mentioned already in the xref:an-devon4j-application#the-devon4j-project[devon4j project section], apart from the `core` and `api` project, apps created with _devon4j_ also provide a `server` project that configures the packaging of the app. 
 
 In our _JumpTheQueue_ app we can verify that this _server_ project is available:
 
@@ -253,31 +253,31 @@ Now we need to follow these steps:
 
 1.- As is explained in the https://github.com/devonfw/devon4j/wiki/guide-configuration#environment-configuration[devon4j configuration guide], the default `application.properties` file used for packaging is located in `src/main/resources/` (*don't* use the one located in `src/main/resources/config/`). We need to modify some settings in this file in order to gain access to the app: +
 
-----
+```
 server.port=8081
 
 spring.application.name=jtqj
 server.servlet.context-path=/jumpthequeue
-----
+```
 
 2.- Install the `jtqj` project in our local _Maven_ repository:
 
-----
+```
 C:\...\workspaces\main\jumpthequeue\java\jtqj> mvn install
-----
+```
 
 3.- Go to the `jtqj/server` project and boot the application:
 
-----
+```
 C:\...\workspaces\main\jumpthequeue\java\jtqj\server> mvn spring-boot:run
-----
+```
 
 The app should be launched in the _Spring Boot_ embedded _Tomcat_ server. Wait a few seconds until you see a console message like this:
 
-----
+```
 {"timestamp":"20XX-XX-XXTXX:XX:XX.XXX+00:00","message":"Tomcat started on port(s): 8081 (http) with context path '/jumpthequeue'","logger_name":"org.springframework.boot.web.embedded.tomcat.TomcatWebServer","thread_name":"main","level":"INFO","appname":"jtqj"}
 {"timestamp":"20XX-XX-XXTXX:XX:XX.XXX+00:00","message":"Started SpringBootApp in XX.XXX seconds (JVM running for XX.XXX)","logger_name":"com.devonfw.application.jtqj.SpringBootApp","thread_name":"main","level":"INFO","appname":"jtqj"}
-----
+```
 
 Now we can try to access the app resource.
 
@@ -291,13 +291,13 @@ If you get a response similar to the one in the image, you have verified that th
 == Packaging the App with Maven
 In the same way, using _Maven_ we can package our project in a `.war` file. As in the previous section, open a command prompt with access to _Maven_ (in our devonfw project folder we can simply do so by right clicking and selecting `Open Devon CMD shell here`). Now execute the following command in the projects root directory:
 
-----
+```
 C:\...\workspaces\main\jumpthequeue\java\jtqj> mvn clean package
-----
+```
 
 The packaging process (which includes compilation, tests and generation of the `.war` file) will be launched. Once the process is finished you should see a result like this:
 
-----
+```
 [INFO] Packaging webapp
 [INFO] Assembling webapp [jtqj-server] in [C:\...\workspaces\main\jump-the-queue\jump-the-queue\java\jtqj\server\target\jtqj-server-v4]
 [INFO] Processing war project
@@ -319,7 +319,7 @@ The packaging process (which includes compilation, tests and generation of the `
 [INFO] Total time:  XX:XX min
 [INFO] Finished at: 20XX-XX-XXTXX:XX:XX+0X:00
 [INFO] ------------------------------------------------------------------------
-----
+```
 
 The packaging process creates two `.war` files, that are stored in the `\java\jtqj\server\target` directory. They contain the web application and can be deployed on any Servlet/JSP container.
 

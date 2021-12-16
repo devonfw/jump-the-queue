@@ -27,9 +27,9 @@ You can go back and read that section again to refresh your memory.
 
 Our app is going to consist of 3 main views:
 
-* Login
-* Register
-* ViewQueue
+* `Login`
+* `Register`
+* `ViewQueue`
 
 To navigate between these views/components, we are going to implement routes using the Angular Router.
 
@@ -209,8 +209,8 @@ export class AppModule { }
 ----
 [NOTE]
 ====
-Even if we setup module correctly the html file can give us this red flag: "If 'td-layout' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message."
-To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the @NgModule of all the affected modules.
+Even if we setup module correctly the HTML file can give us this red flag: "If `td-layout` is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the `@NgModule.schemas` of this component to suppress this message."
+To solve this we add "schemas: [ CUSTOM_ELEMENTS_SCHEMA ]" inside the `@NgModule` of all the affected modules.
 ====
 
 [NOTE]
@@ -252,9 +252,9 @@ To go a step further, we have to modify the body of the root component because i
 
 First, we need to create a component to show as default which will be our access view. We will modify it later. Stop `ng serve` and run:
 
-----
+```
 ng generate component form-login
-----
+```
 
 It will add a folder to our project with all the files needed for a component. Now we can move on to the router task again. Run `ng serve` again to continue the development.
 
@@ -293,11 +293,11 @@ Finally, we remove the `<h1>app works!</h1>` from `app.component.html` and repla
 
 image::images/devon4ng/3.BuildYourOwn/root_router.jpg[Root Router, 250]
 
-As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to formlogin when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match the given path.
+As you can see, now the body content is the HTML of `FormLoginComponent`. This is because we told the Router to redirect to login form when the path is `/FormLogin`, but also, redirect to it by default if any of the other routes match the given path.
 
 For now we are going to leave the header like this. In the future we will separate it into another component inside a layout folder.
 
-=== LoginForm Component
+=== `LoginForm` Component
 
 As we have already created this component from the section before, let's move on to building the template of the login view.
 
@@ -312,7 +312,7 @@ First, we need to add the Covalent Layout and the card to the file `form-login.c
 </td-layout>
 ----
 
-This will add a grey background to the view and a card on top of it with the title "Login" now that we have the basic structure of the view.
+This will add a gray background to the view and a card on top of it with the title "Login" now that we have the basic structure of the view.
 
 Now we are going to add this image:
 
@@ -340,11 +340,11 @@ Now we will continue with the second component: Login.
 
 === Login Component
 
-Our first step will be to create the component in the exact same way we created the `FormLogin` component but this time we are going to generate it in a new folder called components inside formlogin. Putting every child component inside that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
+Our first step will be to create the component in the exact same way we created the `FormLogin` component but this time we are going to generate it in a new folder called components inside `formlogin`. Putting every child component inside that folder will allow us to keep a good and clear structure. In order to do this, we use the command:
 
-----
+```
 ng generate component form-login/components/login
-----
+```
 
 After _Angular/CLI_ has finished generating the component, we have to create two modules, one for the form-login and one for the login:
 
@@ -448,7 +448,7 @@ You can go back and read that section again to refresh your memory.
 
 This form contains two input containers from Material. The containers enclose the input with the properties listed above.
 
-We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the auth service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct. We will tackle the on-click-event later.
+We also need to add a button to send the information and redirect to the `QueueViewer` or show an error if something went wrong in the process. But for the moment, as we neither have another component nor the `auth` service yet, we will implement the button visually, as well as the validator to disable it if the form is not correct. We will tackle the on-click-event later.
 
 As a last step we will add this component to the `form-login-component.html`:
 
@@ -472,9 +472,9 @@ With two components already created, we need to use the router to navigate betwe
 
 First, we are going to generate the register component via:
 
-----
+```
 ng generate component register`
-----
+```
 
 This will create our component so we can start working on it. Turning back to `login.component.html` we have to modify these lines of code:
 
@@ -576,13 +576,13 @@ Now we are going to imitate the `login` to shape our `register.component.html`:
 
 Now that we have a minimum of navigation flow inside our application, we are going to generate our first service using the command:
 
-----
+```
 ng generate service register/services/register
-----
+```
 
 This will create a folder "services" inside "register" and create the service itself. Services are where we keep the logic that connects to our database and fetches data which is going to be used by our `component.ts`.
 
-In order to use the service, we are going to create some interface models. Let's create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts` in which we are going to add the model interfaces that will match our backend:
+In order to use the service, we are going to create some interface models. Let's create a folder called `backendModels` inside "shared" and inside this folder a file called `interfaces.ts` in which we are going to add the model interfaces that will match our back-end:
 
 [source, typescript]
 ----
@@ -651,7 +651,7 @@ export class RegisterService {
 }
 ----
 
-This method will send our model to the backend and return an Observable that we will use on the `component.ts`.
+This method will send our model to the back-end and return an Observable that we will use on the `component.ts`.
 
 [NOTE]
 ====
@@ -734,7 +734,7 @@ The `AuthService` will be the one that contains the login info, the `AuthGuardSe
 
 [NOTE]
 ====
-To keep this tutorial simple, we are going to perform the password check client side. *THIS IS NOT CORRECT!* Usually, you would send the username and password to the backend, check that the values are correct, and create a corresponding token which you would pass in the header and use it inside the `AuthService` -- checking with some interceptors that the token is both in the `AuthService` and in the request.
+To keep this tutorial simple, we are going to perform the password check client side. *THIS IS NOT CORRECT!* Usually, you would send the username and password to the back-end, check that the values are correct, and create a corresponding token which you would pass in the header and use it inside the `AuthService` -- checking with some interceptors that the token is both in the `AuthService` and in the request.
 ====
 
 === Login, Auth and AuthGuard Services
@@ -780,7 +780,7 @@ export class Role {
 
 [NOTE]
 ====
-As you can see, we added a `Pageable`, since a lot of the search methods in the backend are using `SearchCriterias`. These need pageables which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
+As you can see, we added a `Pageable`, since a lot of the search methods in the back-end are using `SearchCriterias`. These need pageables which specify a `paseSize` and `pageNumber`. Also, we can see that in this case `FilterVisitor` uses a pageable and adds parameters as a filter (`username` and `password`), which are optional.
 ====
 
 Then we are going to create a `config.ts` file inside the root (`angular/app`). We are going to use that file to set up default config variables, for example: role names with their permission number, default pagination settings etc. For now we are just adding the roles:
@@ -1010,7 +1010,7 @@ export class LoginService {
 }
 ----
 
-If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` corresponding to the `Criteria` in the backend. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result as soon as the POST call is performed. That's why we return the first page and only a single result.
+If you remember the devon4j tutorial, we used `Criteria` in order to filter and to search the DB. The `Criteria` require a pageable and you can add extra parameters to get specific results. In `getVisitorByUsername()` you can see the creation of a `FilterVisitor` corresponding to the `Criteria` in the back-end. This `FilterVisitor` gets a `Pageable` and a `username` and will return a single result as soon as the POST call is performed. That's why we return the first page and only a single result.
 
 [NOTE]
 ====
@@ -1103,9 +1103,9 @@ Now we only need to generate two more components (`header` and `view-queue`) and
 
 By separating the header on top of the page from the layout, we enable the reuse of this component and reach a better separation of concerns across our application. To do this, we are going to generate a new component inside `angular/src/app/layout/header` via:
 
-----
+```
 ng generate component layout/header
-----
+```
 
 Now we are going to add it to the main view `app.component.html`:
 
@@ -1118,7 +1118,7 @@ Now we are going to add it to the main view `app.component.html`:
 ...
 ----
 
-After adding the component to the header view (`app-header`), we are going to modify the HTML of the component (`header.component.html`) and the logic of the component (`header.component.ts`). As a first step, we are going to modify the HTML, adding an icon as a button, which checks whether or not the user is logged in via `*ngIf` by calling the auth service's `isLogged()` method. This will make the icon appear only if the user is logged in:
+After adding the component to the header view (`app-header`), we are going to modify the HTML of the component (`header.component.html`) and the logic of the component (`header.component.ts`). As a first step, we are going to modify the HTML, adding an icon as a button, which checks whether or not the user is logged in via `*ngIf` by calling the `auth` service's `isLogged()` method. This will make the icon appear only if the user is logged in:
 
 [source, html]
 ----
@@ -1144,15 +1144,15 @@ In the header logic (`header.component.ts`) we are simply going to inject the `A
 
 Separating components will allow us to keep the code clean and easy to work with.
 
-=== ViewQueue Component
+=== `ViewQueue` Component
 
 For the last view, we are going to learn how to use our Observables on the HTML template directly without having to `subscribe()` to them.
 
 First, we are going to generate the component via:
 
-----
+```
 ng generate component view-queue
-----
+```
 
 After that, we are going to include the component in the `app-routing.module.ts`, also adding the guard, to only allow users that are `VISITOR` to see the component. It is important to insert the following code before `{ path: '**', redirectTo: '/FormLogin', pathMatch: 'full' }`:
 
@@ -1179,7 +1179,7 @@ Now in order to make this view work, we are going to do these things:
 
 . Modify the logic of the component `view-queue.component.ts`.
 
-First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the backend.
+First, we are going to add the necessary interfaces. We modify `angular/src/app/shared/backendModels/interfaces.ts` and add the `FilterQueue`, `Queue`, `FilterAccessCode`, `AccessCode`, `QueueArray` and `AccessCodeArray`. These are going to be necessary in order to communicate with the back-end.
 
 [source, typescript]
 ----
@@ -1234,11 +1234,11 @@ export class AccessCodeArray {
 
 After this is done, we are going to generate the `AccessCodeService` and the `QueueService`:
 
-----
+```
 ng generate service view-queue/services/Queue
 
 ng generate service view-queue/services/AccessCode
-----
+```
 
 Once this is done, we are going to modify them and add the necessary methods: 
 
@@ -1323,7 +1323,7 @@ export class AccessCodeService {
 }
 ----
 
-In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the backend like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has an `AccessCode` and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
+In the methods `getCurrentlyAttendedAccessCode` and `getVisitorAccessCode` we can see the use of `Pageable` and `FilterAccessCode` to match the `Criteria` in the back-end like we explained in previous steps. In this case, the `getVisitorAccessCode` method will be used to see if the visitor has an `AccessCode` and the `getCurrentlyAttendedAccessCode` is going to recover the first `AccessCode` of the queue.
 
 - For the `QueueService` we are only going to need to find the active queue:
 
@@ -1362,7 +1362,7 @@ export class QueueService {
 }
 ----
 
-Now we are going to create the template `view-queue.component.html` (which will use this data) and we will also introduce a new concept: "_async pipes in templates_".
+Now we are going to create the template `view-queue.component.html` (which will use this data) and we will also introduce a new concept: `async` pipes in templates.
 
 [source, html]
 ----
@@ -1408,16 +1408,16 @@ Now we are going to create the template `view-queue.component.html` (which will 
 </td-layout>
 ----
 
-If you watch closely, the starting `td-layout` has an `*ngIf` inside it. This `*ngIf` allows us to asynchronously pipe the observables that we will asign in the next steps. This solution avoids having to use `subscribe()` (as it subscribes automatically) and -- as a result -- we dont have to worry about where to `unsubscribe()` from the observables.
+If you watch closely, the starting `td-layout` has an `*ngIf` inside it. This `*ngIf` allows us to asynchronously pipe the observables that we will assign in the next steps. This solution avoids having to use `subscribe()` (as it subscribes automatically) and -- as a result -- we don't have to worry about where to `unsubscribe()` from the observables.
 
 In this HTML, we give `*ngif` another use: We use it to hide certain panels. Using `accessCodeVisitor`, we hide the ticket number panel and the "leave the queue"-button and show the button to join the queue. On the contrary we can hide the ticket number and the "leave the queue"-button and only show the "join the queue"-button.
 
 [NOTE]
 ====
-In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you dont `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubscribe()` method, the app could end up containing a memory leak. This is because -- everytime we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
+In this case, since we are using HTTP and the calls are finite, there wouldn't be any problems if you don't `unsubscribe()` from their corresponding observables. However, if -- for example -- we use an observable to keep track of an input and `subscribe()` to it but not controlling the `unsubscribe()` method, the app could end up containing a memory leak. This is because -- every time we visit the component with the input -- it is going to create another subscription without unsubscribing from the last one.
 ====
 
-Finally, to adapt the async pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queuers variable directly to the observable, so we can load it using `*ngIf`.
+Finally, to adapt the `async` pipe, the `ngOnInit()` method inside `view-queue.component.ts` now does not subscribe to the observable. In its place, we equal the queue variable directly to the observable, so we can load it using `*ngIf`.
 
 [source, typescript]
 ----
@@ -1465,7 +1465,7 @@ export class ViewQueueComponent implements OnInit {
 }
 ----
 
-In this last component we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an async pipe, everytime we modify the status of the `Observables`, they are going to update the template.
+In this last component we assign the `Observables` when the component is initiated. After that, when clicking the "join the queue"-button, we assign a new `Observable` called `AccessCode` to the `accessCodeVisitor$`. Finally, when we leave the queue, we delete the `AccessCode` and set the `accessCodeVisitor` to null. Since we are using an `async` pipe, every time we modify the status of the `Observables`, they are going to update the template.
 
 image::images/devon4ng/3.BuildYourOwn/withCodeAccess.png[Queue Page with Access Code, 250]
 

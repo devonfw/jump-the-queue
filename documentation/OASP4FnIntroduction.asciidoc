@@ -30,15 +30,15 @@ Serverless computing consists in the following concepts and benefits:
 
 Besides the automatic horizontal scaling, the biggest benefit is that **you only pay for the compute that you need**. Depending on your traffic scale and shape this may be a huge economic win in many projects.
 
-It solves common and inefficient situations like **occasional requests**, where an application with a few small requests per minute makes the CPU idle most of time, or like **inconsistent traffic** where the traffic profile of an application is very _speaky_. For example:
+It solves common and inefficient situations like **occasional requests**, where an application with a few small requests per minute makes the CPU idle most of time, or like **inconsistent traffic** where the traffic profile of an application is very inconsistent. For example:
 
 image::images/oasp4fn/1.Introduction/inconsistent-traffic-pattern.png[Inconsistent Traffic Pattern]
 
 
-In a traditional environment you may need to increase your total hardware capability by a factor of 10 to handle the spikes, even though they only account for less than 4% of total machine uptime.
+In a traditional environment you may need to increase your total hardware capability by a factor of 10 to handle the spikes, even though they only account for less than 4% of total machine up-time.
 
 == Installation
-OASP4Fn is distributed as a **npm package** that you can install in your node.js application running in a terminal the following command:
+OASP4Fn is distributed as a **npm package** that you can install in your NodeJS application running in a terminal the following command:
 
 [source, bash]
 ----
@@ -57,7 +57,7 @@ Currently, the **OASP4Fn architecture** defines a series of adapters to help dev
 image::images/oasp4fn/1.Introduction/oasp4fn_available.png[OASP4Fn Available]
 
 === TypeScript
-The Serverless framework is not prepared by default to use TypeScript. OASP4Fn allows the developer to use **TypeScript** as the programming language in any development, as it provides the **types definitions** and a **preconfigured webpack building system** that automates the transpilation of the different handlers. 
+The Serverless framework is not prepared by default to use TypeScript. OASP4Fn allows the developer to use **TypeScript** as the programming language in any development, as it provides the **types definitions** and a **pre-configured webpack building system** that automates the transpilation of the different handlers. 
 
 === Infrastructure as Code 
 The service made with OASP4Fn must follow a **specified structure**, that along with a configuration file will allow the user to avoid having to configure his service manually. 
@@ -84,7 +84,7 @@ The service made with OASP4Fn must follow a **specified structure**, that along 
 
 The logic of our application must be stored in a folder, called **handlers**, inside it we will have a folder for each event used to trigger the handler and inside a folder with the name of the method that triggers the handler.
 
-Furthermore of the specified before, in the file **oasp4fn.config.js**, it is specified the configuration of the events, deployment information and the runtime environment in which the handlers will run.
+Furthermore of the specified before, in the file `oasp4fn.config.js`, it is specified the configuration of the events, deployment information and the runtime environment in which the handlers will run.
 
 === Annotations
 In addition to the configuration file, we can specify to each handler a **concrete configuration**, related to the event that triggers the handler, using a **dummy function** that adds or modifies the configuration specified in OASP4Fn configuration file.

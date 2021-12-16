@@ -13,7 +13,7 @@ endif::[]
 = devon4ng Application
 
 == MyThaiStar Basics
-As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application frontend project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
+As an example of how a devon4ng application is built, we are going to show the _MyThaiStar_ application front-end project, that can be found in https://github.com/devonfw/my-thai-star[GitHub].
 
 The _MyThaiStar_ application is a solution for managing the online booking and orders of a restaurant. It is presented as a showcase app but designed with real requirements in mind. Moreover, it attempts to demonstrate common features provided by many modern web apps (routing with and without guards, use of flex-box, theming, re-usable components, mock back end, ...).
 
@@ -29,23 +29,23 @@ The main features of the app are:
 * Logged-in users in the role _Waiter_ can also:
 ** Access a restricted area to see and filter the list and details of all reservations and orders made by users.
 
-== MyThaiStar devon4ng Frontend Overview
+== MyThaiStar devon4ng Front-end Overview
 In the previous section we have shown the aspect of the _MyThaiStar_ server project and the services it provides.
 
-In this section we are going to focus on the implementation of the frontend components, services and directives. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4ng_ client project with the devonfw framework.
+In this section we are going to focus on the implementation of the front-end components, services and directives. We will show how _MyThaiStar_ is created and how you can kickstart your own _devon4ng_ client project with the devonfw framework.
 
-The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for backend solutions _Angular_ and _Xamarin_ as default clients.
+The _MyThaiStar_ project is hosted on https://github.com/devonfw/my-thai-star[GitHub] and includes different technologies such as _Java_, _.NET_ and _Node_ for back-end solutions _Angular_ and _Xamarin_ as default clients.
 
 === The devon4ng Project
 Using the _devon4ng_ approach for the client project we will have the structure of a main _Angular_ project as follows:
 
 image::images/devon4ng/2.Example_app/project_main_files.jpg[Angular Project Structure]
 
-In the _e2e_ folder will be all end-to-end tests.
+In the `e2e` folder will be all end-to-end tests.
 
-In the _node modules_ folder, all installed dependencies will be stored.
+In the `node modules` folder, all installed dependencies will be stored.
 
-The _src_ folder contains all the application code.
+The `src` folder contains all the application code.
 
 Finally, the rest of the files are configuration files for different technologies involved in the project.
 
@@ -129,15 +129,15 @@ image::images/devon4ng/2.Example_app/price_calculator.jpg[MyThaiStar Price Calcu
 
 There are two special services in MyThaiStar, which serve a different purpose, than just being consumed by a component. They are:
 
-* *Authentication*
-* *AuthGuard*
-* *HttpClient*
+* `*Authentication*`
+* `*AuthGuard*`
+* `*HttpClient*`
 
 To secure the access to the waiter cockpit -- which is a forbidden area for anyone who is not a waiter -- MyThaiStar employs a service of authentication as well as a *Router Guard*.
 
 image::images/devon4ng/2.Example_app/authentication.jpg[MyThaiStar Authentication & Router Guard Service]
 
-*Guards* are services, that implement the _CanActivate_ function, which returns a Boolean, indicating if a navigation attempt is valid or forbidden. If it is forbidden, the router stops navigation -- if it is valid, the router navigates to the desired location. The _authentication service_ serves as storage and validator for certain kinds of data, including usernames, roles, permissions and https://jwt.io/[JWT] tokens.
+*Guards* are services, that implement the `CanActivate` function, which returns a Boolean, indicating if a navigation attempt is valid or forbidden. If it is forbidden, the router stops navigation -- if it is valid, the router navigates to the desired location. The _authentication service_ serves as storage and validator for certain kinds of data, including usernames, roles, permissions and https://jwt.io/[JWT] tokens.
 
 *HttpClient* -- among other things -- implements the management of HTTP headers. The workflow is exactly the same as with standard HTTP requests/responses, but here a token is added to a header, when specific, secured services are called. HttpClient has also been extended to handle errors, in case a token has expired or is corrupted.
 

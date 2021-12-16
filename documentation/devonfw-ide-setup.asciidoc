@@ -31,7 +31,7 @@ image::images/tutorialsources/devonfw-ide-setup-step02.png[devonfw Distribution 
 . Choose a project location for your project (e.g. `C:\projects\devonfw`, referred to with `$projectLoc` in this setup guides following steps). Avoid long paths and white spaces to prevent trouble. Extract the downloaded ZIP files via `Extract Here` (e.g. using http://www.7-zip.org/[7-Zip]). Do not use the Windows native ZIP tool to extract as this is not working properly on long paths and filenames.
 . Run the script `update-all-workspaces.bat` in `$projectLoc`.
 +
-Hint: You can use update-all-workspaces.bat whenever you created a new folder in `workspaces` to separate different workspaces. This update will create new Eclipse start batches allowing to run a number of Eclipse instances using different workspaces in parallel.  
+Hint: You can use `update-all-workspaces.bat` whenever you created a new folder in `workspaces` to separate different work-spaces. This update will create new Eclipse start batches allowing to run a number of Eclipse instances using different work-spaces in parallel.  
 +
 . Open `console.bat` and check out the git repositories you need to work on into `workspaces\main`. with the following commands:
 +
@@ -44,13 +44,13 @@ git clone --recursive https://github.com/devonfw/my-thai-star.git
 Do another check whether there are files in folder `workspaces\main\my-thai-star\`!
 . Run the script `eclipse-main.bat` to start the Eclipse IDE.
 . *In Eclipse* select `File > Import > Maven > Existing Maven Projects` and then choose the cloned projects from your workspace by clicking the `Browse` button and select the folder structure (`workspaces\main\my-thai-star\java\MTSJ`).
-. *Execute* the application by starting the ´SpringBootApp´. Select the class and click the right mouse button. In the context menu select the entry `Run as => Java Application` (or `Debug as ...`). The application starts up and creates log entries in the Eclipse Console Tab.
+. *Execute* the application by starting the `SpringBootApp`. Select the class and click the right mouse button. In the context menu select the entry `Run as => Java Application` (or `Debug as ...`). The application starts up and creates log entries in the Eclipse Console Tab.
 +
 image::images/tutorialsources/devonfw-ide-setup-run.png[Running an Application]
 +
 . Open `console.bat`.
 +
-. Goto the folder `workspaces\main\my-thai-star\angular` in the `console.bat` terminal.
+. Go to the folder `workspaces\main\my-thai-star\angular` in the `console.bat` terminal.
 +
 . Execute the command: `yarn install`. Wait till everything is finished.
 +

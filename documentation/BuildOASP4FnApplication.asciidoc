@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 
 == Build your OASP4Fn Application 
-In this chapter we are going to build a serverless backend with OASP4Fn. The main objective of this tutorial is to take an initial contact with OASP4Fn and the necessary tools we are going to use in the development, so at the end of it, the user will be enough confident to start developing a new project with OASP4Fn without problems.
+In this chapter we are going to build a serverless back-end with OASP4Fn. The main objective of this tutorial is to take an initial contact with OASP4Fn and the necessary tools we are going to use in the development, so at the end of it, the user will be enough confident to start developing a new project with OASP4Fn without problems.
 
 == Install Tools
 In this section we’re going to introduce all the necessary tools we’re going to need to start programming and a initial configuration if necessary.
@@ -21,16 +21,16 @@ Download the installer from the https://code.visualstudio.com/Download[official 
 Once installed, the first thing you should do is install the extensions that will help you during the development, to do that follow this steps:
 
 1. Install https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync[Settings Sync] extension.
-2. Open the command palette (Ctrl+Shift+P) and introduce the command: *Sync: Download Settings*.
-3. Provide GIST ID: *3b1d9d60e842f499fc39334a1dd28564*.
+2. Open the command palette (CTRL+Shift+P) and introduce the command: *Sync: Download Settings*.
+3. Provide GIST ID: `*3b1d9d60e842f499fc39334a1dd28564*`.
 
 In the case that you are unable to set up the extensions using the method mentioned, you can also use the scripts provided in https://github.com/oasp/oasp-vscode-ide[this] repository.
 
-=== Node.js
+=== NodeJS
 Go to the https://nodejs.org/en/[node.js] official page and download the version you like the most, the LTS or the Current as you wish.
 
 === Typescript
-Let’s install what is going to be the main language during development: TypeScript. This is a ES6 superset that will help us to get a final clean and distributable JavaScript code. This is installed globally with https://www.npmjs.com/[npm], the package manager used to install and create javascript modules in Node.js, that is installed along with Node, so for install typescript you don’t have to install npm explicitly, only run this command:
+Let’s install what is going to be the main language during development: TypeScript. This is a ES6 super set that will help us to get a final clean and distributable JavaScript code. This is installed globally with https://www.npmjs.com/[npm], the package manager used to install and create JavaScript modules in NodeJS, that is installed along with Node, so for install typescript you don’t have to install npm explicitly, only run this command:
 
 `npm install –g typescript`
 
@@ -47,7 +47,7 @@ Lastly, we are going to install the serverless framework, that are going to help
 `npm install –g serverless`
 
 == Postman 
-https://www.getpostman.com/[Postman] is an app that helps you build HTTP requests and send them to a server through any of the HTTP methods. This tool will be useful at the end of the tutorial when we are going to run our handlers locally and send POST http requests to them.
+https://www.getpostman.com/[Postman] is an app that helps you build HTTP requests and send them to a server through any of the HTTP methods. This tool will be useful at the end of the tutorial when we are going to run our handlers locally and send POST HTTP requests to them.
 
 == Starting our Project through a Template
 To start with the tutorial we are going to use the https://github.com/oasp/oasp4fn-application-template[oasp4fn application template], so use the following command to clone it in your local machine:
@@ -62,7 +62,7 @@ git remote remove origin
 git remote add origin <your-git-repository>
 ```
 
-This template comes with the structure that has to have an OASP4Fn application and the skeleton of some handlers. These handlers are stored on event folders, which we can add or remove adjusting to our needs, so how we only are going to use http events, we are going to access to the cloned folder and remove S3 folder inside the handlers and test folders:
+This template comes with the structure that has to have an OASP4Fn application and the skeleton of some handlers. These handlers are stored on event folders, which we can add or remove adjusting to our needs, so how we only are going to use HTTP events, we are going to access to the cloned folder and remove S3 folder inside the handlers and test folders:
 
 ```
 rm handlers\S3\ -r
@@ -74,16 +74,18 @@ Only remains to install the base dependencies of our code using yarn, so we only
 `yarn`
 
 == Local Database Setup 
-The database we are going to use during this tutorial is https://aws.amazon.com/dynamodb/[dynamodb], the noSQL database provided by AWS, which is supported by OASP4Fn.
+The database we are going to use during this tutorial is https://aws.amazon.com/dynamodb/[dynamodb], the NoSQL database provided by AWS, which is supported by OASP4Fn.
 First you have to download and start it following http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning[Amazon Official Documentation], once you have downloaded DynamoDB on your computer, open the corresponding shell using the local endpoint:
 
+```
 http://localhost:8000/shell/
+```
 
 And an interactive shell will be opened in your default browser like this:
 
 image::images/oasp4fn/3.BuildYourOwn/dynamo_db_shell.png[Dynamo DB Shell]
 
-Now we are going to create a table called Queue with the opened shell, to do that write "createTable" in the text pane sited at the left side of the screen and press Ctrl + Space, this will generate a template object specifying the properties that has to be passed to the create function, so we have to modify that object, having at the end something like this:
+Now we are going to create a table called Queue with the opened shell, to do that write `createTable` in the text pane sited at the left side of the screen and press CTRL + Space, this will generate a template object specifying the properties that has to be passed to the create function, so we have to modify that object, having at the end something like this:
 
 [source, javascript]
 ----
@@ -114,7 +116,7 @@ dynamodb.createTable(params, function(err, data) {
 });
 ----
 
-Finally press Ctrl + Enter, and if we have specified the properties properly an output with table description will be displayed at the left side console:
+Finally press CTRL + Enter, and if we have specified the properties properly an output with table description will be displayed at the left side console:
 
 image::images/oasp4fn/3.BuildYourOwn/table_description.png[Table Description]
 
@@ -139,8 +141,8 @@ There is no need to put real credentials in the file as we are going to work loc
 Finally, it's worth saying that there are more ways to pass the credentials to the sdk, but this is the best in our case, for more information about credentials take a look on to the   
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html[official documentation].
 
-== Adding Typings
-The template we have cloned comes with a declaration types at the root of the handlers folder with typings for AWS lambda service and events, but must add more types for the data we are going to manage, so we are going to export an interface Visitor and an interface Code in our declaration file, that will look like this:
+== Adding Types
+The template we have cloned comes with a declaration types at the root of the handlers folder with types for AWS lambda service and events, but must add more types for the data we are going to manage, so we are going to export an interface Visitor and an interface Code in our declaration file, that will look like this:
 
 [source, typescript]
 ----
@@ -162,13 +164,13 @@ Now that we already have finish the set up of our project, we are going to add o
 * One that will add the visitor to the queue
 * And other to get your position in the queue
 
-Both of the handlers will be triggered by http events with a post method, so we should delete the rest of the methods than don't are going to use, both in the handlers and test folders. So once we have done that we are going to modify our initial handler in the template following the next steps:
+Both of the handlers will be triggered by HTTP events with a post method, so we should delete the rest of the methods than don't are going to use, both in the handlers and test folders. So once we have done that we are going to modify our initial handler in the template following the next steps:
 
 1. Rename the template handler to _register-handler.ts_
-2. Install the _lodash_ package through ```yarn add <package_name>``` and import it.
+2. Install the _Lodash_ package through ```yarn add <package_name>``` and import it.
 3. Import the _fn-dynamo_ adapter.
 4. Add our _Visitor_ interface we add to the _types.d.ts_ file.
-5. Ser the dynamo adapter to oasp4fn as the database adapter.
+5. Set the dynamo adapter to oasp4fn as the database adapter.
 6. Specify the configuration to this concrete handler, in this case only the path property is necessary.
 7. Rename the handler.
 8. Write the logic of our function with the the imported adapter.
@@ -286,7 +288,7 @@ export async function search (event: HttpEvent, context: Context, callback: Func
 ----
 
 == Generating the Configuration Files
-In this part we are going to learn how to generate the configuration files that we are going to use to build and deploy our handlers. The first step, is to add the configuration in the _oasp4fn.config.js_ file, but how isn't necessary more configuration than the default one in this tutorial, we are going to remove that file:
+In this part we are going to learn how to generate the configuration files that we are going to use to build and deploy our handlers. The first step, is to add the configuration in the `oasp4fn.config.js` file, but how isn't necessary more configuration than the default one in this tutorial, we are going to remove that file:
 
 `rm oasp4fn.config.js`
 
@@ -294,12 +296,12 @@ Finally we can execute the command:
 
 `yarn fun`
 
-And is all goes well, two files, _serverless.yml_ and webpack.config.json will be generated and we will see this command line output:
+And is all goes well, two files, `serverless.yml` and `webpack.config.json` will be generated and we will see this command line output:
 
 image::images/oasp4fn/3.BuildYourOwn/fun_output.png[FUN Output]
 
 == Build and Run your Handlers Locally
-To execute our handlers locally we will make use of the https://github.com/dherault/serverless-offline[serverless-offline] plugin, that emulates a local API-gateway that let you build your handlers through webpack and send http requests to them, so run:
+To execute our handlers locally we will make use of the https://github.com/dherault/serverless-offline[serverless-offline] plugin, that emulates a local API-gateway that let you build your handlers through webpack and send HTTP requests to them, so run:
 
 `yarn offline`
 
@@ -316,7 +318,7 @@ And when the webpack rebuild line appears you can start to send requests to the 
 
 image::images/oasp4fn/3.BuildYourOwn/postman_register.png[Postman Register]
 
-After this, test your other handler, sending a void object with the POST http request, and see how our handler return the visitor inserted:
+After this, test your other handler, sending a void object with the POST HTTP request, and see how our handler return the visitor inserted:
 
 image::images/oasp4fn/3.BuildYourOwn/postman_search.png[Postman Search]
 

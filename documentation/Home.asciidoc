@@ -23,7 +23,7 @@ Here's some general advice up front:
 
 * Don't get lost in all the _optional links_ provided within the text. They exist for the sake of completeness and you don't have to follow them unless explicitly stated.
 
-* In Eclipse select the "Package Explorer" tab, press *Ctrl+F10* and under "Package Presentation" enable the option "Hierarchical" to gain a better overview over the project.
+* In Eclipse select the "Package Explorer" tab, press *CTRL+F10* and under "Package Presentation" enable the option "Hierarchical" to gain a better overview over the project.
 
 * If Eclipse shows any _warnings_, ignore them for the time being.
 
@@ -39,7 +39,7 @@ IMPORTANT: If you haven't already, please read the devonfw https://github.com/de
 
 == Document Overview
 
-=== devon4j (Backend)
+=== devon4j (Back-end)
 . link:devon4j-overview.asciidoc[devon4j Overview]
 . link:an-devon4j-application.asciidoc[devon4j Application]
 . link:build-devon4j-application.asciidoc[Build a devon4j Application]
@@ -50,7 +50,7 @@ IMPORTANT: If you haven't already, please read the devonfw https://github.com/de
 . link:devon4j-testing.asciidoc[devon4j Testing]
 . link:devon4j-deployment.asciidoc[devon4j Deployment]
 
-=== devon4ng (Frontend)
+=== devon4ng (Front-end)
 . link:devon4ng-introduction.asciidoc[devon4ng Introduction]
 . link:an-devon4ng-application.asciidoc[devon4ng Application]
 . link:devon4ng-components.asciidoc[devon4ng Components]

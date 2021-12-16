@@ -26,22 +26,22 @@ Having all the dependencies serf-contained in the distribution's _zip_ file, use
 == Pre-packaged Software
 The list of software pre-installed with devonfw distributions is:
 
-- _Eclipse_: pre-configured and fully functional `IDE` to develop Java based apps.
+- _Eclipse_: pre-configured and fully functional IDE to develop Java based apps.
 
 - _Java_: all the Java environment configured and ready to be used within the distribution.
 
 - _Maven_: to manage project dependencies.
 
-- _Node_: a Node js environment configured and ready to be used within the distribution.
+- _Node_: a NodeJS environment configured and ready to be used within the distribution.
 
-- _Sencha_: devonfw also includes a installation of the _Sencha Cmd_ tool.
+- _Sencha_: devonfw also includes a installation of the _Sencha CMD_ tool.
 
-- _Sonarqube_: a code quality tool.
+- _SonarQube_: a code quality tool.
 
 - _Tomcat_: a web server ready to test the deploy of our artifacts.
 
 == Server Solutions
-For backend solutions _devonfw_ provides the https://github.com/devonfw/devon4j[devon4j] platform as main implementation. With _devon4j_, users will find a standardized architecture blueprint for a Java applications based on _Spring_, and a set of best-of-breed technologies alongside a compendium of best practices and code conventions to build solid and reliable web applications.
+For back-end solutions _devonfw_ provides the https://github.com/devonfw/devon4j[devon4j] platform as main implementation. With _devon4j_, users will find a standardized architecture blueprint for a Java applications based on _Spring_, and a set of best-of-breed technologies alongside a compendium of best practices and code conventions to build solid and reliable web applications.
 
 With _devonfw_/_devon4j_ developers have at their disposal an archetype to generate new server projects with all _devon4j_ modules and pre-configurations ready to start to develop applications in a fully functional environment. 
 
@@ -61,13 +61,13 @@ With _Devcon_ users can automate the creation of new projects (both server and c
 
 image::images/devon/devcon.png[Devcon, 600]
 
-All those tasks can be done manually using _Maven_, _Tomcat_, _Sencha Cmd_, _Bower_, _Gulp_, etc. but with _Devcon_ users have the possibility of managing the projects without the necessity of dealing with all those different tools.
+All those tasks can be done manually using _Maven_, _Tomcat_, _Sencha CMD_, _Bower_, _Gulp_, etc. but with _Devcon_ users have the possibility of managing the projects without the necessity of dealing with all those different tools.
 
-=== Cobigen
+=== CobiGen
 
-_Cobigen_ is a code generator included in the context of _devonfw_ that allows users to generate all the structure and code of the components, helping to save a lot of time consumed in repetitive tasks.
+_CobiGen_ is a code generator included in the context of _devonfw_ that allows users to generate all the structure and code of the components, helping to save a lot of time consumed in repetitive tasks.
 
-image::images/devon/cobigen.png[`CobiGen`]
+image::images/devon/cobigen.png[CobiGen]
 
 == ip modules
 
@@ -75,19 +75,19 @@ As part of the goal of productivity boosting, _devonfw_ provides also to develop
 
 The current available modules are:
 
-- _async_: module to manage asynchronous web calls in a _Spring_ based server app.
+- `async`: module to manage asynchronous web calls in a _Spring_ based server app.
 
-- _i18n_: module for internationalization.
+- `i18n`: module for internationalization.
 
-- _integration_: implementation of https://projects.spring.io/spring-integration/[Spring integration].
+- `integration`: implementation of https://projects.spring.io/spring-integration/[Spring integration].
 
-- _microservices_: a set of archetypes to create a complete microservices infrastructure based on https://cloud.spring.io/spring-cloud-netflix/[Spring Cloud Netflix].
+- `microservices`: a set of archetypes to create a complete microservices infrastructure based on https://cloud.spring.io/spring-cloud-netflix/[Spring Cloud Netflix].
 
-- _reporting_: a module to create reports based on http://community.jaspersoft.com/project/jasperreports-library[Jasper reports] library.
+- `reporting`: a module to create reports based on http://community.jaspersoft.com/project/jasperreports-library[Jasper reports] library.
 
-- _winauth active directory_: a module to authenticate users against an _Active Directory_.
+- `winauth active directory`: a module to authenticate users against an _Active Directory_.
 
-- _winauth single sign on_: module that allows applications to authenticate the users by the Windows credentials.
+- `winauth single sign on`: module that allows applications to authenticate the users by the Windows credentials.
 
 '''
-*Next Chapter*: link:devonfw-ide-setup.asciidoc[devonfw `IDE` Setup]
+*Next Chapter*: link:devonfw-ide-setup.asciidoc[devonfw IDE Setup]

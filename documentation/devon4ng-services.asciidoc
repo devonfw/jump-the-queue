@@ -28,7 +28,7 @@ ____
 
 Services are often created in a shared folder, with the purpose of containing all the logic of a component or a complex type of operation. For example, in the case of MyThaiStar, all components which call the server, or have methods with more complex logic, have their own service that implements them. There are also services, which -- instead of being used by just one component -- are used several times throughout the code, in many components, like the price calculator for example.
 
-Just like components, services have to be declared as a NgModule. In this case via the `providers` array.
+Just like components, services have to be declared as a `NgModule`. In this case via the `providers` array.
 
 == Dependency Injection
 The https://angular.io/guide/architecture#dependency-injection[Angular Architecture Documentation] says the following about DI:
@@ -48,9 +48,9 @@ For more information, please visit the https://angular.io/guide/dependency-injec
 == Create a new Service
 Security or other global services will be stored in a shared folder, at the same level as the rest of the components. Services that are specific to a certain component, will be stored in a folder for the respective component. We can specify the path to a service when creating it with the Angular CLI:
 
-----
+```
 ng generate service <path>/<service_name>
-----
+```
 
 == Authentication
 Authentication is a special service created to maintain user sessions in the application. In the case of our tutorial application it serves as an indicator of the log-in state and stores the name of the user, but it can be extended to store tokens, validate permissions of roles, and so on.
@@ -58,7 +58,7 @@ Authentication is a special service created to maintain user sessions in the app
 Basically, the objective of this service is to manage, what the user can or can not see, depending on their actions in the application.
 
 == Guards
-https://angular.io/guide/router#milestone-5-route-guards[Guards] are services, that implement an interface called *CanActivate*. This interface forces developers to implement the `canActivate` method, which returns a simple boolean. Is up to you to decide, what conditions you are going to implement, to forbid or allow the navigation to a certain component.
+https://angular.io/guide/router#milestone-5-route-guards[Guards] are services, that implement an interface called `*CanActivate*`. This interface forces developers to implement the `canActivate` method, which returns a simple `boolean`. Is up to you to decide, what conditions you are going to implement, to forbid or allow the navigation to a certain component.
 
 Guards are strongly related to the Router, because routes can carry the property `canActivate:[GuardServiceName]`. You can create as many Guards as you want, to secure every single component of your app, just as you require.
 

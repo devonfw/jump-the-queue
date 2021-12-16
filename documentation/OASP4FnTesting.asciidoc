@@ -21,13 +21,13 @@ yarn global add mocha
 yarn global add ts-node
 ```
 
-No more dependencies are needed, because we start our project with the oasp4fn application template and the local part of the test dependencies are specified as dev-dependencies at the _package.json_.
+No more dependencies are needed, because we start our project with the oasp4fn application template and the local part of the test dependencies are specified as dev-dependencies at the package.json.
 
 == Writing the Tests
 Once we have all the dependencies installed, it's time to put hands on the tests.
 
 === Setting up File
-First of all we are going to import all the handlers which we are going to test in our file/s (in our case only in test/Http/Post.ts), our typing and the every time useful _lodash_ package, so the head of our test file will look like this:
+First of all we are going to import all the handlers which we are going to test in our file/s (in our case only in test/Http/Post.ts), our typing and the every time useful _Lodash_ package, so the head of our test file will look like this:
 
 [source, typescript]
 ----
@@ -62,7 +62,7 @@ Now is time to call the function and check his behavior, first of all execute `y
 
 [IMPORTANT]
 ====
-Keep in mind that if you don't have the instace of the database running, as is specified in link:BuildOASP4FnApplication#local-database-set-up[this section], the tests won't pass.
+Keep in mind that if you don't have the instance of the database running, as is specified in link:BuildOASP4FnApplication#local-database-set-up[this section], the tests won't pass.
 ====
 
 [source, typescript]
@@ -101,7 +101,7 @@ describe('register', function () {
 });
 ----
 
-Note that we declare and instantiate a HttpEvent and only declare the Context, that's why we don't use the context variable inside our handlers but our event variable yes.
+Note that we declare and instantiate a `HttpEvent` and only declare the Context, that's why we don't use the context variable inside our handlers but our event variable yes.
 
 Also, realize that we have modified the mocha default timeout (that is 2000ms) to 6000ms, and we change it to match the default AWS lambda timeout. Be careful here, and look that the function passed to the _describe_ is not an arrow function, that's because the scope of an arrow function is bounded when it's created not when it's called, so if that function would been an arrow function we couldn't have access to the mocha methods and properties.
 

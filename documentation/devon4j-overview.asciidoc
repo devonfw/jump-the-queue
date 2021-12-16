@@ -11,12 +11,12 @@ ifdef::env-github[]
 endif::[]
 
 = devon4j
-For _Java_ based backend solutions, _devonfw_ includes https://github.com/devonfw/devon4j/wiki/architecture[devon4j] that provides a standardized architecture blueprint, an open best-of-breed technology stack as well as industry proven best practices and code conventions for a cloud ready _Spring_ based server.
+For _Java_ based back-end solutions, _devonfw_ includes https://github.com/devonfw/devon4j/wiki/architecture[devon4j] that provides a standardized architecture blueprint, an open best-of-breed technology stack as well as industry proven best practices and code conventions for a cloud ready _Spring_ based server.
 
-Included in _devonfw_ framework as default server solution, https://github.com/devonfw/devon4j[devon4j] is the result of applying devonfw principles in a Java based technology stack. With _devon4j_ developers are able to create web application backends in a fast and reliable way, generating web services (REST, SOAP) that web clients can consume.
+Included in _devonfw_ framework as default server solution, https://github.com/devonfw/devon4j[devon4j] is the result of applying devonfw principles in a Java based technology stack. With _devon4j_ developers are able to create web application back-ends in a fast and reliable way, generating web services (REST, SOAP) that web clients can consume.
 
 == devon4j Technology Stack
-As mentioned before, devon4j is not only a framework but a set of tools and conventions. devon4j provides a Java backend solution based on the following technologies:
+As mentioned before, devon4j is not only a framework but a set of tools and conventions. devon4j provides a Java back-end solution based on the following technologies:
 
 * https://spring.io/[Spring framework] as the main development framework.
 
@@ -73,9 +73,9 @@ image::images/devon4j/1.Overview/devon4j_architecture.png[devon4j Architecture, 
 
 A _component_ is a package that contains the services and logic related to one feature of the app.
 
-Each component will be divided in three layers: _service_, _logic_ and _dataaccess_.
+Each component will be divided in three layers: `service`, `logic` and `dataaccess`.
 
-* *Service* Layer: will expose the REST api to exchange information with the client applications.
+* *Service* Layer: will expose the REST API to exchange information with the client applications.
 
 * *Logic* Layer: the layer in charge of hosting the business logic of the application.
 

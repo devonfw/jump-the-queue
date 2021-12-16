@@ -22,7 +22,7 @@ This command will fail if the AWS credentials are missing. For more information 
 
 When the deploy is finish with no errors, you will have a command line output with the endpoints and the functions deployed.
 
-image::images/oasp4fn/3.BuildYourOwn/sls_deploy.PNG[SLS Deploy]
+image::images/oasp4fn/3.BuildYourOwn/sls_deploy.PNG[AWS Deploy]
 
 Note that until now we have been working locally, so if we gonna deploy our handlers and make them work, we should change the endpoint of our services:
 

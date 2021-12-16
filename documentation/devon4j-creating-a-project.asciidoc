@@ -15,31 +15,31 @@ In this chapter you will learn to create a workspace and create a project using 
 
 
 == Command Line Interface
-* Goto your Devon-dist. folder. Open `console.bat` 
+* Go to your Devon-dist. folder. Open `console.bat` 
 
 * Execute: `cd workspaces` 
 
 * Execute: `devon workspace create -workspace MyWS` 
 
-* If the job is finished, use ctrl+c to and answer y to the question
+* If the job is finished, use CTRL+C to and answer y to the question
 
 * Execute: `cd MyWS` 
 
 * Execute: `devon devon4j create –p` and insert the following entries. 
 
-** Serverpath: hit Enter. (So it will be the current directory).
+** `serverpath`: hit Enter. (So it will be the current directory).
 
-** Servername: myServer (or any name you like).
+** `servername`: `myServer` (or any name you like).
 
-** Packagename: com.capgemini.myServer 
+** `packagename`: `com.capgemini.myServer` 
 
-** Groupid: com.capgemini  
+** `groupid`: `com.capgemini`  
 
-** Version:  1.0 
+** `version`:  1.0 
 
-** Dbtype: h2 
+** `dbtype`: h2 
 
-image::images/tutorialsources/devcon-create-backend.png[Devcon Backend Creation]
+image::images/tutorialsources/devcon-create-backend.png[Devcon Back-end Creation]
 
 * Execute: `update-all-workspaces.bat` from your devon-dist. folder.
 
@@ -60,15 +60,15 @@ We see later, how to access these server. For now just use ctr+c to stop it from
 == Graphical User Interface
 * Open: `console.bat`
 
-* Goto your workspaces directory.
+* Go to your `workspaces` directory.
 
 * Execute : `devcon -g`
 
-* The GUI should open. Open "workspaces" select "create".
+* The GUI should open. Open `workspaces` select "create".
 
 image::images/tutorialsources/devcon-gui-workspace.png[Devcon GUI Workspace 1, 600]
 
-* Insert: MyProject. Click "Start".
+* Insert: `MyProject`. Click "Start".
 
 image::images/tutorialsources/devcon-gui-ws02.png[Devcon GUI Workspace 2, 600]
 
@@ -76,17 +76,17 @@ image::images/tutorialsources/devcon-gui-ws02.png[Devcon GUI Workspace 2, 600]
 
 * Open "devon4j". Select "create".
 
-** Serverpath: ../MyProject/Servers
+** `serverpath`: `../MyProject/Servers`
 
-** Servername: mp
+** `servername`: mp
 
-** Packagename: com.devonfw.application.mp
+** `packagename`: com.devonfw.application.mp
 
-** Groupid: com.devonfw.mp
+** `groupid`: com.devonfw.mp
 
-** Version: v4
+** `version`: v4
 
-** Dbtype: h2
+** `dbtype`: h2
 
 image::images/tutorialsources/devcon-gui-project.png[Devcon GUI Project, 600]
 
