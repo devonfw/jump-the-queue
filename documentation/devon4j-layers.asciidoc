@@ -362,24 +362,37 @@ Instead we get a response containing the login form. This is because _devon4j_ a
 
 To make testing easier, we are going to "open" the application, to avoid the security filter, and we are going to enable the https://en.wikipedia.org/wiki/Cross-origin_resource_sharing[CORS] filter to allow requests from (Angular-) clients.
 
-In the file `general/service/impl/config/BaseWebSecurityConfig.java` edit the `configure()` method and remove the HTTP request filter. This will authorize every request and allow us access to the app:
+First, in the file `/jtqj-core/pom.xml` we add the `devon4j-starter-security-cors` dependency:
+
+```
+    <dependency>
+      <groupId>com.devonfw.java.starters</groupId>
+      <artifactId>devon4j-starter-security-cors</artifactId>
+    </dependency>
+```
+
+Second, in the file `/jtqj-core/src/main/resources/application.properties` set `security.cors.enabled` to true and configure other cors properties:
+
+```
+#CORS support
+security.cors.enabled=true
+security.cors.spring.allowCredentials=true
+security.cors.spring.allowedOriginPatterns=*
+security.cors.spring.allowedHeaders=*
+security.cors.spring.allowedMethods=OPTIONS,HEAD,GET,PUT,POST,DELETE,PATCH
+security.cors.pathPattern=/**
+```
+
+Finally in the file `general/service/impl/config/BaseWebSecurityConfig.java` edit the `configure()` method and remove the HTTP request filter. This will authorize every request and allow us access to the app:
 
 ```
 @Override
 public void configure(HttpSecurity http) throws Exception {
 
+  http = this.webSecurityConfigurer.configure(http);
+
   http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
-
-  if (this.corsEnabled) {
-    http.addFilterBefore(getCorsFilter(), CsrfFilter.class);
-  }
 }
-```
-
-Finally in the file `/jtqj-core/src/main/resources/application.properties` set `security.cors.enabled` to true:
-
-```
-security.cors.enabled=true
 ```
 
 Now we run the app again and send the same GET request. We should now be able to obtain the data of our visitor:
