@@ -1133,10 +1133,12 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
-"@covalent/core@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-3.1.0.tgz#40c5898e26ed9ac9dd5c54fa5cf48dc514ad8ea9"
-  integrity sha512-/jgyeSI+y7Wssu+ZKNQa6pJJIqTchl72Vr9MHCy97n+/G5yJoG9CYcbzKScr/twhSW7IqUN75cAFOQ3M/B+afQ==
+"@covalent/core@3.1.2-beta.6":
+  version "3.1.2-beta.6"
+  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-3.1.2-beta.6.tgz#ce4f93013bd4a5779fd019cfa49fde678f5a7e7d"
+  integrity sha512-VFVX6GSTvfo6XI9Khci+0KeKF94Q4DrBIFoZbmS0hmKZBcYroe4UacFiK7taG2fUPqQqx8pzpjbI/KxsEs+Ymg==
+  dependencies:
+    tslib "^2.0.0"
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
