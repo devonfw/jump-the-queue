@@ -13,7 +13,7 @@ endif::[]
 = Home
 
 == General Concept
-This documentation serves as an introductory course to application development under devonfw. It is structured in an alternating fashion: First a general explanation of different components and features is provided -- using the complex _MyThaiStar_ application as an example, then the actual implementation of these aspects is demonstrated via code-examples -- which are part of the smaller _JumpTheQueue_ application.
+This documentation serves as an introductory course to application development under devonfw. It is structured in an alternating fashion: First a general explanation of different components and features is provided -- using the complex https://github.com/devonfw/my-thai-star[_MyThaiStar_] application as an example, then the actual implementation of these aspects is demonstrated via code-examples -- which are part of the smaller _JumpTheQueue_ application.
 
 Here's some general advice up front: 
 
