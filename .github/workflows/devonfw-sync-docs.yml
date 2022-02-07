@@ -3,7 +3,8 @@ on:
   push:
     paths:
       - '**.asciidoc'
-      - '**.md'      
+      - '**.md'    
+      - '**.adoc'
     branches:
       - master
   workflow_dispatch:
@@ -12,3 +13,6 @@ jobs:
     uses: devonfw/.github/.github/workflows/devonfw-sync-docs.yml@master
     secrets:
       RESUSABLE_GH_ACTION_TOKEN: ${{ secrets.GHA_TOKEN }}
+      RESUSABLE_BUILD_USER: ${{ secrets.BUILD_USER }}
+      RESUSABLE_BUILD_USER_PASSWD: ${{ secrets.BUILD_USER_PASSWD }}
+      RESUSABLE_BUILD_USER_EMAIL: ${{ secrets.BUILD_USER_EMAIL }}
