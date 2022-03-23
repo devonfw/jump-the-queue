@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { QueueService } from "./queue.service";
 
-import { QueueService } from './queue.service';
+describe("QueueService", () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule],
+    })
+  );
 
-describe('QueueService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
-
-  it('should be created', () => {
-    const service: QueueService = TestBed.get(QueueService);
+  it("should be created", () => {
+    const service: QueueService = TestBed.inject(QueueService);
     expect(service).toBeTruthy();
   });
 });
