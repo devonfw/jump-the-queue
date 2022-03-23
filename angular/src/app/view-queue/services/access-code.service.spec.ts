@@ -1,12 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AccessCodeService } from "./access-code.service";
 
-import { AccessCodeService } from './access-code.service';
+describe("AccessCodeService", () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule],
+    })
+  );
 
-describe('AccessCodeService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
-
-  it('should be created', () => {
-    const service: AccessCodeService = TestBed.get(AccessCodeService);
+  it("should be created", () => {
+    const service: AccessCodeService = TestBed.inject(AccessCodeService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,16 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ViewQueueComponent } from "./view-queue.component";
 
-import { ViewQueueComponent } from './view-queue.component';
-
-describe('ViewQueueComponent', () => {
+describe("ViewQueueComponent", () => {
   let component: ViewQueueComponent;
   let fixture: ComponentFixture<ViewQueueComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ViewQueueComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, HttpClientTestingModule],
+        declarations: [ViewQueueComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewQueueComponent);
@@ -18,7 +22,7 @@ describe('ViewQueueComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
