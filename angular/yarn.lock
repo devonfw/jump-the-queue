@@ -1521,10 +1521,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@covalent/core@3.1.2-beta.6":
-  version "3.1.2-beta.6"
-  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-3.1.2-beta.6.tgz#ce4f93013bd4a5779fd019cfa49fde678f5a7e7d"
-  integrity sha512-VFVX6GSTvfo6XI9Khci+0KeKF94Q4DrBIFoZbmS0hmKZBcYroe4UacFiK7taG2fUPqQqx8pzpjbI/KxsEs+Ymg==
+"@covalent/core@3.1.2":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@covalent/core/-/core-3.1.2.tgz#ec89e8e9b075550c25e3002a5d67ddde96ab8555"
+  integrity sha512-CdrchbA4H+/obcSqnIX8ddBYL9k+0cotiqJ8TMqhEwC9/z8Hu91JXK+idV1neASva9sZXVMLSWweHocalZY9ZQ==
   dependencies:
     tslib "^2.0.0"
 
