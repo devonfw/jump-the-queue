@@ -22,7 +22,7 @@
     "@angular/platform-browser": "~13.1.1",
     "@angular/platform-browser-dynamic": "~13.1.1",
     "@angular/router": "~13.1.1",
-    "@covalent/core": "3.1.2-beta.6",
+    "@covalent/core": "3.1.2",
     "core-js": "^3.21.1",
     "lodash-es": "^4.17.15",
     "rxjs": "~6.6.3",
