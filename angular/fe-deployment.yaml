@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: fe-deployment
+  labels:
+     app: jump-the-queue
+
+spec:
+  replicas: 1
+  
+  selector:
+    matchLabels:
+      app: jump-the-queue
+      tier: fe-deployment
+
+  template:
+    metadata:
+      labels:
+        app: jump-the-queue
+        tier: fe-deployment
+    spec:
+      containers:
+        - name: fe-container
+          image: "juarurtpt/my-jump-the-queue:jtq-frontend-k8s"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+        # env:
+           # - name: baseUlrRestServices
+           #  value: "http://be-service:8081" # para que apunte al backend?
+
+        
+# The frontend send requests to the backend worker Pods by using
+# DNS name given to the backend service, that is, be-service,
+# value of the 'name' field in the be-service.yaml config file
+        
+  

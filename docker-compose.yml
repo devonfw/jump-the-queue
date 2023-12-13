@@ -1,0 +1,86 @@
+
+# Especificamos como se ejecutarán y se conectarán nuestros contenedores
+
+version: "3.9"
+
+services:
+
+  frontend:
+    container_name: jtq-frontend-container
+    image: jtq-frontend
+    build: 
+      context: ./angular  # Construcción de la imagen a partir de señalarle donde está el Dockerfile
+    # ports:
+      # - "8080:80" # host:container
+    # expose:
+      # - "80"
+    networks:
+      - jtq_network
+    volumes:
+      - frontend_data:/app/data:ro # guardar info persistente
+    depends_on:
+      - backend
+    
+  backend:
+    container_name: jtq-backend-container
+    image: jtq-backend
+    build: 
+      context: ./java/jtqj
+    # ports:
+      # - "8081:8081"
+    # expose:
+      # - "80"
+    networks:
+      - jtq_network
+    volumes:
+      - backend_data:/app/data:ro
+    # environment:
+      # - DATABASE_URL=jdbc:h2:./.jtqj1
+      # - DATABASE_USERNAME=sa
+    depends_on:
+      - db
+
+  db:
+    container_name: db-container
+    image: 1000kit/h2:latest        # https://hub.docker.com/r/1000kit/h2
+    # ports:
+      #- "8181:8181"
+      #- "1521:1521"
+    # expose:
+      # - "80"
+    networks:
+      - jtq_network
+    volumes:
+      - db_data:/app/data/db-data:ro
+    environment:
+      - H2_TCP_PORT=9092
+      - H2_TCP_ALLOW_OTHERS=true
+      - H2_USER=sa    # o h2?
+      #- H2_PASSWORD= 
+      - H2_DB=h2
+  
+  # Servidor proxy NGINX: 
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: nginx:latest
+    ports:
+      - "8082:80" # HTTP
+      #- "443:443" # HTTPS (peticiones cifradas)
+    volumes:
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro # mapeo de mi nginx.conf al del contenedor del server NGINX
+      - /usr/share/nginx/html
+    networks:
+      - jtq_network
+    depends_on:
+      - frontend
+      - backend
+      - db
+
+networks:
+  jtq_network:
+    driver: bridge # controlador que se utiliza para conectar contenedores de una misma maquina fisica, otros: https://docs.docker.com/network/drivers/
+
+volumes:
+  frontend_data:
+  backend_data:
+  db_data:

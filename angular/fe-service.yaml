@@ -1,0 +1,21 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: fe-service
+  labels:
+    app: jump-the-queue
+
+spec:
+  selector: # where we connect the service with the POD (template property of deployment definition)
+    app: jump-the-queue # we put the 'labels' from the POD definition .yml, normally the app name
+    tier: fe-deployment
+
+  type: ClusterIP # to access the web server externally, range: 30000 - 32767
+
+  ports:
+    - protocol: TCP
+      port: 80 # Puerto del objeto servicio
+      targetPort: 80 # Puerto del POD (contenedor del frontend)
+      # nodePort: auto assigned, = minikube port

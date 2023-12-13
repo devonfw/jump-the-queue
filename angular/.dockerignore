@@ -1,0 +1,20 @@
+# Buenas prácticas: excluimos los directorios y archivos que no son necesarios para 
+# la construcción de la imagen con el fin de que ésta se haga más rápido y ligera 
+
+.git
+
+.firebase
+
+.editorconfig
+
+/node_modules
+
+/e2e
+
+/docs
+
+/gitignore
+
+*.zip
+
+*.md

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: be-deployment
+  labels:
+    app: jump-the-queue
+
+spec:
+  replicas: 1
+  
+  selector:
+    matchLabels:
+      app: jump-the-queue
+      tier: be-deployment
+
+  template:
+    metadata:
+      labels:
+        app: jump-the-queue
+        tier: be-deployment
+    spec:
+      containers:
+        - name: be-container
+          image: "juarurtpt/my-jump-the-queue:jtq-backend"
+          ports:
+            - containerPort: 8081
+        
