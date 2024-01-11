@@ -1,0 +1,29 @@
+pipeline{  //task you're trying to accomplish
+		agent any //build agent, place you run your pipeline
+	
+ stages{
+	stage('Build Backend'){
+	    steps{
+	        dir('java/jtqj'){
+            sh 'mvn clean install -DskipTest'
+            }
+        }
+	}
+    stage('Test backend'){
+        step{
+            dir('java/jtqj'){
+            sh 'mvn test -Dmaven.install.skip=true'
+            }
+        }
+    }
+    stage('Sonar backend'){
+        step{
+            dir('java/jtqj'){
+                withSonarQubeEnv('SonarQube_server') {
+                sh 'mvn verify sonar:sonar -Dskiptest -Dmaven.install.skip=true'
+              }
+            }
+        }
+    }
+  }
+}
