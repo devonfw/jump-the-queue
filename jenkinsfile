@@ -1,6 +1,6 @@
 pipeline{  //task you're trying to accomplish
 		agent any //build agent, place you run your pipeline
-	
+ tools{maven 'maven'}
  stages{
 	stage('Build Backend'){
 	    steps{
