@@ -1,27 +1,59 @@
-pipeline{  //task you're trying to accomplish
-		agent any //build agent, place you run your pipeline
- tools{maven 'maven'}
- stages{
-	stage('Build Backend'){
-	    steps{
-	        dir('java/jtqj'){
-            sh 'mvn clean install -DskipTest'
-            }
+pipeline{  
+		agent any 
+ tools{
+        maven 'maven',
+        node 'node 21.5'
         }
-	}
-    stage('Test backend'){
+ 
+ stages{
+	
+       
+      
+    stage('Build Backend'){
+            steps{
+                dir('java/jtqj'){
+                sh 'mvn clean install -DskipTest'
+                }
+            }
+    }
+    stage('Test Backend'){
+            steps{
+                dir('java/jtqj'){
+                sh 'mvn test -Dmaven.install.skip=true'
+                }
+            }
+    }
+    stage('Sonar Backend'){
+            steps{
+                dir('java/jtqj'){
+                    withSonarQubeEnv('SonarQube_server') {
+                    sh 'mvn verify sonar:sonar -Dskiptest -Dmaven.install.skip=true'
+                }
+                }
+            }
+    }
+      
+    
+
+    stage('Build Front'){
         steps{
-            dir('java/jtqj'){
-            sh 'mvn test -Dmaven.install.skip=true'
+            dir('angular'){
+                sh 'npm install'
+                sh 'npm start'
             }
         }
     }
-    stage('Sonar backend'){
+    stage('Test Front'){
         steps{
-            dir('java/jtqj'){
-                withSonarQubeEnv('SonarQube_server') {
-                sh 'mvn verify sonar:sonar -Dskiptest -Dmaven.install.skip=true'
-              }
+            dir('angular/src'){
+                sh 'npm test headless'
+            }
+        }
+    }
+    stage('Sonar Front'){
+        steps{
+            dir('Sonar Front'){
+               sh 'npx sonar-scanner -Dsonar.sources="."'
             }
         }
     }
