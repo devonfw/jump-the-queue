@@ -2,7 +2,7 @@ pipeline{
 		agent any 
  tools{
         maven 'maven'
-        nodejs 'node 20.9'
+        nodejs 'node 14.9'
         }
  
  stages{
