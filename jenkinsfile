@@ -2,13 +2,12 @@ pipeline{
 		agent any 
  tools{
         maven 'maven'
-        nodejs 'node 14.9'
+        nodejs 'node 21.5'
         }
  
  stages{
 	
-       
-      
+          
     stage('Build Backend'){
             steps{
                 dir('java/jtqj'){
@@ -34,11 +33,10 @@ pipeline{
     }
       
     
-
     stage('Build Front'){
         steps{
             dir('angular'){
-                sh 'npm install'
+                sh 'npm install --force'
                 sh 'npm start'
             }
         }
