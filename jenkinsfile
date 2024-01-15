@@ -36,6 +36,7 @@ pipeline{
     stage('Build Front'){
         steps{
             dir('angular'){
+                sh 'npm install --global yarn'
                 sh 'yarn install --force'
             }
         }
