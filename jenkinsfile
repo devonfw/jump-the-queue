@@ -45,11 +45,11 @@ pipeline{
     stage('Test Front'){
         steps{
             dir('angular/src'){
-                sh 'if ! [[ -x \$(command -v google-chrome) ]]
+                sh '''if ! [[ -x \$(command -v google-chrome) ]]
                         then
                             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
                             sudo apt install -y ./google-chrome-stable_current_amd64.deb
-                        fi'
+                        fi'''
                 sh 'yarn test-headless'
             }
         }
