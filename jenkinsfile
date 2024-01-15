@@ -37,6 +37,11 @@ pipeline{
         steps{
             dir('angular'){
                 sh 'npm install --force'
+                sh 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+                sh 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+                sh 'apt-get update'
+                sh 'apt-get install -y google-chrome-stable xvfb'
+                sh 'npm i -g @angular/cli'
             }
         }
     }
@@ -50,7 +55,9 @@ pipeline{
     stage('Sonar Front'){
         steps{
             dir('Sonar Front'){
-               sh 'npx sonar-scanner -Dsonar.sources="."'
+               withSonarQubeEnv('SonarQube_server') {
+                   sh 'npx sonar-scanner -Dsonar.sources="."'
+                }
             }
         }
     }
