@@ -36,9 +36,9 @@ pipeline{
     stage('Build Front'){
         steps{
             dir('angular'){
-                sh 'npm install --force|
-                wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb |
-                |dpkg -i google-chrome-stable_current_amd64.deb'
+                sh 'npm install --force'
+                sh 'wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' 
+                sh 'dpkg -i google-chrome-stable_current_amd64.deb'
                 sh 'npm i -g @angular/cli'
             }
         }
