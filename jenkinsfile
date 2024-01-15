@@ -44,7 +44,7 @@ pipeline{
     stage('Test Front'){
         steps{
             dir('angular/src'){
-                sh 'yarn test'
+                sh 'yarn test --ci'
             }
         }
     }
