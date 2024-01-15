@@ -45,7 +45,7 @@ pipeline{
     stage('Test Front'){
         steps{
             dir('angular/src'){
-                sh '''sudo apt get install wget -y
+                sh '''apt get install wget -y
                     if ! [[ -x \$(command -v google-chrome) ]]
                         then
                             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
