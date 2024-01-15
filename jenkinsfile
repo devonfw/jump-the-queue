@@ -59,7 +59,7 @@ pipeline{
         steps{
             dir('Sonar Front'){
                withSonarQubeEnv('SonarQube_server') {
-                   sh 'npx sonar-scanner -Dsonar.sources="."'
+                   sh 'npx sonar-scanner -Dsonar.sources="." -Dsonar.projectKey="front-jtq"'
                 }
             }
         }
