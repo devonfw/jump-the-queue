@@ -32,7 +32,7 @@ pipeline{
             }
     }
       
-    
+    //added a comment to trigger
     stage('Build Front'){
         steps{
             dir('angular'){
