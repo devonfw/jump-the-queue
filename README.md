@@ -11,7 +11,7 @@ To build application on local execute below commands:
 
 2. Once ide setup is done. Clone jump-the-queue application in workspace:
    
-      `git clone https://github.com/devonfw/jump-the-queue.git`
+      --`git clone https://github.com/devonfw/jump-the-queue.git`
       
 3. ** Building and running Jump-the-queue backend:**
 
