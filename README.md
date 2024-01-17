@@ -1,6 +1,6 @@
 # Jump The Queue
 
-Source code and documentation for the _JumpTheQueue_ tutorial application.  
+#Source code and documentation for the _JumpTheQueue_ tutorial application.  
 Documentation is provided in the form of a step-by-step guide suited for new devonfw users.
 
 ## **Building application on local**
