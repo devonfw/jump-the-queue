@@ -20,7 +20,7 @@ To build application on local execute below commands:
     To run BE using jar navigate to `jump-the-queue\java\jtqj\server\target` from command line and execute `java -jar jtqj-server-bootified.war` <br/>
     OR</br>
     Alternatively, you can launch application using mvn spring-boot:run command. Navigate to `jump-the-queue\java\jtqj\core` folder from command line and execute `mvn spring-boot:run`
-    
+ added and test    
 4.  **Build Jump-the-queue front-end:**
     
     To build Jump-the-queue front-end navigate to `jump-the-queue\angular` folder from command line and execute command `yarn install`.
